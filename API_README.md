@@ -10,6 +10,12 @@ To start the API server correctly, use the following command from the project ro
 /Library/Frameworks/Python.framework/Versions/3.12/bin/python3 -m uvicorn src.api.app:app --port 8003
 ```
 
+Or use the provided script:
+
+```bash
+./scripts/start/start_api.sh
+```
+
 Important notes:
 - Use the full path to your Python interpreter
 - Run the command from the project root (not from src/api)
@@ -21,6 +27,12 @@ To start the web interface, use the following command from the project root:
 
 ```bash
 cd webapp && npm start
+```
+
+Or use the provided script:
+
+```bash
+./scripts/start/start_demo.sh
 ```
 
 This will start the web server on port 3000. You can then access the web interface at http://localhost:3000.
@@ -37,7 +49,7 @@ Important notes:
 The simplest way to use the API is through the `ReliableASDClient` class:
 
 ```python
-from src.api.reliable_client import ReliableASDClient
+from src.reliable_api_client import ReliableASDClient
 
 # Initialize the client
 client = ReliableASDClient(api_url="http://localhost:8003")
@@ -124,17 +136,41 @@ Several test scripts are provided to verify that the API is working correctly:
 
 2. Test the comprehensive assessment endpoint:
    ```bash
-   ./test_comprehensive_endpoint.py
+   ./tests/test_comprehensive_endpoint.py
    ```
 
 3. Test the reliable client:
    ```bash
-   ./test_api_client.py
+   ./tests/test_api_client.py
    ```
 
 4. Test specific hybrid scoring cases:
    ```bash
-   ./test_hybrid_scoring.py
+   ./tests/test_hybrid_scoring.py
+   ```
+
+5. Run end-to-end tests:
+   ```bash
+   ./tests/test_end_to_end.py
+   ```
+
+## Example Usage
+
+Check the `examples/` directory for example scripts showing how to use the API:
+
+1. Integration example:
+   ```bash
+   python examples/integration_example.py
+   ```
+
+2. Submit assessment example:
+   ```bash
+   python examples/submit_assessment.py
+   ```
+
+3. Direct keywords usage:
+   ```bash
+   python examples/use_direct_keywords.py
    ```
 
 ## Troubleshooting

@@ -8,6 +8,32 @@ This project provides a comprehensive API and demonstration web application for 
 
 For a quick start guide on how to use the API and web interface, see our [API Quick Start Guide](API_README.md).
 
+## Directory Structure
+
+The project is organized into the following directories:
+
+- **src/**: Core source code for the API and scoring engine
+  - **api/**: FastAPI application code
+  - **core/**: Core scoring and NLP functionality
+  - **utils/**: Utility functions and helpers
+  - **testing/**: Testing framework and evaluation tools
+  - **web/**: Web-related functionality
+
+- **scripts/**: Scripts for running, testing, and managing the application
+  - **start/**: Scripts for starting the API and web servers
+  - **test/**: Scripts for running tests
+  - **debug/**: Scripts for debugging issues
+  - **fixes/**: Scripts that were used to fix specific issues
+
+- **tests/**: Python test files for various components
+- **examples/**: Example usage of the API
+- **docs/**: Documentation files
+- **webapp/**: Web demo application
+- **data/**: Data files for milestones and scoring
+- **test_data/**: Test data for API testing
+- **test_results/**: Output directory for test results
+- **logs/**: Log files
+
 ## Components
 
 The project consists of three main components:
@@ -49,16 +75,22 @@ To start the API service:
 /Library/Frameworks/Python.framework/Versions/3.12/bin/python3 -m uvicorn src.api.app:app --port 8003
 ```
 
+Or use the provided script:
+
+```bash
+./scripts/start/start_api.sh
+```
+
 The API will be available at `http://localhost:8003`.
 
 ## Testing Framework
 
 The testing framework provides tools for testing the API endpoints and generating performance reports. It includes:
 
-- Single endpoint testing script: `scripts/test_single_endpoint.sh`
-- Comprehensive test runner: `scripts/run_all_tests.sh`
-- Test report generator: `scripts/generate_test_report.py`
-- Hybrid scoring tests: `test_hybrid_scoring.py`
+- Single endpoint testing script: `scripts/test/test_single_endpoint.sh`
+- Comprehensive test runner: `scripts/test/run_all_tests.sh`
+- Test report generator: `scripts/test/generate_test_report.py`
+- Hybrid scoring tests: `tests/test_hybrid_scoring.py`
 
 ### Running Tests
 
@@ -75,30 +107,30 @@ You can also run individual tests:
 To run tests for a single endpoint:
 
 ```bash
-./scripts/test_single_endpoint.sh /endpoint_path iterations data_file
+./scripts/test/test_single_endpoint.sh /endpoint_path iterations data_file
 ```
 
 For example:
 ```bash
-./scripts/test_single_endpoint.sh /question 10 test_data/sample_questions.json
+./scripts/test/test_single_endpoint.sh /question 10 test_data/sample_questions.json
 ```
 
 To test the comprehensive endpoint:
 
 ```bash
-./scripts/test_comprehensive_endpoint.sh test_data/comprehensive_test.json
+./scripts/test/test_comprehensive_endpoint.sh test_data/comprehensive_test.json
 ```
 
 To run tests for all comprehensive endpoint test cases:
 
 ```bash
-./scripts/test_comprehensive_all.sh
+./scripts/test/test_comprehensive_all.sh
 ```
 
 To run tests for all endpoints:
 
 ```bash
-./scripts/run_all_tests.sh
+./scripts/test/run_all_tests.sh
 ```
 
 Test results are saved to the `test_results` directory, including:
@@ -127,7 +159,7 @@ The web application will be available at `http://localhost:3000`.
 Alternatively, you can use the convenience script to start both the API service and web demo:
 
 ```bash
-./scripts/start_demo.sh
+./scripts/start/start_demo.sh
 ```
 
 **Note**: This script starts both servers in the background. If port 8003 or 3000 is already in use by another process, the servers may not start properly. Check for existing processes with `lsof -i :8003` or `lsof -i :3000`.
