@@ -1,248 +1,393 @@
-# ASD Developmental Milestone Assessment API
+# ASD Assessment API Documentation
 
-This API allows you to process textual descriptions of a child's behavior and automatically score them against developmental milestones. The system uses NLP-based analysis to evaluate responses and generate comprehensive developmental assessments.
+This document provides detailed information about all API endpoints available in the ASD Assessment System.
 
 ## Base URL
 
-The API is hosted at: `http://localhost:8000`
+The API is available at: `http://localhost:8003`
 
 ## Authentication
 
-Currently, the API does not require authentication for local usage. For production deployment, proper authentication should be implemented.
+Currently, the API does not require authentication. For production environments, you should implement appropriate authentication mechanisms.
 
-## API Endpoints
+## Endpoints
 
-### Set Child Age
+### Child Information
 
-Sets the child's age to filter age-appropriate milestones.
+#### Set Child Age
 
-**Endpoint:** `/set-child-age`  
-**Method:** `POST`  
-**Request Body:**
-```json
-{
-  "age": 24  // Child's age in months (0-36)
-}
-```
+Sets the child's age to filter appropriate milestones.
 
-**Response:**
-```json
-{
-  "message": "Child age set to 24 months",
-  "total_milestones": 120
-}
-```
+- **URL**: `/set-child-age`
+- **Method**: `POST`
+- **Request Body**:
+  ```json
+  {
+    "age": 24,
+    "name": "Alex"
+  }
+  ```
+- **Parameters**:
+  - `age` (integer, required): Child's age in months (0-36)
+  - `name` (string, optional): Child's name
 
-### Get Next Milestone
+- **Success Response**:
+  ```json
+  {
+    "message": "Child age set to 24 months",
+    "total_milestones": 55
+  }
+  ```
+
+- **Error Response**:
+  ```json
+  {
+    "detail": "Error setting child age: age must be between 0 and 36 months"
+  }
+  ```
+
+### Milestone Assessment
+
+#### Get Next Milestone
 
 Retrieves the next milestone to assess.
 
-**Endpoint:** `/next-milestone`  
-**Method:** `GET`  
-**Response:**
-```json
-{
-  "behavior": "Opens mouth for spoon",
-  "criteria": "Child opens mouth when spoon approaches",
-  "domain": "Activities of Daily Living",
-  "age_range": "12-18 months",
-  "complete": false
-}
-```
+- **URL**: `/next-milestone`
+- **Method**: `GET`
+- **Success Response** (if more milestones are available):
+  ```json
+  {
+    "behavior": "Shows empathy",
+    "criteria": "Child shows concern when others are distressed",
+    "domain": "SOC",
+    "age_range": "24-30",
+    "complete": false
+  }
+  ```
 
-When all milestones have been assessed, you'll receive:
-```json
-{
-  "message": "No more milestones to assess",
-  "complete": true
-}
-```
+- **Success Response** (if all milestones have been assessed):
+  ```json
+  {
+    "message": "No more milestones to assess",
+    "complete": true
+  }
+  ```
 
-### Score Response
+#### Score Response
 
-Scores a single response for a specific milestone using NLP analysis.
+Scores a caregiver's response for a specific milestone.
 
-**Endpoint:** `/score-response`  
-**Method:** `POST`  
-**Request Body:**
-```json
-{
-  "response": "My child always opens their mouth when they see the spoon coming. They recognize it's time to eat.",
-  "milestone_behavior": "Opens mouth for spoon"
-}
-```
+- **URL**: `/score-response`
+- **Method**: `POST`
+- **Request Body**:
+  ```json
+  {
+    "milestone_behavior": "Shows empathy",
+    "response": "Yes, she always notices when I am sad and tries to comfort me."
+  }
+  ```
+- **Parameters**:
+  - `milestone_behavior` (string, required): The behavior being assessed
+  - `response` (string, required): Caregiver's response describing the child's behavior
 
-**Response:**
-```json
-{
-  "milestone": "Opens mouth for spoon",
-  "domain": "Activities of Daily Living",
-  "score": 3,
-  "score_label": "INDEPENDENT"
-}
-```
+- **Success Response**:
+  ```json
+  {
+    "milestone": "Shows empathy",
+    "domain": "SOC",
+    "score": 4,
+    "score_label": "INDEPENDENT"
+  }
+  ```
 
-### Batch Score Responses
+#### Batch Score
 
-Scores multiple responses in parallel for better performance.
+Scores multiple responses in parallel.
 
-**Endpoint:** `/batch-score`  
-**Method:** `POST`  
-**Request Body:**
-```json
-{
-  "responses": [
+- **URL**: `/batch-score`
+- **Method**: `POST`
+- **Request Body**:
+  ```json
+  {
+    "responses": [
+      {
+        "milestone_behavior": "Shows empathy",
+        "response": "Yes, he always notices when someone is upset."
+      },
+      {
+        "milestone_behavior": "Makes eye contact",
+        "response": "She rarely makes eye contact, even when I call her name."
+      }
+    ]
+  }
+  ```
+
+- **Success Response**:
+  ```json
+  [
     {
-      "response": "My child always opens their mouth when they see the spoon coming.",
-      "milestone_behavior": "Opens mouth for spoon"
+      "milestone": "Shows empathy",
+      "domain": "SOC",
+      "score": 4,
+      "score_label": "INDEPENDENT"
     },
     {
-      "response": "My child enjoys playing with a variety of toys.",
-      "milestone_behavior": "Plays with toys"
+      "milestone": "Makes eye contact",
+      "domain": "SOC",
+      "score": 0,
+      "score_label": "CANNOT_DO"
     }
   ]
-}
-```
+  ```
 
-**Response:**
-```json
-[
+### Report Generation
+
+#### Generate Report
+
+Generates a comprehensive assessment report.
+
+- **URL**: `/generate-report`
+- **Method**: `GET`
+- **Success Response**:
+  ```json
   {
-    "milestone": "Opens mouth for spoon",
-    "domain": "Activities of Daily Living",
-    "score": 3,
-    "score_label": "INDEPENDENT"
-  },
-  {
-    "milestone": "Plays with toys",
-    "domain": "Play",
-    "score": 3,
-    "score_label": "INDEPENDENT"
-  }
-]
-```
-
-### Generate Report
-
-Generates a comprehensive assessment report based on all scored milestones.
-
-**Endpoint:** `/generate-report`  
-**Method:** `GET`  
-**Response:**
-```json
-{
-  "scores": [
-    {
-      "milestone": "Opens mouth for spoon",
-      "domain": "Activities of Daily Living",
-      "score": 3,
-      "score_label": "INDEPENDENT",
-      "age_range": "12-18 months"
-    },
-    {
-      "milestone": "Plays with toys",
-      "domain": "Play",
-      "score": 3,
-      "score_label": "INDEPENDENT",
-      "age_range": "12-18 months"
+    "scores": [
+      {
+        "milestone": "Shows empathy",
+        "domain": "SOC",
+        "score": 4,
+        "score_label": "INDEPENDENT",
+        "age_range": "24-30"
+      },
+      {
+        "milestone": "Makes eye contact",
+        "domain": "SOC",
+        "score": 0,
+        "score_label": "CANNOT_DO",
+        "age_range": "0-6"
+      }
+    ],
+    "domain_quotients": {
+      "SOC": 68.75,
+      "Cog": 75.0,
+      "GM": 82.5,
+      "FM": 85.0,
+      "EL": 77.78,
+      "ADL": 80.0,
+      "Emo": 91.67,
+      "RL": 83.33
     }
-  ],
-  "domain_quotients": {
-    "Activities of Daily Living": 100.0,
-    "Play": 100.0,
-    "Communication": 75.0,
-    "Motor": 80.0,
-    "Social": 85.0,
-    "Cognitive": 90.0
   }
-}
-```
+  ```
 
-### Reset Assessment
+### Assessment Management
+
+#### Reset Assessment
 
 Resets the assessment engine for a new assessment.
 
-**Endpoint:** `/reset`  
-**Method:** `POST`  
-**Response:**
-```json
-{
-  "message": "Assessment engine reset"
-}
-```
-
-## Score Labels
-
-The system uses the following scoring scale:
-
-- `NOT_OBSERVED` (0): Child does not demonstrate the skill
-- `LOST_SKILL` (1): Child previously had the skill but has lost it
-- `EMERGING` (2): Child is beginning to show the skill sometimes
-- `WITH_SUPPORT` (3): Child can do this with help and support
-- `INDEPENDENT` (4): Child does this independently and consistently
-
-## Domain Quotients
-
-Domain quotients represent the percentage of achieved developmental milestones in each domain relative to the expected skills for the child's age. The domains include:
-
-- Activities of Daily Living (ADL)
-- Play
-- Communication
-- Motor
-- Social
-- Cognitive
-- Sensory Processing
-- Emotional Regulation
-
-## Using the API Client
-
-A command-line API client is included to facilitate interaction with the API without requiring a frontend. The client supports:
-
-1. Interactive assessments
-2. Processing responses from CSV or JSON files
-3. Scoring individual responses
-
-### Examples
-
-Run an interactive assessment:
-```bash
-python3 api_client.py --age 24 interactive
-```
-
-Process responses from a file:
-```bash
-python3 api_client.py --age 24 file sample_responses.json
-```
-
-Score a single response:
-```bash
-python3 api_client.py --age 24 score "Opens mouth for spoon" "My child always opens their mouth when they see the spoon coming."
-```
-
-## Input File Format
-
-The API supports processing responses from CSV or JSON files:
-
-### JSON Format
-```json
-[
+- **URL**: `/reset`
+- **Method**: `POST`
+- **Success Response**:
+  ```json
   {
-    "milestone_behavior": "Opens mouth for spoon",
-    "response": "My child always opens mouth when spoon approaches."
+    "message": "Assessment engine reset"
   }
-]
-```
+  ```
 
-### CSV Format
-```csv
-milestone_behavior,response
-"Opens mouth for spoon","My child always opens mouth when spoon approaches."
-```
+### System Information
+
+#### Health Check
+
+Checks if the API server is running.
+
+- **URL**: `/health`
+- **Method**: `GET`
+- **Success Response**:
+  ```json
+  {
+    "status": "ok",
+    "message": "API server is running"
+  }
+  ```
+
+#### Get All Milestones
+
+Retrieves all available milestone behaviors.
+
+- **URL**: `/all-milestones`
+- **Method**: `GET`
+- **Success Response**:
+  ```json
+  {
+    "milestones": [
+      {
+        "behavior": "Lifts head when on tummy",
+        "criteria": "Child can lift head when placed on tummy",
+        "domain": "GM",
+        "age_range": "0-6"
+      },
+      {
+        "behavior": "Shows empathy",
+        "criteria": "Child shows concern when others are distressed",
+        "domain": "SOC",
+        "age_range": "24-30"
+      }
+    ]
+  }
+  ```
+
+### New Endpoints
+
+#### Submit Question
+
+Receives and processes questions about a child's behavior.
+
+- **URL**: `/question`
+- **Method**: `POST`
+- **Request Body**:
+  ```json
+  {
+    "text": "Does the child respond when called by name?",
+    "milestone_id": "Recognizes familiar people"
+  }
+  ```
+- **Parameters**:
+  - `text` (string, required): The question text
+  - `milestone_id` (string, optional): Associated milestone ID (behavior)
+
+- **Success Response**:
+  ```json
+  {
+    "status": "success",
+    "message": "Question received successfully",
+    "question": "Does the child respond when called by name?",
+    "milestone_found": true,
+    "milestone_details": {
+      "behavior": "Recognizes familiar people",
+      "criteria": "Child shows recognition of familiar individuals",
+      "domain": "SOC",
+      "age_range": "0-6",
+      "keywords": ["recognize", "familiar", "people", "faces"],
+      "scoring_rules": {
+        "cannot": 0,
+        "lost": 1,
+        "emerging": 2,
+        "support": 3,
+        "independent": 4
+      }
+    }
+  }
+  ```
+
+#### Update Keywords
+
+Updates keywords for specific scoring categories.
+
+- **URL**: `/keywords`
+- **Method**: `POST`
+- **Request Body**:
+  ```json
+  {
+    "category": "CANNOT_DO",
+    "keywords": [
+      "no", "not", "never", "doesn't", "does not", 
+      "cannot", "can't", "unable", "hasn't", "has not", 
+      "not able", "not at all", "not yet started", "not capable"
+    ]
+  }
+  ```
+- **Parameters**:
+  - `category` (string, required): Scoring category (e.g., "CANNOT_DO")
+  - `keywords` (array of strings, required): List of keywords for this category
+
+- **Success Response**:
+  ```json
+  {
+    "status": "success",
+    "message": "Keywords for category CANNOT_DO updated successfully",
+    "category": "CANNOT_DO",
+    "keywords": ["no", "not", "never", "doesn't", "does not", "cannot", "can't", "unable", "hasn't", "has not", "not able", "not at all", "not yet started", "not capable"]
+  }
+  ```
+
+#### Send Score
+
+Manually sets a score for a specific milestone.
+
+- **URL**: `/send-score`
+- **Method**: `POST`
+- **Request Body**:
+  ```json
+  {
+    "milestone_id": "Shows empathy",
+    "score": 4,
+    "score_label": "INDEPENDENT"
+  }
+  ```
+- **Parameters**:
+  - `milestone_id` (string, required): The milestone ID (behavior)
+  - `score` (integer, required): The numeric score value (0-4)
+  - `score_label` (string, required): The score label (e.g., "INDEPENDENT")
+
+- **Success Response**:
+  ```json
+  {
+    "status": "success",
+    "message": "Score for milestone 'Shows empathy' set successfully",
+    "milestone": "Shows empathy",
+    "domain": "SOC",
+    "score": 4,
+    "score_label": "INDEPENDENT"
+  }
+  ```
+
+## Score Values and Labels
+
+| Score Value | Label         | Meaning                                    |
+|-------------|---------------|-------------------------------------------|
+| -1          | NOT_RATED     | No rating provided                         |
+| 0           | CANNOT_DO     | Skill not acquired                         |
+| 1           | LOST_SKILL    | Skill was acquired but lost                |
+| 2           | EMERGING      | Skill is emerging but inconsistent         |
+| 3           | WITH_SUPPORT  | Skill is acquired but needs support        |
+| 4           | INDEPENDENT   | Skill is fully acquired                    |
+
+## Developmental Domains
+
+| Domain Code | Description                      |
+|-------------|----------------------------------|
+| SOC         | Social Development               |
+| Cog         | Cognitive Development            |
+| GM          | Gross Motor Skills               |
+| FM          | Fine Motor Skills                |
+| EL          | Expressive Language              |
+| ADL         | Activities of Daily Living       |
+| Emo         | Emotional Development            |
+| RL          | Receptive Language               |
 
 ## Error Handling
 
-The API returns appropriate HTTP status codes and error messages:
+All endpoints return appropriate HTTP status codes for different error scenarios:
 
-- `400 Bad Request`: Invalid input parameters
-- `404 Not Found`: Milestone not found
-- `500 Internal Server Error`: Server-side processing error 
+- `400`: Bad Request - Invalid input data
+- `404`: Not Found - Resource not found
+- `500`: Internal Server Error - Server-side issues
+
+Error responses include a detailed message in the following format:
+
+```json
+{
+  "detail": "Error message describing what went wrong"
+}
+```
+
+## Future Enhancements
+
+Planned enhancements for the API include:
+
+1. OAuth2 authentication
+2. Rate limiting
+3. Pagination for large result sets
+4. Enhanced error handling
+5. WebSocket support for real-time assessment 
