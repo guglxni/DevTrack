@@ -86,4 +86,28 @@ body {
 /* Response Time Badge */
 .badge {
     font-weight: normal;
+}
+
+/* Comprehensive Assessment Styles */
+#keywordsSection {
+    transition: all 0.3s ease;
+}
+
+#keywordsSection .card {
+    background-color: #f8f9fa;
+}
+
+#keywordsSection .card-header {
+    font-weight: 500;
+    color: #495057;
+}
+
+#comprehensive .form-check {
+    padding-left: 2rem;
+}
+
+#comprehensive .form-check-input {
+    margin-left: -2rem;
+    width: 1.5em;
+    height: 1.5em;
 } 

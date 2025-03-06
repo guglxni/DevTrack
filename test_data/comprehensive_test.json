@@ -1,0 +1,12 @@
+{
+  "question": "Does the child recognize familiar people?",
+  "milestone_behavior": "Recognizes familiar people",
+  "parent_response": "My child always smiles when he sees grandparents or his favorite babysitter. He knows all his family members and distinguishes between strangers and people he knows well.",
+  "keywords": {
+    "CANNOT_DO": ["no", "not", "never", "doesn't", "does not", "cannot"],
+    "LOST_SKILL": ["used to", "lost it", "previously", "before", "stopped", "regressed"],
+    "EMERGING": ["sometimes", "occasionally", "not consistent", "trying", "beginning to"],
+    "WITH_SUPPORT": ["with help", "if guided", "with assistance", "prompted", "when reminded"],
+    "INDEPENDENT": ["always", "consistently", "definitely", "very good at", "excellent", "mastered"]
+  }
+} 

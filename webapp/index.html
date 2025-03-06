@@ -59,6 +59,11 @@
                             <i class="fas fa-comment me-2"></i>Score Response
                         </button>
                     </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="comprehensive-tab" data-bs-toggle="tab" data-bs-target="#comprehensive" type="button" role="tab" aria-controls="comprehensive" aria-selected="false">
+                            <i class="fas fa-clipboard-check me-2"></i>Comprehensive
+                        </button>
+                    </li>
                 </ul>
                 
                 <div class="tab-content p-3 border border-top-0 rounded-bottom" id="apiTabsContent">
@@ -196,6 +201,83 @@
                                     </div>
                                     <div class="card-body">
                                         <pre id="responseResponse" class="response-area">Response will appear here</pre>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Comprehensive Assessment Endpoint -->
+                    <div class="tab-pane fade" id="comprehensive" role="tabpanel" aria-labelledby="comprehensive-tab">
+                        <h3>Comprehensive Assessment Endpoint</h3>
+                        <p>This endpoint combines all functionality in a single call, processing a question, updating keywords, analyzing a response, and recording a score.</p>
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label for="compQuestion">Question:</label>
+                                    <input type="text" class="form-control" id="compQuestion" value="Does the child recognize familiar people?">
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="compMilestoneBehavior">Milestone Behavior:</label>
+                                    <input type="text" class="form-control" id="compMilestoneBehavior" value="Recognizes familiar people">
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="compParentResponse">Parent/Caregiver Response:</label>
+                                    <textarea class="form-control" id="compParentResponse" rows="4">My child always smiles when he sees grandparents or his favorite babysitter. He knows all his family members and distinguishes between strangers and people he knows well.</textarea>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="compKeywords">Include Keywords:</label>
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="includeKeywords" checked>
+                                        <label class="form-check-label" for="includeKeywords">Include predefined keywords</label>
+                                    </div>
+                                </div>
+                                <div id="keywordsSection">
+                                    <div class="card mb-3">
+                                        <div class="card-header">
+                                            Keywords by Category
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="row mb-2">
+                                                <div class="col-md-6">
+                                                    <label for="keywordsCannot">CANNOT_DO:</label>
+                                                    <input type="text" class="form-control" id="keywordsCannot" value="no, not, never, doesn't, does not, cannot">
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label for="keywordsLost">LOST_SKILL:</label>
+                                                    <input type="text" class="form-control" id="keywordsLost" value="used to, lost it, previously, before, stopped, regressed">
+                                                </div>
+                                            </div>
+                                            <div class="row mb-2">
+                                                <div class="col-md-6">
+                                                    <label for="keywordsEmerging">EMERGING:</label>
+                                                    <input type="text" class="form-control" id="keywordsEmerging" value="sometimes, occasionally, not consistent, trying, beginning to">
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label for="keywordsSupport">WITH_SUPPORT:</label>
+                                                    <input type="text" class="form-control" id="keywordsSupport" value="with help, if guided, with assistance, prompted, when reminded">
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <label for="keywordsIndependent">INDEPENDENT:</label>
+                                                    <input type="text" class="form-control" id="keywordsIndependent" value="always, consistently, definitely, very good at, excellent, mastered">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="btn btn-primary" id="sendComprehensiveBtn">Send Request</button>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-header d-flex justify-content-between align-items-center">
+                                        <span>Response</span>
+                                        <span class="badge bg-secondary" id="comprehensiveResponseTime"></span>
+                                    </div>
+                                    <div class="card-body">
+                                        <pre id="comprehensiveResponse" class="response-area">Response will appear here</pre>
                                     </div>
                                 </div>
                             </div>

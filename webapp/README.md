@@ -2,11 +2,11 @@
 
 ## Overview
 
-This web application provides a user-friendly interface for demonstrating the capabilities of the ASD Assessment API. It showcases all four API endpoints through an intuitive, responsive interface designed for presentations and stakeholder demonstrations.
+This web application provides a user-friendly interface for demonstrating the capabilities of the ASD Assessment API. It showcases all API endpoints through an intuitive, responsive interface designed for presentations and stakeholder demonstrations.
 
 ## Features
 
-- **Tabbed Interface**: Organized into four tabs, one for each API endpoint
+- **Tabbed Interface**: Organized into tabs, one for each API endpoint
 - **Interactive Forms**: User-friendly input forms for each endpoint
 - **Visual Feedback**: Response time indicators and formatted JSON responses
 - **Error Handling**: Clear error messages and recovery options
@@ -20,6 +20,20 @@ The web demo application consists of three main components:
 1. **Frontend Interface**: HTML, CSS, and JavaScript providing the user interface
 2. **Node.js Server**: Express.js server hosting the static assets
 3. **Proxy Middleware**: HTTP-Proxy-Middleware handling API requests
+
+## API Endpoints
+
+The application allows testing of the following API endpoints:
+
+1. **Question Endpoint (`/question`)**: Process questions about a child's behavior and match to appropriate milestone behaviors.
+
+2. **Keywords Endpoint (`/keywords`)**: Update the keywords used for scoring caregiver responses by category.
+
+3. **Send Score Endpoint (`/send-score`)**: Record scores for specific developmental milestones.
+
+4. **Score Response Endpoint (`/score-response`)**: Analyze parent/caregiver responses to determine appropriate scores.
+
+5. **Comprehensive Assessment Endpoint (`/comprehensive-assessment`)**: Combines all the functionality above in a single API call - processing a question, updating keywords, analyzing a response, and recording a score.
 
 ## Prerequisites
 

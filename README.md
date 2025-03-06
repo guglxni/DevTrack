@@ -20,6 +20,7 @@ The API service is a FastAPI application that provides the following endpoints:
 - `/keywords`: Manages keywords used for analyzing parent/caregiver responses
 - `/send-score`: Records scores for specific developmental milestones
 - `/score-response`: Analyzes parent/caregiver responses to determine appropriate scores
+- `/comprehensive-assessment`: Combines the functionality of all other endpoints in a single call, processing a question, updating keywords, analyzing a response, and recording a score
 
 For detailed API documentation, see [API Documentation](docs/API_DOCUMENTATION.md).
 
@@ -53,6 +54,18 @@ To run tests for a single endpoint:
 For example:
 ```bash
 ./scripts/test_single_endpoint.sh /question 10 test_data/sample_questions.json
+```
+
+To test the comprehensive endpoint:
+
+```bash
+./scripts/test_comprehensive_endpoint.sh test_data/comprehensive_test.json
+```
+
+To run tests for all comprehensive endpoint test cases:
+
+```bash
+./scripts/test_comprehensive_all.sh
 ```
 
 To run tests for all endpoints:

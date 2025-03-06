@@ -241,6 +241,94 @@ The API currently does not require authentication for development and demonstrat
 **Note on NLP Processing:**
 The API uses a fallback pattern detection mechanism when the advanced NLP module is not available. In such cases, the response analysis will rely on keyword pattern matching to determine scores. The log message "Advanced NLP module not available or error during analysis" indicates that the system is using the fallback mechanism.
 
+### 5. Comprehensive Assessment Endpoint
+
+**Endpoint:** `/comprehensive-assessment`
+
+**Method:** POST
+
+**Description:** Combines the functionality of all other endpoints in a single call, processing a question, updating keywords, analyzing a response, and recording a score.
+
+**Request Format:**
+```json
+{
+  "question": "String - The question text about the child's behavior",
+  "milestone_behavior": "String - The milestone behavior being assessed",
+  "parent_response": "String - Parent/caregiver response describing the child's behavior",
+  "keywords": {
+    "CATEGORY_NAME": ["String array - List of keywords for this category"],
+    ...
+  }
+}
+```
+
+**Sample Request:**
+```json
+{
+  "question": "Does the child recognize familiar people?",
+  "milestone_behavior": "Recognizes familiar people",
+  "parent_response": "My child always smiles when he sees grandparents or his favorite babysitter. He knows all his family members and distinguishes between strangers and people he knows well.",
+  "keywords": {
+    "CANNOT_DO": ["no", "not", "never", "doesn't", "does not", "cannot"],
+    "LOST_SKILL": ["used to", "lost it", "previously", "before", "stopped", "regressed"],
+    "EMERGING": ["sometimes", "occasionally", "not consistent", "trying", "beginning to"],
+    "WITH_SUPPORT": ["with help", "if guided", "with assistance", "prompted", "when reminded"],
+    "INDEPENDENT": ["always", "consistently", "definitely", "very good at", "excellent", "mastered"]
+  }
+}
+```
+
+**Response Format:**
+```json
+{
+  "question_processed": true,
+  "milestone_found": true,
+  "milestone_details": {
+    "behavior": "String - The milestone behavior",
+    "criteria": "String - The criteria for this milestone",
+    "domain": "String - The developmental domain",
+    "age_range": "String - The age range for this milestone"
+  },
+  "keywords_updated": ["String array - Categories that were updated with new keywords"],
+  "score": 0-4,
+  "score_label": "String - The score category (e.g., INDEPENDENT)",
+  "confidence": 0.0-1.0,
+  "domain": "String - The developmental domain"
+}
+```
+
+**Sample Response:**
+```json
+{
+  "question_processed": true,
+  "milestone_found": true,
+  "milestone_details": {
+    "behavior": "Recognizes familiar people",
+    "criteria": "Recognizes familiar people",
+    "domain": "SOC",
+    "age_range": "0-6"
+  },
+  "keywords_updated": [
+    "CANNOT_DO",
+    "LOST_SKILL",
+    "EMERGING",
+    "WITH_SUPPORT",
+    "INDEPENDENT"
+  ],
+  "score": 4,
+  "score_label": "INDEPENDENT",
+  "confidence": 0.85,
+  "domain": "SOC"
+}
+```
+
+**Error Responses:**
+
+- `404 Not Found`: Milestone not found
+- `400 Bad Request`: Missing required fields or invalid data
+- `422 Unprocessable Entity`: Unable to analyze response
+- `500 Internal Server Error`: Server error processing the request
+
 ## Error Handling
 
 All API endpoints return standardized error responses with appropriate HTTP status codes. Error responses follow this format:

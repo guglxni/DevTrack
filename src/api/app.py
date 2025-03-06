@@ -67,6 +67,23 @@ class ScoreData(BaseModel):
     score: int = Field(..., description="The numeric score value (0-4)")
     score_label: str = Field(..., description="The score label (e.g., CANNOT_DO)")
 
+# New comprehensive assessment model that combines multiple endpoints
+class ComprehensiveAssessment(BaseModel):
+    question: str = Field(..., description="The question text about the child's behavior")
+    milestone_behavior: str = Field(..., description="The milestone behavior being assessed")
+    parent_response: str = Field(..., description="Parent/caregiver response describing the child's behavior")
+    keywords: Optional[Dict[str, List[str]]] = Field(None, description="Optional dictionary of keywords by category")
+
+class ComprehensiveResult(BaseModel):
+    question_processed: bool = Field(..., description="Whether the question was successfully processed")
+    milestone_found: bool = Field(..., description="Whether the milestone was found")
+    milestone_details: Optional[Dict] = Field(None, description="Details about the milestone if found")
+    keywords_updated: Optional[List[str]] = Field(None, description="Categories that were updated with new keywords")
+    score: int = Field(..., description="The determined score (0-4)")
+    score_label: str = Field(..., description="The score category (e.g., INDEPENDENT)")
+    confidence: float = Field(..., description="Confidence level of the score determination (0-1)")
+    domain: Optional[str] = Field(None, description="Developmental domain of the milestone")
+
 @app.post("/set-child-age", status_code=200)
 async def set_child_age(child_info: ChildInfo):
     """Set the child's age to filter appropriate milestones"""
@@ -349,6 +366,104 @@ async def send_score(score_data: ScoreData):
         raise
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error setting score: {str(e)}")
+
+@app.post("/comprehensive-assessment", status_code=200, response_model=ComprehensiveResult)
+async def comprehensive_assessment(assessment_data: ComprehensiveAssessment):
+    """
+    Comprehensive endpoint that combines question processing, keyword management,
+    response analysis, and score recording in a single call.
+    
+    This endpoint provides a streamlined way to process a full assessment in one request.
+    """
+    try:
+        # Step 1: Process the question (similar to /question endpoint)
+        print(f"Processing question: {assessment_data.question}")
+        milestone = engine.find_milestone_by_name(assessment_data.milestone_behavior)
+        
+        if not milestone:
+            raise HTTPException(status_code=404, detail=f"Milestone '{assessment_data.milestone_behavior}' not found")
+        
+        milestone_details = {
+            "behavior": milestone.behavior,
+            "criteria": milestone.criteria,
+            "domain": milestone.domain,
+            "age_range": milestone.age_range
+        }
+        
+        # Step 2: Update keywords if provided (similar to /keywords endpoint)
+        keywords_updated = []
+        if assessment_data.keywords:
+            for category, keywords in assessment_data.keywords.items():
+                # Validate the category
+                valid_categories = [score.name for score in Score]
+                if category not in valid_categories:
+                    raise HTTPException(
+                        status_code=400, 
+                        detail=f"Invalid category: {category}. Valid categories are: {', '.join(valid_categories)}"
+                    )
+                
+                # Find the score enum from the category name
+                score_enum = None
+                for score in Score:
+                    if score.name == category:
+                        score_enum = score
+                        break
+                
+                if not score_enum:
+                    raise HTTPException(status_code=500, detail=f"Error finding score enum for category: {category}")
+                
+                # Update keywords for this category
+                for milestone_key in engine._scoring_keywords_cache:
+                    keyword_map = engine._scoring_keywords_cache[milestone_key]
+                    
+                    # Remove existing keywords for this category
+                    keys_to_remove = []
+                    for key, score in keyword_map.items():
+                        if score == score_enum:
+                            keys_to_remove.append(key)
+                    
+                    for key in keys_to_remove:
+                        del keyword_map[key]
+                    
+                    # Add new keywords
+                    for keyword in keywords:
+                        keyword_map[keyword.lower()] = score_enum
+                
+                keywords_updated.append(category)
+        
+        # Step 3: Analyze the parent response (similar to /score-response endpoint)
+        if not assessment_data.parent_response:
+            raise HTTPException(status_code=400, detail="Parent response is required")
+        
+        # Score the response
+        try:
+            score = engine.score_response(milestone.behavior, assessment_data.parent_response)
+            confidence = getattr(score, 'confidence', 0.85)  # Default confidence if not available
+        except Exception as e:
+            raise HTTPException(
+                status_code=422, 
+                detail=f"Unable to analyze response: {str(e)}"
+            )
+        
+        # Step 4: Record the score (similar to /send-score endpoint)
+        engine.set_milestone_score(milestone, score)
+        
+        # Return comprehensive results
+        return {
+            "question_processed": True,
+            "milestone_found": True,
+            "milestone_details": milestone_details,
+            "keywords_updated": keywords_updated if assessment_data.keywords else None,
+            "score": score.value,
+            "score_label": score.name,
+            "confidence": confidence,
+            "domain": milestone.domain
+        }
+    except HTTPException:
+        # Re-raise HTTP exceptions
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error processing comprehensive assessment: {str(e)}")
 
 if __name__ == "__main__":
     # Parse command line arguments

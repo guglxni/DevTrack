@@ -1,0 +1,12 @@
+{
+  "question": "Does the child walk independently?",
+  "milestone_behavior": "Walks independently",
+  "parent_response": "My child is sometimes able to take a few steps on their own, but they're not consistent yet. They're beginning to walk but still need to hold onto furniture most of the time. They're trying to walk more each day.",
+  "keywords": {
+    "CANNOT_DO": ["no", "not", "never", "doesn't", "does not", "cannot"],
+    "LOST_SKILL": ["used to", "lost it", "previously", "before", "stopped", "regressed"],
+    "EMERGING": ["sometimes", "occasionally", "not consistent", "trying", "beginning to"],
+    "WITH_SUPPORT": ["with help", "if guided", "with assistance", "prompted", "when reminded"],
+    "INDEPENDENT": ["always", "consistently", "definitely", "very good at", "excellent", "mastered"]
+  }
+} 

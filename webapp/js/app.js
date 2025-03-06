@@ -110,6 +110,43 @@ $(document).ready(function() {
         makeApiRequest('/score-response', data, 'responseResponse', 'responseResponseTime');
     });
     
+    // Comprehensive Assessment Endpoint Handler
+    $('#sendComprehensiveBtn').click(function() {
+        // Create the request data object
+        const data = {
+            question: $('#compQuestion').val(),
+            milestone_behavior: $('#compMilestoneBehavior').val(),
+            parent_response: $('#compParentResponse').val()
+        };
+        
+        // Add keywords if the checkbox is checked
+        if ($('#includeKeywords').is(':checked')) {
+            data.keywords = {
+                "CANNOT_DO": parseKeywords($('#keywordsCannot').val()),
+                "LOST_SKILL": parseKeywords($('#keywordsLost').val()),
+                "EMERGING": parseKeywords($('#keywordsEmerging').val()),
+                "WITH_SUPPORT": parseKeywords($('#keywordsSupport').val()),
+                "INDEPENDENT": parseKeywords($('#keywordsIndependent').val())
+            };
+        }
+        
+        makeApiRequest('/comprehensive-assessment', data, 'comprehensiveResponse', 'comprehensiveResponseTime');
+    });
+    
+    // Helper function to parse comma-separated keywords
+    function parseKeywords(input) {
+        return input.split(',').map(k => k.trim()).filter(k => k);
+    }
+    
+    // Toggle keywords section based on checkbox
+    $('#includeKeywords').change(function() {
+        if ($(this).is(':checked')) {
+            $('#keywordsSection').slideDown();
+        } else {
+            $('#keywordsSection').slideUp();
+        }
+    });
+    
     // Add visual feedback when switching tabs
     $('#apiTabs button').on('shown.bs.tab', function (e) {
         // Add a subtle animation when switching tabs

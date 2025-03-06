@@ -90,6 +90,21 @@ The API provides four main endpoints:
      }
      ```
 
+5. **Comprehensive Assessment Endpoint (`/comprehensive-assessment`)**
+   - Combines the functionality of all other endpoints in a single call
+   - Example request:
+     ```json
+     {
+       "question": "Does the child recognize familiar people?",
+       "milestone_behavior": "Recognizes familiar people",
+       "parent_response": "My child always smiles when he sees grandparents or his favorite babysitter.",
+       "keywords": {
+         "CANNOT_DO": ["no", "not", "never"],
+         "INDEPENDENT": ["always", "consistently", "definitely"]
+       }
+     }
+     ```
+
 ## Running Tests
 
 ### Testing a Single Endpoint
@@ -103,6 +118,20 @@ Use the provided script to test a single endpoint:
 Example:
 ```bash
 ./scripts/test_single_endpoint.sh /question 10 test_data/sample_questions.json
+```
+
+### Testing the Comprehensive Endpoint
+
+Use the dedicated script to test the comprehensive endpoint:
+
+```bash
+./scripts/test_comprehensive_endpoint.sh test_data/comprehensive_test.json
+```
+
+To run all comprehensive endpoint test cases:
+
+```bash
+./scripts/test_comprehensive_all.sh
 ```
 
 ### Running All Tests

@@ -1,0 +1,12 @@
+{
+  "question": "Can the child use a spoon?",
+  "milestone_behavior": "able to hold spoon with fingers appropriately",
+  "parent_response": "My child can use a spoon with help from me. If guided, they can get food to their mouth, but they need assistance to hold the spoon properly. When reminded about how to hold it, they can do it for a few bites before reverting to their old grip.",
+  "keywords": {
+    "CANNOT_DO": ["no", "not", "never", "doesn't", "does not", "cannot"],
+    "LOST_SKILL": ["used to", "lost it", "previously", "before", "stopped", "regressed"],
+    "EMERGING": ["sometimes", "occasionally", "not consistent", "trying", "beginning to"],
+    "WITH_SUPPORT": ["with help", "if guided", "with assistance", "prompted", "when reminded"],
+    "INDEPENDENT": ["always", "consistently", "definitely", "very good at", "excellent", "mastered"]
+  }
+} 
