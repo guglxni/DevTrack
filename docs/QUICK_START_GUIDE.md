@@ -1,108 +1,225 @@
-# ASD Assessment Testing Framework: Quick Start Guide
+# ASD Assessment API Quick Start Guide
 
-This guide provides the essential steps to quickly get started with the ASD assessment testing framework.
+This guide provides step-by-step instructions to quickly get started with the ASD Assessment API and supporting tools.
 
-## Installation in 3 Steps
+## Prerequisites
 
-1. **Clone & Install**
-   ```bash
-   git clone [repository-url]
-   cd asd-assessment-system
-   python3 -m pip install -r requirements.txt
-   ```
+- Python 3.8 or higher
+- Node.js 14 or higher
+- npm 6 or higher
+- Git (for cloning the repository)
 
-2. **Make Scripts Executable**
-   ```bash
-   chmod +x *.sh
-   chmod +x asd_test_cli.py
-   ```
+## Installation
 
-3. **Start the API Server**
-   ```bash
-   ./start_api.sh
-   ```
-   If the port is already in use:
-   ```bash
-   pkill -f "python3 -m uvicorn"
-   ./start_api.sh
-   ```
-
-## Quick Testing (CLI)
-
-### Run the Demo
-```bash
-python3 asd_test_cli.py demo
-```
-
-### Test Individual Responses
-```bash
-# Format: python3 asd_test_cli.py test "milestone" "response"
-python3 asd_test_cli.py test "walks independently" "yes, consistently"
-```
-
-### Run Interactive Session
-```bash
-python3 asd_test_cli.py interactive
-```
-
-## Quick Testing (Shell Script)
+1. **Clone the repository**
 
 ```bash
-# Set a child's age
-./test_response.sh age 24
-
-# Get a milestone
-./test_response.sh milestone
-
-# Test a response
-./test_response.sh test "walks independently" "not at all"
-
-# Generate a report
-./test_response.sh report
+git clone https://github.com/your-username/asd-assessment-api.git
+cd asd-assessment-api
 ```
 
-## Web Interface
+2. **Install Python dependencies**
 
 ```bash
-streamlit run asd_test_webapp.py
+pip install -r requirements.txt
 ```
 
-## Common Scoring Patterns
+3. **Install Node.js dependencies (for web demo)**
 
-For consistent scoring, use these response patterns:
+```bash
+cd webapp
+npm install
+cd ..
+```
 
-| Score | Label | Example Response |
-|-------|-------|------------------|
-| 0 | CANNOT_DO | "not at all" |
-| 1 | LOST_SKILL | "used to but lost it" |
-| 2 | EMERGING | "sometimes" |
-| 3 | WITH_SUPPORT | "with help" |
-| 4 | INDEPENDENT | "yes, consistently" |
+## Starting the API Server
 
-## Troubleshooting
+1. **Start the API server**
+
+```bash
+cd src/api
+uvicorn main:app --reload --port 8003
+```
+
+2. **Verify the server is running**
+
+Open a web browser and navigate to `http://localhost:8003/docs`. You should see the FastAPI Swagger documentation page with all available endpoints.
+
+## API Endpoints Overview
+
+The API provides four main endpoints:
+
+1. **Question Endpoint (`/question`)**
+   - Processes questions related to developmental milestones
+   - Example request:
+     ```json
+     {
+       "text": "Does the child respond when called by name?",
+       "milestone_id": "Recognizes familiar people"
+     }
+     ```
+
+2. **Keywords Endpoint (`/keywords`)**
+   - Processes categorized keywords used for analyzing responses
+   - Example request:
+     ```json
+     {
+       "category": "CANNOT_DO",
+       "keywords": ["no", "not", "never", "doesn't"]
+     }
+     ```
+
+3. **Send Score Endpoint (`/send-score`)**
+   - Records scores for specific developmental milestones
+   - Example request:
+     ```json
+     {
+       "milestone_id": "Shows empathy",
+       "score": 4,
+       "score_label": "INDEPENDENT"
+     }
+     ```
+
+4. **Score Response Endpoint (`/score-response`)**
+   - Analyzes parent/caregiver responses to determine appropriate scores
+   - Example request:
+     ```json
+     {
+       "milestone_behavior": "Recognizes familiar people",
+       "response": "My child always smiles when he sees family members."
+     }
+     ```
+
+## Running Tests
+
+### Testing a Single Endpoint
+
+Use the provided script to test a single endpoint:
+
+```bash
+./scripts/test_single_endpoint.sh /endpoint_path iterations data_file
+```
+
+Example:
+```bash
+./scripts/test_single_endpoint.sh /question 10 test_data/sample_questions.json
+```
+
+### Running All Tests
+
+To run tests for all endpoints:
+
+```bash
+./scripts/run_all_tests.sh
+```
+
+### Viewing Test Results
+
+After running tests, results are available in the `test_results` directory:
+
+- Single endpoint test report: `test_results/api_test_report.html`
+- Consolidated report: `test_results/consolidated_report.html`
+- Performance charts: Various `.png` files in `test_results`
+
+## Using the Web Demo
+
+1. **Start the web demo (separate terminal)**
+
+```bash
+cd webapp
+npm start
+```
+
+2. **Access the web demo**
+
+Open a web browser and navigate to `http://localhost:3000`
+
+3. **Use the tabbed interface**
+
+The web demo provides tabs for testing each API endpoint:
+
+- Question tab: Test the `/question` endpoint
+- Keywords tab: Test the `/keywords` endpoint
+- Send Score tab: Test the `/send-score` endpoint
+- Score Response tab: Test the `/score-response` endpoint
+
+## Quick Start with Demo Script
+
+For convenience, you can use the demo script to start both the API server and web application:
+
+```bash
+./scripts/start_demo.sh
+```
+
+This script starts both servers in the background. Access the web demo at `http://localhost:3000`.
+
+## Basic Troubleshooting
 
 ### API Server Issues
+
+1. **Port already in use**
+
+If you see an error like `address already in use`, another process is already using port 8003. Find and terminate the process:
+
 ```bash
-# Check if server is running
-curl -s http://localhost:8002/health | jq .
-
-# Check for processes using port 8002
-lsof -i :8002
-
-# Kill processes and restart
-pkill -f "python3 -m uvicorn"
-./start_api.sh
+lsof -i :8003
+kill -9 [PID]
 ```
 
-### Dependency Issues
+2. **Module not found errors**
+
+If you see import errors, ensure you've installed all dependencies:
+
 ```bash
-python3 -m pip install --upgrade pip
-python3 -m pip install --force-reinstall sentence-transformers
+pip install -r requirements.txt
+```
+
+3. **NLP Module Fallback**
+
+If you see logs mentioning "Advanced NLP module not available", the system is using keyword pattern matching instead. This is normal and doesn't affect functionality, but may reduce accuracy.
+
+### Web Demo Issues
+
+1. **Cannot access localhost:3000**
+
+Try using `http://127.0.0.1:3000` instead, or check for any errors when starting the Node.js server.
+
+2. **API connection errors**
+
+Ensure the API server is running on port 8003. Check browser console for specific error messages.
+
+3. **Node.js errors**
+
+Ensure you have the correct Node.js version and have installed all dependencies:
+
+```bash
+cd webapp
+npm install
 ```
 
 ## Next Steps
 
-For more detailed information, refer to the following documents:
-- `README_TESTING.md`: Comprehensive testing documentation
-- `API_DOCUMENTATION.md`: API endpoints and usage details
-- `TUTORIAL.md`: Step-by-step tutorial 
+After getting started:
+
+1. **Explore the API Documentation**: Review `docs/API_DOCUMENTATION.md` for detailed API usage information.
+
+2. **Run Performance Tests**: Use the testing framework to assess API performance.
+
+3. **Review Test Reports**: Study the HTML reports to understand API behavior.
+
+4. **Customize the Application**: Modify test data or web demo to suit your specific needs.
+
+For more detailed information, refer to the following documentation:
+
+- [API Documentation](API_DOCUMENTATION.md)
+- [Testing Documentation](README_TESTING.md)
+- [Web Demo Documentation](../webapp/README.md)
+
+## Support
+
+If you encounter issues not covered in this guide, please:
+
+1. Check the detailed documentation
+2. Review the troubleshooting sections
+3. Check for existing issues in the repository
+4. Contact the project maintainer 

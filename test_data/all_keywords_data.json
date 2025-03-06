@@ -1,0 +1,46 @@
+[
+  {
+    "category": "CANNOT_DO",
+    "keywords": [
+      "no", "not", "never", "doesn't", "does not", 
+      "cannot", "can't", "unable", "hasn't", "has not", 
+      "not able", "not at all", "not yet started", "not capable"
+    ]
+  },
+  {
+    "category": "LOST_SKILL",
+    "keywords": [
+      "used to", "previously", "before", "no longer", 
+      "stopped", "regressed", "lost", "forgotten",
+      "had this skill", "could before", "was able",
+      "used to do", "formerly", "in the past"
+    ]
+  },
+  {
+    "category": "EMERGING",
+    "keywords": [
+      "sometimes", "occasionally", "starting to", "beginning to",
+      "trying to", "inconsistent", "not consistent", "varies",
+      "some days", "partially", "developing", "learning",
+      "working on", "making progress", "getting better"
+    ]
+  },
+  {
+    "category": "WITH_SUPPORT",
+    "keywords": [
+      "with help", "when assisted", "with support", "with guidance",
+      "needs help", "when prompted", "specific situations",
+      "certain contexts", "when reminded", "with supervision",
+      "when shown", "with demonstration", "with assistance"
+    ]
+  },
+  {
+    "category": "INDEPENDENT",
+    "keywords": [
+      "always", "independently", "by themselves", "on their own",
+      "without help", "consistently", "mastered", "yes",
+      "all the time", "every time", "confidently", "fully",
+      "completely", "autonomously", "on own"
+    ]
+  }
+] 

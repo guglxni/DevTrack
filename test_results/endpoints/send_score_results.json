@@ -1,0 +1,593 @@
+{
+  "summary": {
+    "total_tests": 30,
+    "passed_tests": 30,
+    "failed_tests": 0,
+    "success_rate": 100.0,
+    "average_response_time": 0.0010154803593953451,
+    "endpoints": {
+      "/send-score": {
+        "total_tests": 30,
+        "success_rate": 100.0,
+        "min_response_time": 0.0007331371307373047,
+        "max_response_time": 0.002766847610473633,
+        "avg_response_time": 0.0010154803593953451,
+        "median_response_time": 0.0009474754333496094,
+        "std_dev_response_time": 0.00036910421598861575
+      }
+    },
+    "timestamp": "2025-03-06T13:55:37.436861"
+  },
+  "results": [
+    {
+      "endpoint": "/send-score",
+      "success": true,
+      "response_time": 0.002766847610473633,
+      "details": {
+        "response": {
+          "status": "success",
+          "message": "Score for milestone 'Shows empathy' set successfully",
+          "milestone": "Shows empathy",
+          "domain": "SOC",
+          "score": 4,
+          "score_label": "INDEPENDENT"
+        }
+      },
+      "status_code": 200,
+      "expected": 200,
+      "actual": 200,
+      "timestamp": "2025-03-06T13:55:37.405813"
+    },
+    {
+      "endpoint": "/send-score",
+      "success": true,
+      "response_time": 0.0010459423065185547,
+      "details": {
+        "response": {
+          "status": "success",
+          "message": "Score for milestone 'Shows empathy' set successfully",
+          "milestone": "Shows empathy",
+          "domain": "SOC",
+          "score": 4,
+          "score_label": "INDEPENDENT"
+        }
+      },
+      "status_code": 200,
+      "expected": 200,
+      "actual": 200,
+      "timestamp": "2025-03-06T13:55:37.407011"
+    },
+    {
+      "endpoint": "/send-score",
+      "success": true,
+      "response_time": 0.0012416839599609375,
+      "details": {
+        "response": {
+          "status": "success",
+          "message": "Score for milestone 'Shows empathy' set successfully",
+          "milestone": "Shows empathy",
+          "domain": "SOC",
+          "score": 4,
+          "score_label": "INDEPENDENT"
+        }
+      },
+      "status_code": 200,
+      "expected": 200,
+      "actual": 200,
+      "timestamp": "2025-03-06T13:55:37.408356"
+    },
+    {
+      "endpoint": "/send-score",
+      "success": true,
+      "response_time": 0.0012989044189453125,
+      "details": {
+        "response": {
+          "status": "success",
+          "message": "Score for milestone 'Shows empathy' set successfully",
+          "milestone": "Shows empathy",
+          "domain": "SOC",
+          "score": 4,
+          "score_label": "INDEPENDENT"
+        }
+      },
+      "status_code": 200,
+      "expected": 200,
+      "actual": 200,
+      "timestamp": "2025-03-06T13:55:37.409777"
+    },
+    {
+      "endpoint": "/send-score",
+      "success": true,
+      "response_time": 0.0010750293731689453,
+      "details": {
+        "response": {
+          "status": "success",
+          "message": "Score for milestone 'Shows empathy' set successfully",
+          "milestone": "Shows empathy",
+          "domain": "SOC",
+          "score": 4,
+          "score_label": "INDEPENDENT"
+        }
+      },
+      "status_code": 200,
+      "expected": 200,
+      "actual": 200,
+      "timestamp": "2025-03-06T13:55:37.411075"
+    },
+    {
+      "endpoint": "/send-score",
+      "success": true,
+      "response_time": 0.0008950233459472656,
+      "details": {
+        "response": {
+          "status": "success",
+          "message": "Score for milestone 'Shows empathy' set successfully",
+          "milestone": "Shows empathy",
+          "domain": "SOC",
+          "score": 4,
+          "score_label": "INDEPENDENT"
+        }
+      },
+      "status_code": 200,
+      "expected": 200,
+      "actual": 200,
+      "timestamp": "2025-03-06T13:55:37.412079"
+    },
+    {
+      "endpoint": "/send-score",
+      "success": true,
+      "response_time": 0.0007977485656738281,
+      "details": {
+        "response": {
+          "status": "success",
+          "message": "Score for milestone 'Shows empathy' set successfully",
+          "milestone": "Shows empathy",
+          "domain": "SOC",
+          "score": 4,
+          "score_label": "INDEPENDENT"
+        }
+      },
+      "status_code": 200,
+      "expected": 200,
+      "actual": 200,
+      "timestamp": "2025-03-06T13:55:37.412967"
+    },
+    {
+      "endpoint": "/send-score",
+      "success": true,
+      "response_time": 0.0007989406585693359,
+      "details": {
+        "response": {
+          "status": "success",
+          "message": "Score for milestone 'Shows empathy' set successfully",
+          "milestone": "Shows empathy",
+          "domain": "SOC",
+          "score": 4,
+          "score_label": "INDEPENDENT"
+        }
+      },
+      "status_code": 200,
+      "expected": 200,
+      "actual": 200,
+      "timestamp": "2025-03-06T13:55:37.413854"
+    },
+    {
+      "endpoint": "/send-score",
+      "success": true,
+      "response_time": 0.0009670257568359375,
+      "details": {
+        "response": {
+          "status": "success",
+          "message": "Score for milestone 'Shows empathy' set successfully",
+          "milestone": "Shows empathy",
+          "domain": "SOC",
+          "score": 4,
+          "score_label": "INDEPENDENT"
+        }
+      },
+      "status_code": 200,
+      "expected": 200,
+      "actual": 200,
+      "timestamp": "2025-03-06T13:55:37.414907"
+    },
+    {
+      "endpoint": "/send-score",
+      "success": true,
+      "response_time": 0.0009770393371582031,
+      "details": {
+        "response": {
+          "status": "success",
+          "message": "Score for milestone 'Shows empathy' set successfully",
+          "milestone": "Shows empathy",
+          "domain": "SOC",
+          "score": 4,
+          "score_label": "INDEPENDENT"
+        }
+      },
+      "status_code": 200,
+      "expected": 200,
+      "actual": 200,
+      "timestamp": "2025-03-06T13:55:37.415998"
+    },
+    {
+      "endpoint": "/send-score",
+      "success": true,
+      "response_time": 0.0010030269622802734,
+      "details": {
+        "response": {
+          "status": "success",
+          "message": "Score for milestone 'Shows empathy' set successfully",
+          "milestone": "Shows empathy",
+          "domain": "SOC",
+          "score": 4,
+          "score_label": "INDEPENDENT"
+        }
+      },
+      "status_code": 200,
+      "expected": 200,
+      "actual": 200,
+      "timestamp": "2025-03-06T13:55:37.417177"
+    },
+    {
+      "endpoint": "/send-score",
+      "success": true,
+      "response_time": 0.0007479190826416016,
+      "details": {
+        "response": {
+          "status": "success",
+          "message": "Score for milestone 'Shows empathy' set successfully",
+          "milestone": "Shows empathy",
+          "domain": "SOC",
+          "score": 4,
+          "score_label": "INDEPENDENT"
+        }
+      },
+      "status_code": 200,
+      "expected": 200,
+      "actual": 200,
+      "timestamp": "2025-03-06T13:55:37.418016"
+    },
+    {
+      "endpoint": "/send-score",
+      "success": true,
+      "response_time": 0.0007700920104980469,
+      "details": {
+        "response": {
+          "status": "success",
+          "message": "Score for milestone 'Shows empathy' set successfully",
+          "milestone": "Shows empathy",
+          "domain": "SOC",
+          "score": 4,
+          "score_label": "INDEPENDENT"
+        }
+      },
+      "status_code": 200,
+      "expected": 200,
+      "actual": 200,
+      "timestamp": "2025-03-06T13:55:37.418887"
+    },
+    {
+      "endpoint": "/send-score",
+      "success": true,
+      "response_time": 0.0008807182312011719,
+      "details": {
+        "response": {
+          "status": "success",
+          "message": "Score for milestone 'Shows empathy' set successfully",
+          "milestone": "Shows empathy",
+          "domain": "SOC",
+          "score": 4,
+          "score_label": "INDEPENDENT"
+        }
+      },
+      "status_code": 200,
+      "expected": 200,
+      "actual": 200,
+      "timestamp": "2025-03-06T13:55:37.419862"
+    },
+    {
+      "endpoint": "/send-score",
+      "success": true,
+      "response_time": 0.0008089542388916016,
+      "details": {
+        "response": {
+          "status": "success",
+          "message": "Score for milestone 'Shows empathy' set successfully",
+          "milestone": "Shows empathy",
+          "domain": "SOC",
+          "score": 4,
+          "score_label": "INDEPENDENT"
+        }
+      },
+      "status_code": 200,
+      "expected": 200,
+      "actual": 200,
+      "timestamp": "2025-03-06T13:55:37.420755"
+    },
+    {
+      "endpoint": "/send-score",
+      "success": true,
+      "response_time": 0.0007331371307373047,
+      "details": {
+        "response": {
+          "status": "success",
+          "message": "Score for milestone 'Shows empathy' set successfully",
+          "milestone": "Shows empathy",
+          "domain": "SOC",
+          "score": 4,
+          "score_label": "INDEPENDENT"
+        }
+      },
+      "status_code": 200,
+      "expected": 200,
+      "actual": 200,
+      "timestamp": "2025-03-06T13:55:37.421576"
+    },
+    {
+      "endpoint": "/send-score",
+      "success": true,
+      "response_time": 0.0012137889862060547,
+      "details": {
+        "response": {
+          "status": "success",
+          "message": "Score for milestone 'Shows empathy' set successfully",
+          "milestone": "Shows empathy",
+          "domain": "SOC",
+          "score": 4,
+          "score_label": "INDEPENDENT"
+        }
+      },
+      "status_code": 200,
+      "expected": 200,
+      "actual": 200,
+      "timestamp": "2025-03-06T13:55:37.422873"
+    },
+    {
+      "endpoint": "/send-score",
+      "success": true,
+      "response_time": 0.0009431838989257812,
+      "details": {
+        "response": {
+          "status": "success",
+          "message": "Score for milestone 'Shows empathy' set successfully",
+          "milestone": "Shows empathy",
+          "domain": "SOC",
+          "score": 4,
+          "score_label": "INDEPENDENT"
+        }
+      },
+      "status_code": 200,
+      "expected": 200,
+      "actual": 200,
+      "timestamp": "2025-03-06T13:55:37.423935"
+    },
+    {
+      "endpoint": "/send-score",
+      "success": true,
+      "response_time": 0.0011119842529296875,
+      "details": {
+        "response": {
+          "status": "success",
+          "message": "Score for milestone 'Shows empathy' set successfully",
+          "milestone": "Shows empathy",
+          "domain": "SOC",
+          "score": 4,
+          "score_label": "INDEPENDENT"
+        }
+      },
+      "status_code": 200,
+      "expected": 200,
+      "actual": 200,
+      "timestamp": "2025-03-06T13:55:37.425141"
+    },
+    {
+      "endpoint": "/send-score",
+      "success": true,
+      "response_time": 0.001026153564453125,
+      "details": {
+        "response": {
+          "status": "success",
+          "message": "Score for milestone 'Shows empathy' set successfully",
+          "milestone": "Shows empathy",
+          "domain": "SOC",
+          "score": 4,
+          "score_label": "INDEPENDENT"
+        }
+      },
+      "status_code": 200,
+      "expected": 200,
+      "actual": 200,
+      "timestamp": "2025-03-06T13:55:37.426276"
+    },
+    {
+      "endpoint": "/send-score",
+      "success": true,
+      "response_time": 0.0008990764617919922,
+      "details": {
+        "response": {
+          "status": "success",
+          "message": "Score for milestone 'Shows empathy' set successfully",
+          "milestone": "Shows empathy",
+          "domain": "SOC",
+          "score": 4,
+          "score_label": "INDEPENDENT"
+        }
+      },
+      "status_code": 200,
+      "expected": 200,
+      "actual": 200,
+      "timestamp": "2025-03-06T13:55:37.427289"
+    },
+    {
+      "endpoint": "/send-score",
+      "success": true,
+      "response_time": 0.0013260841369628906,
+      "details": {
+        "response": {
+          "status": "success",
+          "message": "Score for milestone 'Shows empathy' set successfully",
+          "milestone": "Shows empathy",
+          "domain": "SOC",
+          "score": 4,
+          "score_label": "INDEPENDENT"
+        }
+      },
+      "status_code": 200,
+      "expected": 200,
+      "actual": 200,
+      "timestamp": "2025-03-06T13:55:37.428708"
+    },
+    {
+      "endpoint": "/send-score",
+      "success": true,
+      "response_time": 0.0008916854858398438,
+      "details": {
+        "response": {
+          "status": "success",
+          "message": "Score for milestone 'Shows empathy' set successfully",
+          "milestone": "Shows empathy",
+          "domain": "SOC",
+          "score": 4,
+          "score_label": "INDEPENDENT"
+        }
+      },
+      "status_code": 200,
+      "expected": 200,
+      "actual": 200,
+      "timestamp": "2025-03-06T13:55:37.429691"
+    },
+    {
+      "endpoint": "/send-score",
+      "success": true,
+      "response_time": 0.000843048095703125,
+      "details": {
+        "response": {
+          "status": "success",
+          "message": "Score for milestone 'Shows empathy' set successfully",
+          "milestone": "Shows empathy",
+          "domain": "SOC",
+          "score": 4,
+          "score_label": "INDEPENDENT"
+        }
+      },
+      "status_code": 200,
+      "expected": 200,
+      "actual": 200,
+      "timestamp": "2025-03-06T13:55:37.430636"
+    },
+    {
+      "endpoint": "/send-score",
+      "success": true,
+      "response_time": 0.0007810592651367188,
+      "details": {
+        "response": {
+          "status": "success",
+          "message": "Score for milestone 'Shows empathy' set successfully",
+          "milestone": "Shows empathy",
+          "domain": "SOC",
+          "score": 4,
+          "score_label": "INDEPENDENT"
+        }
+      },
+      "status_code": 200,
+      "expected": 200,
+      "actual": 200,
+      "timestamp": "2025-03-06T13:55:37.431497"
+    },
+    {
+      "endpoint": "/send-score",
+      "success": true,
+      "response_time": 0.0008180141448974609,
+      "details": {
+        "response": {
+          "status": "success",
+          "message": "Score for milestone 'Shows empathy' set successfully",
+          "milestone": "Shows empathy",
+          "domain": "SOC",
+          "score": 4,
+          "score_label": "INDEPENDENT"
+        }
+      },
+      "status_code": 200,
+      "expected": 200,
+      "actual": 200,
+      "timestamp": "2025-03-06T13:55:37.432398"
+    },
+    {
+      "endpoint": "/send-score",
+      "success": true,
+      "response_time": 0.0009517669677734375,
+      "details": {
+        "response": {
+          "status": "success",
+          "message": "Score for milestone 'Shows empathy' set successfully",
+          "milestone": "Shows empathy",
+          "domain": "SOC",
+          "score": 4,
+          "score_label": "INDEPENDENT"
+        }
+      },
+      "status_code": 200,
+      "expected": 200,
+      "actual": 200,
+      "timestamp": "2025-03-06T13:55:37.433431"
+    },
+    {
+      "endpoint": "/send-score",
+      "success": true,
+      "response_time": 0.0007827281951904297,
+      "details": {
+        "response": {
+          "status": "success",
+          "message": "Score for milestone 'Shows empathy' set successfully",
+          "milestone": "Shows empathy",
+          "domain": "SOC",
+          "score": 4,
+          "score_label": "INDEPENDENT"
+        }
+      },
+      "status_code": 200,
+      "expected": 200,
+      "actual": 200,
+      "timestamp": "2025-03-06T13:55:37.434307"
+    },
+    {
+      "endpoint": "/send-score",
+      "success": true,
+      "response_time": 0.001051187515258789,
+      "details": {
+        "response": {
+          "status": "success",
+          "message": "Score for milestone 'Shows empathy' set successfully",
+          "milestone": "Shows empathy",
+          "domain": "SOC",
+          "score": 4,
+          "score_label": "INDEPENDENT"
+        }
+      },
+      "status_code": 200,
+      "expected": 200,
+      "actual": 200,
+      "timestamp": "2025-03-06T13:55:37.435468"
+    },
+    {
+      "endpoint": "/send-score",
+      "success": true,
+      "response_time": 0.0010166168212890625,
+      "details": {
+        "response": {
+          "status": "success",
+          "message": "Score for milestone 'Shows empathy' set successfully",
+          "milestone": "Shows empathy",
+          "domain": "SOC",
+          "score": 4,
+          "score_label": "INDEPENDENT"
+        }
+      },
+      "status_code": 200,
+      "expected": 200,
+      "actual": 200,
+      "timestamp": "2025-03-06T13:55:37.436588"
+    }
+  ]
+}

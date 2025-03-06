@@ -1,0 +1,533 @@
+{
+  "summary": {
+    "total_tests": 30,
+    "passed_tests": 30,
+    "failed_tests": 0,
+    "success_rate": 100.0,
+    "average_response_time": 0.001092076301574707,
+    "endpoints": {
+      "/score-response": {
+        "total_tests": 30,
+        "success_rate": 100.0,
+        "min_response_time": 0.0007688999176025391,
+        "max_response_time": 0.003713846206665039,
+        "avg_response_time": 0.001092076301574707,
+        "median_response_time": 0.0009599924087524414,
+        "std_dev_response_time": 0.0005246459195657416
+      }
+    },
+    "timestamp": "2025-03-06T13:55:38.049187"
+  },
+  "results": [
+    {
+      "endpoint": "/score-response",
+      "success": true,
+      "response_time": 0.003713846206665039,
+      "details": {
+        "response": {
+          "milestone": "Recognizes familiar people",
+          "domain": "SOC",
+          "score": 4,
+          "score_label": "INDEPENDENT"
+        }
+      },
+      "status_code": 200,
+      "expected": 200,
+      "actual": 200,
+      "timestamp": "2025-03-06T13:55:38.016333"
+    },
+    {
+      "endpoint": "/score-response",
+      "success": true,
+      "response_time": 0.0013680458068847656,
+      "details": {
+        "response": {
+          "milestone": "Recognizes familiar people",
+          "domain": "SOC",
+          "score": 4,
+          "score_label": "INDEPENDENT"
+        }
+      },
+      "status_code": 200,
+      "expected": 200,
+      "actual": 200,
+      "timestamp": "2025-03-06T13:55:38.017899"
+    },
+    {
+      "endpoint": "/score-response",
+      "success": true,
+      "response_time": 0.0010890960693359375,
+      "details": {
+        "response": {
+          "milestone": "Recognizes familiar people",
+          "domain": "SOC",
+          "score": 4,
+          "score_label": "INDEPENDENT"
+        }
+      },
+      "status_code": 200,
+      "expected": 200,
+      "actual": 200,
+      "timestamp": "2025-03-06T13:55:38.019105"
+    },
+    {
+      "endpoint": "/score-response",
+      "success": true,
+      "response_time": 0.0009069442749023438,
+      "details": {
+        "response": {
+          "milestone": "Recognizes familiar people",
+          "domain": "SOC",
+          "score": 4,
+          "score_label": "INDEPENDENT"
+        }
+      },
+      "status_code": 200,
+      "expected": 200,
+      "actual": 200,
+      "timestamp": "2025-03-06T13:55:38.020104"
+    },
+    {
+      "endpoint": "/score-response",
+      "success": true,
+      "response_time": 0.0009777545928955078,
+      "details": {
+        "response": {
+          "milestone": "Recognizes familiar people",
+          "domain": "SOC",
+          "score": 4,
+          "score_label": "INDEPENDENT"
+        }
+      },
+      "status_code": 200,
+      "expected": 200,
+      "actual": 200,
+      "timestamp": "2025-03-06T13:55:38.021163"
+    },
+    {
+      "endpoint": "/score-response",
+      "success": true,
+      "response_time": 0.0009751319885253906,
+      "details": {
+        "response": {
+          "milestone": "Recognizes familiar people",
+          "domain": "SOC",
+          "score": 4,
+          "score_label": "INDEPENDENT"
+        }
+      },
+      "status_code": 200,
+      "expected": 200,
+      "actual": 200,
+      "timestamp": "2025-03-06T13:55:38.022262"
+    },
+    {
+      "endpoint": "/score-response",
+      "success": true,
+      "response_time": 0.0012788772583007812,
+      "details": {
+        "response": {
+          "milestone": "Recognizes familiar people",
+          "domain": "SOC",
+          "score": 4,
+          "score_label": "INDEPENDENT"
+        }
+      },
+      "status_code": 200,
+      "expected": 200,
+      "actual": 200,
+      "timestamp": "2025-03-06T13:55:38.023893"
+    },
+    {
+      "endpoint": "/score-response",
+      "success": true,
+      "response_time": 0.0009300708770751953,
+      "details": {
+        "response": {
+          "milestone": "Recognizes familiar people",
+          "domain": "SOC",
+          "score": 4,
+          "score_label": "INDEPENDENT"
+        }
+      },
+      "status_code": 200,
+      "expected": 200,
+      "actual": 200,
+      "timestamp": "2025-03-06T13:55:38.024969"
+    },
+    {
+      "endpoint": "/score-response",
+      "success": true,
+      "response_time": 0.0010411739349365234,
+      "details": {
+        "response": {
+          "milestone": "Recognizes familiar people",
+          "domain": "SOC",
+          "score": 4,
+          "score_label": "INDEPENDENT"
+        }
+      },
+      "status_code": 200,
+      "expected": 200,
+      "actual": 200,
+      "timestamp": "2025-03-06T13:55:38.026117"
+    },
+    {
+      "endpoint": "/score-response",
+      "success": true,
+      "response_time": 0.0009410381317138672,
+      "details": {
+        "response": {
+          "milestone": "Recognizes familiar people",
+          "domain": "SOC",
+          "score": 4,
+          "score_label": "INDEPENDENT"
+        }
+      },
+      "status_code": 200,
+      "expected": 200,
+      "actual": 200,
+      "timestamp": "2025-03-06T13:55:38.027187"
+    },
+    {
+      "endpoint": "/score-response",
+      "success": true,
+      "response_time": 0.0010979175567626953,
+      "details": {
+        "response": {
+          "milestone": "Recognizes familiar people",
+          "domain": "SOC",
+          "score": 4,
+          "score_label": "INDEPENDENT"
+        }
+      },
+      "status_code": 200,
+      "expected": 200,
+      "actual": 200,
+      "timestamp": "2025-03-06T13:55:38.028390"
+    },
+    {
+      "endpoint": "/score-response",
+      "success": true,
+      "response_time": 0.0009198188781738281,
+      "details": {
+        "response": {
+          "milestone": "Recognizes familiar people",
+          "domain": "SOC",
+          "score": 4,
+          "score_label": "INDEPENDENT"
+        }
+      },
+      "status_code": 200,
+      "expected": 200,
+      "actual": 200,
+      "timestamp": "2025-03-06T13:55:38.029419"
+    },
+    {
+      "endpoint": "/score-response",
+      "success": true,
+      "response_time": 0.0008502006530761719,
+      "details": {
+        "response": {
+          "milestone": "Recognizes familiar people",
+          "domain": "SOC",
+          "score": 4,
+          "score_label": "INDEPENDENT"
+        }
+      },
+      "status_code": 200,
+      "expected": 200,
+      "actual": 200,
+      "timestamp": "2025-03-06T13:55:38.030353"
+    },
+    {
+      "endpoint": "/score-response",
+      "success": true,
+      "response_time": 0.0009448528289794922,
+      "details": {
+        "response": {
+          "milestone": "Recognizes familiar people",
+          "domain": "SOC",
+          "score": 4,
+          "score_label": "INDEPENDENT"
+        }
+      },
+      "status_code": 200,
+      "expected": 200,
+      "actual": 200,
+      "timestamp": "2025-03-06T13:55:38.031374"
+    },
+    {
+      "endpoint": "/score-response",
+      "success": true,
+      "response_time": 0.0007970333099365234,
+      "details": {
+        "response": {
+          "milestone": "Recognizes familiar people",
+          "domain": "SOC",
+          "score": 4,
+          "score_label": "INDEPENDENT"
+        }
+      },
+      "status_code": 200,
+      "expected": 200,
+      "actual": 200,
+      "timestamp": "2025-03-06T13:55:38.032276"
+    },
+    {
+      "endpoint": "/score-response",
+      "success": true,
+      "response_time": 0.0009107589721679688,
+      "details": {
+        "response": {
+          "milestone": "Recognizes familiar people",
+          "domain": "SOC",
+          "score": 4,
+          "score_label": "INDEPENDENT"
+        }
+      },
+      "status_code": 200,
+      "expected": 200,
+      "actual": 200,
+      "timestamp": "2025-03-06T13:55:38.033272"
+    },
+    {
+      "endpoint": "/score-response",
+      "success": true,
+      "response_time": 0.0008859634399414062,
+      "details": {
+        "response": {
+          "milestone": "Recognizes familiar people",
+          "domain": "SOC",
+          "score": 4,
+          "score_label": "INDEPENDENT"
+        }
+      },
+      "status_code": 200,
+      "expected": 200,
+      "actual": 200,
+      "timestamp": "2025-03-06T13:55:38.034236"
+    },
+    {
+      "endpoint": "/score-response",
+      "success": true,
+      "response_time": 0.0007688999176025391,
+      "details": {
+        "response": {
+          "milestone": "Recognizes familiar people",
+          "domain": "SOC",
+          "score": 4,
+          "score_label": "INDEPENDENT"
+        }
+      },
+      "status_code": 200,
+      "expected": 200,
+      "actual": 200,
+      "timestamp": "2025-03-06T13:55:38.035088"
+    },
+    {
+      "endpoint": "/score-response",
+      "success": true,
+      "response_time": 0.0011348724365234375,
+      "details": {
+        "response": {
+          "milestone": "Recognizes familiar people",
+          "domain": "SOC",
+          "score": 4,
+          "score_label": "INDEPENDENT"
+        }
+      },
+      "status_code": 200,
+      "expected": 200,
+      "actual": 200,
+      "timestamp": "2025-03-06T13:55:38.036352"
+    },
+    {
+      "endpoint": "/score-response",
+      "success": true,
+      "response_time": 0.0012149810791015625,
+      "details": {
+        "response": {
+          "milestone": "Recognizes familiar people",
+          "domain": "SOC",
+          "score": 4,
+          "score_label": "INDEPENDENT"
+        }
+      },
+      "status_code": 200,
+      "expected": 200,
+      "actual": 200,
+      "timestamp": "2025-03-06T13:55:38.037879"
+    },
+    {
+      "endpoint": "/score-response",
+      "success": true,
+      "response_time": 0.0009918212890625,
+      "details": {
+        "response": {
+          "milestone": "Recognizes familiar people",
+          "domain": "SOC",
+          "score": 4,
+          "score_label": "INDEPENDENT"
+        }
+      },
+      "status_code": 200,
+      "expected": 200,
+      "actual": 200,
+      "timestamp": "2025-03-06T13:55:38.039006"
+    },
+    {
+      "endpoint": "/score-response",
+      "success": true,
+      "response_time": 0.0011141300201416016,
+      "details": {
+        "response": {
+          "milestone": "Recognizes familiar people",
+          "domain": "SOC",
+          "score": 4,
+          "score_label": "INDEPENDENT"
+        }
+      },
+      "status_code": 200,
+      "expected": 200,
+      "actual": 200,
+      "timestamp": "2025-03-06T13:55:38.040220"
+    },
+    {
+      "endpoint": "/score-response",
+      "success": true,
+      "response_time": 0.0010480880737304688,
+      "details": {
+        "response": {
+          "milestone": "Recognizes familiar people",
+          "domain": "SOC",
+          "score": 4,
+          "score_label": "INDEPENDENT"
+        }
+      },
+      "status_code": 200,
+      "expected": 200,
+      "actual": 200,
+      "timestamp": "2025-03-06T13:55:38.041370"
+    },
+    {
+      "endpoint": "/score-response",
+      "success": true,
+      "response_time": 0.0015439987182617188,
+      "details": {
+        "response": {
+          "milestone": "Recognizes familiar people",
+          "domain": "SOC",
+          "score": 4,
+          "score_label": "INDEPENDENT"
+        }
+      },
+      "status_code": 200,
+      "expected": 200,
+      "actual": 200,
+      "timestamp": "2025-03-06T13:55:38.043013"
+    },
+    {
+      "endpoint": "/score-response",
+      "success": true,
+      "response_time": 0.0009260177612304688,
+      "details": {
+        "response": {
+          "milestone": "Recognizes familiar people",
+          "domain": "SOC",
+          "score": 4,
+          "score_label": "INDEPENDENT"
+        }
+      },
+      "status_code": 200,
+      "expected": 200,
+      "actual": 200,
+      "timestamp": "2025-03-06T13:55:38.044044"
+    },
+    {
+      "endpoint": "/score-response",
+      "success": true,
+      "response_time": 0.0007936954498291016,
+      "details": {
+        "response": {
+          "milestone": "Recognizes familiar people",
+          "domain": "SOC",
+          "score": 4,
+          "score_label": "INDEPENDENT"
+        }
+      },
+      "status_code": 200,
+      "expected": 200,
+      "actual": 200,
+      "timestamp": "2025-03-06T13:55:38.044919"
+    },
+    {
+      "endpoint": "/score-response",
+      "success": true,
+      "response_time": 0.0008769035339355469,
+      "details": {
+        "response": {
+          "milestone": "Recognizes familiar people",
+          "domain": "SOC",
+          "score": 4,
+          "score_label": "INDEPENDENT"
+        }
+      },
+      "status_code": 200,
+      "expected": 200,
+      "actual": 200,
+      "timestamp": "2025-03-06T13:55:38.045880"
+    },
+    {
+      "endpoint": "/score-response",
+      "success": true,
+      "response_time": 0.0008482933044433594,
+      "details": {
+        "response": {
+          "milestone": "Recognizes familiar people",
+          "domain": "SOC",
+          "score": 4,
+          "score_label": "INDEPENDENT"
+        }
+      },
+      "status_code": 200,
+      "expected": 200,
+      "actual": 200,
+      "timestamp": "2025-03-06T13:55:38.046845"
+    },
+    {
+      "endpoint": "/score-response",
+      "success": true,
+      "response_time": 0.0009779930114746094,
+      "details": {
+        "response": {
+          "milestone": "Recognizes familiar people",
+          "domain": "SOC",
+          "score": 4,
+          "score_label": "INDEPENDENT"
+        }
+      },
+      "status_code": 200,
+      "expected": 200,
+      "actual": 200,
+      "timestamp": "2025-03-06T13:55:38.047915"
+    },
+    {
+      "endpoint": "/score-response",
+      "success": true,
+      "response_time": 0.0008940696716308594,
+      "details": {
+        "response": {
+          "milestone": "Recognizes familiar people",
+          "domain": "SOC",
+          "score": 4,
+          "score_label": "INDEPENDENT"
+        }
+      },
+      "status_code": 200,
+      "expected": 200,
+      "actual": 200,
+      "timestamp": "2025-03-06T13:55:38.048897"
+    }
+  ]
+}

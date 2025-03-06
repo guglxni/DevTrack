@@ -1,0 +1,42 @@
+[
+  {
+    "text": "Does the child respond when called by name?",
+    "milestone_id": "Recognizes familiar people"
+  },
+  {
+    "text": "Can the child point to body parts when asked?",
+    "milestone_id": "Points to recognized objects"
+  },
+  {
+    "text": "Is the child able to use a spoon independently?",
+    "milestone_id": "able to hold spoon with fingers appropriately"
+  },
+  {
+    "text": "Does the child make eye contact with you?",
+    "milestone_id": "Makes eye contact"
+  },
+  {
+    "text": "Does the child respond to simple commands like 'come here'?",
+    "milestone_id": "follow simple one step commands"
+  },
+  {
+    "text": "Can the child walk up stairs with assistance?",
+    "milestone_id": "Walks up stairs with help"
+  },
+  {
+    "text": "Does the child show interest in other children?",
+    "milestone_id": "Shows interest in peers"
+  },
+  {
+    "text": "Can the child build a tower of blocks?",
+    "milestone_id": null
+  },
+  {
+    "text": "Does the child try to comfort others who are upset?",
+    "milestone_id": "Shows empathy"
+  },
+  {
+    "text": "Can the child say at least 10 words?",
+    "milestone_id": "Uses 5-10 words"
+  }
+] 

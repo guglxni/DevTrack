@@ -1,0 +1,1073 @@
+{
+  "summary": {
+    "total_tests": 30,
+    "passed_tests": 30,
+    "failed_tests": 0,
+    "success_rate": 100.0,
+    "average_response_time": 0.001031796137491862,
+    "endpoints": {
+      "/question": {
+        "total_tests": 30,
+        "success_rate": 100.0,
+        "min_response_time": 0.0007600784301757812,
+        "max_response_time": 0.002827882766723633,
+        "avg_response_time": 0.001031796137491862,
+        "median_response_time": 0.0009562969207763672,
+        "std_dev_response_time": 0.00036791777980385603
+      }
+    },
+    "timestamp": "2025-03-06T13:55:36.168075"
+  },
+  "results": [
+    {
+      "endpoint": "/question",
+      "success": true,
+      "response_time": 0.002827882766723633,
+      "details": {
+        "response": {
+          "status": "success",
+          "message": "Question received successfully",
+          "question": "Does the child respond when called by name?",
+          "milestone_found": true,
+          "milestone_details": {
+            "behavior": "Recognizes familiar people",
+            "criteria": "Recognizes familiar people",
+            "age_range": "0-6",
+            "domain": "SOC",
+            "keywords": [
+              "familiar",
+              "recognizes",
+              "people"
+            ],
+            "scoring_rules": {
+              "cannot": 0,
+              "lost": 1,
+              "emerging": 2,
+              "support": 3,
+              "independent": 4
+            }
+          }
+        }
+      },
+      "status_code": 200,
+      "expected": 200,
+      "actual": 200,
+      "timestamp": "2025-03-06T13:55:36.136483"
+    },
+    {
+      "endpoint": "/question",
+      "success": true,
+      "response_time": 0.0009448528289794922,
+      "details": {
+        "response": {
+          "status": "success",
+          "message": "Question received successfully",
+          "question": "Does the child respond when called by name?",
+          "milestone_found": true,
+          "milestone_details": {
+            "behavior": "Recognizes familiar people",
+            "criteria": "Recognizes familiar people",
+            "age_range": "0-6",
+            "domain": "SOC",
+            "keywords": [
+              "familiar",
+              "recognizes",
+              "people"
+            ],
+            "scoring_rules": {
+              "cannot": 0,
+              "lost": 1,
+              "emerging": 2,
+              "support": 3,
+              "independent": 4
+            }
+          }
+        }
+      },
+      "status_code": 200,
+      "expected": 200,
+      "actual": 200,
+      "timestamp": "2025-03-06T13:55:36.137576"
+    },
+    {
+      "endpoint": "/question",
+      "success": true,
+      "response_time": 0.0009300708770751953,
+      "details": {
+        "response": {
+          "status": "success",
+          "message": "Question received successfully",
+          "question": "Does the child respond when called by name?",
+          "milestone_found": true,
+          "milestone_details": {
+            "behavior": "Recognizes familiar people",
+            "criteria": "Recognizes familiar people",
+            "age_range": "0-6",
+            "domain": "SOC",
+            "keywords": [
+              "familiar",
+              "recognizes",
+              "people"
+            ],
+            "scoring_rules": {
+              "cannot": 0,
+              "lost": 1,
+              "emerging": 2,
+              "support": 3,
+              "independent": 4
+            }
+          }
+        }
+      },
+      "status_code": 200,
+      "expected": 200,
+      "actual": 200,
+      "timestamp": "2025-03-06T13:55:36.138599"
+    },
+    {
+      "endpoint": "/question",
+      "success": true,
+      "response_time": 0.0010929107666015625,
+      "details": {
+        "response": {
+          "status": "success",
+          "message": "Question received successfully",
+          "question": "Does the child respond when called by name?",
+          "milestone_found": true,
+          "milestone_details": {
+            "behavior": "Recognizes familiar people",
+            "criteria": "Recognizes familiar people",
+            "age_range": "0-6",
+            "domain": "SOC",
+            "keywords": [
+              "familiar",
+              "recognizes",
+              "people"
+            ],
+            "scoring_rules": {
+              "cannot": 0,
+              "lost": 1,
+              "emerging": 2,
+              "support": 3,
+              "independent": 4
+            }
+          }
+        }
+      },
+      "status_code": 200,
+      "expected": 200,
+      "actual": 200,
+      "timestamp": "2025-03-06T13:55:36.139781"
+    },
+    {
+      "endpoint": "/question",
+      "success": true,
+      "response_time": 0.0009710788726806641,
+      "details": {
+        "response": {
+          "status": "success",
+          "message": "Question received successfully",
+          "question": "Does the child respond when called by name?",
+          "milestone_found": true,
+          "milestone_details": {
+            "behavior": "Recognizes familiar people",
+            "criteria": "Recognizes familiar people",
+            "age_range": "0-6",
+            "domain": "SOC",
+            "keywords": [
+              "familiar",
+              "recognizes",
+              "people"
+            ],
+            "scoring_rules": {
+              "cannot": 0,
+              "lost": 1,
+              "emerging": 2,
+              "support": 3,
+              "independent": 4
+            }
+          }
+        }
+      },
+      "status_code": 200,
+      "expected": 200,
+      "actual": 200,
+      "timestamp": "2025-03-06T13:55:36.140916"
+    },
+    {
+      "endpoint": "/question",
+      "success": true,
+      "response_time": 0.0007600784301757812,
+      "details": {
+        "response": {
+          "status": "success",
+          "message": "Question received successfully",
+          "question": "Does the child respond when called by name?",
+          "milestone_found": true,
+          "milestone_details": {
+            "behavior": "Recognizes familiar people",
+            "criteria": "Recognizes familiar people",
+            "age_range": "0-6",
+            "domain": "SOC",
+            "keywords": [
+              "familiar",
+              "recognizes",
+              "people"
+            ],
+            "scoring_rules": {
+              "cannot": 0,
+              "lost": 1,
+              "emerging": 2,
+              "support": 3,
+              "independent": 4
+            }
+          }
+        }
+      },
+      "status_code": 200,
+      "expected": 200,
+      "actual": 200,
+      "timestamp": "2025-03-06T13:55:36.141777"
+    },
+    {
+      "endpoint": "/question",
+      "success": true,
+      "response_time": 0.0011658668518066406,
+      "details": {
+        "response": {
+          "status": "success",
+          "message": "Question received successfully",
+          "question": "Does the child respond when called by name?",
+          "milestone_found": true,
+          "milestone_details": {
+            "behavior": "Recognizes familiar people",
+            "criteria": "Recognizes familiar people",
+            "age_range": "0-6",
+            "domain": "SOC",
+            "keywords": [
+              "familiar",
+              "recognizes",
+              "people"
+            ],
+            "scoring_rules": {
+              "cannot": 0,
+              "lost": 1,
+              "emerging": 2,
+              "support": 3,
+              "independent": 4
+            }
+          }
+        }
+      },
+      "status_code": 200,
+      "expected": 200,
+      "actual": 200,
+      "timestamp": "2025-03-06T13:55:36.143176"
+    },
+    {
+      "endpoint": "/question",
+      "success": true,
+      "response_time": 0.0012111663818359375,
+      "details": {
+        "response": {
+          "status": "success",
+          "message": "Question received successfully",
+          "question": "Does the child respond when called by name?",
+          "milestone_found": true,
+          "milestone_details": {
+            "behavior": "Recognizes familiar people",
+            "criteria": "Recognizes familiar people",
+            "age_range": "0-6",
+            "domain": "SOC",
+            "keywords": [
+              "familiar",
+              "recognizes",
+              "people"
+            ],
+            "scoring_rules": {
+              "cannot": 0,
+              "lost": 1,
+              "emerging": 2,
+              "support": 3,
+              "independent": 4
+            }
+          }
+        }
+      },
+      "status_code": 200,
+      "expected": 200,
+      "actual": 200,
+      "timestamp": "2025-03-06T13:55:36.144523"
+    },
+    {
+      "endpoint": "/question",
+      "success": true,
+      "response_time": 0.0010540485382080078,
+      "details": {
+        "response": {
+          "status": "success",
+          "message": "Question received successfully",
+          "question": "Does the child respond when called by name?",
+          "milestone_found": true,
+          "milestone_details": {
+            "behavior": "Recognizes familiar people",
+            "criteria": "Recognizes familiar people",
+            "age_range": "0-6",
+            "domain": "SOC",
+            "keywords": [
+              "familiar",
+              "recognizes",
+              "people"
+            ],
+            "scoring_rules": {
+              "cannot": 0,
+              "lost": 1,
+              "emerging": 2,
+              "support": 3,
+              "independent": 4
+            }
+          }
+        }
+      },
+      "status_code": 200,
+      "expected": 200,
+      "actual": 200,
+      "timestamp": "2025-03-06T13:55:36.145704"
+    },
+    {
+      "endpoint": "/question",
+      "success": true,
+      "response_time": 0.001020193099975586,
+      "details": {
+        "response": {
+          "status": "success",
+          "message": "Question received successfully",
+          "question": "Does the child respond when called by name?",
+          "milestone_found": true,
+          "milestone_details": {
+            "behavior": "Recognizes familiar people",
+            "criteria": "Recognizes familiar people",
+            "age_range": "0-6",
+            "domain": "SOC",
+            "keywords": [
+              "familiar",
+              "recognizes",
+              "people"
+            ],
+            "scoring_rules": {
+              "cannot": 0,
+              "lost": 1,
+              "emerging": 2,
+              "support": 3,
+              "independent": 4
+            }
+          }
+        }
+      },
+      "status_code": 200,
+      "expected": 200,
+      "actual": 200,
+      "timestamp": "2025-03-06T13:55:36.146840"
+    },
+    {
+      "endpoint": "/question",
+      "success": true,
+      "response_time": 0.0013430118560791016,
+      "details": {
+        "response": {
+          "status": "success",
+          "message": "Question received successfully",
+          "question": "Does the child respond when called by name?",
+          "milestone_found": true,
+          "milestone_details": {
+            "behavior": "Recognizes familiar people",
+            "criteria": "Recognizes familiar people",
+            "age_range": "0-6",
+            "domain": "SOC",
+            "keywords": [
+              "familiar",
+              "recognizes",
+              "people"
+            ],
+            "scoring_rules": {
+              "cannot": 0,
+              "lost": 1,
+              "emerging": 2,
+              "support": 3,
+              "independent": 4
+            }
+          }
+        }
+      },
+      "status_code": 200,
+      "expected": 200,
+      "actual": 200,
+      "timestamp": "2025-03-06T13:55:36.148297"
+    },
+    {
+      "endpoint": "/question",
+      "success": true,
+      "response_time": 0.001094818115234375,
+      "details": {
+        "response": {
+          "status": "success",
+          "message": "Question received successfully",
+          "question": "Does the child respond when called by name?",
+          "milestone_found": true,
+          "milestone_details": {
+            "behavior": "Recognizes familiar people",
+            "criteria": "Recognizes familiar people",
+            "age_range": "0-6",
+            "domain": "SOC",
+            "keywords": [
+              "familiar",
+              "recognizes",
+              "people"
+            ],
+            "scoring_rules": {
+              "cannot": 0,
+              "lost": 1,
+              "emerging": 2,
+              "support": 3,
+              "independent": 4
+            }
+          }
+        }
+      },
+      "status_code": 200,
+      "expected": 200,
+      "actual": 200,
+      "timestamp": "2025-03-06T13:55:36.149497"
+    },
+    {
+      "endpoint": "/question",
+      "success": true,
+      "response_time": 0.000926971435546875,
+      "details": {
+        "response": {
+          "status": "success",
+          "message": "Question received successfully",
+          "question": "Does the child respond when called by name?",
+          "milestone_found": true,
+          "milestone_details": {
+            "behavior": "Recognizes familiar people",
+            "criteria": "Recognizes familiar people",
+            "age_range": "0-6",
+            "domain": "SOC",
+            "keywords": [
+              "familiar",
+              "recognizes",
+              "people"
+            ],
+            "scoring_rules": {
+              "cannot": 0,
+              "lost": 1,
+              "emerging": 2,
+              "support": 3,
+              "independent": 4
+            }
+          }
+        }
+      },
+      "status_code": 200,
+      "expected": 200,
+      "actual": 200,
+      "timestamp": "2025-03-06T13:55:36.150568"
+    },
+    {
+      "endpoint": "/question",
+      "success": true,
+      "response_time": 0.0008158683776855469,
+      "details": {
+        "response": {
+          "status": "success",
+          "message": "Question received successfully",
+          "question": "Does the child respond when called by name?",
+          "milestone_found": true,
+          "milestone_details": {
+            "behavior": "Recognizes familiar people",
+            "criteria": "Recognizes familiar people",
+            "age_range": "0-6",
+            "domain": "SOC",
+            "keywords": [
+              "familiar",
+              "recognizes",
+              "people"
+            ],
+            "scoring_rules": {
+              "cannot": 0,
+              "lost": 1,
+              "emerging": 2,
+              "support": 3,
+              "independent": 4
+            }
+          }
+        }
+      },
+      "status_code": 200,
+      "expected": 200,
+      "actual": 200,
+      "timestamp": "2025-03-06T13:55:36.151504"
+    },
+    {
+      "endpoint": "/question",
+      "success": true,
+      "response_time": 0.0008177757263183594,
+      "details": {
+        "response": {
+          "status": "success",
+          "message": "Question received successfully",
+          "question": "Does the child respond when called by name?",
+          "milestone_found": true,
+          "milestone_details": {
+            "behavior": "Recognizes familiar people",
+            "criteria": "Recognizes familiar people",
+            "age_range": "0-6",
+            "domain": "SOC",
+            "keywords": [
+              "familiar",
+              "recognizes",
+              "people"
+            ],
+            "scoring_rules": {
+              "cannot": 0,
+              "lost": 1,
+              "emerging": 2,
+              "support": 3,
+              "independent": 4
+            }
+          }
+        }
+      },
+      "status_code": 200,
+      "expected": 200,
+      "actual": 200,
+      "timestamp": "2025-03-06T13:55:36.152429"
+    },
+    {
+      "endpoint": "/question",
+      "success": true,
+      "response_time": 0.0009698867797851562,
+      "details": {
+        "response": {
+          "status": "success",
+          "message": "Question received successfully",
+          "question": "Does the child respond when called by name?",
+          "milestone_found": true,
+          "milestone_details": {
+            "behavior": "Recognizes familiar people",
+            "criteria": "Recognizes familiar people",
+            "age_range": "0-6",
+            "domain": "SOC",
+            "keywords": [
+              "familiar",
+              "recognizes",
+              "people"
+            ],
+            "scoring_rules": {
+              "cannot": 0,
+              "lost": 1,
+              "emerging": 2,
+              "support": 3,
+              "independent": 4
+            }
+          }
+        }
+      },
+      "status_code": 200,
+      "expected": 200,
+      "actual": 200,
+      "timestamp": "2025-03-06T13:55:36.153484"
+    },
+    {
+      "endpoint": "/question",
+      "success": true,
+      "response_time": 0.0008280277252197266,
+      "details": {
+        "response": {
+          "status": "success",
+          "message": "Question received successfully",
+          "question": "Does the child respond when called by name?",
+          "milestone_found": true,
+          "milestone_details": {
+            "behavior": "Recognizes familiar people",
+            "criteria": "Recognizes familiar people",
+            "age_range": "0-6",
+            "domain": "SOC",
+            "keywords": [
+              "familiar",
+              "recognizes",
+              "people"
+            ],
+            "scoring_rules": {
+              "cannot": 0,
+              "lost": 1,
+              "emerging": 2,
+              "support": 3,
+              "independent": 4
+            }
+          }
+        }
+      },
+      "status_code": 200,
+      "expected": 200,
+      "actual": 200,
+      "timestamp": "2025-03-06T13:55:36.154400"
+    },
+    {
+      "endpoint": "/question",
+      "success": true,
+      "response_time": 0.0011801719665527344,
+      "details": {
+        "response": {
+          "status": "success",
+          "message": "Question received successfully",
+          "question": "Does the child respond when called by name?",
+          "milestone_found": true,
+          "milestone_details": {
+            "behavior": "Recognizes familiar people",
+            "criteria": "Recognizes familiar people",
+            "age_range": "0-6",
+            "domain": "SOC",
+            "keywords": [
+              "familiar",
+              "recognizes",
+              "people"
+            ],
+            "scoring_rules": {
+              "cannot": 0,
+              "lost": 1,
+              "emerging": 2,
+              "support": 3,
+              "independent": 4
+            }
+          }
+        }
+      },
+      "status_code": 200,
+      "expected": 200,
+      "actual": 200,
+      "timestamp": "2025-03-06T13:55:36.155690"
+    },
+    {
+      "endpoint": "/question",
+      "success": true,
+      "response_time": 0.0010881423950195312,
+      "details": {
+        "response": {
+          "status": "success",
+          "message": "Question received successfully",
+          "question": "Does the child respond when called by name?",
+          "milestone_found": true,
+          "milestone_details": {
+            "behavior": "Recognizes familiar people",
+            "criteria": "Recognizes familiar people",
+            "age_range": "0-6",
+            "domain": "SOC",
+            "keywords": [
+              "familiar",
+              "recognizes",
+              "people"
+            ],
+            "scoring_rules": {
+              "cannot": 0,
+              "lost": 1,
+              "emerging": 2,
+              "support": 3,
+              "independent": 4
+            }
+          }
+        }
+      },
+      "status_code": 200,
+      "expected": 200,
+      "actual": 200,
+      "timestamp": "2025-03-06T13:55:36.156888"
+    },
+    {
+      "endpoint": "/question",
+      "success": true,
+      "response_time": 0.0008330345153808594,
+      "details": {
+        "response": {
+          "status": "success",
+          "message": "Question received successfully",
+          "question": "Does the child respond when called by name?",
+          "milestone_found": true,
+          "milestone_details": {
+            "behavior": "Recognizes familiar people",
+            "criteria": "Recognizes familiar people",
+            "age_range": "0-6",
+            "domain": "SOC",
+            "keywords": [
+              "familiar",
+              "recognizes",
+              "people"
+            ],
+            "scoring_rules": {
+              "cannot": 0,
+              "lost": 1,
+              "emerging": 2,
+              "support": 3,
+              "independent": 4
+            }
+          }
+        }
+      },
+      "status_code": 200,
+      "expected": 200,
+      "actual": 200,
+      "timestamp": "2025-03-06T13:55:36.157821"
+    },
+    {
+      "endpoint": "/question",
+      "success": true,
+      "response_time": 0.0010759830474853516,
+      "details": {
+        "response": {
+          "status": "success",
+          "message": "Question received successfully",
+          "question": "Does the child respond when called by name?",
+          "milestone_found": true,
+          "milestone_details": {
+            "behavior": "Recognizes familiar people",
+            "criteria": "Recognizes familiar people",
+            "age_range": "0-6",
+            "domain": "SOC",
+            "keywords": [
+              "familiar",
+              "recognizes",
+              "people"
+            ],
+            "scoring_rules": {
+              "cannot": 0,
+              "lost": 1,
+              "emerging": 2,
+              "support": 3,
+              "independent": 4
+            }
+          }
+        }
+      },
+      "status_code": 200,
+      "expected": 200,
+      "actual": 200,
+      "timestamp": "2025-03-06T13:55:36.158985"
+    },
+    {
+      "endpoint": "/question",
+      "success": true,
+      "response_time": 0.00090789794921875,
+      "details": {
+        "response": {
+          "status": "success",
+          "message": "Question received successfully",
+          "question": "Does the child respond when called by name?",
+          "milestone_found": true,
+          "milestone_details": {
+            "behavior": "Recognizes familiar people",
+            "criteria": "Recognizes familiar people",
+            "age_range": "0-6",
+            "domain": "SOC",
+            "keywords": [
+              "familiar",
+              "recognizes",
+              "people"
+            ],
+            "scoring_rules": {
+              "cannot": 0,
+              "lost": 1,
+              "emerging": 2,
+              "support": 3,
+              "independent": 4
+            }
+          }
+        }
+      },
+      "status_code": 200,
+      "expected": 200,
+      "actual": 200,
+      "timestamp": "2025-03-06T13:55:36.160022"
+    },
+    {
+      "endpoint": "/question",
+      "success": true,
+      "response_time": 0.0009677410125732422,
+      "details": {
+        "response": {
+          "status": "success",
+          "message": "Question received successfully",
+          "question": "Does the child respond when called by name?",
+          "milestone_found": true,
+          "milestone_details": {
+            "behavior": "Recognizes familiar people",
+            "criteria": "Recognizes familiar people",
+            "age_range": "0-6",
+            "domain": "SOC",
+            "keywords": [
+              "familiar",
+              "recognizes",
+              "people"
+            ],
+            "scoring_rules": {
+              "cannot": 0,
+              "lost": 1,
+              "emerging": 2,
+              "support": 3,
+              "independent": 4
+            }
+          }
+        }
+      },
+      "status_code": 200,
+      "expected": 200,
+      "actual": 200,
+      "timestamp": "2025-03-06T13:55:36.161083"
+    },
+    {
+      "endpoint": "/question",
+      "success": true,
+      "response_time": 0.0009307861328125,
+      "details": {
+        "response": {
+          "status": "success",
+          "message": "Question received successfully",
+          "question": "Does the child respond when called by name?",
+          "milestone_found": true,
+          "milestone_details": {
+            "behavior": "Recognizes familiar people",
+            "criteria": "Recognizes familiar people",
+            "age_range": "0-6",
+            "domain": "SOC",
+            "keywords": [
+              "familiar",
+              "recognizes",
+              "people"
+            ],
+            "scoring_rules": {
+              "cannot": 0,
+              "lost": 1,
+              "emerging": 2,
+              "support": 3,
+              "independent": 4
+            }
+          }
+        }
+      },
+      "status_code": 200,
+      "expected": 200,
+      "actual": 200,
+      "timestamp": "2025-03-06T13:55:36.162093"
+    },
+    {
+      "endpoint": "/question",
+      "success": true,
+      "response_time": 0.0008769035339355469,
+      "details": {
+        "response": {
+          "status": "success",
+          "message": "Question received successfully",
+          "question": "Does the child respond when called by name?",
+          "milestone_found": true,
+          "milestone_details": {
+            "behavior": "Recognizes familiar people",
+            "criteria": "Recognizes familiar people",
+            "age_range": "0-6",
+            "domain": "SOC",
+            "keywords": [
+              "familiar",
+              "recognizes",
+              "people"
+            ],
+            "scoring_rules": {
+              "cannot": 0,
+              "lost": 1,
+              "emerging": 2,
+              "support": 3,
+              "independent": 4
+            }
+          }
+        }
+      },
+      "status_code": 200,
+      "expected": 200,
+      "actual": 200,
+      "timestamp": "2025-03-06T13:55:36.163051"
+    },
+    {
+      "endpoint": "/question",
+      "success": true,
+      "response_time": 0.0008099079132080078,
+      "details": {
+        "response": {
+          "status": "success",
+          "message": "Question received successfully",
+          "question": "Does the child respond when called by name?",
+          "milestone_found": true,
+          "milestone_details": {
+            "behavior": "Recognizes familiar people",
+            "criteria": "Recognizes familiar people",
+            "age_range": "0-6",
+            "domain": "SOC",
+            "keywords": [
+              "familiar",
+              "recognizes",
+              "people"
+            ],
+            "scoring_rules": {
+              "cannot": 0,
+              "lost": 1,
+              "emerging": 2,
+              "support": 3,
+              "independent": 4
+            }
+          }
+        }
+      },
+      "status_code": 200,
+      "expected": 200,
+      "actual": 200,
+      "timestamp": "2025-03-06T13:55:36.163943"
+    },
+    {
+      "endpoint": "/question",
+      "success": true,
+      "response_time": 0.001027822494506836,
+      "details": {
+        "response": {
+          "status": "success",
+          "message": "Question received successfully",
+          "question": "Does the child respond when called by name?",
+          "milestone_found": true,
+          "milestone_details": {
+            "behavior": "Recognizes familiar people",
+            "criteria": "Recognizes familiar people",
+            "age_range": "0-6",
+            "domain": "SOC",
+            "keywords": [
+              "familiar",
+              "recognizes",
+              "people"
+            ],
+            "scoring_rules": {
+              "cannot": 0,
+              "lost": 1,
+              "emerging": 2,
+              "support": 3,
+              "independent": 4
+            }
+          }
+        }
+      },
+      "status_code": 200,
+      "expected": 200,
+      "actual": 200,
+      "timestamp": "2025-03-06T13:55:36.165049"
+    },
+    {
+      "endpoint": "/question",
+      "success": true,
+      "response_time": 0.0008769035339355469,
+      "details": {
+        "response": {
+          "status": "success",
+          "message": "Question received successfully",
+          "question": "Does the child respond when called by name?",
+          "milestone_found": true,
+          "milestone_details": {
+            "behavior": "Recognizes familiar people",
+            "criteria": "Recognizes familiar people",
+            "age_range": "0-6",
+            "domain": "SOC",
+            "keywords": [
+              "familiar",
+              "recognizes",
+              "people"
+            ],
+            "scoring_rules": {
+              "cannot": 0,
+              "lost": 1,
+              "emerging": 2,
+              "support": 3,
+              "independent": 4
+            }
+          }
+        }
+      },
+      "status_code": 200,
+      "expected": 200,
+      "actual": 200,
+      "timestamp": "2025-03-06T13:55:36.166019"
+    },
+    {
+      "endpoint": "/question",
+      "success": true,
+      "response_time": 0.0007801055908203125,
+      "details": {
+        "response": {
+          "status": "success",
+          "message": "Question received successfully",
+          "question": "Does the child respond when called by name?",
+          "milestone_found": true,
+          "milestone_details": {
+            "behavior": "Recognizes familiar people",
+            "criteria": "Recognizes familiar people",
+            "age_range": "0-6",
+            "domain": "SOC",
+            "keywords": [
+              "familiar",
+              "recognizes",
+              "people"
+            ],
+            "scoring_rules": {
+              "cannot": 0,
+              "lost": 1,
+              "emerging": 2,
+              "support": 3,
+              "independent": 4
+            }
+          }
+        }
+      },
+      "status_code": 200,
+      "expected": 200,
+      "actual": 200,
+      "timestamp": "2025-03-06T13:55:36.166879"
+    },
+    {
+      "endpoint": "/question",
+      "success": true,
+      "response_time": 0.000823974609375,
+      "details": {
+        "response": {
+          "status": "success",
+          "message": "Question received successfully",
+          "question": "Does the child respond when called by name?",
+          "milestone_found": true,
+          "milestone_details": {
+            "behavior": "Recognizes familiar people",
+            "criteria": "Recognizes familiar people",
+            "age_range": "0-6",
+            "domain": "SOC",
+            "keywords": [
+              "familiar",
+              "recognizes",
+              "people"
+            ],
+            "scoring_rules": {
+              "cannot": 0,
+              "lost": 1,
+              "emerging": 2,
+              "support": 3,
+              "independent": 4
+            }
+          }
+        }
+      },
+      "status_code": 200,
+      "expected": 200,
+      "actual": 200,
+      "timestamp": "2025-03-06T13:55:36.167785"
+    }
+  ]
+}

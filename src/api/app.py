@@ -53,6 +53,20 @@ class ReportResult(BaseModel):
 class BatchResponseData(BaseModel):
     responses: List[MilestoneResponse] = Field(..., description="Batch of responses to analyze")
 
+# New API models for the requested endpoints
+class Question(BaseModel):
+    text: str = Field(..., description="The question text")
+    milestone_id: Optional[str] = Field(None, description="Associated milestone ID (optional)")
+
+class KeywordCategory(BaseModel):
+    category: str = Field(..., description="Scoring category (e.g., CANNOT_DO)")
+    keywords: List[str] = Field(..., description="List of keywords for this category")
+
+class ScoreData(BaseModel):
+    milestone_id: str = Field(..., description="The milestone ID")
+    score: int = Field(..., description="The numeric score value (0-4)")
+    score_label: str = Field(..., description="The score label (e.g., CANNOT_DO)")
+
 @app.post("/set-child-age", status_code=200)
 async def set_child_age(child_info: ChildInfo):
     """Set the child's age to filter appropriate milestones"""
@@ -193,6 +207,148 @@ async def get_all_milestones():
         })
     
     return {"milestones": milestones}
+
+@app.post("/question", status_code=200)
+async def receive_question(question: Question):
+    """
+    Endpoint to receive and process questions
+    
+    This can be used to submit questions about a child's behavior for assessment
+    """
+    try:
+        # Log or process the received question
+        print(f"Received question: {question.text}")
+        
+        # If a milestone ID is provided, find the corresponding milestone
+        milestone = None
+        if question.milestone_id:
+            # Here you might want to find the milestone by ID if you implement IDs
+            # For now, we can use the behavior as the ID
+            milestone = engine.find_milestone_by_name(question.milestone_id)
+        
+        return {
+            "status": "success",
+            "message": "Question received successfully",
+            "question": question.text,
+            "milestone_found": milestone is not None,
+            "milestone_details": milestone.__dict__ if milestone else None
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error processing question: {str(e)}")
+
+@app.post("/keywords", status_code=200)
+async def update_keywords(keyword_data: KeywordCategory):
+    """
+    Endpoint to receive and update keywords for a scoring category
+    
+    This allows updating the keywords used for automatic scoring of responses
+    """
+    try:
+        category = keyword_data.category
+        keywords = keyword_data.keywords
+        
+        # Validate the category
+        valid_categories = [score.name for score in Score]
+        if category not in valid_categories:
+            raise HTTPException(
+                status_code=400, 
+                detail=f"Invalid category: {category}. Valid categories are: {', '.join(valid_categories)}"
+            )
+        
+        # Find the score enum from the category name
+        score_enum = None
+        for score in Score:
+            if score.name == category:
+                score_enum = score
+                break
+        
+        if not score_enum:
+            raise HTTPException(status_code=500, detail=f"Error finding score enum for category: {category}")
+        
+        # Update the phrase map in the engine's keyword cache
+        # This is a simplified approach - in a production system you might want a more robust solution
+        # that persists these keywords and loads them on startup
+        
+        # Iterate through all milestone keys in the cache
+        for milestone_key in engine._scoring_keywords_cache:
+            # Get the keyword map for this milestone
+            keyword_map = engine._scoring_keywords_cache[milestone_key]
+            
+            # Remove any existing keywords for this category
+            keys_to_remove = []
+            for key, score in keyword_map.items():
+                if score == score_enum:
+                    keys_to_remove.append(key)
+            
+            for key in keys_to_remove:
+                del keyword_map[key]
+            
+            # Add the new keywords
+            for keyword in keywords:
+                keyword_map[keyword.lower()] = score_enum
+        
+        return {
+            "status": "success",
+            "message": f"Keywords for category {category} updated successfully",
+            "category": category,
+            "keywords": keywords
+        }
+    except HTTPException:
+        # Re-raise HTTP exceptions
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error updating keywords: {str(e)}")
+
+@app.post("/send-score", status_code=200)
+async def send_score(score_data: ScoreData):
+    """
+    Endpoint to send a score for a specific milestone
+    
+    This allows manual scoring of a milestone instead of using the automatic scoring system
+    """
+    try:
+        # Validate the score value
+        if score_data.score < 0 or score_data.score > 4:
+            raise HTTPException(status_code=400, detail="Score must be between 0 and 4")
+        
+        # Find the milestone by ID (behavior in this case)
+        milestone = engine.find_milestone_by_name(score_data.milestone_id)
+        if not milestone:
+            raise HTTPException(status_code=404, detail=f"Milestone '{score_data.milestone_id}' not found")
+        
+        # Convert the numeric score to the Score enum
+        score_enum = None
+        for score in Score:
+            if score.value == score_data.score:
+                score_enum = score
+                break
+        
+        if not score_enum:
+            raise HTTPException(status_code=400, detail=f"Invalid score value: {score_data.score}")
+        
+        # Validate that the score label matches the enum name
+        if score_enum.name != score_data.score_label:
+            raise HTTPException(
+                status_code=400, 
+                detail=f"Score label '{score_data.score_label}' does not match the expected label '{score_enum.name}' for score value {score_data.score}"
+            )
+        
+        # Set the score for the milestone
+        engine.set_milestone_score(milestone, score_enum)
+        
+        return {
+            "status": "success",
+            "message": f"Score for milestone '{score_data.milestone_id}' set successfully",
+            "milestone": milestone.behavior,
+            "domain": milestone.domain,
+            "score": score_data.score,
+            "score_label": score_data.score_label
+        }
+    except HTTPException:
+        # Re-raise HTTP exceptions
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error setting score: {str(e)}")
 
 if __name__ == "__main__":
     # Parse command line arguments

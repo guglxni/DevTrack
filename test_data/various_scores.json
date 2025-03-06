@@ -1,0 +1,52 @@
+[
+  {
+    "milestone_id": "Shows empathy",
+    "score": 4,
+    "score_label": "INDEPENDENT"
+  },
+  {
+    "milestone_id": "Makes eye contact",
+    "score": 0,
+    "score_label": "CANNOT_DO"
+  },
+  {
+    "milestone_id": "Uses 5-10 words",
+    "score": 2,
+    "score_label": "EMERGING"
+  },
+  {
+    "milestone_id": "Walks independently",
+    "score": 3,
+    "score_label": "WITH_SUPPORT"
+  },
+  {
+    "milestone_id": "Plays alongside other children",
+    "score": 1,
+    "score_label": "LOST_SKILL"
+  },
+  {
+    "milestone_id": "Shows stranger anxiety",
+    "score": 0,
+    "score_label": "CANNOT_DO"
+  },
+  {
+    "milestone_id": "Scribbles spontaneously",
+    "score": 4,
+    "score_label": "INDEPENDENT"
+  },
+  {
+    "milestone_id": "Follows simple rules",
+    "score": 3,
+    "score_label": "WITH_SUPPORT"
+  },
+  {
+    "milestone_id": "Takes turns",
+    "score": 2,
+    "score_label": "EMERGING"
+  },
+  {
+    "milestone_id": "Kicks ball",
+    "score": 1,
+    "score_label": "LOST_SKILL"
+  }
+] 

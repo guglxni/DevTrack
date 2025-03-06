@@ -1,271 +1,155 @@
-# ASD Assessment System
+# ASD Assessment API and Demo Application
 
-This project provides a comprehensive system for assessing Autism Spectrum Disorder (ASD) in children through natural language processing and developmental milestone tracking.
+## Project Overview
 
-## Project Structure
+This project provides a comprehensive API and demonstration web application for processing and analyzing developmental milestone assessments for Autism Spectrum Disorder (ASD) screening. The system supports question processing, keyword management, score recording, and response analysis to facilitate the assessment of developmental milestones in children.
 
-The project is organized into the following directories:
+## Components
 
-- `src/`: Main source code
-  - `core/`: Core assessment engine and NLP components
-  - `api/`: FastAPI server for the backend
-  - `web/`: Streamlit web application
-  - `testing/`: Testing frameworks and utilities
-  - `utils/`: Utility scripts and tools
-- `data/`: Data files for milestones and assessment criteria
-- `docs/`: Documentation files
-- `scripts/`: Shell scripts for automation
-- `logs/`: Log files
-- `test_results/`: Test results and reports
+The project consists of three main components:
 
-## Installation
+1. **API Service**: A FastAPI-based API that provides endpoints for processing developmental milestone assessments.
+2. **Testing Framework**: A suite of tools for testing the API endpoints and generating performance reports.
+3. **Web Demo Application**: A web-based interface for demonstrating the API capabilities to stakeholders.
 
-1. Clone the repository
-2. Install the required dependencies:
+## API Service
 
-```bash
-pip install -r requirements.txt
-```
+The API service is a FastAPI application that provides the following endpoints:
 
-## Running the Application
+- `/question`: Processes questions related to developmental milestones
+- `/keywords`: Manages keywords used for analyzing parent/caregiver responses
+- `/send-score`: Records scores for specific developmental milestones
+- `/score-response`: Analyzes parent/caregiver responses to determine appropriate scores
 
-You can run the application using the main.py script:
+For detailed API documentation, see [API Documentation](docs/API_DOCUMENTATION.md).
+
+### Running the API Service
+
+To start the API service:
 
 ```bash
-# Start the API server
-python3 main.py --api
-
-# Start the web application
-python3 main.py --web
-
-# Show help
-python3 main.py --help
+cd src/api
+uvicorn main:app --reload --port 8003
 ```
 
-Alternatively, you can run the components separately:
-
-```bash
-# Start the API server
-python3 -m uvicorn src.api.app:app --host 0.0.0.0 --port 8003
-
-# Start the web application
-python3 -m streamlit run src/web/asd_test_webapp.py
-```
-
-## Features
-
-- Interactive assessment of developmental milestones
-- Natural language processing for analyzing caregiver responses
-- Comprehensive reporting and visualization
-- Benchmark testing for system performance
-- Individual response testing for specific milestones
-- Customizable keywords for scoring categories
-- Manual scoring capabilities for special cases
-
-## API Endpoints
-
-The API server provides the following endpoints:
-
-- `/set-child-age`: Set the child's age for appropriate milestone filtering
-- `/next-milestone`: Get the next milestone to assess
-- `/score-response`: Score a caregiver response for a specific milestone
-- `/batch-score`: Score multiple responses in parallel
-- `/generate-report`: Generate a comprehensive assessment report
-- `/reset`: Reset the assessment engine for a new assessment
-- `/health`: Health check endpoint
-- `/all-milestones`: Get all available milestone behaviors
-- `/question`: Receive and process questions about a child's behavior
-- `/keywords`: Update keywords for specific scoring categories
-- `/send-score`: Manually set a score for a specific milestone
-
-## Web Application
-
-The web application provides a user-friendly interface for:
-
-1. Running interactive assessments
-2. Testing individual responses
-3. Viewing detailed reports
-4. Benchmarking the system
-5. Exploring milestone behaviors
+The API will be available at `http://localhost:8003`.
 
 ## Testing Framework
 
-The project includes a comprehensive API testing framework located in `src/testing/comprehensive_api_tester.py`. This framework allows you to:
+The testing framework provides tools for testing the API endpoints and generating performance reports. It includes:
 
-1. Test all API endpoints, including the new ones
-2. Run complex test scenarios and workflows
-3. Perform load testing
-4. Generate detailed reports with visualizations
+- Single endpoint testing script: `scripts/test_single_endpoint.sh`
+- Comprehensive test runner: `scripts/run_all_tests.sh`
+- Test report generator: `scripts/generate_test_report.py`
 
 ### Running Tests
 
-```bash
-# Run basic API tests
-python3 src/testing/comprehensive_api_tester.py --verbose basic
-
-# Run a complete assessment flow
-python3 src/testing/comprehensive_api_tester.py --verbose assessment --age 24
-
-# Test the keywords update workflow
-python3 src/testing/comprehensive_api_tester.py --verbose keywords
-
-# Perform load testing
-python3 src/testing/comprehensive_api_tester.py --verbose load --endpoint /health --count 100 --concurrent
-```
-
-For more details, see [Testing Framework Documentation](src/testing/README_TESTING.md).
-
-## API Usage Guide
-
-Below is a comprehensive guide for using the API endpoints:
-
-### Basic Assessment Flow
-
-1. **Set Child Age**
-   ```bash
-   curl -X POST "http://localhost:8003/set-child-age" \
-     -H "Content-Type: application/json" \
-     -d '{"age": 24, "name": "Alex"}'
-   ```
-
-2. **Get Next Milestone**
-   ```bash
-   curl -X GET "http://localhost:8003/next-milestone"
-   ```
-
-3. **Score Response**
-   ```bash
-   curl -X POST "http://localhost:8003/score-response" \
-     -H "Content-Type: application/json" \
-     -d '{
-       "milestone_behavior": "Shows empathy",
-       "response": "Yes, she always notices when I am sad and tries to comfort me."
-     }'
-   ```
-
-4. **Generate Report**
-   ```bash
-   curl -X GET "http://localhost:8003/generate-report"
-   ```
-
-5. **Reset Assessment**
-   ```bash
-   curl -X POST "http://localhost:8003/reset"
-   ```
-
-### Advanced Features
-
-#### Submit a Question
-Use this endpoint to submit questions about a child's behavior:
+To run tests for a single endpoint:
 
 ```bash
-curl -X POST "http://localhost:8003/question" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "text": "Does the child respond when called by name?",
-    "milestone_id": "Recognizes familiar people"
-  }'
+./scripts/test_single_endpoint.sh /endpoint_path iterations data_file
 ```
 
-#### Update Keywords for Scoring Categories
-Customize the keywords used for automatic scoring:
+For example:
+```bash
+./scripts/test_single_endpoint.sh /question 10 test_data/sample_questions.json
+```
+
+To run tests for all endpoints:
 
 ```bash
-curl -X POST "http://localhost:8003/keywords" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "category": "CANNOT_DO",
-    "keywords": [
-      "no", "not", "never", "doesn't", "does not", 
-      "cannot", "can't", "unable", "hasn't", "has not", 
-      "not able", "not at all", "not yet started", "not capable"
-    ]
-  }'
+./scripts/run_all_tests.sh
 ```
 
-Available categories:
-- `NOT_RATED`: For unrated milestones (-1)
-- `CANNOT_DO`: For skills not acquired (0)
-- `LOST_SKILL`: For skills acquired but lost (1)
-- `EMERGING`: For emerging and inconsistent skills (2)
-- `WITH_SUPPORT`: For skills acquired with support (3)
-- `INDEPENDENT`: For skills fully acquired (4)
+Test results are saved to the `test_results` directory, including:
+- Raw JSON results: `api_test_results.json`
+- Performance charts: PNG files in the `test_results` directory
+- HTML reports: `api_test_report.html` and `consolidated_report.html`
 
-#### Manual Scoring
-Manually score a milestone when automatic scoring is not sufficient:
+For detailed testing documentation, see [Testing Documentation](docs/README_TESTING.md).
+
+## Web Demo Application
+
+The web demo application provides a user-friendly interface for demonstrating the API capabilities. It includes tabs for each API endpoint and displays responses in a structured format.
+
+### Running the Web Demo
+
+To start the web demo application:
 
 ```bash
-curl -X POST "http://localhost:8003/send-score" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "milestone_id": "Shows empathy",
-    "score": 4,
-    "score_label": "INDEPENDENT"
-  }'
+cd webapp
+npm install
+npm start
 ```
 
-Score values and their meanings:
-- -1: `NOT_RATED` - No rating provided
-- 0: `CANNOT_DO` - Skill not acquired
-- 1: `LOST_SKILL` - Skill was acquired but lost
-- 2: `EMERGING` - Skill is emerging but inconsistent
-- 3: `WITH_SUPPORT` - Skill is acquired but needs support
-- 4: `INDEPENDENT` - Skill is fully acquired
+The web application will be available at `http://localhost:3000`.
 
-#### Batch Scoring
-Score multiple responses at once:
+Alternatively, you can use the convenience script to start both the API service and web demo:
 
 ```bash
-curl -X POST "http://localhost:8003/batch-score" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "responses": [
-      {
-        "milestone_behavior": "Shows empathy",
-        "response": "Yes, he always notices when someone is upset."
-      },
-      {
-        "milestone_behavior": "Makes eye contact",
-        "response": "She rarely makes eye contact, even when I call her name."
-      }
-    ]
-  }'
+./scripts/start_demo.sh
 ```
 
-#### Get All Milestones
-Retrieve all available milestones:
+**Note**: This script starts both servers in the background. If port 8003 is already in use by another process, the API server may not start properly. Check for existing processes with `lsof -i :8003`.
 
-```bash
-curl -X GET "http://localhost:8003/all-milestones"
-```
+### Web Demo Screenshots
 
-### Response Format
+Screenshots of the web demo application are available in the `webapp/img` directory. The application provides a tabbed interface for testing each API endpoint.
 
-Most API endpoints return JSON responses with the following structure:
+## Milestone Domains
 
-```json
-{
-  "status": "success",
-  "message": "Operation completed successfully",
-  "data": { ... }
-}
-```
+The API includes milestones across the following developmental domains:
 
-In case of errors, the response will include an appropriate HTTP status code and an error message:
+1. **Cognitive**: Mental processes like thinking, learning, problem-solving
+2. **Gross Motor**: Large muscle movements (walking, running, jumping)
+3. **Fine Motor**: Small muscle movements (grasping, writing, cutting)
+4. **Expressive Language**: Communication through speech, gestures, or writing
+5. **Activities of Daily Living**: Self-care skills (eating, dressing, hygiene)
+6. **Social**: Interactions with others, relationships, play skills
+7. **Emotional**: Understanding and expressing feelings, self-regulation
+8. **Receptive Language**: Understanding and processing language
 
-```json
-{
-  "detail": "Error message describing what went wrong"
-}
-```
+## Technical Details
 
-## Documentation
+### API Implementation
 
-For more detailed information, see:
+- Built with FastAPI
+- Uses Uvicorn as the ASGI server
+- Implements NLP processing with a fallback mechanism
+- Includes CORS support for cross-origin requests
 
-- [API Documentation](docs/API_DOCUMENTATION.md) - Detailed API endpoint documentation
-- [Testing Framework](src/testing/README_TESTING.md) - Guide to using the testing framework
-- [Quick Start Guide](docs/QUICK_START_GUIDE.md) - Quick introduction to using the system
+### Testing Framework
+
+- Uses Python for API interaction
+- Generates performance metrics (response time, success rate)
+- Creates visual charts with matplotlib
+- Produces HTML reports for easy viewing
+
+### Web Demo Application
+
+- Built with HTML, CSS, and JavaScript
+- Uses a Node.js server for local hosting
+- Implements a proxy to handle CORS issues
+- Includes tabbed interface for testing different endpoints
+
+## Troubleshooting
+
+### API Service Issues
+
+- If port 8003 is already in use, check for existing processes with `lsof -i :8003`
+- If you see "Advanced NLP module not available" in logs, the system is using the fallback pattern matching
+
+### Web Demo Issues
+
+- If you cannot access the web demo, ensure that both the API service and web server are running
+- Try using `http://127.0.0.1:3000` instead of `localhost` if you encounter connectivity issues
+- Check the browser console for any JavaScript errors
+
+## Additional Resources
+
+- [Quick Start Guide](docs/QUICK_START_GUIDE.md) - Get started quickly with the basic functionality
+- [Tutorial](docs/TUTORIAL.md) - Step-by-step guide to using the system
+- [Enhanced Documentation](docs/README_ENHANCED.md) - Advanced usage and configuration options
 
 ## License
 

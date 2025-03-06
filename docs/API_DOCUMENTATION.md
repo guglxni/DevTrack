@@ -1,18 +1,281 @@
 # ASD Assessment API Documentation
 
-This document provides detailed information about all API endpoints available in the ASD Assessment System.
+## Overview
+
+The ASD Assessment API provides endpoints for processing and analyzing developmental milestone assessments. The API supports question processing, keyword management, score recording, and response analysis to facilitate the assessment of developmental milestones in children.
 
 ## Base URL
 
-The API is available at: `http://localhost:8003`
+All API endpoints are available at the base URL:
+
+```
+http://localhost:8003
+```
 
 ## Authentication
 
-Currently, the API does not require authentication. For production environments, you should implement appropriate authentication mechanisms.
+The API currently does not require authentication for development and demonstration purposes. In a production environment, appropriate authentication mechanisms should be implemented.
 
 ## Endpoints
 
-### Child Information
+### 1. Question Endpoint
+
+**Endpoint:** `/question`
+
+**Method:** POST
+
+**Description:** Processes questions related to developmental milestones and matches them to appropriate milestone behaviors.
+
+**Request Format:**
+```json
+{
+  "text": "String - The question text",
+  "milestone_id": "String - Optional milestone ID"
+}
+```
+
+**Sample Request:**
+```json
+{
+  "text": "Does the child respond when called by name?",
+  "milestone_id": "Recognizes familiar people"
+}
+```
+
+**Response Format:**
+```json
+{
+  "success": true,
+  "milestone_matched": true,
+  "milestone_id": "String - ID of the matched milestone",
+  "confidence": 0.92
+}
+```
+
+**Sample Response:**
+```json
+{
+  "success": true,
+  "milestone_matched": true,
+  "milestone_id": "Recognizes familiar people",
+  "confidence": 0.92
+}
+```
+
+**Error Responses:**
+- `400 Bad Request`: Invalid request format
+- `404 Not Found`: Milestone not found
+- `500 Internal Server Error`: Server processing error
+
+### 2. Keywords Endpoint
+
+**Endpoint:** `/keywords`
+
+**Method:** POST
+
+**Description:** Processes categorized keywords used for analyzing parent/caregiver responses.
+
+**Request Format:**
+```json
+{
+  "category": "String - Keyword category (CANNOT_DO, LOST_SKILL, EMERGING, WITH_SUPPORT, INDEPENDENT)",
+  "keywords": ["String Array - List of keywords"]
+}
+```
+
+**Sample Request:**
+```json
+{
+  "category": "CANNOT_DO",
+  "keywords": [
+    "no", "not", "never", "doesn't", "does not", 
+    "cannot", "can't", "unable", "hasn't", "has not", 
+    "not able", "not at all", "not yet started", "not capable"
+  ]
+}
+```
+
+**Response Format:**
+```json
+{
+  "success": true,
+  "message": "Keywords updated successfully",
+  "category": "String - Category updated",
+  "keywords_count": 14
+}
+```
+
+**Sample Response:**
+```json
+{
+  "success": true,
+  "message": "Keywords updated successfully",
+  "category": "CANNOT_DO",
+  "keywords_count": 14
+}
+```
+
+**Error Responses:**
+- `400 Bad Request`: Invalid request format or category
+- `500 Internal Server Error`: Server processing error
+
+**Available Categories:**
+- `CANNOT_DO`: Keywords indicating the child cannot perform the behavior (score: 0)
+- `LOST_SKILL`: Keywords indicating a skill was previously acquired but lost (score: 1)
+- `EMERGING`: Keywords indicating a skill is emerging but inconsistent (score: 2)
+- `WITH_SUPPORT`: Keywords indicating a skill is acquired with support (score: 3)
+- `INDEPENDENT`: Keywords indicating a skill is fully acquired (score: 4)
+
+### 3. Send Score Endpoint
+
+**Endpoint:** `/send-score`
+
+**Method:** POST
+
+**Description:** Sends scores for specific developmental milestones.
+
+**Request Format:**
+```json
+{
+  "milestone_id": "String - Milestone ID",
+  "score": "Integer - Score value (0-4)",
+  "score_label": "String - Score category label"
+}
+```
+
+**Sample Request:**
+```json
+{
+  "milestone_id": "Shows empathy",
+  "score": 4,
+  "score_label": "INDEPENDENT"
+}
+```
+
+**Response Format:**
+```json
+{
+  "success": true,
+  "message": "Score recorded successfully",
+  "milestone_id": "String - Milestone ID",
+  "score": "Integer - Score value",
+  "score_label": "String - Score category label"
+}
+```
+
+**Sample Response:**
+```json
+{
+  "success": true,
+  "message": "Score recorded successfully",
+  "milestone_id": "Shows empathy",
+  "score": 4,
+  "score_label": "INDEPENDENT"
+}
+```
+
+**Error Responses:**
+- `400 Bad Request`: Invalid request format or score
+- `404 Not Found`: Milestone not found
+- `500 Internal Server Error`: Server processing error
+
+**Score Values and Labels:**
+- `0`: `CANNOT_DO` - Skill not acquired
+- `1`: `LOST_SKILL` - Skill was acquired but lost
+- `2`: `EMERGING` - Skill is emerging but inconsistent
+- `3`: `WITH_SUPPORT` - Skill is acquired but needs support
+- `4`: `INDEPENDENT` - Skill is fully acquired
+
+### 4. Score Response Endpoint
+
+**Endpoint:** `/score-response`
+
+**Method:** POST
+
+**Description:** Analyzes parent/caregiver responses about specific milestone behaviors to determine appropriate scores.
+
+**Request Format:**
+```json
+{
+  "milestone_behavior": "String - Milestone behavior description",
+  "response": "String - Parent/caregiver response"
+}
+```
+
+**Sample Request:**
+```json
+{
+  "milestone_behavior": "Recognizes familiar people",
+  "response": "My child is very good at recognizing familiar faces. He always smiles when he sees grandparents or his favorite babysitter. He knows all his family members and distinguishes between strangers and people he knows well."
+}
+```
+
+**Response Format:**
+```json
+{
+  "success": true,
+  "milestone_behavior": "String - Milestone behavior",
+  "score": "Integer - Determined score (0-4)",
+  "score_label": "String - Score category label",
+  "confidence": "Float - Confidence level (0-1)"
+}
+```
+
+**Sample Response:**
+```json
+{
+  "success": true,
+  "milestone_behavior": "Recognizes familiar people",
+  "score": 4,
+  "score_label": "INDEPENDENT",
+  "confidence": 0.95
+}
+```
+
+**Error Responses:**
+- `400 Bad Request`: Invalid request format
+- `404 Not Found`: Milestone behavior not recognized
+- `422 Unprocessable Entity`: Unable to analyze response
+- `500 Internal Server Error`: Server processing error
+
+**Note on NLP Processing:**
+The API uses a fallback pattern detection mechanism when the advanced NLP module is not available. In such cases, the response analysis will rely on keyword pattern matching to determine scores. The log message "Advanced NLP module not available or error during analysis" indicates that the system is using the fallback mechanism.
+
+## Error Handling
+
+All API endpoints return standardized error responses with appropriate HTTP status codes. Error responses follow this format:
+
+```json
+{
+  "detail": "Description of what went wrong"
+}
+```
+
+## Performance
+
+The API is designed for high performance with most responses returned in milliseconds. Response times are typically:
+
+- `/question`: 1-5ms
+- `/keywords`: 1-3ms
+- `/send-score`: 1-3ms
+- `/score-response`: 1-5ms
+
+## Implementation Notes
+
+- The API is built using FastAPI
+- The server runs on Uvicorn with auto-reload enabled for development
+- Default port is 8003
+- Cross-Origin Resource Sharing (CORS) is enabled for all origins in development mode
+
+## Troubleshooting
+
+1. **Server Already Running**: If you see the error "address already in use" when starting the server, it means the API server is already running on port 8003.
+
+2. **NLP Module Issues**: If you see "Advanced NLP module not available" in logs, the system is using the fallback keyword pattern matching instead of advanced NLP techniques. This doesn't affect functionality but may reduce accuracy of response analysis.
+
+3. **Request Validation Errors**: Ensure all request fields match the expected format and types.
+
+## Child Information
 
 #### Set Child Age
 
@@ -70,33 +333,6 @@ Retrieves the next milestone to assess.
   {
     "message": "No more milestones to assess",
     "complete": true
-  }
-  ```
-
-#### Score Response
-
-Scores a caregiver's response for a specific milestone.
-
-- **URL**: `/score-response`
-- **Method**: `POST`
-- **Request Body**:
-  ```json
-  {
-    "milestone_behavior": "Shows empathy",
-    "response": "Yes, she always notices when I am sad and tries to comfort me."
-  }
-  ```
-- **Parameters**:
-  - `milestone_behavior` (string, required): The behavior being assessed
-  - `response` (string, required): Caregiver's response describing the child's behavior
-
-- **Success Response**:
-  ```json
-  {
-    "milestone": "Shows empathy",
-    "domain": "SOC",
-    "score": 4,
-    "score_label": "INDEPENDENT"
   }
   ```
 

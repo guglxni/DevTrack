@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASD Assessment API Demo</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-brain me-2"></i>
+                ASD Assessment API Demo
+            </a>
+        </div>
+    </nav>
+
+    <div class="container my-5">
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title">API Endpoints Demonstration</h2>
+                        <p class="card-text">
+                            This application demonstrates the functionality of the ASD Assessment API endpoints. 
+                            Select an endpoint from the tabs below to explore its capabilities.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <ul class="nav nav-tabs" id="apiTabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="question-tab" data-bs-toggle="tab" data-bs-target="#question" type="button" role="tab" aria-controls="question" aria-selected="true">
+                            <i class="fas fa-question-circle me-2"></i>Question
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="keywords-tab" data-bs-toggle="tab" data-bs-target="#keywords" type="button" role="tab" aria-controls="keywords" aria-selected="false">
+                            <i class="fas fa-key me-2"></i>Keywords
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="send-score-tab" data-bs-toggle="tab" data-bs-target="#send-score" type="button" role="tab" aria-controls="send-score" aria-selected="false">
+                            <i class="fas fa-star me-2"></i>Send Score
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="score-response-tab" data-bs-toggle="tab" data-bs-target="#score-response" type="button" role="tab" aria-controls="score-response" aria-selected="false">
+                            <i class="fas fa-comment me-2"></i>Score Response
+                        </button>
+                    </li>
+                </ul>
+                
+                <div class="tab-content p-3 border border-top-0 rounded-bottom" id="apiTabsContent">
+                    <!-- Question Endpoint -->
+                    <div class="tab-pane fade show active" id="question" role="tabpanel" aria-labelledby="question-tab">
+                        <h3>Question Endpoint</h3>
+                        <p>This endpoint processes questions related to developmental milestones.</p>
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label for="questionText">Question Text:</label>
+                                    <input type="text" class="form-control" id="questionText" value="Does the child respond when called by name?">
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="milestoneId">Milestone ID:</label>
+                                    <input type="text" class="form-control" id="milestoneId" value="Recognizes familiar people">
+                                </div>
+                                <button class="btn btn-primary" id="sendQuestionBtn">Send Request</button>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-header d-flex justify-content-between align-items-center">
+                                        <span>Response</span>
+                                        <span class="badge bg-secondary" id="questionResponseTime"></span>
+                                    </div>
+                                    <div class="card-body">
+                                        <pre id="questionResponse" class="response-area">Response will appear here</pre>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Keywords Endpoint -->
+                    <div class="tab-pane fade" id="keywords" role="tabpanel" aria-labelledby="keywords-tab">
+                        <h3>Keywords Endpoint</h3>
+                        <p>This endpoint processes categorized keywords used in assessment responses.</p>
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label for="keywordCategory">Category:</label>
+                                    <select class="form-control" id="keywordCategory">
+                                        <option value="CANNOT_DO">CANNOT_DO</option>
+                                        <option value="LOST_SKILL">LOST_SKILL</option>
+                                        <option value="EMERGING">EMERGING</option>
+                                        <option value="WITH_SUPPORT">WITH_SUPPORT</option>
+                                        <option value="INDEPENDENT">INDEPENDENT</option>
+                                    </select>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="keywordsList">Keywords (comma-separated):</label>
+                                    <textarea class="form-control" id="keywordsList" rows="4">no, not, never, doesn't, does not, cannot, can't, unable, hasn't, has not, not able, not at all, not yet started, not capable</textarea>
+                                </div>
+                                <button class="btn btn-primary" id="sendKeywordsBtn">Send Request</button>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-header d-flex justify-content-between align-items-center">
+                                        <span>Response</span>
+                                        <span class="badge bg-secondary" id="keywordsResponseTime"></span>
+                                    </div>
+                                    <div class="card-body">
+                                        <pre id="keywordsResponse" class="response-area">Response will appear here</pre>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Send Score Endpoint -->
+                    <div class="tab-pane fade" id="send-score" role="tabpanel" aria-labelledby="send-score-tab">
+                        <h3>Send Score Endpoint</h3>
+                        <p>This endpoint allows sending scores for specific developmental milestones.</p>
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label for="scoreId">Milestone ID:</label>
+                                    <input type="text" class="form-control" id="scoreId" value="Shows empathy">
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="scoreValue">Score:</label>
+                                    <input type="number" class="form-control" id="scoreValue" min="0" max="4" value="4">
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="scoreLabel">Score Label:</label>
+                                    <select class="form-control" id="scoreLabel">
+                                        <option value="CANNOT_DO">CANNOT_DO</option>
+                                        <option value="LOST_SKILL">LOST_SKILL</option>
+                                        <option value="EMERGING">EMERGING</option>
+                                        <option value="WITH_SUPPORT">WITH_SUPPORT</option>
+                                        <option value="INDEPENDENT" selected>INDEPENDENT</option>
+                                    </select>
+                                </div>
+                                <button class="btn btn-primary" id="sendScoreBtn">Send Request</button>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-header d-flex justify-content-between align-items-center">
+                                        <span>Response</span>
+                                        <span class="badge bg-secondary" id="scoreResponseTime"></span>
+                                    </div>
+                                    <div class="card-body">
+                                        <pre id="scoreResponse" class="response-area">Response will appear here</pre>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Score Response Endpoint -->
+                    <div class="tab-pane fade" id="score-response" role="tabpanel" aria-labelledby="score-response-tab">
+                        <h3>Score Response Endpoint</h3>
+                        <p>This endpoint analyzes parent/caregiver responses about specific milestone behaviors.</p>
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label for="milestoneBehavior">Milestone Behavior:</label>
+                                    <input type="text" class="form-control" id="milestoneBehavior" value="Recognizes familiar people">
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="parentResponse">Parent/Caregiver Response:</label>
+                                    <textarea class="form-control" id="parentResponse" rows="5">My child is very good at recognizing familiar faces. He always smiles when he sees grandparents or his favorite babysitter. He knows all his family members and distinguishes between strangers and people he knows well.</textarea>
+                                </div>
+                                <button class="btn btn-primary" id="sendResponseBtn">Send Request</button>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-header d-flex justify-content-between align-items-center">
+                                        <span>Response</span>
+                                        <span class="badge bg-secondary" id="responseResponseTime"></span>
+                                    </div>
+                                    <div class="card-body">
+                                        <pre id="responseResponse" class="response-area">Response will appear here</pre>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer bg-light py-3 mt-5">
+        <div class="container text-center">
+            <span class="text-muted">ASD Assessment API Demo Application &copy; 2025</span>
+        </div>
+    </footer>
+
+    <!-- Bootstrap & jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="js/app.js"></script>
+</body>
+</html> 

@@ -330,7 +330,7 @@ If you notice unexpected scoring results:
 2. Avoid complex negations like "not at all, he has never walked independently" as they can be misinterpreted
 3. For the most reliable results, use these standard response templates:
    - CANNOT_DO: "not at all" or "no, not yet"
-   - LOST_SKILL: "used to but lost this ability" or "he had this skill but lost it"
+   - LOST_SKILL: "used to but lost it" or "he had this skill but lost it"
    - EMERGING: "sometimes" or "occasionally" 
    - WITH_SUPPORT: "with help" or "with assistance"
    - INDEPENDENT: "yes" or "consistently"
@@ -439,3 +439,269 @@ Contributions to improve the testing framework are welcome. Please follow these 
 ## License
 
 [Specify your license information here]
+
+## ASD Assessment API Testing Framework
+
+## Overview
+
+This document provides comprehensive information about the ASD Assessment API testing framework. The framework is designed to test the performance, reliability, and functionality of the API endpoints. It includes tools for single endpoint testing, comprehensive test runs, and detailed report generation.
+
+## Components
+
+The testing framework consists of the following components:
+
+1. **Test Scripts**:
+   - `scripts/test_single_endpoint.sh`: Tests a single API endpoint with configurable iterations and data.
+   - `scripts/run_all_tests.sh`: Runs tests for all API endpoints and generates a consolidated report.
+   - `scripts/generate_test_report.py`: Generates HTML reports from test results.
+
+2. **Test Data**:
+   - `test_data/sample_questions.json`: Sample data for testing the `/question` endpoint.
+   - `test_data/sample_keywords.json`: Sample data for testing the `/keywords` endpoint.
+   - `test_data/sample_scores.json`: Sample data for testing the `/send-score` endpoint.
+   - `test_data/sample_response.json`: Sample data for testing the `/score-response` endpoint.
+
+3. **Test Results**:
+   - `test_results/api_test_results.json`: Raw JSON results from the most recent test run.
+   - `test_results/api_test_report.html`: HTML report for a single endpoint test.
+   - `test_results/consolidated_report.html`: Comprehensive HTML report for all endpoints.
+   - Various `.png` files: Performance charts generated during testing.
+
+## API Endpoints Tested
+
+The framework tests the following API endpoints:
+
+1. **Question Endpoint** (`/question`):
+   - Tests the API's ability to process questions related to developmental milestones.
+   - Validates milestone matching functionality.
+   - Measures response time and success rate.
+
+2. **Keywords Endpoint** (`/keywords`):
+   - Tests the API's ability to process categorized keywords.
+   - Validates keyword management functionality.
+   - Measures response time and success rate.
+
+3. **Send Score Endpoint** (`/send-score`):
+   - Tests the API's ability to record scores for specific milestones.
+   - Validates score recording functionality.
+   - Measures response time and success rate.
+
+4. **Score Response Endpoint** (`/score-response`):
+   - Tests the API's ability to analyze parent/caregiver responses.
+   - Validates score determination functionality, including the fallback pattern detection mechanism.
+   - Measures response time and success rate.
+
+## Running Tests
+
+### Single Endpoint Testing
+
+To test a single API endpoint:
+
+```bash
+./scripts/test_single_endpoint.sh /endpoint_path iterations data_file
+```
+
+Parameters:
+- `/endpoint_path`: The path of the endpoint to test (e.g., `/question`, `/keywords`, `/send-score`, `/score-response`).
+- `iterations`: The number of test iterations to run (recommended: 10-100).
+- `data_file`: The path to the JSON file containing test data for the endpoint.
+
+Example:
+```bash
+./scripts/test_single_endpoint.sh /question 30 test_data/sample_questions.json
+```
+
+This command will:
+1. Send 30 requests to the `/question` endpoint using data from `test_data/sample_questions.json`.
+2. Record response times and success/failure status for each request.
+3. Generate performance charts.
+4. Create an HTML report at `test_results/api_test_report.html`.
+
+### Comprehensive Testing
+
+To test all API endpoints:
+
+```bash
+./scripts/run_all_tests.sh
+```
+
+This command will:
+1. Test each endpoint with a predefined number of iterations (default: 30).
+2. Use the appropriate sample data file for each endpoint.
+3. Save individual test results and generate performance charts.
+4. Create a consolidated HTML report at `test_results/consolidated_report.html`.
+
+## Test Data Format
+
+Each endpoint requires a specific JSON format for test data:
+
+### Question Endpoint
+
+```json
+{
+  "text": "Does the child respond when called by name?",
+  "milestone_id": "Recognizes familiar people"
+}
+```
+
+### Keywords Endpoint
+
+```json
+{
+  "category": "CANNOT_DO",
+  "keywords": [
+    "no", "not", "never", "doesn't", "does not", 
+    "cannot", "can't", "unable", "hasn't", "has not", 
+    "not able", "not at all", "not yet started", "not capable"
+  ]
+}
+```
+
+### Send Score Endpoint
+
+```json
+{
+  "milestone_id": "Shows empathy",
+  "score": 4,
+  "score_label": "INDEPENDENT"
+}
+```
+
+### Score Response Endpoint
+
+```json
+{
+  "milestone_behavior": "Recognizes familiar people",
+  "response": "My child is very good at recognizing familiar faces. He always smiles when he sees grandparents or his favorite babysitter. He knows all his family members and distinguishes between strangers and people he knows well."
+}
+```
+
+## Generated Reports
+
+### Single Endpoint Report
+
+The single endpoint report (`test_results/api_test_report.html`) includes:
+
+1. **Test Summary**:
+   - Endpoint tested
+   - Number of iterations
+   - Success rate
+   - Average response time
+   - Timestamp of the test
+
+2. **Performance Charts**:
+   - Response time distribution
+   - Success/failure ratio
+   - Response time trend
+
+3. **Detailed Results**:
+   - Request data
+   - Response data
+   - Status code
+   - Response time
+
+### Consolidated Report
+
+The consolidated report (`test_results/consolidated_report.html`) includes:
+
+1. **Overall Summary**:
+   - Total tests run
+   - Overall success rate
+   - Average response time across all endpoints
+   - Timestamp of the test
+
+2. **Endpoint Comparison**:
+   - Comparative performance charts
+   - Success rates by endpoint
+   - Average response times by endpoint
+
+3. **Individual Endpoint Summaries**:
+   - Detailed results for each endpoint
+   - Links to individual test results
+
+## Interpreting Results
+
+When analyzing test results, consider the following metrics:
+
+1. **Success Rate**:
+   - 100%: All requests successful, ideal scenario.
+   - 95-99%: Acceptable for most use cases.
+   - <95%: May indicate issues with the API or test data.
+
+2. **Response Time**:
+   - <5ms: Excellent performance.
+   - 5-20ms: Good performance.
+   - >20ms: May require optimization.
+
+3. **Response Time Variability**:
+   - Low variability indicates consistent performance.
+   - High variability may indicate intermittent issues.
+
+## Customizing Tests
+
+### Modifying Test Data
+
+To customize test data, edit the JSON files in the `test_data` directory. Ensure the data follows the required format for each endpoint.
+
+### Adjusting Test Parameters
+
+To modify the number of iterations or other test parameters:
+
+1. For single endpoint tests, adjust the parameters when calling `test_single_endpoint.sh`.
+2. For comprehensive tests, edit the `run_all_tests.sh` script to change the number of iterations or data files used.
+
+### Adding New Test Data
+
+To add new test data files:
+
+1. Create a new JSON file in the `test_data` directory.
+2. Follow the required format for the endpoint you're testing.
+3. Use the file path when calling `test_single_endpoint.sh`.
+
+## Troubleshooting
+
+### API Server Issues
+
+If tests fail with connection errors:
+
+1. Ensure the API server is running (`uvicorn main:app --reload --port 8003`).
+2. Check if the port (8003) is already in use by another process.
+3. Verify network connectivity if testing a remote API.
+
+### Data Format Issues
+
+If tests fail with 400 Bad Request errors:
+
+1. Check the test data format matches the API requirements.
+2. Verify JSON syntax and field names.
+3. Ensure required fields are present.
+
+### Report Generation Issues
+
+If report generation fails:
+
+1. Ensure Python 3.8+ is installed.
+2. Check that matplotlib and other required libraries are installed.
+3. Verify the `test_results` directory exists and is writable.
+
+## Best Practices
+
+1. **Regular Testing**:
+   - Run comprehensive tests after any API code changes.
+   - Perform regular performance monitoring.
+
+2. **Progressive Load Testing**:
+   - Start with a small number of iterations and gradually increase.
+   - Monitor system resources during high-load tests.
+
+3. **Data Variety**:
+   - Use diverse test data to cover different scenarios.
+   - Include both common and edge cases.
+
+4. **Results Analysis**:
+   - Compare results over time to identify trends.
+   - Investigate any significant performance changes.
+
+## Conclusion
+
+The ASD Assessment API testing framework provides comprehensive tools for evaluating the API's performance, reliability, and functionality. By following the guidelines in this document, you can effectively test the API and identify areas for improvement.
