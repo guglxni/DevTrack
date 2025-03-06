@@ -1,0 +1,229 @@
+Processing domain: Cog from file: CDDC Cog-Table 1.csv
+Added milestone: recognises bottle or breast (Cog, 0-6)
+Added milestone: focuses on colorful and moving objects (Cog, 0-6)
+Added milestone: recognises mother (Cog, 0-6)
+Added milestone: plays 2 to 3 minutes with a single toy (Cog, 6-12 months)
+Added milestone: explores objects in many ways (shake, bang, throw, drop) (Cog, 6-12 months)
+Added milestone: looks for an object out of sight (Cog, 6-12 months)
+Added milestone: reacts to various sensations such as extreme in temperature and taste and texture (Cog, 12-18 months)
+Added milestone: identifies self in mirror (Cog, 12-18 months)
+Added milestone: puts a lid on a pot (Cog, 12-18 months)
+Added milestone: enjoys picture books and recognises smaller details (Cog, 18-24)
+Added milestone: very curious about surrounding but has little understnasing of common dangers (Cog, 18-24)
+Added milestone: recognises self in photographs (Cog, 18-24)
+Added milestone: plays with sand and water (filling and emptying) (Cog, 24-30)
+Added milestone: knows where things usually belong (Cog, 24-30)
+Added milestone: little understanding of the need to wait for something - including attention (Cog, 24-30)
+Added milestone: enjoys floor play with bricks, boxes which can be used imaginatively (Cog, 30-36)
+Added milestone: concentrateson activities of choice such as putting into bottle (Cog, 30-36)
+Added milestone: chooses picture books (Cog, 30-36)
+Processing domain: GM from file: CDDC GM-Table 1.csv
+Added milestone: Lifts head when on tummy (GM, 0-6)
+Added milestone: Rolls from back to side (GM, 0-6)
+Added milestone: Sits with support (GM, 0-6)
+Added milestone: Sits without support (GM, 6-12)
+Added milestone: Crawls on hands and knees (GM, 6-12)
+Added milestone: Pulls to stand (GM, 6-12)
+Added milestone: Walks independently (GM, 12-18)
+Added milestone: Squats to pick up toy (GM, 12-18)
+Added milestone: Walks up stairs with help (GM, 12-18)
+Added milestone: Runs (GM, 18-24)
+Added milestone: Kicks ball (GM, 18-24)
+Added milestone: Jumps with both feet (GM, 18-24)
+Added milestone: Stands on one foot briefly (GM, 24-30)
+Added milestone: Walks up and down stairs (GM, 24-30)
+Added milestone: Pedals tricycle (GM, 24-30)
+Added milestone: Hops on one foot (GM, 30-36)
+Added milestone: Throws ball overhand (GM, 30-36)
+Added milestone: Catches large ball (GM, 30-36)
+Processing domain: FM from file: CDDC FM-Table 1.csv
+Added milestone: Clenches fist (FM, 0-6)
+Added milestone: Puts everything in mouth (FM, 0-6)
+Added milestone: clenches immediately when something is placed in palm (FM, 0-6)
+Added milestone: Attempts to play with tiny objects (FM, 6-12 months)
+Added milestone: Reaches and takes objects in a distance (FM, 6-12 months)
+Added milestone: Bangs objects on table (FM, 6-12 months)
+Added milestone: able to hold and manipulate with both hands together (FM, 12-18 months)
+Added milestone: Picks up crumbs from floor (FM, 12-18 months)
+Added milestone: Points to recognized objects (FM, 12-18 months)
+Added milestone: Scribbles spontaneously (FM, 18-24)
+Added milestone: Opens cabinets, drawers and boxes (FM, 18-24)
+Added milestone: Can pick threads, pins (FM, 18-24)
+Added milestone: Opens doors (FM, 24-30)
+Added milestone: Turns one page at a time (FM, 24-30)
+Added milestone: Makes own designs or spontaneous forms in drawing (FM, 24-30)
+Added milestone: Uses one hand consistently in most activities (FM, 30-36)
+Added milestone: Pours liquid with some spills (FM, 30-36)
+Added milestone: Rolls, Pounds, Squeezes and pulls clay (FM, 30-36)
+Processing domain: EL from file: CDDC EL-Table 1.csv
+Added milestone: Coos and gurgles (EL, 0-6)
+Added milestone: Laughs (EL, 0-6)
+Added milestone: Makes consonant sounds (EL, 0-6)
+Added milestone: Babbles with inflection (EL, 6-12)
+Added milestone: Says "mama" or "dada" specifically (EL, 6-12)
+Added milestone: Uses gestures to communicate (EL, 6-12)
+Added milestone: Uses 5-10 words (EL, 12-18)
+Added milestone: Names familiar objects (EL, 12-18)
+Added milestone: Imitates animal sounds (EL, 12-18)
+Added milestone: Uses 50+ words (EL, 18-24)
+Added milestone: Combines two words (EL, 18-24)
+Added milestone: Asks simple questions (EL, 18-24)
+Added milestone: Uses pronouns (EL, 24-30)
+Added milestone: Uses 3-word sentences (EL, 24-30)
+Added milestone: Talks about past events (EL, 24-30)
+Added milestone: Uses plurals (EL, 30-36)
+Added milestone: Answers "what" "where" "who" questions (EL, 30-36)
+Added milestone: Tells simple stories (EL, 30-36)
+Processing domain: ADL from file: CDDC ADL-Table 1.csv
+Added milestone: Sucks finger when placed between the lips (ADL, 0-6)
+Added milestone: coordinates sucking, swallowing and breathing (ADL, 0-6)
+Added milestone: Opens and closes mouth in response to food stimulus (ADL, 0-6)
+Added milestone: Eats mashed food (ADL, 6-12 months)
+Added milestone: Holds own bottle (ADL, 6-12 months)
+Added milestone: swallows with mouth closed (ADL, 6-12 months)
+Added milestone: removes cap (ADL, 12-18 months)
+Added milestone: indicates discomfort over soiled pants verbally or by gesture (ADL, 12-18 months)
+Added milestone: lifts and drinks from cup (ADL, 12-18 months)
+Added milestone: uses palm and fingers to fill and eat with spoon (ADL, 18-24)
+Added milestone: able to swallow mixed textures (ADL, 18-24)
+Added milestone: gives empty dish to adults (ADL, 18-24)
+Added milestone: pulls up pants with assistance (ADL, 24-30)
+Added milestone: able to hold spoon with fingers appropriately (ADL, 24-30)
+Added milestone: wipes nose if towel is given (ADL, 24-30)
+Added milestone: knows proper place for own things (ADL, 30-36)
+Added milestone: insists on doing things independently (ADL, 30-36)
+Added milestone: serves self at table with little spilling (ADL, 30-36)
+Processing domain: SOC from file: CDDC SOC-Table 1.csv
+Added milestone: Smiles responsively (SOC, 0-6)
+Added milestone: Makes eye contact (SOC, 0-6)
+Added milestone: Recognizes familiar people (SOC, 0-6)
+Added milestone: Plays social games (SOC, 6-12)
+Added milestone: Shows stranger anxiety (SOC, 6-12)
+Added milestone: Imitates actions (SOC, 6-12)
+Added milestone: Plays alongside other children (SOC, 12-18)
+Added milestone: Shows affection (SOC, 12-18)
+Added milestone: Responds to emotions (SOC, 12-18)
+Added milestone: Engages in pretend play (SOC, 18-24)
+Added milestone: Follows simple rules (SOC, 18-24)
+Added milestone: Shows interest in peers (SOC, 18-24)
+Added milestone: Takes turns (SOC, 24-30)
+Added milestone: Shows empathy (SOC, 24-30)
+Added milestone: Engages in cooperative play (SOC, 24-30)
+Added milestone: Shares toys (SOC, 30-36)
+Added milestone: Follows group instructions (SOC, 30-36)
+Added milestone: Makes friends (SOC, 30-36)
+Processing domain: Emo from file: CDDC Emo-Table 1.csv
+Added milestone: most content with caregiver/mother (Emo, 0-6)
+Added milestone: cries to show disconfort (Emo, 0-6)
+Added milestone: moulds and cuddles to relax (Emo, 0-6)
+Added milestone: smiles and baby games (Emo, 6-12 months)
+Added milestone: laughs at funny faces (Emo, 6-12 months)
+Added milestone: shows anger when a toy is taken away (Emo, 6-12 months)
+Added milestone: seeks for comfort while at distress (Emo, 12-18 months)
+Added milestone: shows affection to familiar people (Emo, 12-18 months)
+Added milestone: express appropriate emotions (Emo, 12-18 months)
+Added milestone: preference for likes and dislikes (Emo, 18-24)
+Added milestone: curious about everything (Emo, 18-24)
+Added milestone: demands attention from parent (Emo, 18-24)
+Added milestone: increases understanding about language used related to emotions (Emo, 24-30)
+Added milestone: recognise feelings when emotions are labelled (Emo, 24-30)
+Added milestone: takes pride in clothing (Emo, 24-30)
+Added milestone: takes pride in achievements (Emo, 30-36)
+Added milestone: begenning sense of identity with his belongings (Emo, 30-36)
+Added milestone: shows sympathy (Emo, 30-36)
+Processing domain: RL from file: CDDC RL-Table 1.csv
+Added milestone: startle response to sudden loud sound (RL, 0-6)
+Added milestone: looks at you with interest when you talk to him (RL, 0-6)
+Added milestone: comforted by a friendly familiar voice (RL, 0-6)INFO:     Started server process [47628]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8002 (Press CTRL+C to quit)
+
+Added milestone: pays some attention to music and songs (RL, 6-12 months)
+Added milestone: appears to listen to conversations between others (RL, 6-12 months)
+Added milestone: understands 'no' and 'bye' (RL, 6-12 months)
+Added milestone: follow simple one step commands (RL, 12-18 months)
+Added milestone: selects and brings familiar objects from another room when asked (RL, 12-18 months)
+Added milestone: responds accurately to action commands like sit down, stop that (RL, 12-18 months)
+Added milestone: listens as pictures are named (RL, 18-24)
+Added milestone: recognises familiar names, objects and people (RL, 18-24)
+Added milestone: listens to short rhymes (RL, 18-24)
+Added milestone: understands meaning of common verbs (RL, 24-30)
+Added milestone: understands kinship terms like grandma, uncle (RL, 24-30)
+Added milestone: can name objects when told their use (RL, 24-30)
+Added milestone: understands prepositions (RL, 30-36)
+Added milestone: understands adjectives (RL, 30-36)
+Added milestone: shows interest in how/why answers (RL, 30-36)
+Successfully loaded 144 milestones from 8 CSV files
+Successfully loaded embedding model: all-MiniLM-L6-v2
+Assessment engine initialized and ready
+INFO:     127.0.0.1:59550 - "GET /next-milestone HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59550 - "POST /set-child-age HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59550 - "GET /next-milestone HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59550 - "POST /score-response HTTP/1.1" 422 Unprocessable Entity
+INFO:     127.0.0.1:59550 - "POST /score-response HTTP/1.1" 422 Unprocessable Entity
+INFO:     127.0.0.1:59550 - "POST /score-response HTTP/1.1" 422 Unprocessable Entity
+INFO:     127.0.0.1:59550 - "POST /score-response HTTP/1.1" 422 Unprocessable Entity
+INFO:     127.0.0.1:59550 - "POST /score-response HTTP/1.1" 422 Unprocessable Entity
+INFO:     127.0.0.1:59550 - "POST /batch-score HTTP/1.1" 422 Unprocessable Entity
+INFO:     127.0.0.1:59550 - "GET /generate-report HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59617 - "GET /next-milestone HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59617 - "POST /set-child-age HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59617 - "GET /next-milestone HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59617 - "POST /score-response HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59617 - "POST /score-response HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59617 - "POST /score-response HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59617 - "POST /score-response HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59617 - "POST /score-response HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59617 - "POST /batch-score HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59617 - "GET /generate-report HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59632 - "GET /next-milestone HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59632 - "POST /set-child-age HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59632 - "GET /next-milestone HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59632 - "POST /score-response HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59632 - "POST /score-response HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59632 - "POST /score-response HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59632 - "POST /score-response HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59632 - "POST /score-response HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59632 - "POST /batch-score HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59632 - "GET /generate-report HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59682 - "GET /next-milestone HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59682 - "POST /set-child-age HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59682 - "GET /next-milestone HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59682 - "POST /score-response HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59682 - "POST /score-response HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59682 - "POST /score-response HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59682 - "POST /score-response HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59682 - "POST /score-response HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59682 - "POST /batch-score HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59682 - "GET /generate-report HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59813 - "GET /next-milestone HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59813 - "POST /set-child-age HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59813 - "GET /next-milestone HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59813 - "POST /score-response HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59813 - "POST /score-response HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59813 - "POST /score-response HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59813 - "POST /score-response HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59813 - "POST /score-response HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59813 - "POST /batch-score HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59813 - "GET /generate-report HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59842 - "GET /next-milestone HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59842 - "POST /set-child-age HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59842 - "GET /next-milestone HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59842 - "POST /score-response HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59842 - "POST /score-response HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59842 - "POST /score-response HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59842 - "POST /score-response HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59842 - "POST /score-response HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59842 - "POST /batch-score HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59842 - "GET /generate-report HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60031 - "GET /next-milestone HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60031 - "POST /set-child-age HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60031 - "GET /next-milestone HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60031 - "POST /score-response HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60031 - "POST /score-response HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60031 - "POST /score-response HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60031 - "POST /score-response HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60031 - "POST /score-response HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60031 - "POST /batch-score HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60031 - "GET /generate-report HTTP/1.1" 200 OK

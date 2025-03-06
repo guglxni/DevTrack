@@ -1,0 +1,60 @@
+{
+  "metadata": {
+    "age": 24,
+    "profile_type": "random",
+    "response_length": "medium",
+    "generated_at": "2025-03-05T16:25:01.436645",
+    "child": {
+      "name": "Avery",
+      "age": 24,
+      "gender": "they"
+    }
+  },
+  "test_cases": [
+    {
+      "milestone": "understands kinship terms like grandma, uncle",
+      "domain": "RL",
+      "age_expected": "24-30",
+      "caregiver_response": "This is something Avery does very well without any assistance. they first showed this ability when we were at bedtime and has been doing it confidently ever since.",
+      "expected_score": 4,
+      "expected_label": "INDEPENDENT",
+      "profile_type": "uneven_cognitive"
+    },
+    {
+      "milestone": "gives empty dish to adults",
+      "domain": "ADL",
+      "age_expected": "18-24",
+      "caregiver_response": "My child is just beginning to gives empty dish to adults. I first noticed attempts about a month ago. It's inconsistent - sometimes they will try when in a good mood but other times they shows no interest.",
+      "expected_score": 2,
+      "expected_label": "EMERGING",
+      "profile_type": "uneven_motor"
+    },
+    {
+      "milestone": "Stands on one foot briefly",
+      "domain": "GM",
+      "age_expected": "24-30",
+      "caregiver_response": "Avery does this when I provide some assistance. Specifically, they needs help with the finishing but can manage the simpler aspects on their own.",
+      "expected_score": 3,
+      "expected_label": "WITH_SUPPORT",
+      "profile_type": "uneven_cognitive"
+    },
+    {
+      "milestone": "enjoys picture books and recognises smaller details",
+      "domain": "Cog",
+      "age_expected": "18-24",
+      "caregiver_response": "Avery has completely mastered this skill. they does it on their own not only at home but also when we're at bedtime. It's been consistent for a couple of months.",
+      "expected_score": 4,
+      "expected_label": "INDEPENDENT",
+      "profile_type": "uneven_motor"
+    },
+    {
+      "milestone": "listens as pictures are named",
+      "domain": "RL",
+      "age_expected": "18-24",
+      "caregiver_response": "Yes, Avery demonstrates this ability independently. I've noticed they does this regularly, especially when we are during meals. they seems to enjoy it and will often try to do it again.",
+      "expected_score": 4,
+      "expected_label": "INDEPENDENT",
+      "profile_type": "neurotypical"
+    }
+  ]
+}
