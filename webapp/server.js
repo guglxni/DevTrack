@@ -18,7 +18,7 @@ const API_URL = process.env.API_URL || 'http://localhost:8003';
 app.use(express.static(path.join(__dirname)));
 
 // Proxy API requests
-app.use('/api', createProxyMiddleware({
+app.use('/', createProxyMiddleware({
     target: API_URL,
     changeOrigin: true,
     pathRewrite: {

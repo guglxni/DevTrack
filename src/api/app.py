@@ -7,10 +7,28 @@ from pydantic import BaseModel, Field
 import pandas as pd
 from src.core.enhanced_assessment_engine import EnhancedAssessmentEngine, Score, DevelopmentalMilestone
 import argparse
+import os
+import re
+import functools
+import json
+from enum import Enum
+from dataclasses import dataclass
+from collections import defaultdict
+import torch
+from sentence_transformers import SentenceTransformer
 
 # Initialize the enhanced assessment engine
 engine = EnhancedAssessmentEngine(use_embeddings=True)
 print("Assessment engine initialized and ready")
+
+# Import our new hybrid scorer for reliable scoring
+try:
+    from src.api.hybrid_scorer import score_response as hybrid_score_response
+    HYBRID_SCORER_AVAILABLE = True
+    print("Hybrid scorer available - using enhanced scoring for better reliability")
+except ImportError as e:
+    HYBRID_SCORER_AVAILABLE = False
+    print(f"Hybrid scorer not available: {str(e)} - falling back to keyword-based scoring")
 
 app = FastAPI(
     title="ASD Developmental Milestone Assessment API",
@@ -113,31 +131,59 @@ async def get_next_milestone():
 
 @app.post("/score-response")
 async def score_response(response_data: MilestoneResponse):
-    """Score a caregiver response for a specific milestone"""
-    if engine is None:
-        raise HTTPException(status_code=500, detail="Assessment engine not initialized")
+    """
+    Analyze a single response to determine the milestone score
     
-    if not response_data.milestone_behavior:
-        raise HTTPException(status_code=400, detail="Milestone behavior is required")
-    
-    if not response_data.response:
-        raise HTTPException(status_code=400, detail="Response text is required")
-    
-    # Find the milestone by name (with fuzzy matching)
-    milestone = engine.find_milestone_by_name(response_data.milestone_behavior)
-    
-    if not milestone:
-        raise HTTPException(status_code=404, detail=f"Milestone '{response_data.milestone_behavior}' not found")
-    
-    # Score the response
-    score = engine.score_response(milestone.behavior, response_data.response)
-    
-    return {
-        "milestone": milestone.behavior,
-        "domain": milestone.domain,
-        "score": score.value,
-        "score_label": score.name
-    }
+    This endpoint processes a parent/caregiver response about a specific milestone behavior 
+    and returns a score for how well the child can perform the milestone.
+    """
+    try:
+        # Validate the response data
+        if not response_data.response or not response_data.milestone_behavior:
+            raise HTTPException(status_code=400, detail="Missing response or milestone behavior")
+        
+        # Try to use the hybrid scorer for more reliable scoring if available
+        if HYBRID_SCORER_AVAILABLE:
+            # Use our enhanced hybrid scoring approach
+            result = hybrid_score_response(response_data.milestone_behavior, response_data.response)
+            
+            # Find the milestone for the domain
+            milestone = engine.find_milestone_by_name(response_data.milestone_behavior)
+            domain = milestone.domain if milestone else None
+            
+            # Return the score with the format expected by the API
+            return {
+                "milestone": response_data.milestone_behavior,
+                "domain": domain,
+                "score": result["score"],
+                "score_label": result["score_label"],
+                "confidence": result["confidence"]
+            }
+        else:
+            # Fall back to the original scoring logic
+            milestone = engine.find_milestone_by_name(response_data.milestone_behavior)
+            if not milestone:
+                raise HTTPException(status_code=404, detail=f"Milestone '{response_data.milestone_behavior}' not found")
+            
+            # Use the assessment engine to analyze the response
+            score = await engine.analyze_response(response_data.response, milestone)
+            
+            # Set the score for the milestone
+            engine.set_milestone_score(milestone, score)
+            
+            # Return the score info
+            return {
+                "milestone": milestone.behavior,
+                "domain": milestone.domain,
+                "score": score.value,
+                "score_label": score.name,
+                "confidence": 0.8  # Default confidence
+            }
+    except HTTPException:
+        # Re-raise HTTP exceptions
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error scoring response: {str(e)}")
 
 @app.post("/batch-score")
 async def batch_score(batch_data: BatchResponseData):
@@ -393,69 +439,72 @@ async def comprehensive_assessment(assessment_data: ComprehensiveAssessment):
         # Step 2: Update keywords if provided (similar to /keywords endpoint)
         keywords_updated = []
         if assessment_data.keywords:
+            # Get the specific milestone key for this milestone only
+            milestone_key = engine._get_milestone_key(milestone)
+            
+            # Initialize the keyword map for this milestone if it doesn't exist
+            if milestone_key not in engine._scoring_keywords_cache:
+                engine._scoring_keywords_cache[milestone_key] = {}
+            
+            # Process each category of keywords
             for category, keywords in assessment_data.keywords.items():
-                # Validate the category
-                valid_categories = [score.name for score in Score]
-                if category not in valid_categories:
-                    raise HTTPException(
-                        status_code=400, 
-                        detail=f"Invalid category: {category}. Valid categories are: {', '.join(valid_categories)}"
-                    )
+                # Skip invalid categories
+                try:
+                    score_enum = Score[category]
+                except (KeyError, ValueError):
+                    continue
                 
-                # Find the score enum from the category name
-                score_enum = None
-                for score in Score:
-                    if score.name == category:
-                        score_enum = score
-                        break
+                # Update the scoring keywords for this milestone
+                for keyword in keywords:
+                    engine._scoring_keywords_cache[milestone_key][keyword.lower()] = score_enum
                 
-                if not score_enum:
-                    raise HTTPException(status_code=500, detail=f"Error finding score enum for category: {category}")
-                
-                # Update keywords for this category
-                for milestone_key in engine._scoring_keywords_cache:
-                    keyword_map = engine._scoring_keywords_cache[milestone_key]
-                    
-                    # Remove existing keywords for this category
-                    keys_to_remove = []
-                    for key, score in keyword_map.items():
-                        if score == score_enum:
-                            keys_to_remove.append(key)
-                    
-                    for key in keys_to_remove:
-                        del keyword_map[key]
-                    
-                    # Add new keywords
-                    for keyword in keywords:
-                        keyword_map[keyword.lower()] = score_enum
-                
+                # Add this category to the list of updated categories
                 keywords_updated.append(category)
         
-        # Step 3: Analyze the parent response (similar to /score-response endpoint)
-        if not assessment_data.parent_response:
-            raise HTTPException(status_code=400, detail="Parent response is required")
-        
-        # Score the response
-        try:
-            score = engine.score_response(milestone.behavior, assessment_data.parent_response)
-            confidence = getattr(score, 'confidence', 0.85)  # Default confidence if not available
-        except Exception as e:
-            raise HTTPException(
-                status_code=422, 
-                detail=f"Unable to analyze response: {str(e)}"
+        # Step 3: Analyze the response (similar to /score-response endpoint)
+        # Try to use the hybrid scorer for more reliable scoring if available
+        if HYBRID_SCORER_AVAILABLE:
+            # Use our enhanced hybrid scoring approach with the provided keywords
+            result = hybrid_score_response(
+                assessment_data.milestone_behavior, 
+                assessment_data.parent_response,
+                assessment_data.keywords
             )
+            
+            score_value = result["score"]
+            score_label = result["score_label"]
+            confidence = result["confidence"]
+            
+            # Map score value to Score enum for the engine
+            score_enum = None
+            for score in Score:
+                if score.value == score_value:
+                    score_enum = score
+                    break
+            
+            # Record the score in the engine if we have a valid score
+            if score_enum is not None:
+                engine.set_milestone_score(milestone, score_enum)
+                print(f"Scored {milestone.behavior} ({milestone.domain}): {score_enum.name}")
+        else:
+            # Fall back to the original scoring logic
+            score_enum = await engine.analyze_response(assessment_data.parent_response, milestone)
+            score_value = score_enum.value
+            score_label = score_enum.name
+            confidence = 0.85  # Default confidence
+            
+            # Record the score
+            engine.set_milestone_score(milestone, score_enum)
+            print(f"Scored {milestone.behavior} ({milestone.domain}): {score_enum.name}")
         
-        # Step 4: Record the score (similar to /send-score endpoint)
-        engine.set_milestone_score(milestone, score)
-        
-        # Return comprehensive results
+        # Step 4: Return the comprehensive result
         return {
             "question_processed": True,
             "milestone_found": True,
             "milestone_details": milestone_details,
-            "keywords_updated": keywords_updated if assessment_data.keywords else None,
-            "score": score.value,
-            "score_label": score.name,
+            "keywords_updated": keywords_updated,
+            "score": score_value,
+            "score_label": score_label,
             "confidence": confidence,
             "domain": milestone.domain
         }
@@ -463,7 +512,7 @@ async def comprehensive_assessment(assessment_data: ComprehensiveAssessment):
         # Re-raise HTTP exceptions
         raise
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Error processing comprehensive assessment: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Error processing assessment: {str(e)}")
 
 if __name__ == "__main__":
     # Parse command line arguments

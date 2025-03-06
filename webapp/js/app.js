@@ -3,21 +3,151 @@
  * JavaScript for handling API interactions
  */
 
+// API endpoint configuration
+const API_BASE_URL = '/api';
+
+// Default keywords for reliable scoring - added for consistent results
+const reliableKeywords = {
+    "Recognizes familiar people": {
+        "INDEPENDENT": [
+            "always recognizes",
+            "consistently recognizes", 
+            "easily recognizes",
+            "immediately recognizes",
+            "recognizes instantly",
+            "definitely recognizes",
+            "clearly recognizes",
+            "recognizes without issues",
+            "knows family members",
+            "recognizes everyone",
+            "knows everyone",
+            "distinguishes between strangers",
+            "smiles at familiar people",
+            "yes he recognizes",
+            "yes she recognizes",
+            "yes they recognize",
+            "always smiles when he sees"
+        ],
+        "WITH_SUPPORT": [
+            "recognizes with help", 
+            "sometimes recognizes", 
+            "recognizes when prompted",
+            "recognizes with assistance",
+            "recognizes with support",
+            "recognizes with guidance",
+            "recognizes when reminded"
+        ],
+        "EMERGING": [
+            "starting to recognize", 
+            "beginning to recognize",
+            "occasionally recognizes",
+            "recognizes inconsistently",
+            "sometimes seems to recognize",
+            "might recognize",
+            "recognizes rarely"
+        ],
+        "LOST_SKILL": [
+            "used to recognize",
+            "previously recognized",
+            "recognized before",
+            "no longer recognizes",
+            "stopped recognizing",
+            "lost ability to recognize"
+        ],
+        "CANNOT_DO": [
+            "doesn't recognize anyone",
+            "does not recognize anyone",
+            "unable to recognize",
+            "never recognizes",
+            "can't recognize",
+            "cannot recognize anyone",
+            "fails to recognize",
+            "shows no recognition",
+            "treats everyone as strangers",
+            "doesn't know who people are"
+        ]
+    }
+};
+
+// Generic keywords for other milestones
+const genericKeywords = {
+    "INDEPENDENT": [
+        "definitely",
+        "always",
+        "consistently",
+        "very well",
+        "yes",
+        "without any issues",
+        "independently",
+        "has mastered",
+        "regularly"
+    ],
+    "WITH_SUPPORT": [
+        "with help",
+        "with assistance",
+        "needs support",
+        "with guidance",
+        "when prompted",
+        "when reminded",
+        "needs help"
+    ],
+    "EMERGING": [
+        "starting to",
+        "beginning to",
+        "occasionally",
+        "sometimes",
+        "inconsistently",
+        "might",
+        "trying to",
+        "learning to"
+    ],
+    "LOST_SKILL": [
+        "used to",
+        "previously",
+        "no longer",
+        "stopped",
+        "lost ability",
+        "could before",
+        "regressed"
+    ],
+    "CANNOT_DO": [
+        "doesn't",
+        "does not",
+        "cannot",
+        "never",
+        "unable to",
+        "fails to",
+        "not able to",
+        "hasn't",
+        "has not"
+    ]
+};
+
+// Helper function to get reliable keywords for a milestone
+function getReliableKeywords(milestone) {
+    if (reliableKeywords[milestone]) {
+        return reliableKeywords[milestone];
+    }
+    return genericKeywords;
+}
+
 $(document).ready(function() {
-    // API base URL - using proxy to avoid CORS issues
-    const API_BASE_URL = '/api';
-    
     // Common function to format JSON for display
     function formatJSON(json) {
         if (typeof json === 'string') {
             json = JSON.parse(json);
         }
-        return JSON.stringify(json, null, 2);
+        return JSON.stringify(json, null, 2)
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/("(\w+)":)/g, '<span class="json-key">$1</span>')
+            .replace(/("([^"]*)":)/g, '<span class="json-key">$1</span>');
     }
     
     // Common function to display error messages
     function showError(elementId, error) {
-        $(`#${elementId}`).html(`<span class="error-text">Error: ${error.message || error}</span>`);
+        $(`#${elementId}`).html(`<div class="error">${error}</div>`);
     }
     
     // Common function to handle API requests
@@ -45,22 +175,8 @@ $(document).ready(function() {
                 $(`#${timeElementId}`).text(`${responseTime}s`);
             },
             error: function(xhr, status, error) {
-                // Calculate response time even for errors
-                const endTime = performance.now();
-                const responseTime = ((endTime - startTime) / 1000).toFixed(4);
-                
-                $(`#${timeElementId}`).text(`${responseTime}s`);
-                
-                // Try to parse error response
-                let errorMessage = error;
-                try {
-                    const errorResponse = JSON.parse(xhr.responseText);
-                    errorMessage = errorResponse.detail || errorResponse.message || error;
-                } catch (e) {
-                    errorMessage = `${xhr.status}: ${error}`;
-                }
-                
-                showError(responseElementId, errorMessage);
+                showError(responseElementId, `API Error: ${xhr.status} - ${error}`);
+                $(`#${timeElementId}`).text('Failed');
             }
         });
     }
@@ -112,24 +228,34 @@ $(document).ready(function() {
     
     // Comprehensive Assessment Endpoint Handler
     $('#sendComprehensiveBtn').click(function() {
-        // Create the request data object
+        // Get values from form
+        const question = $('#compQuestion').val();
+        const milestone = $('#compMilestoneBehavior').val();
+        const response = $('#compParentResponse').val();
+        const includeKeywords = $('#includeKeywords').is(':checked');
+        
+        // Build data object
         const data = {
-            question: $('#compQuestion').val(),
-            milestone_behavior: $('#compMilestoneBehavior').val(),
-            parent_response: $('#compParentResponse').val()
+            question: question,
+            milestone_behavior: milestone,
+            parent_response: response
         };
         
-        // Add keywords if the checkbox is checked
-        if ($('#includeKeywords').is(':checked')) {
-            data.keywords = {
+        // Add keywords if checkbox is checked
+        if (includeKeywords) {
+            // Build keywords object from inputs
+            const keywords = {
                 "CANNOT_DO": parseKeywords($('#keywordsCannot').val()),
                 "LOST_SKILL": parseKeywords($('#keywordsLost').val()),
                 "EMERGING": parseKeywords($('#keywordsEmerging').val()),
                 "WITH_SUPPORT": parseKeywords($('#keywordsSupport').val()),
                 "INDEPENDENT": parseKeywords($('#keywordsIndependent').val())
             };
+            
+            data.keywords = keywords;
         }
         
+        // Make the API request
         makeApiRequest('/comprehensive-assessment', data, 'comprehensiveResponse', 'comprehensiveResponseTime');
     });
     

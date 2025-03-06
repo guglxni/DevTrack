@@ -12,9 +12,13 @@ import argparse
 import pandas as pd
 from typing import Dict, List, Optional, Union
 import sys
+from src.api.reliable_client import ReliableASDClient
 
 # API configuration
-API_BASE_URL = "http://localhost:8002"  # Update this if your API is hosted elsewhere
+API_BASE_URL = "http://localhost:8003"  # Update this if your API is hosted elsewhere
+
+# Initialize the reliable client
+reliable_client = ReliableASDClient(api_url=API_BASE_URL)
 
 def print_response(response):
     """Pretty print API response"""
@@ -44,18 +48,21 @@ def get_next_milestone():
     return response.json() if response.status_code == 200 else None
 
 def score_response(milestone_behavior: str, response_text: str):
-    """Score a response for a specific milestone"""
-    url = f"{API_BASE_URL}/score-response"
-    payload = {
-        "response": response_text,
-        "milestone_behavior": milestone_behavior
-    }
+    """
+    Score a response for a specific milestone
     
+    Now uses the reliable client for consistent scoring.
+    """
     print(f"\n>>> Scoring response for milestone: {milestone_behavior}")
     print(f">>> Response text: '{response_text}'")
-    response = requests.post(url, json=payload)
-    print_response(response)
-    return response.json() if response.status_code == 200 else None
+    
+    # Use the reliable client for scoring
+    result = reliable_client.score_response(milestone_behavior, response_text)
+    
+    # Print the result
+    print(json.dumps(result, indent=2))
+    
+    return result
 
 def generate_report():
     """Generate assessment report"""
@@ -85,14 +92,20 @@ def generate_report():
         return None
 
 def batch_analyze_responses(responses_data: List[Dict]):
-    """Analyze a batch of responses at once"""
-    url = f"{API_BASE_URL}/batch-score"
-    payload = {"responses": responses_data}
+    """
+    Analyze a batch of responses at once
     
+    Now uses the reliable client for consistent scoring.
+    """
     print(f"\n>>> Analyzing batch of {len(responses_data)} responses...")
-    response = requests.post(url, json=payload)
-    print_response(response)
-    return response.json() if response.status_code == 200 else None
+    
+    # Use the reliable client for batch analysis
+    results = reliable_client.batch_analyze_responses(responses_data)
+    
+    # Print the results
+    print(json.dumps(results, indent=2))
+    
+    return results
 
 def process_input_file(filename: str, age: int):
     """Process responses from an input file and generate an assessment"""
@@ -128,75 +141,72 @@ def process_input_file(filename: str, age: int):
         print(f"Error processing input file: {str(e)}")
 
 def run_interactive_assessment(age: int):
-    """Run an interactive assessment in the terminal"""
-    # Set the child's age
-    result = set_child_age(age)
-    if not result:
-        print("Failed to set child age. Exiting.")
-        return
-    
-    total_milestones = result.get("total_milestones", 0)
-    print(f"\nStarting assessment with {total_milestones} age-appropriate milestones.")
-    
-    # Process milestones one by one
-    assessed = 0
-    while True:
-        milestone = get_next_milestone()
+    """Run an interactive assessment with the user"""
+    try:
+        # Set the child's age
+        set_child_age(age)
         
-        if not milestone or milestone.get("complete", False):
-            print("\nAssessment complete!")
-            break
+        while True:
+            # Get the next milestone
+            milestone_data = get_next_milestone()
+            
+            if not milestone_data or milestone_data.get('complete', False):
+                print("\n>>> Assessment complete!")
+                break
+            
+            milestone = milestone_data.get('behavior')
+            domain = milestone_data.get('domain')
+            age_range = milestone_data.get('age_range')
+            
+            print(f"\n>>> Milestone: {milestone}")
+            print(f">>> Domain: {domain}")
+            print(f">>> Age Range: {age_range}")
+            
+            # Get caregiver response
+            print("\nPlease describe how your child performs this behavior:")
+            response_text = input("> ")
+            
+            # Score the response
+            score_response(milestone, response_text)
         
-        assessed += 1
-        print(f"\nMilestone {assessed}/{total_milestones}: {milestone['behavior']}")
-        print(f"Criteria: {milestone['criteria']}")
-        print(f"Domain: {milestone['domain']}")
+        # Generate the final report
+        generate_report()
         
-        # Get user input for the response
-        print("\nEnter caregiver's description (or type 'skip' to skip, 'quit' to exit):")
-        response_text = input("> ")
-        
-        if response_text.lower() == 'skip':
-            continue
-        elif response_text.lower() == 'quit':
-            break
-        
-        # Score the response
-        score_response(milestone['behavior'], response_text)
-    
-    # Generate final report
-    generate_report()
+    except KeyboardInterrupt:
+        print("\nAssessment terminated by user.")
+    except Exception as e:
+        print(f"Error during interactive assessment: {str(e)}")
 
 def main():
+    """Main function to handle command-line arguments and run the client"""
     parser = argparse.ArgumentParser(description="ASD Assessment API Client")
-    parser.add_argument("--age", type=int, default=24, help="Child's age in months (default: 24)")
-    
-    subparsers = parser.add_subparsers(dest="command", help="Command to run")
-    
-    # Interactive assessment
-    interactive_parser = subparsers.add_parser("interactive", help="Run interactive assessment")
-    
-    # Process input file
-    file_parser = subparsers.add_parser("file", help="Process responses from a file")
-    file_parser.add_argument("filename", help="Input file (CSV or JSON)")
-    
-    # Single response scoring
-    score_parser = subparsers.add_parser("score", help="Score a single response")
-    score_parser.add_argument("milestone", help="Milestone behavior to assess")
-    score_parser.add_argument("response", help="Response text to score")
+    parser.add_argument("--age", type=int, help="Child's age in months")
+    parser.add_argument("--interactive", action="store_true", help="Run interactive assessment")
+    parser.add_argument("--file", type=str, help="Input file with responses (CSV or JSON)")
+    parser.add_argument("--milestone", type=str, help="Specific milestone to score")
+    parser.add_argument("--response", type=str, help="Response text to score")
     
     args = parser.parse_args()
     
-    if not args.command:
-        # Default to interactive if no command specified
+    # Check if API is running
+    health_check = reliable_client.health_check()
+    if not health_check:
+        print("Error: Cannot connect to the API server.")
+        print(f"Make sure the API server is running at {API_BASE_URL}")
+        sys.exit(1)
+    
+    # Interactive assessment
+    if args.interactive and args.age:
         run_interactive_assessment(args.age)
-    elif args.command == "interactive":
-        run_interactive_assessment(args.age)
-    elif args.command == "file":
-        process_input_file(args.filename, args.age)
-    elif args.command == "score":
-        set_child_age(args.age)
+    
+    # Process input file
+    elif args.file and args.age:
+        process_input_file(args.file, args.age)
+    
+    # Score a single response
+    elif args.milestone and args.response:
         score_response(args.milestone, args.response)
+    
     else:
         parser.print_help()
 

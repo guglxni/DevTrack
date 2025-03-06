@@ -652,6 +652,448 @@ class AdvancedResponseAnalyzer:
             
         return None
 
+class HybridScorer:
+    """
+    Advanced hybrid scoring system that combines multiple NLP approaches:
+    1. Word boundary-aware keyword matching
+    2. Negation detection with context windows
+    3. Semantic similarity using sentence embeddings
+    4. Weighted ensemble for final decision
+    """
+    def __init__(self, use_transformer=False, use_spacy=False, use_sentence_embeddings=False):
+        """
+        Initialize the hybrid scorer with configurable components.
+        
+        Args:
+            use_transformer: Whether to use transformer models for classification
+            use_spacy: Whether to use spaCy for NER and linguistic analysis
+            use_sentence_embeddings: Whether to use sentence embeddings
+        """
+        self.use_transformer = use_transformer
+        self.use_spacy = use_spacy
+        self.use_sentence_embeddings = use_sentence_embeddings
+        self.negation_regex = re.compile(r'\b(no|not|never|doesn\'t|does not|cannot|can\'t|unable|hasn\'t|has not)\b')
+        self.positive_regex = re.compile(r'\b(yes|always|consistently|definitely|very well)\b')
+        
+        # Word boundary regex for each score category
+        self.score_regexes = {
+            "CANNOT_DO": re.compile(r'\b(no|not|never|doesn\'t|does not|cannot|can\'t|unable|hasn\'t|has not|not able|not at all|not yet started|not capable)\b'),
+            "LOST_SKILL": re.compile(r'\b(used to|previously|before|no longer|stopped|regressed|lost ability|could before|forgotten how)\b'),
+            "EMERGING": re.compile(r'\b(sometimes|occasionally|beginning to|starting to|trying to|inconsistently|might|rarely|not consistent|learning to)\b'),
+            "WITH_SUPPORT": re.compile(r'\b(with help|when assisted|with support|with guidance|needs help|when prompted|specific situations|only when|if guided|with assistance)\b'),
+            "INDEPENDENT": re.compile(r'\b(yes|always|consistently|definitely|independently|without help|on own|mastered|very good at|excellent|regularly|all situations)\b')
+        }
+        
+        # Try to load advanced components if requested
+        if use_transformer:
+            try:
+                from transformers import pipeline
+                self.transformer = pipeline("zero-shot-classification")
+                logger.info("Transformer model loaded successfully")
+            except ImportError:
+                logger.warning("Transformers not available - disabling transformer model")
+                self.use_transformer = False
+        
+        if use_spacy:
+            try:
+                import spacy
+                self.nlp = spacy.load("en_core_web_sm")
+                logger.info("spaCy model loaded successfully")
+            except ImportError:
+                logger.warning("spaCy not available - disabling spaCy model")
+                self.use_spacy = False
+        
+        if use_sentence_embeddings:
+            try:
+                from sentence_transformers import SentenceTransformer
+                self.sentence_model = SentenceTransformer('all-MiniLM-L6-v2')
+                logger.info("Sentence transformer model loaded successfully")
+            except ImportError:
+                logger.warning("Sentence transformers not available - disabling sentence embeddings")
+                self.use_sentence_embeddings = False
+    
+    def score_with_word_boundaries(self, response_text, milestone=None, keywords=None):
+        """
+        Score response text using regex patterns with proper word boundaries.
+        
+        Args:
+            response_text: The text response to analyze
+            milestone: Optional milestone for context
+            keywords: Optional custom keywords for each score category
+        
+        Returns:
+            Dict with score category and count of matched patterns
+        """
+        response_lower = response_text.lower()
+        logger.info(f"Analyzing with word boundaries: '{response_lower}'")
+        
+        # Initialize counters for each score category
+        score_counts = {"CANNOT_DO": 0, "LOST_SKILL": 0, "EMERGING": 0, 
+                        "WITH_SUPPORT": 0, "INDEPENDENT": 0}
+        
+        # Track matched keywords for debugging
+        matched_keywords = {category: [] for category in score_counts.keys()}
+        
+        # Use custom keywords if provided
+        if keywords:
+            for category, keyword_list in keywords.items():
+                if category in score_counts:
+                    # Create a regex pattern with word boundaries for each keyword
+                    for keyword in keyword_list:
+                        keyword_pattern = r'\b' + re.escape(keyword.lower()) + r'\b'
+                        matches = re.findall(keyword_pattern, response_lower)
+                        if matches:
+                            score_counts[category] += len(matches)
+                            matched_keywords[category].extend(matches)
+        # Otherwise use the default regexes
+        else:
+            for category, regex in self.score_regexes.items():
+                matches = regex.findall(response_lower)
+                score_counts[category] += len(matches)
+                matched_keywords[category].extend(matches)
+        
+        # Log the matches for debugging
+        for category, keywords in matched_keywords.items():
+            if keywords:
+                logger.info(f"Matched {category} keywords: {', '.join(keywords)}")
+        
+        # Find the category with the highest score
+        if all(count == 0 for count in score_counts.values()):
+            best_category = None
+            confidence = 0.0
+        else:
+            best_category = max(score_counts.items(), key=lambda x: x[1])[0]
+            total_matches = sum(score_counts.values())
+            confidence = score_counts[best_category] / total_matches if total_matches > 0 else 0.0
+        
+        # Convert category name to score value
+        score_values = {"CANNOT_DO": 0, "LOST_SKILL": 1, "EMERGING": 2, 
+                        "WITH_SUPPORT": 3, "INDEPENDENT": 4}
+        
+        score = score_values.get(best_category, -1) if best_category else -1
+        
+        return {
+            "score": score,
+            "score_label": best_category or "NOT_RATED",
+            "confidence": confidence,
+            "matches": matched_keywords
+        }
+    
+    def check_for_negations(self, response_text):
+        """
+        Check for negations with context window analysis.
+        
+        Args:
+            response_text: The text response to analyze
+        
+        Returns:
+            Dict with negation score
+        """
+        response_lower = response_text.lower()
+        
+        # Check for clear negative indicators
+        negation_matches = self.negation_regex.findall(response_lower)
+        positive_matches = self.positive_regex.findall(response_lower)
+        
+        negation_count = len(negation_matches)
+        positive_count = len(positive_matches)
+        
+        # For each negation, check the surrounding context (5 words before and after)
+        sentences = re.split(r'[.!?]', response_lower)
+        for sentence in sentences:
+            words = sentence.split()
+            for i, word in enumerate(words):
+                if self.negation_regex.search(word):
+                    # Check if this negation applies to the milestone capability
+                    # Look for positive terms that might be negated
+                    context_start = max(0, i - 5)
+                    context_end = min(len(words), i + 6)
+                    context = words[context_start:context_end]
+                    
+                    # If we find positive capability terms in this context, increase negation weight
+                    capability_terms = ['can', 'able', 'does', 'is', 'has', 'shows', 'demonstrates']
+                    for term in capability_terms:
+                        if term in context:
+                            negation_count += 1
+                            break
+        
+        # Determine result based on counts
+        if negation_count > 0 and negation_count > positive_count:
+            score = 0  # CANNOT_DO
+            confidence = min(1.0, negation_count / (negation_count + positive_count + 1))
+        elif positive_count > 0:
+            score = 4  # INDEPENDENT
+            confidence = min(1.0, positive_count / (negation_count + positive_count + 1))
+        else:
+            score = -1  # NOT_RATED
+            confidence = 0.0
+        
+        return {
+            "score": score,
+            "score_label": "CANNOT_DO" if score == 0 else "INDEPENDENT" if score == 4 else "NOT_RATED",
+            "confidence": confidence
+        }
+    
+    def score_with_transformer(self, response_text, milestone=None):
+        """
+        Use a transformer model for zero-shot classification.
+        
+        Args:
+            response_text: The text response to analyze
+            milestone: Optional milestone for context
+        
+        Returns:
+            Dict with score results
+        """
+        if not self.use_transformer:
+            return {"score": -1, "score_label": "NOT_RATED", "confidence": 0.0, "method": "transformer_unavailable"}
+        
+        try:
+            # Define label descriptions for zero-shot classification
+            candidate_labels = [
+                "Child cannot perform this skill at all",
+                "Child used to have this skill but lost it",
+                "Child is beginning to develop this skill",
+                "Child can do this with help or support",
+                "Child can do this independently"
+            ]
+            
+            # Incorporate milestone in query if available
+            if milestone:
+                query = f"Milestone: {milestone}. Response: {response_text}"
+            else:
+                query = response_text
+            
+            # Run classification
+            result = self.transformer(query, candidate_labels)
+            
+            # Map to score
+            score_mapping = {
+                "Child cannot perform this skill at all": 0,         # CANNOT_DO
+                "Child used to have this skill but lost it": 1,      # LOST_SKILL
+                "Child is beginning to develop this skill": 2,       # EMERGING
+                "Child can do this with help or support": 3,         # WITH_SUPPORT
+                "Child can do this independently": 4                 # INDEPENDENT
+            }
+            
+            best_label = result["labels"][0]
+            score = score_mapping[best_label]
+            confidence = result["scores"][0]
+            
+            return {
+                "score": score,
+                "score_label": list(score_mapping.keys())[list(score_mapping.values()).index(score)],
+                "confidence": confidence,
+                "method": "transformer"
+            }
+        
+        except Exception as e:
+            logger.error(f"Error in transformer scoring: {str(e)}")
+            return {"score": -1, "score_label": "NOT_RATED", "confidence": 0.0, "method": "transformer_error"}
+    
+    def semantic_scoring(self, response_text, milestone=None):
+        """
+        Use sentence embeddings to compare with canonical examples.
+        
+        Args:
+            response_text: The text response to analyze
+            milestone: Optional milestone for context
+        
+        Returns:
+            Dict with score results
+        """
+        if not self.use_sentence_embeddings:
+            return {"score": -1, "score_label": "NOT_RATED", "confidence": 0.0, "method": "embeddings_unavailable"}
+        
+        try:
+            import torch
+            
+            # Create embeddings for canonical examples of each category
+            examples = {
+                "INDEPENDENT": [
+                    "Child always recognizes familiar people without any help",
+                    "Child consistently identifies family members and distinguishes them from strangers",
+                    "Yes, my child does this very well all the time",
+                    "Completely independent with this skill"
+                ],
+                "WITH_SUPPORT": [
+                    "Child recognizes people with some help",
+                    "Needs prompting to recognize family members",
+                    "Can do this with assistance",
+                    "Does this when supported by an adult"
+                ],
+                "EMERGING": [
+                    "Child is starting to recognize some people",
+                    "Sometimes recognizes family members",
+                    "Beginning to show this skill",
+                    "Occasionally demonstrates this ability"
+                ],
+                "LOST_SKILL": [
+                    "Child used to recognize people but doesn't anymore",
+                    "Previously could do this but has regressed",
+                    "Had this skill before but lost it",
+                    "Used to be able to do this"
+                ],
+                "CANNOT_DO": [
+                    "Child never recognizes anyone, even parents",
+                    "Does not show any recognition of familiar people",
+                    "Unable to do this at all",
+                    "No, my child cannot do this"
+                ]
+            }
+            
+            # Add milestone context if available
+            if milestone:
+                for category in examples:
+                    examples[category] = [f"For milestone '{milestone}': {ex}" for ex in examples[category]]
+            
+            # Create embeddings
+            response_embedding = self.sentence_model.encode(response_text, convert_to_tensor=True)
+            
+            # Compare with each category
+            scores = {}
+            for category, category_examples in examples.items():
+                category_embeddings = self.sentence_model.encode(category_examples, convert_to_tensor=True)
+                # Get max similarity score for this category
+                similarities = torch.nn.functional.cosine_similarity(
+                    response_embedding.unsqueeze(0), 
+                    category_embeddings, 
+                    dim=1
+                )
+                scores[category] = torch.max(similarities).item()
+            
+            # Get highest scoring category
+            best_category = max(scores.items(), key=lambda x: x[1])
+            
+            # Convert category to score
+            score_values = {
+                "CANNOT_DO": 0, 
+                "LOST_SKILL": 1, 
+                "EMERGING": 2, 
+                "WITH_SUPPORT": 3, 
+                "INDEPENDENT": 4
+            }
+            
+            score = score_values.get(best_category[0], -1)
+            
+            return {
+                "score": score,
+                "score_label": best_category[0],
+                "confidence": best_category[1],
+                "method": "semantic_embeddings"
+            }
+            
+        except Exception as e:
+            logger.error(f"Error in semantic scoring: {str(e)}")
+            return {"score": -1, "score_label": "NOT_RATED", "confidence": 0.0, "method": "embeddings_error"}
+    
+    def weighted_ensemble(self, scores):
+        """
+        Combine multiple scoring approaches using a weighted ensemble.
+        
+        Args:
+            scores: List of (result_dict, weight) tuples
+        
+        Returns:
+            Dict with final score results
+        """
+        # Filter out scores with negative values (NOT_RATED)
+        valid_scores = [(result, weight) for result, weight in scores if result["score"] >= 0]
+        
+        if not valid_scores:
+            return {
+                "score": -1,
+                "score_label": "NOT_RATED",
+                "confidence": 0.0,
+                "methods": [s[0]["method"] for s in scores if "method" in s[0]]
+            }
+        
+        # Calculate weighted scores for each category
+        weighted_scores = defaultdict(float)
+        total_weight = 0
+        
+        for result, weight in valid_scores:
+            weighted_scores[result["score"]] += result["confidence"] * weight
+            total_weight += weight
+        
+        # Normalize by total weight
+        if total_weight > 0:
+            for score in weighted_scores:
+                weighted_scores[score] /= total_weight
+        
+        # Select best score
+        best_score = max(weighted_scores.items(), key=lambda x: x[1])
+        
+        # Map score value to label
+        score_labels = {
+            0: "CANNOT_DO",
+            1: "LOST_SKILL",
+            2: "EMERGING",
+            3: "WITH_SUPPORT",
+            4: "INDEPENDENT"
+        }
+        
+        return {
+            "score": best_score[0],
+            "score_label": score_labels[best_score[0]],
+            "confidence": best_score[1],
+            "methods": [s[0].get("method", "unknown") for s in valid_scores]
+        }
+    
+    def score(self, response_text, milestone=None, keywords=None):
+        """
+        Score a response using the hybrid approach.
+        
+        Args:
+            response_text: The text response to analyze
+            milestone: Optional milestone text for context
+            keywords: Optional custom keywords for each score category
+        
+        Returns:
+            Dict with final score results
+        """
+        # Step 1: Word boundary-aware keyword matching
+        boundary_result = self.score_with_word_boundaries(response_text, milestone, keywords)
+        
+        # Step 2: Check for negations
+        negation_result = self.check_for_negations(response_text)
+        
+        # Step 3: Transformer-based classification (if available)
+        transformer_result = self.score_with_transformer(response_text, milestone) if self.use_transformer else {
+            "score": -1, 
+            "score_label": "NOT_RATED", 
+            "confidence": 0.0,
+            "method": "transformer_disabled"
+        }
+        
+        # Step 4: Semantic similarity (if available)
+        semantic_result = self.semantic_scoring(response_text, milestone) if self.use_sentence_embeddings else {
+            "score": -1, 
+            "score_label": "NOT_RATED", 
+            "confidence": 0.0,
+            "method": "embeddings_disabled"
+        }
+        
+        # Step 5: Weighted ensemble
+        ensemble_weights = [
+            (boundary_result, 0.5),    # Word boundary matching has highest weight
+            (negation_result, 0.3),    # Negation detection is important
+            (transformer_result, 0.1), # Lower weight as it may not be available
+            (semantic_result, 0.1)     # Lower weight as it may not be available
+        ]
+        
+        final_result = self.weighted_ensemble(ensemble_weights)
+        
+        # Add detailed info for debugging
+        final_result["detail"] = {
+            "boundary": boundary_result,
+            "negation": negation_result,
+            "transformer": transformer_result,
+            "semantic": semantic_result
+        }
+        
+        return final_result
+
 def install_dependencies():
     """Install required dependencies if they are not already installed."""
     try:

@@ -657,9 +657,11 @@ class EnhancedAssessmentEngine:
         """Analyze a response using keyword-based scoring (fallback method)"""
         # Get the milestone key for caching
         milestone_key = self._get_milestone_key(milestone)
+        print(f"Analyzing response for milestone: {milestone.behavior} with key: {milestone_key}")
         
         # Check if we already have keywords cached for this milestone's scoring rules
         if milestone_key not in self._scoring_keywords_cache:
+            print(f"No cached keywords found for milestone: {milestone.behavior}. Initializing new keyword map.")
             # Initialize the keyword mapping
             keyword_map = {}
             for key, score in milestone.scoring_rules.items():
@@ -734,23 +736,57 @@ class EnhancedAssessmentEngine:
             
             # Cache the result
             self._scoring_keywords_cache[milestone_key] = keyword_map
+            print(f"Created and cached keyword map with {len(keyword_map)} entries for {milestone_key}")
+        else:
+            print(f"Using cached keyword map for milestone: {milestone.behavior}")
         
         # Get the keyword mapping from the cache
         keyword_map = self._scoring_keywords_cache[milestone_key]
+        print(f"Keyword map has {len(keyword_map)} entries")
         
         # Process response
         response_lower = response.lower()
+        print(f"Analyzing response: '{response_lower}'")
         
         # Count occurrences of each scoring keyword/phrase
         score_counts = {score: 0 for score in Score}
         
+        # Track matched keywords for debugging
+        matched_keywords = {score.name: [] for score in Score}
+        
+        # Split the response into words for better matching
+        words = response_lower.split()
+        
         for keyword, score in keyword_map.items():
-            count = response_lower.count(keyword)
-            if count > 0:
-                score_counts[score] += count
+            keyword_lower = keyword.lower()
+            
+            # Check for exact matches (whole words or phrases)
+            if keyword_lower in response_lower:
+                score_counts[score] += 1
+                matched_keywords[score.name].append(keyword)
+                continue
+            
+            # Check for word matches (for single words)
+            if len(keyword_lower.split()) == 1 and keyword_lower in words:
+                score_counts[score] += 1
+                matched_keywords[score.name].append(keyword)
+                continue
+            
+            # Check for substring matches in words (for partial matches)
+            for word in words:
+                if len(word) > 3 and len(keyword_lower) > 3 and keyword_lower in word:
+                    score_counts[score] += 1
+                    matched_keywords[score.name].append(f"{keyword} (in {word})")
+                    break
+        
+        # Print matched keywords for debugging
+        for score_name, keywords in matched_keywords.items():
+            if keywords:
+                print(f"Matched {score_name} keywords: {', '.join(keywords)}")
         
         # If no scores were found, default to NOT_RATED
         if all(count == 0 for count in score_counts.values()):
+            print(f"No keywords matched in response for milestone: {milestone.behavior}")
             return Score.NOT_RATED
         
         # Find the score with the highest count
@@ -758,8 +794,10 @@ class EnhancedAssessmentEngine:
         
         # If the highest count is 0, return NOT_RATED
         if score_counts[max_score] == 0:
+            print(f"No keywords matched in response for milestone: {milestone.behavior}")
             return Score.NOT_RATED
-            
+        
+        print(f"Selected score {max_score.name} with count {score_counts[max_score]} for milestone: {milestone.behavior}")
         return max_score
         
     async def analyze_response(self, response: str, milestone: DevelopmentalMilestone) -> Score:
@@ -1009,10 +1047,15 @@ class EnhancedAssessmentEngine:
             print(f"Error using advanced NLP: {str(e)}")
             # Continue with regular scoring
         
-        # Special handling for problematic responses
+        # First, try keyword-based scoring using the cache
         response_lower = response_text.lower()
+        score = self.analyze_response_keywords(response_text, milestone)
         
-        # Fallback scoring logic for common patterns
+        # If we got a valid score (not NOT_RATED), return it
+        if score != Score.NOT_RATED:
+            return score
+        
+        # Fallback scoring logic for common patterns if keyword scoring didn't match
         # CANNOT_DO (0) patterns
         if re.search(r"\b(no|not),?\s+(yet|yet started|started yet)", response_lower) or \
            re.search(r"not at all", response_lower) or \

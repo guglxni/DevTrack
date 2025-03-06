@@ -1,0 +1,12 @@
+{
+  "question": "Does the child follow simple instructions?",
+  "milestone_behavior": "Simple Commands",
+  "parent_response": "The child understands and responds to simple commands like 'give me the toy' and 'come here'",
+  "keywords": {
+    "CANNOT_DO": ["doesn't understand", "ignores commands", "no recognition"],
+    "LOST_SKILL": ["used to follow", "no longer responds", "stopped following"],
+    "EMERGING": ["sometimes", "beginning to", "inconsistent"],
+    "WITH_SUPPORT": ["with help", "when prompted", "needs assistance"],
+    "INDEPENDENT": ["understands", "responds", "follows"]
+  }
+} 

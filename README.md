@@ -4,6 +4,10 @@
 
 This project provides a comprehensive API and demonstration web application for processing and analyzing developmental milestone assessments for Autism Spectrum Disorder (ASD) screening. The system supports question processing, keyword management, score recording, and response analysis to facilitate the assessment of developmental milestones in children.
 
+## Quick Start
+
+For a quick start guide on how to use the API and web interface, see our [API Quick Start Guide](API_README.md).
+
 ## Components
 
 The project consists of three main components:
@@ -11,6 +15,19 @@ The project consists of three main components:
 1. **API Service**: A FastAPI-based API that provides endpoints for processing developmental milestone assessments.
 2. **Testing Framework**: A suite of tools for testing the API endpoints and generating performance reports.
 3. **Web Demo Application**: A web-based interface for demonstrating the API capabilities to stakeholders.
+
+## Enhanced Reliable Scoring
+
+The API now features an advanced hybrid scoring approach that combines multiple NLP techniques:
+
+1. **Word boundary-aware keyword matching**: Prevents false matches from substring matching
+2. **Negation detection**: Correctly identifies negated phrases
+3. **Milestone-specific pattern matching**: Uses custom patterns for each milestone type
+4. **Special phrase handling**: Correctly interprets complex phrases
+
+This hybrid approach provides more accurate scoring compared to simple keyword matching and resolves issues with problematic milestones like "Recognizes familiar people".
+
+For more details on the reliable scoring system, see [Reliable Scoring Documentation](docs/RELIABLE_SCORING.md).
 
 ## API Service
 
@@ -29,8 +46,7 @@ For detailed API documentation, see [API Documentation](docs/API_DOCUMENTATION.m
 To start the API service:
 
 ```bash
-cd src/api
-uvicorn main:app --reload --port 8003
+/Library/Frameworks/Python.framework/Versions/3.12/bin/python3 -m uvicorn src.api.app:app --port 8003
 ```
 
 The API will be available at `http://localhost:8003`.
@@ -42,8 +58,19 @@ The testing framework provides tools for testing the API endpoints and generatin
 - Single endpoint testing script: `scripts/test_single_endpoint.sh`
 - Comprehensive test runner: `scripts/run_all_tests.sh`
 - Test report generator: `scripts/generate_test_report.py`
+- Hybrid scoring tests: `test_hybrid_scoring.py`
 
 ### Running Tests
+
+The easiest way to run all tests is with the provided script:
+
+```bash
+./run_tests.sh
+```
+
+This will start the API server, run the tests, and display the results.
+
+You can also run individual tests:
 
 To run tests for a single endpoint:
 
@@ -103,7 +130,7 @@ Alternatively, you can use the convenience script to start both the API service 
 ./scripts/start_demo.sh
 ```
 
-**Note**: This script starts both servers in the background. If port 8003 is already in use by another process, the API server may not start properly. Check for existing processes with `lsof -i :8003`.
+**Note**: This script starts both servers in the background. If port 8003 or 3000 is already in use by another process, the servers may not start properly. Check for existing processes with `lsof -i :8003` or `lsof -i :3000`.
 
 ### Web Demo Screenshots
 
@@ -128,7 +155,10 @@ The API includes milestones across the following developmental domains:
 
 - Built with FastAPI
 - Uses Uvicorn as the ASGI server
-- Implements NLP processing with a fallback mechanism
+- Implements advanced NLP processing with hybrid scoring
+- Includes word boundary-aware keyword matching
+- Uses milestone-specific pattern matching
+- Implements negation detection
 - Includes CORS support for cross-origin requests
 
 ### Testing Framework
@@ -137,6 +167,7 @@ The API includes milestones across the following developmental domains:
 - Generates performance metrics (response time, success rate)
 - Creates visual charts with matplotlib
 - Produces HTML reports for easy viewing
+- Includes specific tests for hybrid scoring
 
 ### Web Demo Application
 
@@ -149,18 +180,21 @@ The API includes milestones across the following developmental domains:
 
 ### API Service Issues
 
-- If port 8003 is already in use, check for existing processes with `lsof -i :8003`
-- If you see "Advanced NLP module not available" in logs, the system is using the fallback pattern matching
+- If port 8003 is already in use, check for existing processes with `lsof -i :8003` and kill them with `kill -9 <PID>`
+- If you see "Advanced NLP module not available" in logs, this is normal - the system will fall back to basic scoring
+- If scoring is not as expected, make sure to use the comprehensive-assessment endpoint with keywords
 
 ### Web Demo Issues
 
-- If you cannot access the web demo, ensure that both the API service and web server are running
-- Try using `http://127.0.0.1:3000` instead of `localhost` if you encounter connectivity issues
+- If you see "API Error: 0 -", make sure the API server is running on port 8003
+- If port 3000 is already in use, check for existing processes with `lsof -i :3000` and kill them with `kill -9 <PID>`
+- Try restarting both the API server and web server if you encounter issues
 - Check the browser console for any JavaScript errors
 
 ## Additional Resources
 
-- [Quick Start Guide](docs/QUICK_START_GUIDE.md) - Get started quickly with the basic functionality
+- [API Quick Start Guide](API_README.md) - Get started quickly with the basic functionality
+- [Reliable Scoring Documentation](docs/RELIABLE_SCORING.md) - Details on the hybrid scoring approach
 - [Tutorial](docs/TUTORIAL.md) - Step-by-step guide to using the system
 - [Enhanced Documentation](docs/README_ENHANCED.md) - Advanced usage and configuration options
 
