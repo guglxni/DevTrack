@@ -21,7 +21,6 @@
 - [Components](#-components)
 - [API Service](#-api-service)
 - [Testing Framework](#-testing-framework)
-- [Web Demo Application](#-web-demo-application)
 - [Documentation](#-documentation)
 - [License](#-license)
 
@@ -63,14 +62,8 @@ For a comprehensive guide on using the API and web interface, see our [API Quick
 We've provided several scripts to make it easy to start the application:
 
 ```bash
-# Start both the API server and web application in separate terminals
-./start_all.sh
-
-# Start just the API server
+# Start the API server
 ./start_api_server.sh
-
-# Start just the web application
-./start_webapp.sh
 ```
 
 <div align="center">
@@ -78,7 +71,6 @@ We've provided several scripts to make it easy to start the application:
 | Component | URL | Description |
 |-----------|-----|-------------|
 | API Server | http://localhost:8003 | Endpoints for assessment processing |
-| Web Application | http://localhost:3000 | Interactive demo interface |
 | Active Learning Dashboard | http://localhost:8003/active-learning/ | Review and improve model performance |
 | Expert Feedback Interface | http://localhost:8003/feedback/ | Input from domain experts |
 | R2R Dashboard | http://localhost:8003/r2r-dashboard/ | Enhanced reasoning visualization |
@@ -187,7 +179,6 @@ project/
 │   ├── core/             # Core scoring and NLP functionality
 │   ├── utils/            # Utility functions and helpers
 │   ├── testing/          # Testing framework and tools
-│   └── web/              # Web-related functionality
 ├── scripts/              # Scripts for running, testing, managing
 │   ├── start/            # Scripts for starting servers
 │   ├── test/             # Scripts for running tests
@@ -196,7 +187,6 @@ project/
 ├── tests/                # Python test files
 ├── examples/             # Example usage of the API
 ├── docs/                 # Documentation files
-├── webapp/               # Web demo application
 ├── data/                 # Data files for milestones and scoring
 ├── test_data/            # Test data for API testing
 ├── test_results/         # Output directory for test results
@@ -208,14 +198,12 @@ project/
 <div align="center">
   <table>
     <tr>
-      <td align="center" width="33%"><b>🔄 API Service</b></td>
-      <td align="center" width="33%"><b>🧪 Testing Framework</b></td>
-      <td align="center" width="33%"><b>🖥️ Web Demo</b></td>
+      <td align="center" width="50%"><b>🔄 API Service</b></td>
+      <td align="center" width="50%"><b>🧪 Testing Framework</b></td>
     </tr>
     <tr>
       <td>FastAPI-based REST API for developmental milestone assessments</td>
       <td>Comprehensive testing tools and performance reporting</td>
-      <td>Interactive web interface for demonstration</td>
     </tr>
   </table>
 </div>
@@ -271,22 +259,6 @@ The testing framework includes tools for API testing and performance reporting:
 Test results are saved to the `test_results` directory, including JSON results, performance charts, and HTML reports.
 
 For detailed testing documentation, see [Testing Documentation](docs/README_TESTING.md).
-
-## 🖥️ Web Demo Application
-
-The web demo provides a user-friendly interface for demonstrating the API capabilities:
-
-<div align="center">
-  <img src="https://via.placeholder.com/800x400?text=Web+Demo+Screenshot" alt="Web Demo Screenshot" width="800"/>
-</div>
-
-### Running the Web Demo
-
-```bash
-cd webapp
-npm install
-npm start
-```
 
 ## 📚 Documentation
 
