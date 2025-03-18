@@ -6,11 +6,11 @@
 [![License](https://img.shields.io/badge/License-Proprietary-red)](LICENSE)
 
 <div align="center">
-  <img src="https://via.placeholder.com/800x300?text=DevTrack+Platform" alt="DevTrack Platform Banner" width="800"/>
+  <img src="docs/images/diagram_0.png" alt="DevTrack Platform Banner" width="800"/>
   <p><em>A comprehensive platform for developmental assessment and tracking</em></p>
 </div>
 
-## 📋 Table of Contents
+## �� Table of Contents
 - [Overview](#-overview)
 - [Features](#-features)
 - [Quick Start](#-quick-start)
@@ -79,6 +79,10 @@ We've provided several scripts to make it easy to start the application:
 
 ## 🧠 Active Learning System
 
+<div align="center">
+  <img src="docs/images/diagram_3.png" alt="Active Learning System" width="800"/>
+</div>
+
 DevTrack includes an Active Learning system that helps improve scoring accuracy over time:
 
 - 🎯 **Targeted Learning**: Identifies valuable examples for expert review based on uncertainty and disagreement
@@ -98,6 +102,10 @@ python3 main.py --api
 ```
 
 ## 🔍 R2R Integration
+
+<div align="center">
+  <img src="docs/images/diagram_4.png" alt="R2R Integration" width="800"/>
+</div>
 
 The system includes a fully implemented and production-ready R2R (Reason to Retrieve) integration that enhances developmental assessment accuracy:
 
@@ -154,7 +162,7 @@ The system detects various response patterns:
 ### Tiered Scoring Approach
 
 <div align="center">
-  <img src="https://via.placeholder.com/600x200?text=Scoring+Pipeline+Diagram" alt="Scoring Pipeline" width="600"/>
+  <img src="docs/images/diagram_1.png" alt="Smart Scoring Pipeline" width="800"/>
 </div>
 
 1. **Primary**: LLM-based scoring (when available)
@@ -237,7 +245,7 @@ python3 -m uvicorn src.api.app:app --port 8003
 The testing framework includes tools for API testing and performance reporting:
 
 <div align="center">
-  <img src="https://via.placeholder.com/600x300?text=Test+Results+Dashboard" alt="Test Results Dashboard" width="600"/>
+  <img src="docs/images/diagram_2.png" alt="Test Results Dashboard" width="600"/>
 </div>
 
 ### Running Tests
