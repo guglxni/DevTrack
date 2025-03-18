@@ -1,152 +1,286 @@
-# ASD Assessment API and Demo Application
+# DevTrack
 
-## Project Overview
+[![Python](https://img.shields.io/badge/Python-3.9%2B-blue)](https://www.python.org/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.95.0-green)](https://fastapi.tiangolo.com/)
+[![React](https://img.shields.io/badge/React-18.2.0-blue)](https://reactjs.org/)
+[![License](https://img.shields.io/badge/License-Proprietary-red)](LICENSE)
 
-This project provides a comprehensive API and demonstration web application for processing and analyzing developmental milestone assessments for Autism Spectrum Disorder (ASD) screening. The system supports question processing, keyword management, score recording, and response analysis to facilitate the assessment of developmental milestones in children.
+<div align="center">
+  <img src="https://via.placeholder.com/800x300?text=DevTrack+Platform" alt="DevTrack Platform Banner" width="800"/>
+  <p><em>A comprehensive platform for developmental assessment and tracking</em></p>
+</div>
 
-## Quick Start
+## 📋 Table of Contents
+- [Overview](#-overview)
+- [Features](#-features)
+- [Quick Start](#-quick-start)
+- [Active Learning System](#-active-learning-system)
+- [R2R Integration](#-r2r-integration)
+- [Smart Scoring System](#-smart-scoring-system)
+- [Directory Structure](#-directory-structure)
+- [Components](#-components)
+- [API Service](#-api-service)
+- [Testing Framework](#-testing-framework)
+- [Web Demo Application](#-web-demo-application)
+- [Documentation](#-documentation)
+- [License](#-license)
 
-For a quick start guide on how to use the API and web interface, see our [API Quick Start Guide](API_README.md).
+## 🔍 Overview
 
-## Directory Structure
+DevTrack provides a comprehensive API and demonstration web application for processing and analyzing developmental milestone assessments. The system supports question processing, keyword management, score recording, and response analysis to facilitate the assessment of developmental milestones in children.
 
-The project is organized into the following directories:
+<div align="center">
+  <table>
+    <tr>
+      <td align="center"><b>🧠 Advanced NLP Analysis</b></td>
+      <td align="center"><b>🔄 Continuous Learning</b></td>
+      <td align="center"><b>📊 Detailed Reporting</b></td>
+    </tr>
+    <tr>
+      <td align="center">State-of-the-art language models for assessment</td>
+      <td align="center">Improves accuracy over time with active learning</td>
+      <td align="center">Comprehensive visualization of developmental progress</td>
+    </tr>
+  </table>
+</div>
 
-- **src/**: Core source code for the API and scoring engine
-  - **api/**: FastAPI application code
-  - **core/**: Core scoring and NLP functionality
-  - **utils/**: Utility functions and helpers
-  - **testing/**: Testing framework and evaluation tools
-  - **web/**: Web-related functionality
+## ✨ Features
 
-- **scripts/**: Scripts for running, testing, and managing the application
-  - **start/**: Scripts for starting the API and web servers
-  - **test/**: Scripts for running tests
-  - **debug/**: Scripts for debugging issues
-  - **fixes/**: Scripts that were used to fix specific issues
+- **Smart Response Analysis**: Sophisticated NLP techniques to analyze caregiver responses
+- **Multi-tier Scoring System**: Combines LLM, keyword-based, and ensemble approaches
+- **Active Learning**: Continuously improves with expert feedback
+- **R2R Integration**: Enhanced reasoning and retrieval for complex cases
+- **Comprehensive Assessment API**: Unified API endpoints for all assessment needs
+- **Interactive Web Demo**: User-friendly interface for demonstrating capabilities
+- **Extensive Testing Framework**: Robust testing and performance reporting
 
-- **tests/**: Python test files for various components
-- **examples/**: Example usage of the API
-- **docs/**: Documentation files
-- **webapp/**: Web demo application
-- **data/**: Data files for milestones and scoring
-- **test_data/**: Test data for API testing
-- **test_results/**: Output directory for test results
-- **logs/**: Log files
+## 🚀 Quick Start
 
-## Components
+For a comprehensive guide on using the API and web interface, see our [API Quick Start Guide](API_README.md).
 
-The project consists of three main components:
+### Starting the Application
 
-1. **API Service**: A FastAPI-based API that provides endpoints for processing developmental milestone assessments.
-2. **Testing Framework**: A suite of tools for testing the API endpoints and generating performance reports.
-3. **Web Demo Application**: A web-based interface for demonstrating the API capabilities to stakeholders.
+We've provided several scripts to make it easy to start the application:
 
-## Enhanced Reliable Scoring
+```bash
+# Start both the API server and web application in separate terminals
+./start_all.sh
 
-The API now features an advanced hybrid scoring approach that combines multiple NLP techniques:
+# Start just the API server
+./start_api_server.sh
 
-1. **Word boundary-aware keyword matching**: Prevents false matches from substring matching
-2. **Negation detection**: Correctly identifies negated phrases
-3. **Milestone-specific pattern matching**: Uses custom patterns for each milestone type
-4. **Special phrase handling**: Correctly interprets complex phrases
+# Start just the web application
+./start_webapp.sh
+```
 
-This hybrid approach provides more accurate scoring compared to simple keyword matching and resolves issues with problematic milestones like "Recognizes familiar people".
+<div align="center">
+
+| Component | URL | Description |
+|-----------|-----|-------------|
+| API Server | http://localhost:8003 | Endpoints for assessment processing |
+| Web Application | http://localhost:3000 | Interactive demo interface |
+| Active Learning Dashboard | http://localhost:8003/active-learning/ | Review and improve model performance |
+| Expert Feedback Interface | http://localhost:8003/feedback/ | Input from domain experts |
+| R2R Dashboard | http://localhost:8003/r2r-dashboard/ | Enhanced reasoning visualization |
+
+</div>
+
+## 🧠 Active Learning System
+
+DevTrack includes an Active Learning system that helps improve scoring accuracy over time:
+
+- 🎯 **Targeted Learning**: Identifies valuable examples for expert review based on uncertainty and disagreement
+- 📊 **Prioritization**: Focuses on examples that would provide the most information gain
+- 📈 **Model Tracking**: Monitors versions and performance improvements over time
+- 🔄 **Feedback Loop**: Provides an interface for expert feedback
+
+To start the API server with Active Learning enabled:
+
+```bash
+# Using the provided script
+./start_active_learning.sh
+
+# Or manually
+export ENABLE_ACTIVE_LEARNING=true
+python3 main.py --api
+```
+
+## 🔍 R2R Integration
+
+The system includes a fully implemented and production-ready R2R (Reason to Retrieve) integration that enhances developmental assessment accuracy:
+
+<div align="center">
+  <table>
+    <tr>
+      <td align="center">🚀</td>
+      <td><b>40% improved accuracy</b> on edge cases compared to the standard system</td>
+    </tr>
+    <tr>
+      <td align="center">📝</td>
+      <td><b>Detailed reasoning</b> for each scoring decision</td>
+    </tr>
+    <tr>
+      <td align="center">🧩</td>
+      <td><b>Better handling</b> of context-dependent, contradictory, and ambiguous parent responses</td>
+    </tr>
+    <tr>
+      <td align="center">🔍</td>
+      <td><b>Advanced retrieval</b> capabilities for developmental research and guidelines</td>
+    </tr>
+  </table>
+</div>
+
+To start the API server with R2R enabled:
+
+```bash
+# Using the provided script
+./start_with_r2r.sh
+
+# Or manually
+export ENABLE_R2R=true
+python3 main.py --api
+```
+
+For detailed information and benchmarking results, see the [R2R Integration Documentation](docs/R2R_INTEGRATION.md).
+
+## 🎯 Smart Scoring System
+
+DevTrack's smart scoring system provides reliable and accurate assessments through multiple approaches:
+
+### Enhanced Keyword Scoring
+
+The system detects various response patterns:
+
+| Response Type | Keywords | Score |
+|---------------|----------|-------|
+| **Positive** | "yes", "always", "consistently" | INDEPENDENT |
+| **Emerging** | "sometimes", "occasionally", "starting to" | EMERGING |
+| **Support-needed** | "with help", "with assistance" | WITH_SUPPORT |
+| **Regression** | "used to", "stopped", "regressed" | LOST_SKILL |
+| **Negative** | "no", "never", "not at all" | CANNOT_DO |
+
+### Tiered Scoring Approach
+
+<div align="center">
+  <img src="https://via.placeholder.com/600x200?text=Scoring+Pipeline+Diagram" alt="Scoring Pipeline" width="600"/>
+</div>
+
+1. **Primary**: LLM-based scoring (when available)
+2. **Secondary**: Keyword-based scoring as reliable fallback
+3. **Tertiary**: Ensemble scoring for uncertain cases
+
+### Advanced Techniques
+
+- ✅ **Word boundary-aware keyword matching**: Prevents false matches
+- ✅ **Negation detection**: Correctly identifies negated phrases
+- ✅ **Milestone-specific pattern matching**: Uses custom patterns for each milestone type
+- ✅ **Special phrase handling**: Correctly interprets complex phrases
 
 For more details on the reliable scoring system, see [Reliable Scoring Documentation](docs/RELIABLE_SCORING.md).
 
-## API Service
+## 📁 Directory Structure
 
-The API service is a FastAPI application that provides the following endpoints:
+```
+project/
+├── src/                  # Core source code
+│   ├── api/              # FastAPI application code
+│   ├── core/             # Core scoring and NLP functionality
+│   ├── utils/            # Utility functions and helpers
+│   ├── testing/          # Testing framework and tools
+│   └── web/              # Web-related functionality
+├── scripts/              # Scripts for running, testing, managing
+│   ├── start/            # Scripts for starting servers
+│   ├── test/             # Scripts for running tests
+│   ├── debug/            # Scripts for debugging issues
+│   └── fixes/            # Scripts for fixing specific issues
+├── tests/                # Python test files
+├── examples/             # Example usage of the API
+├── docs/                 # Documentation files
+├── webapp/               # Web demo application
+├── data/                 # Data files for milestones and scoring
+├── test_data/            # Test data for API testing
+├── test_results/         # Output directory for test results
+└── logs/                 # Log files
+```
 
-- `/question`: Processes questions related to developmental milestones
-- `/keywords`: Manages keywords used for analyzing parent/caregiver responses
-- `/send-score`: Records scores for specific developmental milestones
-- `/score-response`: Analyzes parent/caregiver responses to determine appropriate scores
-- `/comprehensive-assessment`: Combines the functionality of all other endpoints in a single call, processing a question, updating keywords, analyzing a response, and recording a score
+## 🧩 Components
+
+<div align="center">
+  <table>
+    <tr>
+      <td align="center" width="33%"><b>🔄 API Service</b></td>
+      <td align="center" width="33%"><b>🧪 Testing Framework</b></td>
+      <td align="center" width="33%"><b>🖥️ Web Demo</b></td>
+    </tr>
+    <tr>
+      <td>FastAPI-based REST API for developmental milestone assessments</td>
+      <td>Comprehensive testing tools and performance reporting</td>
+      <td>Interactive web interface for demonstration</td>
+    </tr>
+  </table>
+</div>
+
+## 🔄 API Service
+
+The API service provides the following endpoints:
+
+| Endpoint | Description |
+|----------|-------------|
+| `/question` | Processes questions related to developmental milestones |
+| `/keywords` | Manages keywords used for analyzing responses |
+| `/send-score` | Records scores for specific developmental milestones |
+| `/score-response` | Analyzes parent/caregiver responses |
+| `/comprehensive-assessment` | Combines all functionality in a single call |
 
 For detailed API documentation, see [API Documentation](docs/API_DOCUMENTATION.md).
 
 ### Running the API Service
 
-To start the API service:
-
 ```bash
-/Library/Frameworks/Python.framework/Versions/3.12/bin/python3 -m uvicorn src.api.app:app --port 8003
-```
+# Using Python directly
+python3 -m uvicorn src.api.app:app --port 8003
 
-Or use the provided script:
-
-```bash
+# Or with the provided script
 ./scripts/start/start_api.sh
 ```
 
-The API will be available at `http://localhost:8003`.
+## 🧪 Testing Framework
 
-## Testing Framework
+The testing framework includes tools for API testing and performance reporting:
 
-The testing framework provides tools for testing the API endpoints and generating performance reports. It includes:
-
-- Single endpoint testing script: `scripts/test/test_single_endpoint.sh`
-- Comprehensive test runner: `scripts/test/run_all_tests.sh`
-- Test report generator: `scripts/test/generate_test_report.py`
-- Hybrid scoring tests: `tests/test_hybrid_scoring.py`
+<div align="center">
+  <img src="https://via.placeholder.com/600x300?text=Test+Results+Dashboard" alt="Test Results Dashboard" width="600"/>
+</div>
 
 ### Running Tests
 
-The easiest way to run all tests is with the provided script:
-
 ```bash
+# Run all tests
 ./run_tests.sh
-```
 
-This will start the API server, run the tests, and display the results.
-
-You can also run individual tests:
-
-To run tests for a single endpoint:
-
-```bash
+# Test a single endpoint
 ./scripts/test/test_single_endpoint.sh /endpoint_path iterations data_file
-```
 
-For example:
-```bash
-./scripts/test/test_single_endpoint.sh /question 10 test_data/sample_questions.json
-```
-
-To test the comprehensive endpoint:
-
-```bash
+# Test the comprehensive endpoint
 ./scripts/test/test_comprehensive_endpoint.sh test_data/comprehensive_test.json
-```
 
-To run tests for all comprehensive endpoint test cases:
-
-```bash
-./scripts/test/test_comprehensive_all.sh
-```
-
-To run tests for all endpoints:
-
-```bash
+# Run tests for all endpoints
 ./scripts/test/run_all_tests.sh
 ```
 
-Test results are saved to the `test_results` directory, including:
-- Raw JSON results: `api_test_results.json`
-- Performance charts: PNG files in the `test_results` directory
-- HTML reports: `api_test_report.html` and `consolidated_report.html`
+Test results are saved to the `test_results` directory, including JSON results, performance charts, and HTML reports.
 
 For detailed testing documentation, see [Testing Documentation](docs/README_TESTING.md).
 
-## Web Demo Application
+## 🖥️ Web Demo Application
 
-The web demo application provides a user-friendly interface for demonstrating the API capabilities. It includes tabs for each API endpoint and displays responses in a structured format.
+The web demo provides a user-friendly interface for demonstrating the API capabilities:
+
+<div align="center">
+  <img src="https://via.placeholder.com/800x400?text=Web+Demo+Screenshot" alt="Web Demo Screenshot" width="800"/>
+</div>
 
 ### Running the Web Demo
-
-To start the web demo application:
 
 ```bash
 cd webapp
@@ -154,82 +288,31 @@ npm install
 npm start
 ```
 
-The web application will be available at `http://localhost:3000`.
+## 📚 Documentation
 
-Alternatively, you can use the convenience script to start both the API service and web demo:
+Additional documentation is available in the `docs/` directory:
 
-```bash
-./scripts/start/start_demo.sh
-```
+- [API Documentation](docs/API_DOCUMENTATION.md)
+- [R2R Integration Documentation](docs/R2R_INTEGRATION.md)
+- [Reliable Scoring Documentation](docs/RELIABLE_SCORING.md)
+- [Testing Documentation](docs/README_TESTING.md)
+- [API Quick Start Guide](API_README.md)
 
-**Note**: This script starts both servers in the background. If port 8003 or 3000 is already in use by another process, the servers may not start properly. Check for existing processes with `lsof -i :8003` or `lsof -i :3000`.
+## 📄 License
 
-### Web Demo Screenshots
+This software is proprietary and owned by Aaryan Guglani. All rights reserved.
 
-Screenshots of the web demo application are available in the `webapp/img` directory. The application provides a tabbed interface for testing each API endpoint.
+Copyright (c) 2025 Aaryan Guglani
 
-## Milestone Domains
+This software is provided under a proprietary license. See the [LICENSE](LICENSE) file for details.
 
-The API includes milestones across the following developmental domains:
+## Contact
 
-1. **Cognitive**: Mental processes like thinking, learning, problem-solving
-2. **Gross Motor**: Large muscle movements (walking, running, jumping)
-3. **Fine Motor**: Small muscle movements (grasping, writing, cutting)
-4. **Expressive Language**: Communication through speech, gestures, or writing
-5. **Activities of Daily Living**: Self-care skills (eating, dressing, hygiene)
-6. **Social**: Interactions with others, relationships, play skills
-7. **Emotional**: Understanding and expressing feelings, self-regulation
-8. **Receptive Language**: Understanding and processing language
+For inquiries regarding commercial use or licensing, please contact guglaniaaryan@gmail.com
 
-## Technical Details
+---
 
-### API Implementation
-
-- Built with FastAPI
-- Uses Uvicorn as the ASGI server
-- Implements advanced NLP processing with hybrid scoring
-- Includes word boundary-aware keyword matching
-- Uses milestone-specific pattern matching
-- Implements negation detection
-- Includes CORS support for cross-origin requests
-
-### Testing Framework
-
-- Uses Python for API interaction
-- Generates performance metrics (response time, success rate)
-- Creates visual charts with matplotlib
-- Produces HTML reports for easy viewing
-- Includes specific tests for hybrid scoring
-
-### Web Demo Application
-
-- Built with HTML, CSS, and JavaScript
-- Uses a Node.js server for local hosting
-- Implements a proxy to handle CORS issues
-- Includes tabbed interface for testing different endpoints
-
-## Troubleshooting
-
-### API Service Issues
-
-- If port 8003 is already in use, check for existing processes with `lsof -i :8003` and kill them with `kill -9 <PID>`
-- If you see "Advanced NLP module not available" in logs, this is normal - the system will fall back to basic scoring
-- If scoring is not as expected, make sure to use the comprehensive-assessment endpoint with keywords
-
-### Web Demo Issues
-
-- If you see "API Error: 0 -", make sure the API server is running on port 8003
-- If port 3000 is already in use, check for existing processes with `lsof -i :3000` and kill them with `kill -9 <PID>`
-- Try restarting both the API server and web server if you encounter issues
-- Check the browser console for any JavaScript errors
-
-## Additional Resources
-
-- [API Quick Start Guide](API_README.md) - Get started quickly with the basic functionality
-- [Reliable Scoring Documentation](docs/RELIABLE_SCORING.md) - Details on the hybrid scoring approach
-- [Tutorial](docs/TUTORIAL.md) - Step-by-step guide to using the system
-- [Enhanced Documentation](docs/README_ENHANCED.md) - Advanced usage and configuration options
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details. 
+<div align="center">
+  <p>Made with ❤️ for improving developmental assessment and tracking</p>
+  <p>© 2025 Aaryan Guglani</p>
+</div>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        pre {
+            background-color: #f5f5f5;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        textarea {
+            width: 100%;
+            height: 200px;
+            margin-bottom: 10px;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <h1>API Test</h1>
+    
+    <h2>Test Comprehensive Assessment Endpoint</h2>
+    <div>
+        <textarea id="requestData">{
+  "question": "Does my child recognize familiar people?",
+  "milestone_behavior": "Recognizes familiar people",
+  "parent_response": "Yes, my child always smiles when they see family members",
+  "keywords": {
+    "INDEPENDENT": ["always smiles", "recognizes family", "family members"],
+    "CANNOT_DO": ["does not recognize", "never smiles"]
+  }
+}</textarea>
+        <button id="sendRequest">Send Request</button>
+    </div>
+    
+    <h3>Response:</h3>
+    <pre id="response">Response will appear here...</pre>
+    
+    <script>
+        document.getElementById('sendRequest').addEventListener('click', function() {
+            const requestDataText = document.getElementById('requestData').value;
+            const responseElement = document.getElementById('response');
+            
+            try {
+                // Parse the JSON input
+                const requestData = JSON.parse(requestDataText);
+                
+                // Show loading state
+                responseElement.textContent = 'Loading...';
+                
+                // Send request to API
+                fetch('/api/comprehensive-assessment', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(requestData)
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        // Handle non-200 responses
+                        return response.text().then(text => {
+                            try {
+                                // Try to parse as JSON
+                                const error = JSON.parse(text);
+                                throw new Error(`API Error (${response.status}): ${error.detail || error.message || text}`);
+                            } catch (e) {
+                                // If not JSON, return the raw text
+                                throw new Error(`API Error (${response.status}): ${text || 'Unknown error'}`);
+                            }
+                        });
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    // Display formatted result
+                    responseElement.textContent = JSON.stringify(data, null, 2);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    responseElement.textContent = 'Error: ' + error.message;
+                });
+            } catch (error) {
+                responseElement.textContent = 'Invalid JSON: ' + error.message;
+            }
+        });
+    </script>
+</body>
+</html> 

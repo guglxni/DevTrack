@@ -1,0 +1,94 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+}
+
+.container {
+    max-width: 1000px;
+}
+
+h1 {
+    color: #343a40;
+}
+
+pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.card {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn-primary {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+}
+
+.btn-primary:hover {
+    background-color: #0b5ed7;
+    border-color: #0a58ca;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: #86b7fe;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+/* Styles for dropdown elements */
+.form-select {
+    cursor: pointer;
+}
+
+.form-select:disabled {
+    cursor: not-allowed;
+    background-color: #e9ecef;
+}
+
+#milestone-select-container {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 5px;
+    border: 1px solid #dee2e6;
+    margin-bottom: 20px;
+}
+
+/* Highlight the milestone criteria box */
+#milestone-criteria .alert {
+    border-left: 4px solid #0d6efd;
+    background-color: #f0f7ff;
+}
+
+/* Domain labels */
+.domain-label {
+    font-weight: 500;
+    color: #495057;
+}
+
+/* Add some spacing between age range options */
+.form-select option {
+    padding: 4px;
+}
+
+/* Make milestone count more visible */
+.text-muted {
+    font-size: 0.9rem;
+    color: #6c757d;
+}
+
+/* Loading spinner for API calls */
+.loading-spinner {
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    border-left-color: #09f;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+} 

@@ -715,3 +715,278 @@ Planned enhancements for the API include:
 3. Pagination for large result sets
 4. Enhanced error handling
 5. WebSocket support for real-time assessment 
+
+## GPU Acceleration API
+
+These endpoints provide access to Metal GPU acceleration features for Apple Silicon Macs.
+
+### System Information
+
+#### Get System Information
+
+Retrieves basic system information including GPU capabilities.
+
+- **URL**: `/gpu-acceleration/system-info`
+- **Method**: `GET`
+- **Success Response**:
+  ```json
+  {
+    "os_version": "macOS-15.3.1-arm64-arm-64bit",
+    "python_version": "3.12.6 (v3.12.6:a4a2d2b0d85, Sep 6 2024, 16:08:03)",
+    "memory_info": "16.00 GB",
+    "is_apple_silicon": true,
+    "chip_model": "Apple M4",
+    "metal_enabled": true,
+    "gpu_mode": "Enabled",
+    "gpu_layers": "32/32",
+    "metal_family": null,
+    "gpu_memory": null
+  }
+  ```
+
+#### Get Detailed System Information
+
+Retrieves detailed system information including Python packages and environment variables.
+
+- **URL**: `/gpu-acceleration/detailed-system-info`
+- **Method**: `GET`
+- **Success Response**:
+  ```json
+  {
+    "os_version": "macOS-15.3.1-arm64-arm-64bit",
+    "python_version": "3.12.6 (v3.12.6:a4a2d2b0d85, Sep 6 2024, 16:08:03)",
+    "memory_info": "16.00 GB",
+    "is_apple_silicon": true,
+    "chip_model": "Apple M4",
+    "metal_enabled": true,
+    "gpu_mode": "Enabled",
+    "gpu_layers": "32/32",
+    "metal_family": null,
+    "gpu_memory": null,
+    "python_packages": {
+      "torch": "2.1.0",
+      "pandas": "2.1.1",
+      "numpy": "1.24.3",
+      "fastapi": "0.104.1"
+    },
+    "environment_variables": {
+      "ENABLE_METAL": "1",
+      "METAL_LAYERS": "32"
+    },
+    "gpu_settings": {
+      "ENABLE_METAL": "1",
+      "METAL_LAYERS": "32",
+      "METAL_MEMORY_LIMIT": "8192",
+      "METAL_BUFFER_SIZE": "2048",
+      "OPTIMIZE_FOR_APPLE": "1",
+      "DEFAULT_CONTEXT_SIZE": "8192"
+    },
+    "server_pid": 45215
+  }
+  ```
+
+### Server Control
+
+#### Get Server Status
+
+Checks if the server is running and its current mode.
+
+- **URL**: `/gpu-acceleration/server-status`
+- **Method**: `GET`
+- **Success Response (Running)**:
+  ```json
+  {
+    "status": "running",
+    "message": "Server is running with PID 45215",
+    "pid": 45215,
+    "running": true,
+    "mode": "gpu_accelerated"
+  }
+  ```
+- **Success Response (Not Running)**:
+  ```json
+  {
+    "status": "not_running",
+    "message": "Server is not running",
+    "pid": null,
+    "running": false
+  }
+  ```
+
+#### Restart Server
+
+Restarts the server with the specified GPU acceleration mode.
+
+- **URL**: `/gpu-acceleration/restart-server`
+- **Method**: `POST`
+- **Query Parameters**:
+  - `mode` (string, optional): One of "cpu", "basic_gpu", or "advanced_gpu". Default is "advanced_gpu".
+- **Success Response**:
+  ```json
+  {
+    "status": "restarting",
+    "message": "Server is restarting with advanced_gpu mode",
+    "previous_pid": 45215
+  }
+  ```
+
+#### Stop Server
+
+Stops the running server.
+
+- **URL**: `/gpu-acceleration/stop-server`
+- **Method**: `POST`
+- **Success Response**:
+  ```json
+  {
+    "status": "stopped",
+    "message": "Server stopped (PID: 45215)"
+  }
+  ```
+
+### GPU Settings
+
+#### Update GPU Settings
+
+Updates GPU acceleration settings and optionally restarts the server.
+
+- **URL**: `/gpu-acceleration/settings`
+- **Method**: `POST`
+- **Request Body**:
+  ```json
+  {
+    "mode": "optimal",
+    "restart_server": false
+  }
+  ```
+- **Parameters**:
+  - `mode` (string, required): GPU acceleration mode. One of "optimal", "basic", "advanced", "custom", or "disabled".
+  - `restart_server` (boolean, optional): Whether to restart the server with new settings. Default is false.
+- **Success Response**:
+  ```json
+  {
+    "status": "success",
+    "message": "GPU acceleration enabled with optimal mode",
+    "settings": {
+      "ENABLE_METAL": "1",
+      "METAL_LAYERS": "32",
+      "METAL_MEMORY_LIMIT": "8192",
+      "METAL_BUFFER_SIZE": "2048",
+      "OPTIMIZE_FOR_APPLE": "1",
+      "DEFAULT_CONTEXT_SIZE": "8192"
+    },
+    "restart_scheduled": false
+  }
+  ```
+
+### Testing and Benchmarking
+
+#### Test GPU
+
+Runs a simple test to verify GPU acceleration is working.
+
+- **URL**: `/gpu-acceleration/test-gpu`
+- **Method**: `GET`
+- **Success Response**:
+  ```json
+  {
+    "status": "success",
+    "message": "Metal GPU test completed. Speedup: 1.15x",
+    "cpu_time": 0.0165,
+    "gpu_time": 0.0143,
+    "speedup": 1.15,
+    "matrix_size": 2000
+  }
+  ```
+
+#### Get Benchmarks
+
+Retrieves historical benchmark results.
+
+- **URL**: `/gpu-acceleration/benchmarks`
+- **Method**: `GET`
+- **Success Response**:
+  ```json
+  [
+    {
+      "benchmark_id": "5967248e-6eeb-4f13-8b2d-18ac2345a7e9",
+      "timestamp": "2025-03-18T13:14:55.208553",
+      "duration": 0.021274924278259277,
+      "operations_per_second": 2538199398208,
+      "speedup_vs_cpu": 1.1183299993836395,
+      "model_name": "Apple M4",
+      "status": "success",
+      "message": "Benchmark completed with 5 iterations. Matrix size: 3000x3000"
+    }
+  ]
+  ```
+
+#### Run Benchmark
+
+Runs a benchmark to measure GPU acceleration performance.
+
+- **URL**: `/gpu-acceleration/run-benchmark`
+- **Method**: `POST`
+- **Query Parameters**:
+  - `matrix_size` (integer, optional): Size of the matrix for multiplication benchmark. Default is 2000.
+  - `iterations` (integer, optional): Number of iterations to run. Default is 5.
+- **Success Response**:
+  ```json
+  {
+    "benchmark_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+    "timestamp": "2025-03-18T14:30:15.123456",
+    "duration": 0.01859,
+    "operations_per_second": 2150435982151,
+    "speedup_vs_cpu": 1.23,
+    "model_name": "Apple M4",
+    "status": "success",
+    "message": "Benchmark completed with 5 iterations. Matrix size: 2000x2000"
+  }
+  ```
+
+#### Run Benchmarks (Alternative Endpoint)
+
+Alternative endpoint for running benchmarks with default parameters.
+
+- **URL**: `/gpu-acceleration/run-benchmarks`
+- **Method**: `POST`
+- **Success Response**: Same as `/gpu-acceleration/run-benchmark`
+
+### Monitoring
+
+#### Get Monitoring Data
+
+Retrieves performance monitoring data for visualization.
+
+- **URL**: `/gpu-acceleration/monitoring-data`
+- **Method**: `GET`
+- **Success Response**:
+  ```json
+  {
+    "timestamps": [
+      "2025-03-18T13:11:18.484343",
+      "2025-03-18T13:12:18.484343"
+    ],
+    "memory_usage": [
+      0.3137,
+      0.2372
+    ],
+    "cpu_usage": [
+      35.66,
+      38.00
+    ]
+  }
+  ```
+
+### Dashboard
+
+#### Get GPU Acceleration Dashboard
+
+Returns the HTML page for the GPU Acceleration Dashboard.
+
+- **URL**: `/gpu-acceleration/`
+- **Method**: `GET`
+- **Response**: HTML page
+- **Alternative Routes**:
+  - `/gpu-acceleration/index.html`
+  - `/gpu-acceleration/dashboard` 

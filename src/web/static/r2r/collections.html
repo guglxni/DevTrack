@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>R2R Collections</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <style>
+        body {
+            padding-top: 2rem;
+            background-color: #f8f9fa;
+        }
+        .card {
+            margin-bottom: 1.5rem;
+            border: none;
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+        }
+        .card-header {
+            background-color: #563d7c;
+            color: white;
+            font-weight: 500;
+        }
+        .header-icon {
+            margin-right: 0.5rem;
+        }
+        .collection-card {
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            height: 100%;
+        }
+        .collection-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+        }
+        .collection-card.selected {
+            border: 2px solid #563d7c;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="mb-4">
+            <nav class="d-flex justify-content-between align-items-center">
+                <a href="/r2r/" class="btn btn-outline-secondary">
+                    <i class="bi bi-arrow-left"></i> Back to Dashboard
+                </a>
+                <h1 class="h2 mb-0">R2R Collections Manager</h1>
+                <div></div>
+            </nav>
+        </header>
+
+        <!-- Alert section -->
+        <div class="alert alert-info mb-4">
+            <i class="bi bi-info-circle-fill me-2"></i>
+            Collections help organize your knowledge base into logical groups. Each collection can contain multiple documents related to a specific topic or purpose.
+        </div>
+
+        <!-- Content area -->
+        <div class="row">
+            <!-- Collections List -->
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="bi bi-collection header-icon"></i>
+                        Your Collections
+                    </div>
+                    <div class="card-body">
+                        <div id="collections-loading" class="text-center py-4">
+                            <div class="spinner-border text-primary" role="status">
+                                <span class="visually-hidden">Loading collections...</span>
+                            </div>
+                            <p class="mt-2">Loading collections...</p>
+                        </div>
+                        
+                        <div id="collections-list" class="d-none">
+                            <!-- Collections will be loaded here -->
+                        </div>
+                        
+                        <div class="mt-3">
+                            <button id="btn-create-collection" class="btn btn-primary">
+                                <i class="bi bi-plus-circle me-2"></i>Create New Collection
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Collection Details -->
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="bi bi-info-circle header-icon"></i>
+                        Collection Details
+                    </div>
+                    <div class="card-body">
+                        <div id="collection-detail-placeholder" class="text-center py-5">
+                            <i class="bi bi-arrow-left-circle" style="font-size: 2rem; color: #6c757d;"></i>
+                            <p class="mt-3">Select a collection to view its details</p>
+                        </div>
+                        
+                        <div id="collection-detail" class="d-none">
+                            <div class="d-flex justify-content-between align-items-start mb-3">
+                                <h3 id="detail-name">Collection Name</h3>
+                                <div>
+                                    <button id="btn-rename-collection" class="btn btn-sm btn-outline-secondary me-2">
+                                        <i class="bi bi-pencil me-1"></i>Rename
+                                    </button>
+                                    <button id="btn-delete-collection" class="btn btn-sm btn-outline-danger">
+                                        <i class="bi bi-trash me-1"></i>Delete
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="row mb-4">
+                                <div class="col-md-6">
+                                    <div class="card bg-light">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Documents</h5>
+                                            <h2 id="detail-doc-count" class="mb-0">0</h2>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card bg-light">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Last Updated</h5>
+                                            <p id="detail-updated" class="mb-0">Never</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <h5>Collection Info</h5>
+                                <div class="card bg-light">
+                                    <div class="card-body">
+                                        <div class="mb-2">
+                                            <strong>Collection Key:</strong>
+                                            <span id="detail-key" class="ms-2">collection_key</span>
+                                        </div>
+                                        <div>
+                                            <strong>Description:</strong>
+                                            <p id="detail-description" class="mt-1">No description available.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <h5>Documents in this Collection</h5>
+                            <div id="documents-loading" class="text-center py-3 d-none">
+                                <div class="spinner-border spinner-border-sm text-primary" role="status">
+                                    <span class="visually-hidden">Loading documents...</span>
+                                </div>
+                                <span class="ms-2">Loading documents...</span>
+                            </div>
+                            <div id="documents-list" class="list-group">
+                                <div class="text-center py-3 text-muted">
+                                    No documents found in this collection
+                                </div>
+                            </div>
+                            
+                            <div class="mt-3">
+                                <a id="add-document-link" href="/r2r/ingest.html" class="btn btn-primary">
+                                    <i class="bi bi-plus-circle me-2"></i>Add Document
+                                </a>
+                                <a id="search-collection-link" href="/r2r/search.html" class="btn btn-outline-secondary ms-2">
+                                    <i class="bi bi-search me-2"></i>Search Documents
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Create Collection Modal -->
+    <div class="modal fade" id="createCollectionModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Create New Collection</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="create-collection-form">
+                        <div class="mb-3">
+                            <label for="new-collection-name" class="form-label">Collection Name</label>
+                            <input type="text" class="form-control" id="new-collection-name" placeholder="Enter collection name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="new-collection-key" class="form-label">Collection Key</label>
+                            <input type="text" class="form-control" id="new-collection-key" placeholder="Enter collection key (e.g., research_papers)" required>
+                            <div class="form-text">Collection keys should be lowercase with underscores, no spaces or special characters.</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="new-collection-description" class="form-label">Description (Optional)</label>
+                            <textarea class="form-control" id="new-collection-description" rows="3" placeholder="Enter collection description"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="btn-submit-create">Create Collection</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Rename Collection Modal -->
+    <div class="modal fade" id="renameCollectionModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Rename Collection</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="rename-collection-form">
+                        <div class="mb-3">
+                            <label for="rename-collection-name" class="form-label">New Collection Name</label>
+                            <input type="text" class="form-control" id="rename-collection-name" placeholder="Enter new collection name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="rename-collection-description" class="form-label">Update Description (Optional)</label>
+                            <textarea class="form-control" id="rename-collection-description" rows="3" placeholder="Enter updated collection description"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="btn-submit-rename">Update Collection</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Delete Collection Modal -->
+    <div class="modal fade" id="deleteCollectionModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Delete Collection</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-danger">
+                        <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                        Warning: This action cannot be undone. All documents in this collection will be permanently deleted.
+                    </div>
+                    <p>Are you sure you want to delete the collection "<span id="delete-collection-name">Collection Name</span>"?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-danger" id="btn-confirm-delete">Delete Collection</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // DOM elements
+        const collectionsLoading = document.getElementById('collections-loading');
+        const collectionsList = document.getElementById('collections-list');
+        const collectionDetail = document.getElementById('collection-detail');
+        const collectionDetailPlaceholder = document.getElementById('collection-detail-placeholder');
+        
+        // Initialize modals
+        const createCollectionModal = new bootstrap.Modal(document.getElementById('createCollectionModal'));
+        const renameCollectionModal = new bootstrap.Modal(document.getElementById('renameCollectionModal'));
+        const deleteCollectionModal = new bootstrap.Modal(document.getElementById('deleteCollectionModal'));
+        
+        // Current selected collection
+        let selectedCollection = null;
+        
+        // Format date string
+        function formatDate(dateString) {
+            if (!dateString) return 'Unknown';
+            const date = new Date(dateString);
+            return date.toLocaleString();
+        }
+        
+        // Load collections
+        async function loadCollections() {
+            try {
+                collectionsLoading.classList.remove('d-none');
+                collectionsList.classList.add('d-none');
+                
+                const response = await fetch('/r2r/collections');
+                
+                if (!response.ok) {
+                    throw new Error(`Failed to load collections: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                
+                if (data.collections && data.collections.length > 0) {
+                    renderCollections(data.collections);
+                } else {
+                    collectionsList.innerHTML = '<div class="alert alert-info">No collections found. Create your first collection to get started.</div>';
+                }
+                
+                collectionsLoading.classList.add('d-none');
+                collectionsList.classList.remove('d-none');
+            } catch (error) {
+                console.error('Error loading collections:', error);
+                collectionsList.innerHTML = `<div class="alert alert-danger">Failed to load collections: ${error.message}</div>`;
+                collectionsLoading.classList.add('d-none');
+                collectionsList.classList.remove('d-none');
+            }
+        }
+        
+        // Render collections list
+        function renderCollections(collections) {
+            collectionsList.innerHTML = '';
+            
+            collections.forEach(collection => {
+                const collectionEl = document.createElement('div');
+                collectionEl.className = 'card collection-card mb-3';
+                collectionEl.dataset.key = collection.key;
+                collectionEl.innerHTML = `
+                    <div class="card-body">
+                        <h5 class="card-title">${collection.name || collection.key}</h5>
+                        <div class="small text-muted">
+                            <div><i class="bi bi-files me-1"></i> ${collection.document_count || 0} documents</div>
+                            <div><i class="bi bi-clock-history me-1"></i> Last updated: ${formatDate(collection.last_updated)}</div>
+                        </div>
+                    </div>
+                `;
+                
+                collectionEl.addEventListener('click', () => {
+                    document.querySelectorAll('.collection-card').forEach(card => {
+                        card.classList.remove('selected');
+                    });
+                    collectionEl.classList.add('selected');
+                    loadCollectionDetails(collection.key);
+                });
+                
+                collectionsList.appendChild(collectionEl);
+            });
+        }
+        
+        // Load collection details
+        async function loadCollectionDetails(collectionKey) {
+            try {
+                collectionDetailPlaceholder.classList.add('d-none');
+                collectionDetail.classList.add('d-none');
+                
+                const response = await fetch(`/r2r/collection/${collectionKey}`);
+                
+                if (!response.ok) {
+                    throw new Error(`Failed to load collection details: ${response.status}`);
+                }
+                
+                const collection = await response.json();
+                selectedCollection = collection;
+                
+                // Update detail view
+                document.getElementById('detail-name').textContent = collection.name || collection.key;
+                document.getElementById('detail-key').textContent = collection.key;
+                document.getElementById('detail-doc-count').textContent = collection.document_count || 0;
+                document.getElementById('detail-updated').textContent = formatDate(collection.last_updated);
+                document.getElementById('detail-description').textContent = collection.description || 'No description available.';
+                
+                // Update links with collection key
+                document.getElementById('add-document-link').href = `/r2r/ingest.html?collection=${collection.key}`;
+                document.getElementById('search-collection-link').href = `/r2r/search.html?collection=${collection.key}`;
+                
+                // Load documents for this collection
+                loadCollectionDocuments(collection.key);
+                
+                collectionDetail.classList.remove('d-none');
+            } catch (error) {
+                console.error('Error loading collection details:', error);
+                collectionDetailPlaceholder.classList.remove('d-none');
+            }
+        }
+        
+        // Load documents for a collection
+        async function loadCollectionDocuments(collectionKey) {
+            try {
+                const documentsLoading = document.getElementById('documents-loading');
+                const documentsList = document.getElementById('documents-list');
+                
+                documentsLoading.classList.remove('d-none');
+                documentsList.innerHTML = '';
+                
+                // First try to get documents using direct API approach
+                try {
+                    // Make a search request with the collection key
+                    const response = await fetch('/r2r/search', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            query: "*", // Use wildcard instead of empty string
+                            collection_key: collectionKey,
+                            limit: 5, // Limit to 5 recent documents
+                            filters: {} // Explicitly provide empty filters
+                        })
+                    });
+                    
+                    if (!response.ok) {
+                        throw new Error(`API returned status ${response.status}`);
+                    }
+                    
+                    const data = await response.json();
+                    
+                    if (data.results && data.results.length > 0) {
+                        renderDocuments(data.results, collectionKey);
+                    } else {
+                        documentsList.innerHTML = `
+                            <div class="text-center py-3 text-muted">
+                                No documents found in this collection
+                            </div>
+                        `;
+                    }
+                } catch (searchError) {
+                    console.error('Error with search approach:', searchError);
+                    
+                    // Fall back to getting collection details again
+                    try {
+                        const detailResponse = await fetch(`/r2r/collection/${collectionKey}`);
+                        
+                        if (!detailResponse.ok) {
+                            throw new Error(`API returned status ${detailResponse.status}`);
+                        }
+                        
+                        const collection = await detailResponse.json();
+                        
+                        if (collection.documents && collection.documents.length > 0) {
+                            renderDocuments(collection.documents, collectionKey);
+                        } else {
+                            documentsList.innerHTML = `
+                                <div class="text-center py-3 text-muted">
+                                    No documents found in this collection
+                                </div>
+                            `;
+                        }
+                    } catch (detailError) {
+                        throw new Error(`Failed to load documents using fallback approach: ${detailError.message}`);
+                    }
+                }
+                
+                documentsLoading.classList.add('d-none');
+            } catch (error) {
+                console.error('Error loading documents:', error);
+                document.getElementById('documents-list').innerHTML = `
+                    <div class="alert alert-warning">
+                        <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                        Unable to load documents at this time. The R2R API may need configuration for this collection.
+                    </div>
+                    <div class="mt-3 text-center">
+                        <button class="btn btn-outline-primary btn-sm" onclick="loadCollectionDetails('${collectionKey}')">
+                            <i class="bi bi-arrow-repeat me-1"></i> Try Again
+                        </button>
+                    </div>
+                `;
+                document.getElementById('documents-loading').classList.add('d-none');
+            }
+        }
+        
+        // Render document list
+        function renderDocuments(documents, collectionKey) {
+            const documentsList = document.getElementById('documents-list');
+            documentsList.innerHTML = '';
+            
+            documents.forEach(doc => {
+                const docItem = document.createElement('a');
+                docItem.href = `/r2r/search.html?collection=${collectionKey}&id=${doc.id}`;
+                docItem.className = 'list-group-item list-group-item-action';
+                
+                // Get document content - API might return it in different fields
+                const content = doc.text || doc.content || doc.body || '';
+                
+                // Truncate content if too long
+                const contentPreview = content.length > 150 
+                    ? content.substring(0, 150) + '...' 
+                    : content;
+                
+                let metadataHtml = '';
+                if (doc.metadata && Object.keys(doc.metadata).length > 0) {
+                    metadataHtml = '<div class="mt-1 small">';
+                    for (const [key, value] of Object.entries(doc.metadata)) {
+                        metadataHtml += `<span class="badge bg-light text-dark me-1">${key}: ${value}</span>`;
+                    }
+                    metadataHtml += '</div>';
+                }
+                
+                docItem.innerHTML = `
+                    <div class="d-flex w-100 justify-content-between">
+                        <h6 class="mb-1">Document ${doc.id ? doc.id.substring(0, 8) : 'Unknown'}</h6>
+                        <small>${formatDate(doc.created_at || doc.timestamp || '')}</small>
+                    </div>
+                    <p class="mb-1 text-muted">${contentPreview || 'No content preview available'}</p>
+                    ${metadataHtml}
+                `;
+                
+                documentsList.appendChild(docItem);
+            });
+        }
+        
+        // Create new collection
+        async function createCollection() {
+            try {
+                const name = document.getElementById('new-collection-name').value;
+                const key = document.getElementById('new-collection-key').value;
+                const description = document.getElementById('new-collection-description').value;
+                
+                if (!name || !key) {
+                    alert('Collection name and key are required');
+                    return;
+                }
+                
+                // Validate key format
+                if (!/^[a-z0-9_]+$/.test(key)) {
+                    alert('Collection key must contain only lowercase letters, numbers, and underscores');
+                    return;
+                }
+                
+                // Try with the collection endpoint first
+                try {
+                    const response = await fetch('/r2r/collection', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            name,
+                            key,
+                            description
+                        })
+                    });
+                    
+                    if (!response.ok) {
+                        throw new Error(`API returned status ${response.status}`);
+                    }
+                    
+                    createCollectionModal.hide();
+                    document.getElementById('create-collection-form').reset();
+                    loadCollections();
+                    return;
+                } catch (firstError) {
+                    console.error('Error with first approach:', firstError);
+                    
+                    // If that fails, try the alternative endpoint format
+                    const alternativeResponse = await fetch('/r2r/collections', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            collection_key: key,
+                            name,
+                            description
+                        })
+                    });
+                    
+                    if (!alternativeResponse.ok) {
+                        // Both approaches failed, show the original error
+                        throw firstError;
+                    }
+                    
+                    createCollectionModal.hide();
+                    document.getElementById('create-collection-form').reset();
+                    loadCollections();
+                }
+            } catch (error) {
+                console.error('Error creating collection:', error);
+                
+                // Create a more user-friendly error message
+                const errorDiv = document.createElement('div');
+                errorDiv.className = 'alert alert-danger mt-3';
+                errorDiv.innerHTML = `
+                    <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                    <strong>Error creating collection:</strong> The server returned an error. 
+                    The collection key might already be in use or the R2R API may need configuration.
+                `;
+                
+                const modalBody = document.querySelector('#createCollectionModal .modal-body');
+                
+                // Remove any existing error messages
+                const existingError = modalBody.querySelector('.alert-danger');
+                if (existingError) {
+                    existingError.remove();
+                }
+                
+                // Add the new error message
+                modalBody.appendChild(errorDiv);
+            }
+        }
+        
+        // Rename collection
+        async function renameCollection() {
+            try {
+                if (!selectedCollection) {
+                    alert('No collection selected');
+                    return;
+                }
+                
+                const name = document.getElementById('rename-collection-name').value;
+                const description = document.getElementById('rename-collection-description').value;
+                
+                if (!name) {
+                    alert('Collection name is required');
+                    return;
+                }
+                
+                let updateSuccessful = false;
+                
+                // Try first approach - PUT to collection/{key}
+                try {
+                    const response = await fetch(`/r2r/collection/${selectedCollection.key}`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            name,
+                            description
+                        })
+                    });
+                    
+                    if (response.ok) {
+                        updateSuccessful = true;
+                    } else {
+                        throw new Error(`API returned status ${response.status}`);
+                    }
+                } catch (firstError) {
+                    console.error('Error with first update approach:', firstError);
+                    
+                    // Try second approach - PATCH to collections/{key}
+                    try {
+                        const response = await fetch(`/r2r/collections/${selectedCollection.key}`, {
+                            method: 'PATCH',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                name,
+                                description
+                            })
+                        });
+                        
+                        if (response.ok) {
+                            updateSuccessful = true;
+                        } else {
+                            throw firstError; // If both fail, throw the original error
+                        }
+                    } catch (secondError) {
+                        console.error('Error with second update approach:', secondError);
+                        throw firstError; // If both fail, throw the original error
+                    }
+                }
+                
+                if (updateSuccessful) {
+                    renameCollectionModal.hide();
+                    document.getElementById('rename-collection-form').reset();
+                    loadCollections();
+                    loadCollectionDetails(selectedCollection.key);
+                }
+            } catch (error) {
+                console.error('Error updating collection:', error);
+                
+                // Create a more user-friendly error message
+                const errorDiv = document.createElement('div');
+                errorDiv.className = 'alert alert-danger mt-3';
+                errorDiv.innerHTML = `
+                    <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                    <strong>Error updating collection:</strong> The server returned an error.
+                    The R2R API may need configuration for updating collections.
+                `;
+                
+                const modalBody = document.querySelector('#renameCollectionModal .modal-body');
+                
+                // Remove any existing error messages
+                const existingError = modalBody.querySelector('.alert-danger');
+                if (existingError) {
+                    existingError.remove();
+                }
+                
+                // Add the new error message
+                modalBody.appendChild(errorDiv);
+            }
+        }
+        
+        // Delete collection
+        async function deleteCollection() {
+            try {
+                if (!selectedCollection) {
+                    alert('No collection selected');
+                    return;
+                }
+                
+                let deleteSuccessful = false;
+                
+                // Try first approach - DELETE to collection/{key}
+                try {
+                    const response = await fetch(`/r2r/collection/${selectedCollection.key}`, {
+                        method: 'DELETE'
+                    });
+                    
+                    if (response.ok) {
+                        deleteSuccessful = true;
+                    } else {
+                        throw new Error(`API returned status ${response.status}`);
+                    }
+                } catch (firstError) {
+                    console.error('Error with first delete approach:', firstError);
+                    
+                    // Try second approach - DELETE to collections/{key}
+                    try {
+                        const response = await fetch(`/r2r/collections/${selectedCollection.key}`, {
+                            method: 'DELETE'
+                        });
+                        
+                        if (response.ok) {
+                            deleteSuccessful = true;
+                        } else {
+                            throw firstError; // If both fail, throw the original error
+                        }
+                    } catch (secondError) {
+                        console.error('Error with second delete approach:', secondError);
+                        throw firstError; // If both fail, throw the original error
+                    }
+                }
+                
+                if (deleteSuccessful) {
+                    deleteCollectionModal.hide();
+                    collectionDetailPlaceholder.classList.remove('d-none');
+                    collectionDetail.classList.add('d-none');
+                    selectedCollection = null;
+                    loadCollections();
+                }
+            } catch (error) {
+                console.error('Error deleting collection:', error);
+                
+                // Create a more user-friendly error message
+                const errorDiv = document.createElement('div');
+                errorDiv.className = 'alert alert-danger mt-3';
+                errorDiv.innerHTML = `
+                    <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                    <strong>Error deleting collection:</strong> The server returned an error.
+                    The collection may be in use or the R2R API may need configuration.
+                `;
+                
+                const modalBody = document.querySelector('#deleteCollectionModal .modal-body');
+                
+                // Add the new error message after the existing warning
+                modalBody.appendChild(errorDiv);
+            }
+        }
+        
+        // Event listeners
+        document.getElementById('btn-create-collection').addEventListener('click', () => {
+            createCollectionModal.show();
+        });
+        
+        document.getElementById('btn-rename-collection').addEventListener('click', () => {
+            if (selectedCollection) {
+                document.getElementById('rename-collection-name').value = selectedCollection.name || selectedCollection.key;
+                document.getElementById('rename-collection-description').value = selectedCollection.description || '';
+                renameCollectionModal.show();
+            }
+        });
+        
+        document.getElementById('btn-delete-collection').addEventListener('click', () => {
+            if (selectedCollection) {
+                document.getElementById('delete-collection-name').textContent = selectedCollection.name || selectedCollection.key;
+                deleteCollectionModal.show();
+            }
+        });
+        
+        document.getElementById('btn-submit-create').addEventListener('click', createCollection);
+        document.getElementById('btn-submit-rename').addEventListener('click', renameCollection);
+        document.getElementById('btn-confirm-delete').addEventListener('click', deleteCollection);
+        
+        // Auto-generate collection key from name
+        document.getElementById('new-collection-name').addEventListener('input', function() {
+            const keyInput = document.getElementById('new-collection-key');
+            if (!keyInput.value) {
+                keyInput.value = this.value.toLowerCase()
+                    .replace(/[^a-z0-9\s]/g, '')
+                    .replace(/\s+/g, '_');
+            }
+        });
+        
+        // Load collections on page load
+        document.addEventListener('DOMContentLoaded', loadCollections);
+    </script>
+</body>
+</html>

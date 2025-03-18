@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASD Assessment API Demo</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="mb-4">ASD Assessment API Demo</h1>
+                <div class="card">
+                    <div class="card-header">
+                        <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="comprehensive-tab" data-bs-toggle="tab" data-bs-target="#comprehensive" type="button" role="tab" aria-controls="comprehensive" aria-selected="true">Comprehensive Assessment</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="dashboards-tab" data-bs-toggle="tab" data-bs-target="#dashboards" type="button" role="tab" aria-controls="dashboards" aria-selected="false">API Dashboards</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="health-tab" data-bs-toggle="tab" data-bs-target="#health" type="button" role="tab" aria-controls="health" aria-selected="false">API Health</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="direct-test-tab" data-bs-toggle="tab" data-bs-target="#direct-test" type="button" role="tab" aria-controls="direct-test" aria-selected="false">Direct Test</button>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card-body">
+                        <div class="tab-content" id="myTabContent">
+                            <!-- Comprehensive Assessment Tab -->
+                            <div class="tab-pane fade show active" id="comprehensive" role="tabpanel" aria-labelledby="comprehensive-tab">
+                                <h5 class="card-title">Comprehensive Assessment</h5>
+                                <form id="comprehensive-form">
+                                    <div class="mb-3">
+                                        <label for="question" class="form-label">Question</label>
+                                        <input type="text" class="form-control" id="question" placeholder="Does your child recognize familiar people?">
+                                    </div>
+                                    
+                                    <div class="mb-3" id="milestone-select-container">
+                                        <label class="form-label">Milestone Selection</label>
+                                        <div class="row g-3 mb-2">
+                                            <div class="col-md-4">
+                                                <label for="domain-select" class="form-label">Domain</label>
+                                                <select class="form-select" id="domain-select">
+                                                    <option value="">Loading domains...</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="age-range-select" class="form-label">Age Range</label>
+                                                <select class="form-select" id="age-range-select" disabled>
+                                                    <option value="">Select Age Range</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="milestone-select" class="form-label">Milestone</label>
+                                                <select class="form-select" id="milestone-select" disabled>
+                                                    <option value="">Select Milestone</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div id="milestone-criteria" class="mt-2" style="display: none;"></div>
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <label for="response" class="form-label">Parent Response</label>
+                                        <textarea class="form-control" id="response" rows="3" placeholder="Yes, my child always smiles when they see family members"></textarea>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Keywords (Optional)</label>
+                                        <div class="row g-3">
+                                            <div class="col-md-6">
+                                                <label for="independent-keywords" class="form-label">INDEPENDENT</label>
+                                                <input type="text" class="form-control" id="independent-keywords" placeholder="always smiles, recognizes family">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="cannot-do-keywords" class="form-label">CANNOT_DO</label>
+                                                <input type="text" class="form-control" id="cannot-do-keywords" placeholder="does not recognize, never smiles">
+                                            </div>
+                                        </div>
+                                        <div class="row g-3 mt-1">
+                                            <div class="col-md-4">
+                                                <label for="lost-skill-keywords" class="form-label">LOST_SKILL</label>
+                                                <input type="text" class="form-control" id="lost-skill-keywords" placeholder="used to, no longer, stopped">
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="emerging-keywords" class="form-label">EMERGING</label>
+                                                <input type="text" class="form-control" id="emerging-keywords" placeholder="sometimes, occasionally, trying to">
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="with-support-keywords" class="form-label">WITH_SUPPORT</label>
+                                                <input type="text" class="form-control" id="with-support-keywords" placeholder="with help, when prompted, needs assistance">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </form>
+                                <div class="mt-4">
+                                    <h5>Result</h5>
+                                    <pre id="comprehensive-result" class="bg-light p-3 rounded">Submit the form to see results</pre>
+                                </div>
+                            </div>
+                            
+                            <!-- API Dashboards Tab -->
+                            <div class="tab-pane fade" id="dashboards" role="tabpanel" aria-labelledby="dashboards-tab">
+                                <h5 class="card-title">API Dashboards and Interfaces</h5>
+                                <div class="row mt-4">
+                                    <div class="col-md-4 mb-3">
+                                        <div class="card h-100">
+                                            <div class="card-header bg-primary text-white">
+                                                <i class="bi bi-check2-square me-2"></i>Core Scoring
+                                            </div>
+                                            <div class="card-body">
+                                                <p class="card-text">Access the basic milestone scoring interface</p>
+                                                <a href="/core-scoring/" class="btn btn-primary">
+                                                    <i class="bi bi-arrow-right-circle me-2"></i>Open Interface
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <div class="card h-100">
+                                            <div class="card-header bg-primary text-white">
+                                                <i class="bi bi-graph-up-arrow me-2"></i>Improved Scoring
+                                            </div>
+                                            <div class="card-body">
+                                                <p class="card-text">Access the enhanced scoring interface with advanced features</p>
+                                                <a href="/improved-scoring/" class="btn btn-primary">
+                                                    <i class="bi bi-arrow-right-circle me-2"></i>Open Interface
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <div class="card h-100">
+                                            <div class="card-header bg-primary text-white">
+                                                <i class="bi bi-stars me-2"></i>Active Learning
+                                            </div>
+                                            <div class="card-body">
+                                                <p class="card-text">Interact with the active learning dashboard</p>
+                                                <a href="/active-learning/" class="btn btn-primary">
+                                                    <i class="bi bi-arrow-right-circle me-2"></i>Open Dashboard
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-md-4 mb-3">
+                                        <div class="card h-100">
+                                            <div class="card-header bg-primary text-white">
+                                                <i class="bi bi-collection me-2"></i>Batch Processing
+                                            </div>
+                                            <div class="card-body">
+                                                <p class="card-text">Process multiple assessments in batch mode</p>
+                                                <a href="/batch-processing/" class="btn btn-primary">
+                                                    <i class="bi bi-arrow-right-circle me-2"></i>Open Interface
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <div class="card h-100">
+                                            <div class="card-header bg-primary text-white">
+                                                <i class="bi bi-speedometer2 me-2"></i>Metrics Dashboard
+                                            </div>
+                                            <div class="card-body">
+                                                <p class="card-text">View performance metrics and statistics</p>
+                                                <a href="/metrics-dashboard/" class="btn btn-primary">
+                                                    <i class="bi bi-arrow-right-circle me-2"></i>Open Dashboard
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <div class="card h-100">
+                                            <div class="card-header bg-primary text-white">
+                                                <i class="bi bi-file-earmark-text me-2"></i>API Documentation
+                                            </div>
+                                            <div class="card-body">
+                                                <p class="card-text">Browse the complete API documentation</p>
+                                                <a href="/docs" class="btn btn-primary">
+                                                    <i class="bi bi-arrow-right-circle me-2"></i>View Docs
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Health Tab -->
+                            <div class="tab-pane fade" id="health" role="tabpanel" aria-labelledby="health-tab">
+                                <h5 class="card-title">API Health Check</h5>
+                                <button id="check-health" class="btn btn-primary">Check Health</button>
+                                <div class="mt-4">
+                                    <pre id="health-result" class="bg-light p-3 rounded">Click the button to check API health</pre>
+                                </div>
+                            </div>
+                            
+                            <!-- Direct Test Tab -->
+                            <div class="tab-pane fade" id="direct-test" role="tabpanel" aria-labelledby="direct-test-tab">
+                                <h5 class="card-title">Direct API Test</h5>
+                                <p>Use the direct test page to test the API without using the proxy:</p>
+                                <a href="/direct-test.html" class="btn btn-primary" target="_blank">Open Direct Test Page</a>
+                                <p class="mt-3">Or use the simple test page:</p>
+                                <a href="/test-simple.html" class="btn btn-primary" target="_blank">Open Simple Test Page</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/main.js"></script>
+</body>
+</html> 

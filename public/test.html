@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Milestone Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #output {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Milestone Test</h1>
+    <button id="fetchBtn">Fetch Milestones</button>
+    <div id="output">Results will appear here...</div>
+
+    <script>
+        document.getElementById('fetchBtn').addEventListener('click', function() {
+            const output = document.getElementById('output');
+            output.innerHTML = 'Fetching milestones...';
+            
+            fetch('/milestones')
+                .then(response => {
+                    console.log('Response status:', response.status);
+                    return response.json();
+                })
+                .then(data => {
+                    console.log(`Loaded ${data.length} milestones from server`);
+                    
+                    // Get unique domains
+                    const domains = Array.from(new Set(data.map(m => m.domain)));
+                    
+                    // Create HTML output
+                    let html = `<p>Loaded ${data.length} milestones</p>`;
+                    html += `<p>Domains (${domains.length}): ${domains.join(', ')}</p>`;
+                    html += `<p>First milestone: ${data[0].behavior} (${data[0].domain}, ${data[0].age_range})</p>`;
+                    
+                    // Add domain counts
+                    html += '<h3>Milestones by Domain:</h3><ul>';
+                    domains.forEach(domain => {
+                        const count = data.filter(m => m.domain === domain).length;
+                        html += `<li>${domain}: ${count} milestones</li>`;
+                    });
+                    html += '</ul>';
+                    
+                    output.innerHTML = html;
+                })
+                .catch(error => {
+                    console.error('Error fetching milestones:', error);
+                    output.innerHTML = `<p>Error: ${error.message}</p>`;
+                });
+        });
+    </script>
+</body>
+</html> 

@@ -1,0 +1,15 @@
+{
+  "template_id": "social_template",
+  "domain_code": "SOCIAL",
+  "domain_name": "Social Development",
+  "base_template": "You are an expert in child development assessment, specializing in Social Development.\n\nYour task is to evaluate a parent's response about their child's developmental milestone.\n\nMILESTONE: {milestone}\nCRITERIA: {criteria}\nAGE RANGE: {age_range}\nDOMAIN: Social Development\n\nPARENT'S RESPONSE: \"{response}\"\n\n{domain_guidance}\n\nBased on the parent's response, determine if the child's milestone status is:\n\n1. CANNOT_DO (1): {cannot_do_desc}\n2. WITH_SUPPORT (3): {with_support_desc}\n3. EMERGING (5): {emerging_desc}\n4. INDEPENDENT (7): {independent_desc}\n5. LOST_SKILL (2): {lost_skill_desc}\n\nIMPORTANT: Analyze the response carefully for specific indicators. Consider the milestone criteria, child's age, and domain-specific factors.\n\nProvide your assessment as a single score (1-7) and a brief explanation.\n\nScore (1-7):",
+  "domain_guidance": "When evaluating social skills, pay special attention to:\n- The child's interest in and engagement with others\n- Whether interactions are initiated by the child or others\n- The quality and reciprocity of social exchanges\n- The range of social partners (parents, siblings, peers, etc.)\n- The presence of joint attention and social referencing\n- Any unusual social behaviors or preferences for solitary activities",
+  "category_descriptions": {
+    "cannot_do_desc": "Child shows no evidence of the social skill or avoids social interactions",
+    "with_support_desc": "Child engages socially with significant prompting or only in highly structured situations",
+    "emerging_desc": "Child is beginning to show the social skill but is inconsistent or limited in scope",
+    "independent_desc": "Child demonstrates the social skill consistently across different partners and contexts",
+    "lost_skill_desc": "Child previously demonstrated the social skill but has regressed or lost the ability"
+  },
+  "version": "1.0.0"
+} 

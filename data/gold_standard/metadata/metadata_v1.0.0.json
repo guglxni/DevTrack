@@ -1,0 +1,23 @@
+{
+  "description": "Initial gold standard dataset for developmental milestone scoring",
+  "creation_date": "2025-03-11T23:02:38.940198",
+  "version": "1.0.0",
+  "source": "mixed",
+  "sample_count": 182,
+  "composition": {
+    "generated": 100,
+    "edge_cases": 10,
+    "domain_examples": 8
+  },
+  "creator": "Developmental Milestone Scoring System Team",
+  "created_at": "2025-03-11T23:02:38.942478",
+  "entry_count": 182,
+  "file_hash": "182205683228f3b35f6c725ff089679d",
+  "distribution": {
+    "INDEPENDENT": 42,
+    "LOST_SKILL": 22,
+    "WITH_SUPPORT": 41,
+    "EMERGING": 39,
+    "CANNOT_DO": 38
+  }
+}

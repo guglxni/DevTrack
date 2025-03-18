@@ -1,0 +1,12 @@
+[
+  {
+    "benchmark_id": "5967248e-6eeb-4f13-8b2d-18ac2345a7e9",
+    "timestamp": "2025-03-18T13:14:55.208553",
+    "duration": 0.021274924278259277,
+    "operations_per_second": 2538199398208,
+    "speedup_vs_cpu": 1.1183299993836395,
+    "model_name": "Apple M4",
+    "status": "success",
+    "message": "Benchmark completed with 5 iterations. Matrix size: 3000x3000"
+  }
+]

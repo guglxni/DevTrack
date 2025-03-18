@@ -1,1 +1,27 @@
- 
+# Python cache and temporary files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Log files
+logs/archive/
+*.log
+
+# Temporary and backup files
+*.bak
+*.tmp
+*_old*
+*_backup*
+
+# Virtual environment
+venv/
+.env
+
+# IDE and system files
+.DS_Store
+.vscode/
+.idea/
+
+# Model and large data files
+models/*.gguf
+test_data/ 

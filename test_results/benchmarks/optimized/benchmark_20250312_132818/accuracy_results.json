@@ -1,0 +1,15 @@
+{
+  "name": "accuracy_benchmark",
+  "timestamp": "2025-03-12T13:30:03.631815",
+  "metrics": {
+    "accuracy": 0.3333333333333333,
+    "avg_confidence": 0.7133333333333334,
+    "avg_score_distance": 0.6666666666666666,
+    "samples": 3,
+    "EMERGING_accuracy": 0.3333333333333333,
+    "EMERGING_samples": 3,
+    "total_time_seconds": 18.34323811531067,
+    "avg_time_per_sample": 6.114412705103557
+  },
+  "details": {}
+}

@@ -1,0 +1,406 @@
+{
+  "name": "r2r_accuracy_benchmark",
+  "timestamp": "2025-03-13T14:08:27.792194",
+  "metrics": {
+    "accuracy": 0.48,
+    "avg_confidence": 0.6999999999999997,
+    "avg_latency": 11.237446403503418,
+    "total_cases": 25,
+    "correct_cases": 12,
+    "motor_accuracy": 0.6666666666666666,
+    "communication_accuracy": 0.0,
+    "social_accuracy": 0.4444444444444444,
+    "cognitive_accuracy": 0.4444444444444444,
+    "standard_accuracy": 0.55,
+    "edge_complex_accuracy": 0.3333333333333333,
+    "edge_ambiguous_accuracy": 0.0,
+    "edge_multilingual_accuracy": 0.0
+  },
+  "details": {
+    "by_score": {
+      "CANNOT_DO": {
+        "correct": 6,
+        "total": 6,
+        "accuracy": 1.0
+      },
+      "LOST_SKILL": {
+        "correct": 0,
+        "total": 3,
+        "accuracy": 0.0
+      },
+      "EMERGING": {
+        "correct": 1,
+        "total": 4,
+        "accuracy": 0.25
+      },
+      "WITH_SUPPORT": {
+        "correct": 0,
+        "total": 6,
+        "accuracy": 0.0
+      },
+      "INDEPENDENT": {
+        "correct": 5,
+        "total": 6,
+        "accuracy": 0.8333333333333334
+      }
+    },
+    "by_domain": {
+      "MOTOR": {
+        "correct": 4,
+        "total": 6,
+        "accuracy": 0.6666666666666666
+      },
+      "COMMUNICATION": {
+        "correct": 0,
+        "total": 1,
+        "accuracy": 0.0
+      },
+      "SOCIAL": {
+        "correct": 4,
+        "total": 9,
+        "accuracy": 0.4444444444444444
+      },
+      "COGNITIVE": {
+        "correct": 4,
+        "total": 9,
+        "accuracy": 0.4444444444444444
+      }
+    },
+    "by_test_type": {
+      "standard": {
+        "correct": 11,
+        "total": 20,
+        "accuracy": 0.55
+      },
+      "edge_complex": {
+        "correct": 1,
+        "total": 3,
+        "accuracy": 0.3333333333333333
+      },
+      "edge_ambiguous": {
+        "correct": 0,
+        "total": 1,
+        "accuracy": 0.0
+      },
+      "edge_multilingual": {
+        "correct": 0,
+        "total": 1,
+        "accuracy": 0.0
+      }
+    },
+    "confusion_matrix": {
+      "CANNOT_DO": {
+        "CANNOT_DO": 6,
+        "LOST_SKILL": 0,
+        "EMERGING": 0,
+        "WITH_SUPPORT": 0,
+        "INDEPENDENT": 0
+      },
+      "LOST_SKILL": {
+        "CANNOT_DO": 2,
+        "LOST_SKILL": 0,
+        "EMERGING": 0,
+        "WITH_SUPPORT": 0,
+        "INDEPENDENT": 1
+      },
+      "EMERGING": {
+        "CANNOT_DO": 2,
+        "LOST_SKILL": 0,
+        "EMERGING": 1,
+        "WITH_SUPPORT": 0,
+        "INDEPENDENT": 1
+      },
+      "WITH_SUPPORT": {
+        "CANNOT_DO": 3,
+        "LOST_SKILL": 0,
+        "EMERGING": 0,
+        "WITH_SUPPORT": 0,
+        "INDEPENDENT": 3
+      },
+      "INDEPENDENT": {
+        "CANNOT_DO": 0,
+        "LOST_SKILL": 0,
+        "EMERGING": 1,
+        "WITH_SUPPORT": 0,
+        "INDEPENDENT": 5
+      }
+    },
+    "case_results": [
+      {
+        "response": "This is concerning because she had mastered takesing, but now she refuses to even attempt it.",
+        "expected_score": "LOST_SKILL",
+        "predicted_score": "CANNOT_DO",
+        "confidence": 0.7,
+        "latency": 15.690155982971191,
+        "correct": false,
+        "domain": "SOCIAL",
+        "test_type": "standard",
+        "reasoning": " Based on the caregiver's response, it does not indicate that the child has achieved the developmental milestone in question. The description suggests that the child had previously been able to take t..."
+      },
+      {
+        "response": "He's fully capable of takesing on his own and does it many times throughout the day.",
+        "expected_score": "INDEPENDENT",
+        "predicted_score": "INDEPENDENT",
+        "confidence": 0.7,
+        "latency": 12.539959192276001,
+        "correct": true,
+        "domain": "SOCIAL",
+        "test_type": "standard",
+        "reasoning": " Based on the caregiver's response, it appears that the child has achieved the developmental milestone in question. The caregiver's description indicates that the child is consistently able to take on..."
+      },
+      {
+        "response": "My child can't engages currently. I haven't seen any attempts at this behavior.",
+        "expected_score": "CANNOT_DO",
+        "predicted_score": "CANNOT_DO",
+        "confidence": 0.7,
+        "latency": 9.777091026306152,
+        "correct": true,
+        "domain": "SOCIAL",
+        "test_type": "standard",
+        "reasoning": " Based on the caregiver's response, it appears that their child has not yet achieved this developmental milestone. The caregiver did not report observing any attempts or engagement in the behavior des..."
+      },
+      {
+        "response": "We see early signs of this skill. She has attempted to crawls a few times in the last week. The ther...",
+        "expected_score": "EMERGING",
+        "predicted_score": "EMERGING",
+        "confidence": 0.7,
+        "latency": 18.47545313835144,
+        "correct": true,
+        "domain": "MOTOR",
+        "test_type": "standard",
+        "reasoning": " Based on the caregiver's response, it appears that the child is exhibiting early signs of the developmental milestone of crawling. However, it's important to note that the age range for this mileston..."
+      },
+      {
+        "response": "My child can't sorts currently. I haven't seen any attempts at this behavior.",
+        "expected_score": "CANNOT_DO",
+        "predicted_score": "CANNOT_DO",
+        "confidence": 0.7,
+        "latency": 9.857240200042725,
+        "correct": true,
+        "domain": "COGNITIVE",
+        "test_type": "standard",
+        "reasoning": " Based on the caregiver's response, it appears that their child has not yet achieved the developmental milestone in question. The caregiver specifically states that they have not observed any attempts..."
+      },
+      {
+        "response": "She used to engages a few months ago, but she doesn't anymore. I'm not sure why she stopped. This is...",
+        "expected_score": "LOST_SKILL",
+        "predicted_score": "INDEPENDENT",
+        "confidence": 0.7,
+        "latency": 10.70740294456482,
+        "correct": false,
+        "domain": "SOCIAL",
+        "test_type": "standard",
+        "reasoning": " Based on the caregiver's response, it is unclear whether the child has achieved the developmental milestone in question. The caregiver mentions that the child used to engage with the milestone but no..."
+      },
+      {
+        "response": "My child is very good at takesing. This is something she mastered and does regularly.",
+        "expected_score": "INDEPENDENT",
+        "predicted_score": "INDEPENDENT",
+        "confidence": 0.7,
+        "latency": 9.957878828048706,
+        "correct": true,
+        "domain": "SOCIAL",
+        "test_type": "standard",
+        "reasoning": " Based on the caregiver's response, it is not clear if the child has achieved the specific developmental milestone being described. The term \"takesing\" is not a recognized developmental milestone, and..."
+      },
+      {
+        "response": "No, he doesn't completes at all. He hasn't shown any progress in this area.",
+        "expected_score": "CANNOT_DO",
+        "predicted_score": "CANNOT_DO",
+        "confidence": 0.7,
+        "latency": 6.645313024520874,
+        "correct": true,
+        "domain": "COGNITIVE",
+        "test_type": "standard",
+        "reasoning": " Based on the caregiver's response, it appears that their child has not achieved the developmental milestone in question. The caregiver's description is clear and specific, indicating a lack of progre..."
+      },
+      {
+        "response": "He sometimes tries to sorts, but he needs a lot of encouragement and doesn't always succeed.",
+        "expected_score": "EMERGING",
+        "predicted_score": "INDEPENDENT",
+        "confidence": 0.7,
+        "latency": 10.287528991699219,
+        "correct": false,
+        "domain": "COGNITIVE",
+        "test_type": "standard",
+        "reasoning": " Based on the caregiver's response, it does not appear that the child has consistently achieved the developmental milestone in question. The description indicates that the child tries to sort but requ..."
+      },
+      {
+        "response": "She hasn't started completesing yet. We've tried to encourage her but she's not showing any signs of...",
+        "expected_score": "CANNOT_DO",
+        "predicted_score": "CANNOT_DO",
+        "confidence": 0.7,
+        "latency": 9.768129825592041,
+        "correct": true,
+        "domain": "COGNITIVE",
+        "test_type": "standard",
+        "reasoning": " Based on the caregiver's response, it does not appear that their child has achieved the developmental milestone in question. The caregiver has indicated that their child has not started completing ta..."
+      },
+      {
+        "response": "He does understands but only when I'm guiding him through it step by step.",
+        "expected_score": "WITH_SUPPORT",
+        "predicted_score": "CANNOT_DO",
+        "confidence": 0.7,
+        "latency": 11.302793979644775,
+        "correct": false,
+        "domain": "COGNITIVE",
+        "test_type": "standard",
+        "reasoning": " Based on the caregiver's response, it does not appear that the child has fully achieved the developmental milestone in question. The caregiver describes the child as only understanding the task when ..."
+      },
+      {
+        "response": "She hasn't started understandsing yet. We've tried to encourage her but she's not showing any signs ...",
+        "expected_score": "CANNOT_DO",
+        "predicted_score": "CANNOT_DO",
+        "confidence": 0.7,
+        "latency": 7.404266119003296,
+        "correct": true,
+        "domain": "COGNITIVE",
+        "test_type": "standard",
+        "reasoning": " Based on the caregiver's response, it appears that their child has not yet achieved the developmental milestone in question. The caregiver describes their child as not showing any signs of understand..."
+      },
+      {
+        "response": "We see early signs of this skill. She has attempted to completes a few times in the last week.",
+        "expected_score": "EMERGING",
+        "predicted_score": "CANNOT_DO",
+        "confidence": 0.7,
+        "latency": 9.538585186004639,
+        "correct": false,
+        "domain": "COGNITIVE",
+        "test_type": "standard",
+        "reasoning": " Based on the caregiver's response, it appears that the child is exhibiting early signs of the developmental milestone but has not yet fully achieved it. The caregiver describes the child's attempts t..."
+      },
+      {
+        "response": "My child needs assistance with runsing, but participates actively when supported.",
+        "expected_score": "WITH_SUPPORT",
+        "predicted_score": "INDEPENDENT",
+        "confidence": 0.7,
+        "latency": 13.195908784866333,
+        "correct": false,
+        "domain": "MOTOR",
+        "test_type": "standard",
+        "reasoning": " Based on the caregiver's response, it does not appear that their child has fully achieved the developmental milestone in question. The description indicates that the child needs assistance with runni..."
+      },
+      {
+        "response": "This is something we've been working on, but she still can't crawls.",
+        "expected_score": "CANNOT_DO",
+        "predicted_score": "CANNOT_DO",
+        "confidence": 0.7,
+        "latency": 7.877446889877319,
+        "correct": true,
+        "domain": "MOTOR",
+        "test_type": "standard",
+        "reasoning": " Based on the caregiver's response, it appears that their child has not yet achieved the developmental milestone of crawling. The caregiver's description is specific and age-appropriate, as they have ..."
+      },
+      {
+        "response": "He's fully capable of engagesing on his own and does it many times throughout the day. This is new.",
+        "expected_score": "INDEPENDENT",
+        "predicted_score": "INDEPENDENT",
+        "confidence": 0.7,
+        "latency": 10.45514702796936,
+        "correct": true,
+        "domain": "SOCIAL",
+        "test_type": "standard",
+        "reasoning": " Based on the caregiver's response, it appears that the child has achieved the developmental milestone in question. The caregiver describes the child as being fully capable of engaging on his own and ..."
+      },
+      {
+        "response": "My child was showsing consistently, but in the last month has stopped doing it completely.",
+        "expected_score": "LOST_SKILL",
+        "predicted_score": "CANNOT_DO",
+        "confidence": 0.7,
+        "latency": 17.83028221130371,
+        "correct": false,
+        "domain": "SOCIAL",
+        "test_type": "standard",
+        "reasoning": " Based on the caregiver's response, it is unclear if their child has achieved the developmental milestone in question. The caregiver mentions that their child was consistently showing the behavior but..."
+      },
+      {
+        "response": "My child is very good at crawlsing. This is something she mastered and does regularly.",
+        "expected_score": "INDEPENDENT",
+        "predicted_score": "INDEPENDENT",
+        "confidence": 0.7,
+        "latency": 8.386699914932251,
+        "correct": true,
+        "domain": "MOTOR",
+        "test_type": "standard",
+        "reasoning": " Based on the caregiver's response, it appears that their child has indeed achieved the developmental milestone of crawling. The age range given (9-12 months) is appropriate for this milestone, and th..."
+      },
+      {
+        "response": "She's just beginning to sorts. We've seen a few attempts, but she's not consistent yet. We practice ...",
+        "expected_score": "EMERGING",
+        "predicted_score": "CANNOT_DO",
+        "confidence": 0.7,
+        "latency": 9.112428903579712,
+        "correct": false,
+        "domain": "COGNITIVE",
+        "test_type": "standard",
+        "reasoning": " Based on the caregiver's response, it appears that the child is in the process of learning to sort items but has not yet fully achieved this milestone. The age range given (24-30 months) is consisten..."
+      },
+      {
+        "response": "She's getting better at completesing, but still needs me to help her with certain parts.",
+        "expected_score": "WITH_SUPPORT",
+        "predicted_score": "CANNOT_DO",
+        "confidence": 0.7,
+        "latency": 9.478605031967163,
+        "correct": false,
+        "domain": "COGNITIVE",
+        "test_type": "standard",
+        "reasoning": " Based on the caregiver's response, it appears that the child is making progress towards the developmental milestone but still requires assistance in certain areas. This response does not indicate tha..."
+      },
+      {
+        "response": "My child combines formsing with other skills in unexpected ways, demonstrating creativity beyond wha...",
+        "expected_score": "WITH_SUPPORT",
+        "predicted_score": "INDEPENDENT",
+        "confidence": 0.7,
+        "latency": 10.21193790435791,
+        "correct": false,
+        "domain": "COMMUNICATION",
+        "test_type": "edge_complex",
+        "reasoning": " Based on the caregiver's response, it is not clear if the child has achieved a specific developmental milestone. The description suggests that the child demonstrates creativity and combines forms in ..."
+      },
+      {
+        "response": "He goes back and forth with showsing. Some days he's very good at it, other days it's like he's neve...",
+        "expected_score": "WITH_SUPPORT",
+        "predicted_score": "CANNOT_DO",
+        "confidence": 0.7,
+        "latency": 19.63164496421814,
+        "correct": false,
+        "domain": "SOCIAL",
+        "test_type": "edge_ambiguous",
+        "reasoning": " Based on the caregiver's response, it appears that the child is exhibiting inconsistent behavior with regard to the developmental milestone in question. The caregiver mentions that some days the chil..."
+      },
+      {
+        "response": "He has a unique approach to runsing. Instead of following the usual steps for runs with coordination...",
+        "expected_score": "WITH_SUPPORT",
+        "predicted_score": "INDEPENDENT",
+        "confidence": 0.7,
+        "latency": 10.195337057113647,
+        "correct": false,
+        "domain": "MOTOR",
+        "test_type": "edge_complex",
+        "reasoning": " Based on the caregiver's response, it is not clear if the child has achieved the developmental milestone in question. The description does not provide enough specific information about the milestone ..."
+      },
+      {
+        "response": "My child combines crawlsing with other skills in unexpected ways, demonstrating creativity beyond wh...",
+        "expected_score": "INDEPENDENT",
+        "predicted_score": "INDEPENDENT",
+        "confidence": 0.7,
+        "latency": 10.073871850967407,
+        "correct": true,
+        "domain": "MOTOR",
+        "test_type": "edge_complex",
+        "reasoning": " Based on the caregiver's response, it is not clear if their child has achieved a specific developmental milestone at the 9-12 month age range. The description mentions the child's creativity in combi..."
+      },
+      {
+        "response": "Sometimes \u308f\u305f\u3057\u306e\u5b50 (my child) will shows, but only when he feels like it.",
+        "expected_score": "INDEPENDENT",
+        "predicted_score": "EMERGING",
+        "confidence": 0.7,
+        "latency": 12.535051107406616,
+        "correct": false,
+        "domain": "SOCIAL",
+        "test_type": "edge_multilingual",
+        "reasoning": " Based on the caregiver's response, it is not clear if their child has achieved the developmental milestone in question. The caregiver mentions that their child displays the behavior occasionally, but..."
+      }
+    ]
+  }
+}

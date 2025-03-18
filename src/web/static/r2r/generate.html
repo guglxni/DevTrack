@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>R2R Generation Interface</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <style>
+        body {
+            padding-top: 2rem;
+            background-color: #f8f9fa;
+        }
+        .card {
+            margin-bottom: 1.5rem;
+            border: none;
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+        }
+        .card-header {
+            background-color: #563d7c;
+            color: white;
+            font-weight: 500;
+        }
+        .header-icon {
+            margin-right: 0.5rem;
+        }
+        pre {
+            background-color: #f8f9fa;
+            padding: 1rem;
+            border-radius: 0.25rem;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .parameter-group {
+            border: 1px solid #dee2e6;
+            border-radius: 0.25rem;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            background-color: #f8f9fa;
+        }
+        .form-check-input:checked {
+            background-color: #563d7c;
+            border-color: #563d7c;
+        }
+        .parameter-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        .collection-badge {
+            background-color: #563d7c;
+            color: white;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .collection-badge.selected {
+            background-color: #4a3369;
+            border: 2px solid #2c1e40;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="mb-4">
+            <nav class="d-flex justify-content-between align-items-center">
+                <a href="/r2r/" class="btn btn-outline-secondary">
+                    <i class="bi bi-arrow-left"></i> Back to Dashboard
+                </a>
+                <h1 class="h2 mb-0">R2R Generation Interface</h1>
+                <div></div>
+            </nav>
+        </header>
+
+        <div class="row mb-4">
+            <div class="col">
+                <div class="alert alert-info">
+                    <i class="bi bi-info-circle-fill me-2"></i>
+                    This interface allows you to generate detailed information using the R2R knowledge base. The system will retrieve relevant information from the knowledge base to inform the generation.
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="bi bi-question-circle header-icon"></i>
+                        Prompt and Parameters
+                    </div>
+                    <div class="card-body">
+                        <form id="generation-form">
+                            <div class="mb-3">
+                                <label for="generation-prompt" class="form-label">Prompt</label>
+                                <textarea class="form-control" id="generation-prompt" rows="5" placeholder="Enter your prompt here. Be specific about what information you need." required></textarea>
+                                <div class="form-text">Example: "Explain the developmental milestones for social interaction in 2-year-olds" or "Describe how to score a child who points to objects but doesn't engage in joint attention"</div>
+                            </div>
+                            
+                            <div class="parameter-group">
+                                <div class="parameter-title">Knowledge Base Parameters</div>
+                                
+                                <div class="mb-3">
+                                    <label class="form-label">Collections to Use</label>
+                                    <div id="collections-container" class="d-flex flex-wrap">
+                                        <div class="spinner-border spinner-border-sm text-primary me-2" role="status">
+                                            <span class="visually-hidden">Loading...</span>
+                                        </div>
+                                        Loading collections...
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="retrieval-count" class="form-label">Number of Documents to Retrieve</label>
+                                    <input type="range" class="form-range" id="retrieval-count" min="1" max="10" value="3">
+                                    <div class="d-flex justify-content-between">
+                                        <span class="form-text">1</span>
+                                        <span id="retrieval-count-value" class="form-text">3</span>
+                                        <span class="form-text">10</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-check form-switch mb-3">
+                                    <input class="form-check-input" type="checkbox" id="apply-filters" checked>
+                                    <label class="form-check-label" for="apply-filters">Apply Smart Filtering</label>
+                                    <div class="form-text">Automatically applies filters based on prompt context</div>
+                                </div>
+                                
+                                <div class="form-check form-switch mb-3">
+                                    <input class="form-check-input" type="checkbox" id="show-sources">
+                                    <label class="form-check-label" for="show-sources">Show Sources in Result</label>
+                                    <div class="form-text">Include knowledge document references in the generation</div>
+                                </div>
+                            </div>
+                            
+                            <div class="parameter-group">
+                                <div class="parameter-title">Generation Parameters</div>
+                                
+                                <div class="mb-3">
+                                    <label for="temperature" class="form-label">Temperature</label>
+                                    <input type="range" class="form-range" id="temperature" min="0" max="10" value="7">
+                                    <div class="d-flex justify-content-between">
+                                        <span class="form-text">0.0</span>
+                                        <span id="temperature-value" class="form-text">0.7</span>
+                                        <span class="form-text">1.0</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="max-tokens" class="form-label">Max Length (tokens)</label>
+                                    <select class="form-select" id="max-tokens">
+                                        <option value="256">Brief (256 tokens)</option>
+                                        <option value="512">Short (512 tokens)</option>
+                                        <option value="1024" selected>Medium (1024 tokens)</option>
+                                        <option value="2048">Long (2048 tokens)</option>
+                                        <option value="4096">Very Long (4096 tokens)</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="response-format" class="form-label">Response Format</label>
+                                    <select class="form-select" id="response-format">
+                                        <option value="text" selected>Plain Text</option>
+                                        <option value="markdown">Markdown</option>
+                                        <option value="json">JSON</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="d-flex justify-content-between">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="bi bi-lightning-charge"></i> Generate
+                                </button>
+                                <button type="reset" class="btn btn-outline-secondary">
+                                    <i class="bi bi-x-circle"></i> Clear Form
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="bi bi-file-text header-icon"></i>
+                        Generation Result
+                    </div>
+                    <div class="card-body">
+                        <div id="result-waiting" class="text-center py-5">
+                            <p class="text-muted">Submit the form to generate a response</p>
+                        </div>
+                        <div id="result-loading" class="text-center py-5" style="display: none;">
+                            <div class="spinner-border text-primary" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                            <p class="mt-2">Generating response...</p>
+                            <div class="progress mt-3" style="height: 5px;">
+                                <div id="progress-bar" class="progress-bar progress-bar-striped progress-bar-animated" style="width: 0%"></div>
+                            </div>
+                            <div id="progress-info" class="text-muted mt-1 small">Retrieving relevant knowledge...</div>
+                        </div>
+                        <div id="result-content" style="display: none;">
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between">
+                                    <h5>Generated Response</h5>
+                                    <div>
+                                        <button id="copy-result" class="btn btn-sm btn-outline-secondary">
+                                            <i class="bi bi-clipboard"></i> Copy
+                                        </button>
+                                    </div>
+                                </div>
+                                <div id="generation-result" class="p-3 border rounded bg-white overflow-auto" style="min-height: 300px; max-height: 500px;"></div>
+                            </div>
+                            
+                            <div id="sources-container" class="mb-3" style="display: none;">
+                                <h5>Sources</h5>
+                                <div id="sources-list" class="border rounded p-3 bg-white">
+                                    <!-- Sources will be displayed here -->
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Generation Stats</label>
+                                <div class="d-flex flex-wrap gap-2">
+                                    <div class="badge bg-secondary">
+                                        <i class="bi bi-clock"></i> <span id="stat-time">0.0s</span>
+                                    </div>
+                                    <div class="badge bg-secondary">
+                                        <i class="bi bi-hash"></i> <span id="stat-tokens">0 tokens</span>
+                                    </div>
+                                    <div class="badge bg-secondary">
+                                        <i class="bi bi-search"></i> <span id="stat-retrieved">0 docs</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="d-flex justify-content-between">
+                                <button id="btn-regenerate" class="btn btn-sm btn-outline-primary">
+                                    <i class="bi bi-arrow-repeat"></i> Regenerate
+                                </button>
+                                <button id="btn-feedback" class="btn btn-sm btn-outline-success">
+                                    <i class="bi bi-star"></i> Provide Feedback
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card mt-3">
+                    <div class="card-header">
+                        <i class="bi bi-lightbulb header-icon"></i>
+                        Tips for Better Results
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <i class="bi bi-check-circle text-success me-2"></i>
+                                Be specific about the developmental domain and age range
+                            </li>
+                            <li class="list-group-item">
+                                <i class="bi bi-check-circle text-success me-2"></i>
+                                Include relevant context (assessment setting, behavior details)
+                            </li>
+                            <li class="list-group-item">
+                                <i class="bi bi-check-circle text-success me-2"></i>
+                                Ask one focused question rather than multiple questions
+                            </li>
+                            <li class="list-group-item">
+                                <i class="bi bi-check-circle text-success me-2"></i>
+                                Adjust temperature for more focused (lower) or creative (higher) responses
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script>
+        // Helper functions
+        function formatJson(json) {
+            return JSON.stringify(json, null, 2);
+        }
+        
+        // Initialize range sliders
+        const temperatureSlider = document.getElementById('temperature');
+        const temperatureValue = document.getElementById('temperature-value');
+        temperatureSlider.addEventListener('input', () => {
+            temperatureValue.textContent = (temperatureSlider.value / 10).toFixed(1);
+        });
+        
+        const retrievalSlider = document.getElementById('retrieval-count');
+        const retrievalValue = document.getElementById('retrieval-count-value');
+        retrievalSlider.addEventListener('input', () => {
+            retrievalValue.textContent = retrievalSlider.value;
+        });
+        
+        // Load available collections
+        async function loadCollections() {
+            try {
+                const response = await fetch('/r2r/collections');
+                if (!response.ok) throw new Error('Failed to load collections');
+                
+                const data = await response.json();
+                const container = document.getElementById('collections-container');
+                
+                if (data.collections && data.collections.length > 0) {
+                    container.innerHTML = '';
+                    
+                    data.collections.forEach(collection => {
+                        const badge = document.createElement('span');
+                        badge.className = 'badge collection-badge';
+                        badge.textContent = collection.name || collection.key;
+                        badge.dataset.key = collection.key;
+                        badge.dataset.selected = 'true';
+                        badge.classList.add('selected');
+                        
+                        badge.addEventListener('click', () => {
+                            const isSelected = badge.dataset.selected === 'true';
+                            badge.dataset.selected = isSelected ? 'false' : 'true';
+                            if (isSelected) {
+                                badge.classList.remove('selected');
+                            } else {
+                                badge.classList.add('selected');
+                            }
+                        });
+                        
+                        container.appendChild(badge);
+                    });
+                } else {
+                    container.innerHTML = '<div class="alert alert-warning">No collections available</div>';
+                }
+            } catch (error) {
+                console.error('Error loading collections:', error);
+                document.getElementById('collections-container').innerHTML = 
+                    `<div class="alert alert-danger">Error loading collections: ${error.message}</div>`;
+            }
+        }
+        
+        // Load collections on page load
+        document.addEventListener('DOMContentLoaded', loadCollections);
+        
+        // Form reset handler
+        document.getElementById('generation-form').addEventListener('reset', () => {
+            // Reset UI state
+            document.getElementById('result-waiting').style.display = 'block';
+            document.getElementById('result-loading').style.display = 'none';
+            document.getElementById('result-content').style.display = 'none';
+            
+            // Reset sliders to default values
+            temperatureSlider.value = 7;
+            temperatureValue.textContent = '0.7';
+            retrievalSlider.value = 3;
+            retrievalValue.textContent = '3';
+            
+            // Reset collections
+            const badges = document.querySelectorAll('.collection-badge');
+            badges.forEach(badge => {
+                badge.dataset.selected = 'true';
+                badge.classList.add('selected');
+            });
+        });
+        
+        // Copy button handler
+        document.getElementById('copy-result').addEventListener('click', () => {
+            const resultText = document.getElementById('generation-result').innerText;
+            navigator.clipboard.writeText(resultText)
+                .then(() => {
+                    const button = document.getElementById('copy-result');
+                    const originalText = button.innerHTML;
+                    button.innerHTML = '<i class="bi bi-check2"></i> Copied!';
+                    setTimeout(() => {
+                        button.innerHTML = originalText;
+                    }, 2000);
+                })
+                .catch(err => {
+                    console.error('Error copying text:', err);
+                    alert('Failed to copy text to clipboard');
+                });
+        });
+        
+        // Regenerate button handler
+        document.getElementById('btn-regenerate').addEventListener('click', () => {
+            // Submit the form again with the same parameters
+            document.getElementById('generation-form').dispatchEvent(new Event('submit'));
+        });
+        
+        // Feedback button handler
+        document.getElementById('btn-feedback').addEventListener('click', () => {
+            alert('Feedback functionality is coming soon!');
+        });
+        
+        // Simulate generation progress
+        function simulateProgress() {
+            const progressBar = document.getElementById('progress-bar');
+            const progressInfo = document.getElementById('progress-info');
+            let progress = 0;
+            
+            const phases = [
+                'Retrieving relevant knowledge...',
+                'Analyzing retrieved documents...',
+                'Generating response...',
+                'Finalizing output...'
+            ];
+            
+            const interval = setInterval(() => {
+                progress += Math.random() * 5;
+                
+                if (progress >= 100) {
+                    progress = 100;
+                    clearInterval(interval);
+                }
+                
+                progressBar.style.width = `${progress}%`;
+                
+                // Update progress info text based on progress percentage
+                const phaseIndex = Math.min(Math.floor(progress / 25), phases.length - 1);
+                progressInfo.textContent = phases[phaseIndex];
+                
+            }, 300);
+            
+            return interval;
+        }
+        
+        // Form submission handler
+        document.getElementById('generation-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            // Get form values
+            const prompt = document.getElementById('generation-prompt').value;
+            if (!prompt.trim()) {
+                alert('Please enter a prompt');
+                return;
+            }
+            
+            // Get selected collections
+            const selectedCollections = [];
+            document.querySelectorAll('.collection-badge.selected').forEach(badge => {
+                selectedCollections.push(badge.dataset.key);
+            });
+            
+            if (selectedCollections.length === 0) {
+                alert('Please select at least one collection');
+                return;
+            }
+            
+            // Get other parameters
+            const retrievalCount = parseInt(retrievalSlider.value);
+            const temperature = parseFloat(temperatureSlider.value) / 10;
+            const maxTokens = parseInt(document.getElementById('max-tokens').value);
+            const responseFormat = document.getElementById('response-format').value;
+            const applyFilters = document.getElementById('apply-filters').checked;
+            const showSources = document.getElementById('show-sources').checked;
+            
+            // Show loading state
+            document.getElementById('result-waiting').style.display = 'none';
+            document.getElementById('result-loading').style.display = 'block';
+            document.getElementById('result-content').style.display = 'none';
+            
+            // Start progress animation
+            const progressInterval = simulateProgress();
+            
+            try {
+                // Make API request to generate response
+                const startTime = Date.now();
+                
+                const response = await fetch('/r2r/generate', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        prompt,
+                        collections: selectedCollections,
+                        retrieval_count: retrievalCount,
+                        temperature,
+                        max_tokens: maxTokens,
+                        response_format: responseFormat,
+                        apply_filters: applyFilters,
+                        include_sources: showSources
+                    })
+                });
+                
+                const data = await response.json();
+                const endTime = Date.now();
+                
+                // Clear progress animation
+                clearInterval(progressInterval);
+                
+                // Show result state
+                document.getElementById('result-loading').style.display = 'none';
+                document.getElementById('result-content').style.display = 'block';
+                
+                // Display the generated content
+                const resultElement = document.getElementById('generation-result');
+                if (responseFormat === 'markdown') {
+                    resultElement.innerHTML = marked.parse(data.result || '');
+                } else if (responseFormat === 'json') {
+                    resultElement.innerHTML = `<pre>${formatJson(data.result || {})}</pre>`;
+                } else {
+                    resultElement.innerText = data.result || '';
+                }
+                
+                // Display sources if available
+                const sourcesContainer = document.getElementById('sources-container');
+                const sourcesList = document.getElementById('sources-list');
+                
+                if (showSources && data.sources && data.sources.length > 0) {
+                    sourcesContainer.style.display = 'block';
+                    sourcesList.innerHTML = '';
+                    
+                    data.sources.forEach((source, index) => {
+                        const sourceDiv = document.createElement('div');
+                        sourceDiv.className = 'mb-3';
+                        sourceDiv.innerHTML = `
+                            <div class="d-flex justify-content-between">
+                                <strong>[${index + 1}] ${source.id || 'Document'}</strong>
+                                <span class="badge bg-secondary">${source.collection || 'Unknown'}</span>
+                            </div>
+                            <div class="mt-1 source-text text-muted small">${source.text ? source.text.substring(0, 200) + '...' : 'No text available'}</div>
+                        `;
+                        sourcesList.appendChild(sourceDiv);
+                    });
+                } else {
+                    sourcesContainer.style.display = 'none';
+                }
+                
+                // Update stats
+                document.getElementById('stat-time').textContent = `${((endTime - startTime) / 1000).toFixed(1)}s`;
+                document.getElementById('stat-tokens').textContent = `${data.token_count || 0} tokens`;
+                document.getElementById('stat-retrieved').textContent = `${data.sources?.length || 0} docs`;
+                
+            } catch (error) {
+                console.error('Error:', error);
+                clearInterval(progressInterval);
+                
+                document.getElementById('result-loading').style.display = 'none';
+                document.getElementById('result-content').style.display = 'block';
+                
+                document.getElementById('generation-result').innerHTML = `
+                    <div class="alert alert-danger">
+                        <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                        Error generating response: ${error.message}
+                    </div>
+                `;
+                
+                document.getElementById('sources-container').style.display = 'none';
+                document.getElementById('stat-time').textContent = '0.0s';
+                document.getElementById('stat-tokens').textContent = '0 tokens';
+                document.getElementById('stat-retrieved').textContent = '0 docs';
+            }
+        });
+    </script>
+</body>
+</html> 

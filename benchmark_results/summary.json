@@ -1,0 +1,36 @@
+{
+  "sample_size": 30,
+  "runtime": {
+    "standard": 0.00037288665771484375,
+    "age_prompts": 0.00045371055603027344,
+    "age_adjusted": 0.00034308433532714844
+  },
+  "configurations": [
+    "standard",
+    "age_prompts",
+    "age_adjusted"
+  ],
+  "standard": {
+    "count": 30,
+    "avg_confidence": 0.7931106653138436,
+    "agreement": 0.4666666666666667
+  },
+  "age_prompts": {
+    "count": 30,
+    "avg_confidence": 0.8618793707260706,
+    "agreement": 0.4666666666666667
+  },
+  "age_adjusted": {
+    "count": 30,
+    "avg_confidence": 0.84868801954606,
+    "agreement": 0.4666666666666667
+  },
+  "age_adjusted_manual": {
+    "count": 30,
+    "avg_confidence_original": 0.84868801954606,
+    "avg_confidence_adjusted": 0.8070213528793934,
+    "agreement_original": 0.4666666666666667,
+    "agreement_adjusted": 0.4666666666666667,
+    "change_rate": 0.0
+  }
+}

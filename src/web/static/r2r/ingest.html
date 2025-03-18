@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>R2R Document Ingestion</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <style>
+        body {
+            padding-top: 2rem;
+            background-color: #f8f9fa;
+        }
+        .card {
+            margin-bottom: 1.5rem;
+            border: none;
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+        }
+        .card-header {
+            background-color: #563d7c;
+            color: white;
+            font-weight: 500;
+        }
+        .header-icon {
+            margin-right: 0.5rem;
+        }
+        pre {
+            background-color: #f8f9fa;
+            padding: 1rem;
+            border-radius: 0.25rem;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .metadata-field {
+            margin-bottom: 0.5rem;
+        }
+        .json-editor {
+            font-family: monospace;
+            height: 200px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="mb-4">
+            <nav class="d-flex justify-content-between align-items-center">
+                <a href="/r2r/" class="btn btn-outline-secondary">
+                    <i class="bi bi-arrow-left"></i> Back to Dashboard
+                </a>
+                <h1 class="h2 mb-0">R2R Document Ingestion</h1>
+                <div></div>
+            </nav>
+        </header>
+
+        <div class="row mb-4">
+            <div class="col">
+                <div class="alert alert-info">
+                    <i class="bi bi-info-circle-fill me-2"></i>
+                    This page allows you to add new documents to the knowledge base. Documents are ingested into collections and can be retrieved during searches and generations.
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="bi bi-cloud-upload header-icon"></i>
+                        Document Ingestion
+                    </div>
+                    <div class="card-body">
+                        <form id="ingest-form">
+                            <div class="mb-3">
+                                <label for="ingest-collection" class="form-label">Collection</label>
+                                <select class="form-select" id="ingest-collection" required>
+                                    <option value="" selected disabled>Select a collection</option>
+                                    <option value="developmental_research">Developmental Research</option>
+                                    <option value="scoring_examples">Scoring Examples</option>
+                                    <option value="expert_knowledge">Expert Knowledge</option>
+                                    <option value="clinical_guidelines">Clinical Guidelines</option>
+                                    <option value="new_collection">Create New Collection...</option>
+                                </select>
+                            </div>
+                            
+                            <div id="new-collection-container" class="mb-3" style="display: none;">
+                                <label for="new-collection-key" class="form-label">New Collection Key</label>
+                                <input type="text" class="form-control" id="new-collection-key" placeholder="Enter collection key (e.g., research_papers)">
+                                <div class="form-text">Collection keys should be lowercase with underscores, no spaces or special characters.</div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="ingest-content" class="form-label">Document Content</label>
+                                <textarea class="form-control" id="ingest-content" rows="10" placeholder="Enter the document content to be ingested into the knowledge base" required></textarea>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Document Metadata</label>
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="metadata-field">
+                                                    <label for="metadata-domain" class="form-label">Domain</label>
+                                                    <select class="form-select" id="metadata-domain">
+                                                        <option value="">Select domain (optional)</option>
+                                                        <option value="SOCIAL">Social</option>
+                                                        <option value="MOTOR">Motor</option>
+                                                        <option value="COMMUNICATION">Communication</option>
+                                                        <option value="COGNITION">Cognition</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="metadata-field">
+                                                    <label for="metadata-type" class="form-label">Document Type</label>
+                                                    <select class="form-select" id="metadata-type">
+                                                        <option value="">Select type (optional)</option>
+                                                        <option value="research">Research Paper</option>
+                                                        <option value="example">Example</option>
+                                                        <option value="guideline">Clinical Guideline</option>
+                                                        <option value="expert">Expert Knowledge</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-2">
+                                            <div class="col-md-6">
+                                                <div class="metadata-field">
+                                                    <label for="metadata-age" class="form-label">Age Range</label>
+                                                    <select class="form-select" id="metadata-age">
+                                                        <option value="">Select age range (optional)</option>
+                                                        <option value="infant">Infant (0-1)</option>
+                                                        <option value="toddler">Toddler (1-3)</option>
+                                                        <option value="preschool">Preschool (3-5)</option>
+                                                        <option value="school-age">School Age (5+)</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="metadata-field">
+                                                    <label for="metadata-source" class="form-label">Source</label>
+                                                    <input type="text" class="form-control" id="metadata-source" placeholder="Source (optional)">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="mt-3">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="use-custom-metadata">
+                                                <label class="form-check-label" for="use-custom-metadata">
+                                                    Use Custom JSON Metadata
+                                                </label>
+                                            </div>
+                                        </div>
+                                        
+                                        <div id="custom-metadata-container" class="mt-2" style="display: none;">
+                                            <label for="custom-metadata" class="form-label">Custom Metadata (JSON)</label>
+                                            <textarea class="form-control json-editor" id="custom-metadata" placeholder='{"key1": "value1", "key2": "value2"}'></textarea>
+                                            <div class="form-text">Enter valid JSON for custom metadata fields.</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="d-flex justify-content-between">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="bi bi-cloud-upload"></i> Ingest Document
+                                </button>
+                                <button type="reset" class="btn btn-outline-secondary">
+                                    <i class="bi bi-x-circle"></i> Clear Form
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="bi bi-info-circle header-icon"></i>
+                        Ingestion Result
+                    </div>
+                    <div class="card-body">
+                        <div id="result-waiting" class="text-center py-5">
+                            <p class="text-muted">Submit the form to ingest a document</p>
+                        </div>
+                        <div id="result-loading" class="text-center py-5" style="display: none;">
+                            <div class="spinner-border text-primary" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                            <p class="mt-2">Processing document...</p>
+                        </div>
+                        <div id="result-success" style="display: none;">
+                            <div class="alert alert-success">
+                                <i class="bi bi-check-circle-fill me-2"></i>
+                                Document successfully ingested!
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Document ID</label>
+                                <input type="text" class="form-control" id="result-id" readonly>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Collection</label>
+                                <input type="text" class="form-control" id="result-collection" readonly>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Complete Response</label>
+                                <pre id="result-data"></pre>
+                            </div>
+                        </div>
+                        <div id="result-error" style="display: none;">
+                            <div class="alert alert-danger">
+                                <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                                Error ingesting document
+                            </div>
+                            <pre id="error-message"></pre>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card mt-3">
+                    <div class="card-header">
+                        <i class="bi bi-lightbulb header-icon"></i>
+                        Tips for Good Documents
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <i class="bi bi-check-circle text-success me-2"></i>
+                                Use clear, concise content without long irrelevant sections
+                            </li>
+                            <li class="list-group-item">
+                                <i class="bi bi-check-circle text-success me-2"></i>
+                                Include domain-specific terminology relevant to your field
+                            </li>
+                            <li class="list-group-item">
+                                <i class="bi bi-check-circle text-success me-2"></i>
+                                Add detailed metadata to improve search relevance
+                            </li>
+                            <li class="list-group-item">
+                                <i class="bi bi-check-circle text-success me-2"></i>
+                                Organize similar content in the same collection
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Helper function to format JSON for display
+        function formatJson(json) {
+            return JSON.stringify(json, null, 2);
+        }
+        
+        // Handle collection selection
+        document.getElementById('ingest-collection').addEventListener('change', function() {
+            const newCollectionContainer = document.getElementById('new-collection-container');
+            if (this.value === 'new_collection') {
+                newCollectionContainer.style.display = 'block';
+            } else {
+                newCollectionContainer.style.display = 'none';
+            }
+        });
+        
+        // Handle custom metadata toggle
+        document.getElementById('use-custom-metadata').addEventListener('change', function() {
+            const customMetadataContainer = document.getElementById('custom-metadata-container');
+            if (this.checked) {
+                customMetadataContainer.style.display = 'block';
+                
+                // Populate with current values from the form fields
+                const domain = document.getElementById('metadata-domain').value;
+                const type = document.getElementById('metadata-type').value;
+                const age = document.getElementById('metadata-age').value;
+                const source = document.getElementById('metadata-source').value;
+                
+                let metadataObj = {};
+                if (domain) metadataObj.domain = domain;
+                if (type) metadataObj.type = type;
+                if (age) metadataObj.age_range = age;
+                if (source) metadataObj.source = source;
+                
+                document.getElementById('custom-metadata').value = formatJson(metadataObj);
+            } else {
+                customMetadataContainer.style.display = 'none';
+            }
+        });
+        
+        // Handle form reset
+        document.getElementById('ingest-form').addEventListener('reset', function() {
+            document.getElementById('new-collection-container').style.display = 'none';
+            document.getElementById('custom-metadata-container').style.display = 'none';
+            document.getElementById('use-custom-metadata').checked = false;
+            
+            // Reset result sections
+            document.getElementById('result-waiting').style.display = 'block';
+            document.getElementById('result-loading').style.display = 'none';
+            document.getElementById('result-success').style.display = 'none';
+            document.getElementById('result-error').style.display = 'none';
+        });
+        
+        // Handle form submission
+        document.getElementById('ingest-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            // Get form values
+            let collectionKey = document.getElementById('ingest-collection').value;
+            if (collectionKey === 'new_collection') {
+                collectionKey = document.getElementById('new-collection-key').value.trim();
+                if (!collectionKey) {
+                    alert('Please enter a key for the new collection');
+                    return;
+                }
+            }
+            
+            const content = document.getElementById('ingest-content').value;
+            if (!content.trim()) {
+                alert('Please enter document content');
+                return;
+            }
+            
+            let metadata = {};
+            
+            // Use either custom JSON or form fields for metadata
+            if (document.getElementById('use-custom-metadata').checked) {
+                try {
+                    const customMetadataText = document.getElementById('custom-metadata').value;
+                    if (customMetadataText.trim()) {
+                        metadata = JSON.parse(customMetadataText);
+                    }
+                } catch (error) {
+                    alert('Invalid JSON in custom metadata. Please check the format.');
+                    return;
+                }
+            } else {
+                const domain = document.getElementById('metadata-domain').value;
+                const type = document.getElementById('metadata-type').value;
+                const age = document.getElementById('metadata-age').value;
+                const source = document.getElementById('metadata-source').value;
+                
+                if (domain) metadata.domain = domain;
+                if (type) metadata.type = type;
+                if (age) metadata.age_range = age;
+                if (source) metadata.source = source;
+            }
+            
+            // Show loading state
+            document.getElementById('result-waiting').style.display = 'none';
+            document.getElementById('result-loading').style.display = 'block';
+            document.getElementById('result-success').style.display = 'none';
+            document.getElementById('result-error').style.display = 'none';
+            
+            try {
+                const response = await fetch('/r2r/ingest', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        content,
+                        collection_key: collectionKey,
+                        metadata
+                    })
+                });
+                
+                const data = await response.json();
+                
+                // Show success state
+                document.getElementById('result-loading').style.display = 'none';
+                
+                if (response.ok) {
+                    document.getElementById('result-id').value = data.id || 'N/A';
+                    document.getElementById('result-collection').value = data.collection || collectionKey;
+                    document.getElementById('result-data').textContent = formatJson(data);
+                    document.getElementById('result-success').style.display = 'block';
+                } else {
+                    document.getElementById('error-message').textContent = formatJson(data);
+                    document.getElementById('result-error').style.display = 'block';
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('result-loading').style.display = 'none';
+                document.getElementById('error-message').textContent = `An error occurred: ${error.message}`;
+                document.getElementById('result-error').style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html> 

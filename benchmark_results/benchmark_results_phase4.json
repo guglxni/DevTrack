@@ -1,0 +1,418 @@
+{
+  "standard": {
+    "correct": 19,
+    "total": 20,
+    "confidence_sum": 16.700000000000003,
+    "by_category": {
+      "CANNOT_DO": {
+        "correct": 0,
+        "total": 0,
+        "accuracy": 0
+      },
+      "LOST_SKILL": {
+        "correct": 0,
+        "total": 0,
+        "accuracy": 0
+      },
+      "EMERGING": {
+        "correct": 1,
+        "total": 2,
+        "accuracy": 0.5
+      },
+      "WITH_SUPPORT": {
+        "correct": 1,
+        "total": 1,
+        "accuracy": 1.0
+      },
+      "INDEPENDENT": {
+        "correct": 17,
+        "total": 17,
+        "accuracy": 1.0
+      }
+    },
+    "confusion_matrix": {
+      "WITH_SUPPORT": {
+        "WITH_SUPPORT": 1
+      },
+      "INDEPENDENT": {
+        "INDEPENDENT": 17
+      },
+      "EMERGING": {
+        "EMERGING": 1,
+        "NOT_RATED": 1
+      }
+    },
+    "details": [
+      {
+        "response": "they does this with support from babysitter. The specific help needed is physical guidance, but they...",
+        "expected": "WITH_SUPPORT",
+        "predicted": "WITH_SUPPORT",
+        "confidence": 0.8000000000000002,
+        "correct": true,
+        "reasoning": "Selected WITH_SUPPORT with 100% of total vote weight. Key factors: keyword: Matched patterns for WITH_SUPPORT: physical guidance, with support"
+      },
+      {
+        "response": "My child can runs without any help. they mastered this skill about several weeks and does it consist...",
+        "expected": "INDEPENDENT",
+        "predicted": "INDEPENDENT",
+        "confidence": 0.8999999999999999,
+        "correct": true,
+        "reasoning": "Selected INDEPENDENT with 100% of total vote weight. Key factors: keyword: Matched patterns for INDEPENDENT: mastered, consistently"
+      },
+      {
+        "response": "Yes, Jessie demonstrates this ability independently. I've noticed they does this regularly, especial...",
+        "expected": "INDEPENDENT",
+        "predicted": "INDEPENDENT",
+        "confidence": 0.8999999999999999,
+        "correct": true,
+        "reasoning": "Selected INDEPENDENT with 100% of total vote weight. Key factors: keyword: Matched patterns for INDEPENDENT: regularly, independently, Yes"
+      },
+      {
+        "response": "Jessie has completely mastered this skill. they does it on their own not only at home but also when ...",
+        "expected": "INDEPENDENT",
+        "predicted": "INDEPENDENT",
+        "confidence": 0.8000000000000002,
+        "correct": true,
+        "reasoning": "Selected INDEPENDENT with 100% of total vote weight. Key factors: keyword: Matched patterns for INDEPENDENT: mastered, completely"
+      },
+      {
+        "response": "they occasionally attempts this, especially when interested in the outcome. The skill isn't reliable...",
+        "expected": "EMERGING",
+        "predicted": "EMERGING",
+        "confidence": 0.8999999999999999,
+        "correct": true,
+        "reasoning": "Selected EMERGING with 100% of total vote weight. Key factors: keyword: Matched patterns for EMERGING: occasionally, making progress"
+      },
+      {
+        "response": "Jessie has completely mastered this skill. they does it on their own not only at home but also when ...",
+        "expected": "INDEPENDENT",
+        "predicted": "INDEPENDENT",
+        "confidence": 0.8000000000000002,
+        "correct": true,
+        "reasoning": "Selected INDEPENDENT with 100% of total vote weight. Key factors: keyword: Matched patterns for INDEPENDENT: mastered, completely"
+      },
+      {
+        "response": "Yes, Jessie demonstrates this ability independently. I've noticed they does this regularly, especial...",
+        "expected": "INDEPENDENT",
+        "predicted": "INDEPENDENT",
+        "confidence": 0.8999999999999999,
+        "correct": true,
+        "reasoning": "Selected INDEPENDENT with 100% of total vote weight. Key factors: keyword: Matched patterns for INDEPENDENT: regularly, independently, Yes"
+      },
+      {
+        "response": "Definitely yes. Jessie is very independent with this skill and even helps friends with it. they demo...",
+        "expected": "INDEPENDENT",
+        "predicted": "INDEPENDENT",
+        "confidence": 0.8999999999999999,
+        "correct": true,
+        "reasoning": "Selected INDEPENDENT with 100% of total vote weight. Key factors: keyword: Matched patterns for INDEPENDENT: independent, Definitely, yes"
+      },
+      {
+        "response": "Yes, Jessie demonstrates this ability independently. I've noticed they does this regularly, especial...",
+        "expected": "INDEPENDENT",
+        "predicted": "INDEPENDENT",
+        "confidence": 0.8999999999999999,
+        "correct": true,
+        "reasoning": "Selected INDEPENDENT with 100% of total vote weight. Key factors: keyword: Matched patterns for INDEPENDENT: regularly, independently, Yes"
+      },
+      {
+        "response": "My child can jumps with both feet without any help. they mastered this skill about 3 months and does...",
+        "expected": "INDEPENDENT",
+        "predicted": "INDEPENDENT",
+        "confidence": 0.9,
+        "correct": true,
+        "reasoning": "Selected INDEPENDENT with 100% of total vote weight. Key factors: keyword: Matched patterns for INDEPENDENT: mastered, consistently"
+      },
+      {
+        "response": "My child can talks about past events without any help. they mastered this skill about 3 months and d...",
+        "expected": "INDEPENDENT",
+        "predicted": "INDEPENDENT",
+        "confidence": 0.9,
+        "correct": true,
+        "reasoning": "Selected INDEPENDENT with 100% of total vote weight. Key factors: keyword: Matched patterns for INDEPENDENT: mastered, consistently"
+      },
+      {
+        "response": "This is something Jessie does very well without any assistance. they first showed this ability when ...",
+        "expected": "INDEPENDENT",
+        "predicted": "INDEPENDENT",
+        "confidence": 0.8999999999999999,
+        "correct": true,
+        "reasoning": "Selected INDEPENDENT with 100% of total vote weight. Key factors: keyword: Matched patterns for INDEPENDENT: very well, confidently"
+      },
+      {
+        "response": "Yes, Jessie demonstrates this ability independently. I've noticed they does this regularly, especial...",
+        "expected": "INDEPENDENT",
+        "predicted": "INDEPENDENT",
+        "confidence": 0.8999999999999999,
+        "correct": true,
+        "reasoning": "Selected INDEPENDENT with 100% of total vote weight. Key factors: keyword: Matched patterns for INDEPENDENT: regularly, independently, Yes"
+      },
+      {
+        "response": "My child can curious about everything without any help. they mastered this skill about a couple of m...",
+        "expected": "INDEPENDENT",
+        "predicted": "INDEPENDENT",
+        "confidence": 0.8999999999999999,
+        "correct": true,
+        "reasoning": "Selected INDEPENDENT with 100% of total vote weight. Key factors: keyword: Matched patterns for INDEPENDENT: mastered, consistently"
+      },
+      {
+        "response": "Jessie has completely mastered this skill. they does it on their own not only at home but also when ...",
+        "expected": "INDEPENDENT",
+        "predicted": "INDEPENDENT",
+        "confidence": 0.8000000000000002,
+        "correct": true,
+        "reasoning": "Selected INDEPENDENT with 100% of total vote weight. Key factors: keyword: Matched patterns for INDEPENDENT: mastered, completely"
+      },
+      {
+        "response": "My child can gives empty dish to adults without any help. they mastered this skill about 3 months an...",
+        "expected": "INDEPENDENT",
+        "predicted": "INDEPENDENT",
+        "confidence": 0.8999999999999999,
+        "correct": true,
+        "reasoning": "Selected INDEPENDENT with 100% of total vote weight. Key factors: keyword: Matched patterns for INDEPENDENT: mastered, consistently"
+      },
+      {
+        "response": "Jessie shows early signs of this skill. they has tried 9 times in the past week, succeeding about 1 ...",
+        "expected": "EMERGING",
+        "predicted": "NOT_RATED",
+        "confidence": 0.0,
+        "correct": false,
+        "reasoning": "No valid scores available"
+      },
+      {
+        "response": "My child can shows empathy without any help. they mastered this skill about a couple of months and d...",
+        "expected": "INDEPENDENT",
+        "predicted": "INDEPENDENT",
+        "confidence": 0.9000000000000001,
+        "correct": true,
+        "reasoning": "Selected INDEPENDENT with 100% of total vote weight. Key factors: keyword: Matched patterns for INDEPENDENT: mastered, consistently"
+      },
+      {
+        "response": "Definitely yes. Jessie is very independent with this skill and even helps friends with it. they demo...",
+        "expected": "INDEPENDENT",
+        "predicted": "INDEPENDENT",
+        "confidence": 0.8999999999999999,
+        "correct": true,
+        "reasoning": "Selected INDEPENDENT with 100% of total vote weight. Key factors: keyword: Matched patterns for INDEPENDENT: independent, Definitely, yes"
+      },
+      {
+        "response": "Yes, Jessie demonstrates this ability independently. I've noticed they does this regularly, especial...",
+        "expected": "INDEPENDENT",
+        "predicted": "INDEPENDENT",
+        "confidence": 0.8999999999999999,
+        "correct": true,
+        "reasoning": "Selected INDEPENDENT with 100% of total vote weight. Key factors: keyword: Matched patterns for INDEPENDENT: regularly, independently, Yes"
+      }
+    ],
+    "accuracy": 0.95,
+    "avg_confidence": 0.8350000000000002
+  },
+  "enhanced": {
+    "correct": 19,
+    "total": 20,
+    "confidence_sum": 16.700000000000003,
+    "by_category": {
+      "CANNOT_DO": {
+        "correct": 0,
+        "total": 0,
+        "accuracy": 0
+      },
+      "LOST_SKILL": {
+        "correct": 0,
+        "total": 0,
+        "accuracy": 0
+      },
+      "EMERGING": {
+        "correct": 1,
+        "total": 2,
+        "accuracy": 0.5
+      },
+      "WITH_SUPPORT": {
+        "correct": 1,
+        "total": 1,
+        "accuracy": 1.0
+      },
+      "INDEPENDENT": {
+        "correct": 17,
+        "total": 17,
+        "accuracy": 1.0
+      }
+    },
+    "confusion_matrix": {
+      "WITH_SUPPORT": {
+        "WITH_SUPPORT": 1
+      },
+      "INDEPENDENT": {
+        "INDEPENDENT": 17
+      },
+      "EMERGING": {
+        "EMERGING": 1,
+        "NOT_RATED": 1
+      }
+    },
+    "details": [
+      {
+        "response": "they does this with support from babysitter. The specific help needed is physical guidance, but they...",
+        "expected": "WITH_SUPPORT",
+        "predicted": "WITH_SUPPORT",
+        "confidence": 0.8,
+        "correct": true,
+        "reasoning": "Selected WITH_SUPPORT with 100% of total vote weight. Key factors: keyword: Matched patterns for WITH_SUPPORT: physical guidance, with support"
+      },
+      {
+        "response": "My child can runs without any help. they mastered this skill about several weeks and does it consist...",
+        "expected": "INDEPENDENT",
+        "predicted": "INDEPENDENT",
+        "confidence": 0.9,
+        "correct": true,
+        "reasoning": "Selected INDEPENDENT with 100% of total vote weight. Key factors: keyword: Matched patterns for INDEPENDENT: mastered, consistently"
+      },
+      {
+        "response": "Yes, Jessie demonstrates this ability independently. I've noticed they does this regularly, especial...",
+        "expected": "INDEPENDENT",
+        "predicted": "INDEPENDENT",
+        "confidence": 0.9,
+        "correct": true,
+        "reasoning": "Selected INDEPENDENT with 100% of total vote weight. Key factors: keyword: Matched patterns for INDEPENDENT: regularly, independently, Yes"
+      },
+      {
+        "response": "Jessie has completely mastered this skill. they does it on their own not only at home but also when ...",
+        "expected": "INDEPENDENT",
+        "predicted": "INDEPENDENT",
+        "confidence": 0.8,
+        "correct": true,
+        "reasoning": "Selected INDEPENDENT with 100% of total vote weight. Key factors: keyword: Matched patterns for INDEPENDENT: mastered, completely"
+      },
+      {
+        "response": "they occasionally attempts this, especially when interested in the outcome. The skill isn't reliable...",
+        "expected": "EMERGING",
+        "predicted": "EMERGING",
+        "confidence": 0.9,
+        "correct": true,
+        "reasoning": "Selected EMERGING with 100% of total vote weight. Key factors: keyword: Matched patterns for EMERGING: occasionally, making progress"
+      },
+      {
+        "response": "Jessie has completely mastered this skill. they does it on their own not only at home but also when ...",
+        "expected": "INDEPENDENT",
+        "predicted": "INDEPENDENT",
+        "confidence": 0.8,
+        "correct": true,
+        "reasoning": "Selected INDEPENDENT with 100% of total vote weight. Key factors: keyword: Matched patterns for INDEPENDENT: mastered, completely"
+      },
+      {
+        "response": "Yes, Jessie demonstrates this ability independently. I've noticed they does this regularly, especial...",
+        "expected": "INDEPENDENT",
+        "predicted": "INDEPENDENT",
+        "confidence": 0.9,
+        "correct": true,
+        "reasoning": "Selected INDEPENDENT with 100% of total vote weight. Key factors: keyword: Matched patterns for INDEPENDENT: regularly, independently, Yes"
+      },
+      {
+        "response": "Definitely yes. Jessie is very independent with this skill and even helps friends with it. they demo...",
+        "expected": "INDEPENDENT",
+        "predicted": "INDEPENDENT",
+        "confidence": 0.9,
+        "correct": true,
+        "reasoning": "Selected INDEPENDENT with 100% of total vote weight. Key factors: keyword: Matched patterns for INDEPENDENT: independent, Definitely, yes"
+      },
+      {
+        "response": "Yes, Jessie demonstrates this ability independently. I've noticed they does this regularly, especial...",
+        "expected": "INDEPENDENT",
+        "predicted": "INDEPENDENT",
+        "confidence": 0.9,
+        "correct": true,
+        "reasoning": "Selected INDEPENDENT with 100% of total vote weight. Key factors: keyword: Matched patterns for INDEPENDENT: regularly, independently, Yes"
+      },
+      {
+        "response": "My child can jumps with both feet without any help. they mastered this skill about 3 months and does...",
+        "expected": "INDEPENDENT",
+        "predicted": "INDEPENDENT",
+        "confidence": 0.9,
+        "correct": true,
+        "reasoning": "Selected INDEPENDENT with 100% of total vote weight. Key factors: keyword: Matched patterns for INDEPENDENT: mastered, consistently"
+      },
+      {
+        "response": "My child can talks about past events without any help. they mastered this skill about 3 months and d...",
+        "expected": "INDEPENDENT",
+        "predicted": "INDEPENDENT",
+        "confidence": 0.9,
+        "correct": true,
+        "reasoning": "Selected INDEPENDENT with 100% of total vote weight. Key factors: keyword: Matched patterns for INDEPENDENT: mastered, consistently"
+      },
+      {
+        "response": "This is something Jessie does very well without any assistance. they first showed this ability when ...",
+        "expected": "INDEPENDENT",
+        "predicted": "INDEPENDENT",
+        "confidence": 0.9,
+        "correct": true,
+        "reasoning": "Selected INDEPENDENT with 100% of total vote weight. Key factors: keyword: Matched patterns for INDEPENDENT: very well, confidently"
+      },
+      {
+        "response": "Yes, Jessie demonstrates this ability independently. I've noticed they does this regularly, especial...",
+        "expected": "INDEPENDENT",
+        "predicted": "INDEPENDENT",
+        "confidence": 0.9,
+        "correct": true,
+        "reasoning": "Selected INDEPENDENT with 100% of total vote weight. Key factors: keyword: Matched patterns for INDEPENDENT: regularly, independently, Yes"
+      },
+      {
+        "response": "My child can curious about everything without any help. they mastered this skill about a couple of m...",
+        "expected": "INDEPENDENT",
+        "predicted": "INDEPENDENT",
+        "confidence": 0.9,
+        "correct": true,
+        "reasoning": "Selected INDEPENDENT with 100% of total vote weight. Key factors: keyword: Matched patterns for INDEPENDENT: mastered, consistently"
+      },
+      {
+        "response": "Jessie has completely mastered this skill. they does it on their own not only at home but also when ...",
+        "expected": "INDEPENDENT",
+        "predicted": "INDEPENDENT",
+        "confidence": 0.8,
+        "correct": true,
+        "reasoning": "Selected INDEPENDENT with 100% of total vote weight. Key factors: keyword: Matched patterns for INDEPENDENT: mastered, completely"
+      },
+      {
+        "response": "My child can gives empty dish to adults without any help. they mastered this skill about 3 months an...",
+        "expected": "INDEPENDENT",
+        "predicted": "INDEPENDENT",
+        "confidence": 0.9000000000000001,
+        "correct": true,
+        "reasoning": "Selected INDEPENDENT with 100% of total vote weight. Key factors: keyword: Matched patterns for INDEPENDENT: mastered, consistently"
+      },
+      {
+        "response": "Jessie shows early signs of this skill. they has tried 9 times in the past week, succeeding about 1 ...",
+        "expected": "EMERGING",
+        "predicted": "NOT_RATED",
+        "confidence": 0.0,
+        "correct": false,
+        "reasoning": "No valid scores available"
+      },
+      {
+        "response": "My child can shows empathy without any help. they mastered this skill about a couple of months and d...",
+        "expected": "INDEPENDENT",
+        "predicted": "INDEPENDENT",
+        "confidence": 0.9,
+        "correct": true,
+        "reasoning": "Selected INDEPENDENT with 100% of total vote weight. Key factors: keyword: Matched patterns for INDEPENDENT: mastered, consistently"
+      },
+      {
+        "response": "Definitely yes. Jessie is very independent with this skill and even helps friends with it. they demo...",
+        "expected": "INDEPENDENT",
+        "predicted": "INDEPENDENT",
+        "confidence": 0.9,
+        "correct": true,
+        "reasoning": "Selected INDEPENDENT with 100% of total vote weight. Key factors: keyword: Matched patterns for INDEPENDENT: independent, Definitely, yes"
+      },
+      {
+        "response": "Yes, Jessie demonstrates this ability independently. I've noticed they does this regularly, especial...",
+        "expected": "INDEPENDENT",
+        "predicted": "INDEPENDENT",
+        "confidence": 0.9,
+        "correct": true,
+        "reasoning": "Selected INDEPENDENT with 100% of total vote weight. Key factors: keyword: Matched patterns for INDEPENDENT: regularly, independently, Yes"
+      }
+    ],
+    "accuracy": 0.95,
+    "avg_confidence": 0.8350000000000002
+  }
+}

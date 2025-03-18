@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Milestone Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .alert {
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid transparent;
+            border-radius: 4px;
+        }
+        .alert-info {
+            color: #31708f;
+            background-color: #d9edf7;
+            border-color: #bce8f1;
+        }
+        .alert-success {
+            color: #3c763d;
+            background-color: #dff0d8;
+            border-color: #d6e9c6;
+        }
+        .alert-danger {
+            color: #a94442;
+            background-color: #f2dede;
+            border-color: #ebccd1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Milestone Test</h1>
+        
+        <div id="milestone-count" class="alert alert-info">
+            Loading milestone data...
+        </div>
+        
+        <div id="domain-list" class="alert alert-info">
+            Loading domains...
+        </div>
+        
+        <div id="milestone-sample" class="alert alert-info">
+            Loading milestone sample...
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const milestoneCountElement = document.getElementById('milestone-count');
+            const domainListElement = document.getElementById('domain-list');
+            const milestoneSampleElement = document.getElementById('milestone-sample');
+            
+            // Fetch milestone data
+            fetch('/test-milestones')
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Test endpoint response:', data);
+                    
+                    if (data.count) {
+                        milestoneCountElement.textContent = `${data.count} milestones available`;
+                        milestoneCountElement.className = 'alert alert-success';
+                    }
+                    
+                    if (data.domains && data.domains.length > 0) {
+                        domainListElement.textContent = `Domains (${data.domains.length}): ${data.domains.join(', ')}`;
+                        domainListElement.className = 'alert alert-success';
+                    }
+                    
+                    if (data.firstFew && data.firstFew.length > 0) {
+                        let sampleHtml = '<h3>Sample Milestones:</h3><ul>';
+                        data.firstFew.forEach(milestone => {
+                            sampleHtml += `<li><strong>${milestone.behavior}</strong> (${milestone.domain}, ${milestone.age_range})<br>${milestone.criteria}</li>`;
+                        });
+                        sampleHtml += '</ul>';
+                        milestoneSampleElement.innerHTML = sampleHtml;
+                        milestoneSampleElement.className = 'alert alert-success';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching milestones:', error);
+                    milestoneCountElement.textContent = `Error: ${error.message}`;
+                    milestoneCountElement.className = 'alert alert-danger';
+                });
+        });
+    </script>
+</body>
+</html> 

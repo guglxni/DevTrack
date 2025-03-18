@@ -1,0 +1,60 @@
+{
+  "name": "confusion_matrix",
+  "timestamp": "2025-03-12T13:30:21.785615",
+  "metrics": {
+    "confusion_matrix": {
+      "CANNOT_DO": {
+        "CANNOT_DO": 0,
+        "LOST_SKILL": 0,
+        "EMERGING": 0,
+        "WITH_SUPPORT": 0,
+        "INDEPENDENT": 0
+      },
+      "LOST_SKILL": {
+        "CANNOT_DO": 0,
+        "LOST_SKILL": 0,
+        "EMERGING": 0,
+        "WITH_SUPPORT": 0,
+        "INDEPENDENT": 0
+      },
+      "EMERGING": {
+        "CANNOT_DO": 0,
+        "LOST_SKILL": 0,
+        "EMERGING": 1,
+        "WITH_SUPPORT": 2,
+        "INDEPENDENT": 0
+      },
+      "WITH_SUPPORT": {
+        "CANNOT_DO": 0,
+        "LOST_SKILL": 0,
+        "EMERGING": 0,
+        "WITH_SUPPORT": 0,
+        "INDEPENDENT": 0
+      },
+      "INDEPENDENT": {
+        "CANNOT_DO": 0,
+        "LOST_SKILL": 0,
+        "EMERGING": 0,
+        "WITH_SUPPORT": 0,
+        "INDEPENDENT": 0
+      }
+    },
+    "samples": 3,
+    "CANNOT_DO_precision": 0,
+    "CANNOT_DO_recall": 0,
+    "CANNOT_DO_f1": 0,
+    "LOST_SKILL_precision": 0,
+    "LOST_SKILL_recall": 0,
+    "LOST_SKILL_f1": 0,
+    "EMERGING_precision": 1.0,
+    "EMERGING_recall": 0.3333333333333333,
+    "EMERGING_f1": 0.5,
+    "WITH_SUPPORT_precision": 0.0,
+    "WITH_SUPPORT_recall": 0,
+    "WITH_SUPPORT_f1": 0,
+    "INDEPENDENT_precision": 0,
+    "INDEPENDENT_recall": 0,
+    "INDEPENDENT_f1": 0
+  },
+  "details": {}
+}

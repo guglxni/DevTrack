@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevTrack Assessment API</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <style>
+        body {
+            padding-top: 2rem;
+            background-color: #f8f9fa;
+        }
+        .card {
+            margin-bottom: 1.5rem;
+            border: none;
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+            transition: transform 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+        }
+        .card-header {
+            background-color: #563d7c;
+            color: white;
+            font-weight: 500;
+        }
+        .header-icon {
+            margin-right: 0.5rem;
+        }
+        .api-url {
+            background-color: #f8f9fa;
+            padding: 0.5rem;
+            border-radius: 0.25rem;
+            font-family: monospace;
+            margin-top: 0.5rem;
+        }
+        pre {
+            background-color: #f8f9fa;
+            padding: 1rem;
+            border-radius: 0.25rem;
+        }
+        .result-container {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 0.25rem;
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="mb-4">DevTrack Assessment API</h1>
+                
+                <!-- Direct milestone count display -->
+                <div id="direct-milestone-count" class="alert alert-info mb-3">
+                    Loading milestone data directly...
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="comprehensive-tab" data-bs-toggle="tab" data-bs-target="#comprehensive" type="button" role="tab" aria-controls="comprehensive" aria-selected="true">Comprehensive Assessment</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="dashboards-tab" data-bs-toggle="tab" data-bs-target="#dashboards" type="button" role="tab" aria-controls="dashboards" aria-selected="false">API Dashboards</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="health-tab" data-bs-toggle="tab" data-bs-target="#health" type="button" role="tab" aria-controls="health" aria-selected="false">API Health</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="direct-test-tab" data-bs-toggle="tab" data-bs-target="#direct-test" type="button" role="tab" aria-controls="direct-test" aria-selected="false">Direct Test</button>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card-body">
+                        <div class="tab-content" id="myTabContent">
+                            <!-- Comprehensive Assessment Tab -->
+                            <div class="tab-pane fade show active" id="comprehensive" role="tabpanel" aria-labelledby="comprehensive-tab">
+                                <h5 class="card-title">Comprehensive Assessment</h5>
+                                <form id="comprehensive-form">
+                                    <div class="mb-3">
+                                        <label for="question" class="form-label">Question</label>
+                                        <input type="text" class="form-control" id="question" placeholder="Does your child recognize familiar people?">
+                    </div>
+                                    
+                                    <!-- Milestone count display -->
+                                    <div id="milestone-count" class="alert alert-info mb-3">
+                                        Loading milestone data...
+            </div>
+            
+                                    <div class="mb-3" id="milestone-select-container">
+                                        <label class="form-label">Milestone Selection</label>
+                                        <div class="row">
+                                            <div class="col-md-4 mb-2">
+                                                <select id="domain-select" class="form-select">
+                                                    <option value="">Select Domain</option>
+                                                </select>
+                    </div>
+                                            <div class="col-md-4 mb-2">
+                                                <select id="age-range-select" class="form-select" disabled>
+                                                    <option value="">Select Age Range</option>
+                                                </select>
+                        </div>
+                                            <div class="col-md-4 mb-2">
+                                                <select id="milestone-select" class="form-select" disabled>
+                                                    <option value="">Select Milestone</option>
+                                                </select>
+                    </div>
+                </div>
+            </div>
+            
+                                    <div id="milestone-criteria" class="mb-3">
+                                        <!-- Milestone criteria will be displayed here -->
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <label for="parent-response" class="form-label">Parent/Caregiver Response</label>
+                                        <textarea class="form-control" id="parent-response" rows="3" placeholder="My child can recognize familiar people and smiles when they see them."></textarea>
+                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <button type="button" id="submit-assessment" class="btn btn-primary">Submit Assessment</button>
+                    </div>
+                                </form>
+                                
+                                <div id="assessment-result" class="mt-4" style="display: none;">
+                                    <h5>Assessment Result</h5>
+                                    <div id="result-content" class="alert alert-info">
+                                        <!-- Results will be displayed here -->
+                </div>
+            </div>
+        </div>
+
+                            <!-- API Dashboards Tab -->
+                            <div class="tab-pane fade" id="dashboards" role="tabpanel" aria-labelledby="dashboards-tab">
+                                <h5 class="card-title">API Dashboards</h5>
+                                <div class="list-group">
+                                    <a href="/project-overview/" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <h6 class="mb-1">Project Overview</h6>
+                                            <p class="mb-1 text-muted">Overview of the DevTrack Assessment System</p>
+            </div>
+                                        <span class="badge bg-primary rounded-pill">
+                                            <i class="bi bi-arrow-right"></i>
+                                        </span>
+                                    </a>
+                                    <a href="/improved-scoring/" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <h6 class="mb-1">Improved Scoring Interface</h6>
+                                            <p class="mb-1 text-muted">Enhanced scoring with NLP and machine learning</p>
+                    </div>
+                                        <span class="badge bg-primary rounded-pill">
+                                            <i class="bi bi-arrow-right"></i>
+                                        </span>
+                                    </a>
+                                    <a href="/batch-processing/" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <h6 class="mb-1">Batch Processing</h6>
+                                            <p class="mb-1 text-muted">Process multiple assessments at once</p>
+                    </div>
+                                        <span class="badge bg-primary rounded-pill">
+                                            <i class="bi bi-arrow-right"></i>
+                                        </span>
+                                    </a>
+                                    <a href="/active-learning/" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <h6 class="mb-1">Active Learning Dashboard</h6>
+                                            <p class="mb-1 text-muted">Review and provide feedback on uncertain cases</p>
+                </div>
+                                        <span class="badge bg-primary rounded-pill">
+                                            <i class="bi bi-arrow-right"></i>
+                                        </span>
+                                    </a>
+                                    <a href="/r2r/" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <h6 class="mb-1">R2R Dashboard</h6>
+                                            <p class="mb-1 text-muted">Retrieval-to-Response knowledge base and generation</p>
+                                        </div>
+                                        <span class="badge bg-primary rounded-pill">
+                                            <i class="bi bi-arrow-right"></i>
+                                        </span>
+                                    </a>
+                                    <a href="/gpu-acceleration/" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <h6 class="mb-1">GPU Acceleration Dashboard</h6>
+                                            <p class="mb-1 text-muted">Monitor and optimize Metal GPU acceleration performance</p>
+                                        </div>
+                                        <span class="badge bg-primary rounded-pill">
+                                            <i class="bi bi-arrow-right"></i>
+                                        </span>
+                                    </a>
+                                    <a href="/docs" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <h6 class="mb-1">API Documentation</h6>
+                                            <p class="mb-1 text-muted">Interactive API documentation with Swagger UI</p>
+            </div>
+                                        <span class="badge bg-primary rounded-pill">
+                                            <i class="bi bi-arrow-right"></i>
+                                        </span>
+                        </a>
+                    </div>
+                </div>
+                            
+                            <!-- API Health Tab -->
+                            <div class="tab-pane fade" id="health" role="tabpanel" aria-labelledby="health-tab">
+                                <h5 class="card-title">API Health</h5>
+                                <div id="health-status" class="alert alert-info">
+                                    Checking API health...
+                                </div>
+                                <div id="llm-status" class="alert alert-info">
+                                    Checking LLM status...
+                                </div>
+                                <button id="refresh-health" class="btn btn-primary">Refresh Health Status</button>
+            </div>
+            
+                            <!-- Direct Test Tab -->
+                            <div class="tab-pane fade" id="direct-test" role="tabpanel" aria-labelledby="direct-test-tab">
+                                <h5 class="card-title">Direct Test</h5>
+                                <form id="direct-test-form">
+                                    <div class="mb-3">
+                                        <label for="direct-question" class="form-label">Question</label>
+                                        <input type="text" class="form-control" id="direct-question" placeholder="Does your child bang objects on table?">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="direct-milestone" class="form-label">Milestone</label>
+                                        <input type="text" class="form-control" id="direct-milestone" placeholder="Bangs objects on table">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="direct-response" class="form-label">Parent/Caregiver Response</label>
+                                        <textarea class="form-control" id="direct-response" rows="3" placeholder="Yes, he does this all the time independently"></textarea>
+                    </div>
+                                    <div class="mb-3">
+                                        <button type="button" id="submit-direct-test" class="btn btn-primary">Submit Direct Test</button>
+                    </div>
+                                </form>
+                                
+                                <div id="direct-test-result" class="mt-4" style="display: none;">
+                                    <h5>Test Result</h5>
+                                    <div id="direct-result-content" class="alert alert-info">
+                                        <!-- Results will be displayed here -->
+                </div>
+            </div>
+        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Fetch milestones
+            fetchMilestones();
+            
+            // Check API health
+            checkApiHealth();
+            
+            // Set up event listeners
+            document.getElementById('domain-select').addEventListener('change', updateAgeRangeSelect);
+            document.getElementById('age-range-select').addEventListener('change', updateMilestoneSelect);
+            document.getElementById('milestone-select').addEventListener('change', updateMilestoneCriteria);
+            document.getElementById('submit-assessment').addEventListener('click', submitAssessment);
+            document.getElementById('refresh-health').addEventListener('click', checkApiHealth);
+            document.getElementById('submit-direct-test').addEventListener('click', submitDirectTest);
+        });
+
+        // Fetch milestones from the API
+        async function fetchMilestones() {
+            try {
+                const response = await fetch('/all-milestones');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const milestones = await response.json();
+                
+                // Update milestone count displays
+                document.getElementById('milestone-count').innerHTML = `Loaded ${milestones.length} milestones`;
+                document.getElementById('direct-milestone-count').innerHTML = `Loaded ${milestones.length} milestones from the API`;
+                
+                // Populate domain select
+                const domainSelect = document.getElementById('domain-select');
+                const domains = [...new Set(milestones.map(m => m.domain))].sort();
+                
+                domains.forEach(domain => {
+                    const option = document.createElement('option');
+                    option.value = domain;
+                    option.textContent = getDomainName(domain);
+                    domainSelect.appendChild(option);
+                });
+                
+                // Store milestones in a global variable for later use
+                window.allMilestones = milestones;
+            } catch (error) {
+                console.error('Error fetching milestones:', error);
+                document.getElementById('milestone-count').innerHTML = `Error loading milestones: ${error.message}`;
+                document.getElementById('direct-milestone-count').innerHTML = `Error loading milestones: ${error.message}`;
+            }
+        }
+        
+        // Update age range select based on selected domain
+        function updateAgeRangeSelect() {
+            const domainSelect = document.getElementById('domain-select');
+            const ageRangeSelect = document.getElementById('age-range-select');
+            const milestoneSelect = document.getElementById('milestone-select');
+            
+            // Clear previous options
+            ageRangeSelect.innerHTML = '<option value="">Select Age Range</option>';
+            milestoneSelect.innerHTML = '<option value="">Select Milestone</option>';
+            
+            if (domainSelect.value) {
+                // Enable age range select
+                ageRangeSelect.disabled = false;
+                
+                // Filter milestones by domain
+                const domainMilestones = window.allMilestones.filter(m => m.domain === domainSelect.value);
+                
+                // Get unique age ranges
+                const ageRanges = [...new Set(domainMilestones.map(m => m.age_range))].sort((a, b) => {
+                    // Sort by the lower bound of the age range
+                    const aLower = parseInt(a.split('-')[0]);
+                    const bLower = parseInt(b.split('-')[0]);
+                    return aLower - bLower;
+                });
+                
+                // Add age range options
+                ageRanges.forEach(ageRange => {
+                    const option = document.createElement('option');
+                    option.value = ageRange;
+                    option.textContent = ageRange;
+                    ageRangeSelect.appendChild(option);
+                });
+            } else {
+                // Disable age range select
+                ageRangeSelect.disabled = true;
+                milestoneSelect.disabled = true;
+            }
+            
+            // Clear milestone criteria
+            document.getElementById('milestone-criteria').innerHTML = '';
+        }
+        
+        // Update milestone select based on selected domain and age range
+        function updateMilestoneSelect() {
+            const domainSelect = document.getElementById('domain-select');
+            const ageRangeSelect = document.getElementById('age-range-select');
+            const milestoneSelect = document.getElementById('milestone-select');
+            
+            // Clear previous options
+            milestoneSelect.innerHTML = '<option value="">Select Milestone</option>';
+            
+            if (domainSelect.value && ageRangeSelect.value) {
+                // Enable milestone select
+                milestoneSelect.disabled = false;
+                
+                // Filter milestones by domain and age range
+                const filteredMilestones = window.allMilestones.filter(m => 
+                    m.domain === domainSelect.value && 
+                    m.age_range === ageRangeSelect.value
+                );
+                
+                // Add milestone options
+                filteredMilestones.forEach(milestone => {
+                    const option = document.createElement('option');
+                    option.value = milestone.behavior;
+                    option.textContent = milestone.behavior;
+                    option.dataset.criteria = milestone.criteria || '';
+                    milestoneSelect.appendChild(option);
+                });
+            } else {
+                // Disable milestone select
+                milestoneSelect.disabled = true;
+            }
+            
+            // Clear milestone criteria
+            document.getElementById('milestone-criteria').innerHTML = '';
+        }
+        
+        // Update milestone criteria based on selected milestone
+        function updateMilestoneCriteria() {
+            const milestoneSelect = document.getElementById('milestone-select');
+            const milestoneCriteria = document.getElementById('milestone-criteria');
+            
+            if (milestoneSelect.value) {
+                const selectedOption = milestoneSelect.options[milestoneSelect.selectedIndex];
+                const criteria = selectedOption.dataset.criteria;
+                
+                if (criteria) {
+                    milestoneCriteria.innerHTML = `
+                        <div class="alert alert-secondary">
+                            <strong>Criteria:</strong> ${criteria}
+                        </div>
+                    `;
+                } else {
+                    milestoneCriteria.innerHTML = '';
+                }
+                
+                // Update question field with the milestone
+                const questionField = document.getElementById('question');
+                if (!questionField.value) {
+                    questionField.value = `Does your child ${milestoneSelect.value.toLowerCase()}?`;
+                }
+            } else {
+                milestoneCriteria.innerHTML = '';
+            }
+        }
+        
+        // Submit assessment
+        async function submitAssessment() {
+            const question = document.getElementById('question').value;
+            const milestone = document.getElementById('milestone-select').value;
+            const response = document.getElementById('parent-response').value;
+            
+            if (!question || !milestone || !response) {
+                alert('Please fill in all fields');
+                return;
+            }
+            
+            try {
+                // Show loading state
+                document.getElementById('submit-assessment').disabled = true;
+                document.getElementById('submit-assessment').textContent = 'Submitting...';
+                
+                // Prepare request data for smart-scoring endpoint
+                const requestData = {
+                    parent_responses: [{
+                        id: "web-form",
+                        question: question,
+                        milestone_behavior: milestone,
+                        response: response
+                    }]
+                };
+                
+                // Send request to API using the smart-scoring endpoint
+                const apiResponse = await fetch('/smart-scoring/smart-comprehensive-assessment', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(requestData)
+                });
+                
+                if (!apiResponse.ok) {
+                    throw new Error(`HTTP error! status: ${apiResponse.status}`);
+                }
+                
+                const results = await apiResponse.json();
+                
+                // Check if we got a valid response
+                if (!results || results.length === 0) {
+                    throw new Error('No results returned from the API');
+                }
+                
+                // Get the first result
+                const result = results[0];
+                
+                // Display result
+                const resultContent = document.getElementById('result-content');
+                const assessmentResult = document.getElementById('assessment-result');
+                
+                let scoreClass = 'alert-info';
+                if (result.score === 4) {
+                    scoreClass = 'alert-success';
+                } else if (result.score === 3) {
+                    scoreClass = 'alert-primary';
+                } else if (result.score === 2) {
+                    scoreClass = 'alert-warning';
+                } else if (result.score === 1) {
+                    scoreClass = 'alert-danger';
+                } else if (result.score === 0) {
+                    scoreClass = 'alert-dark';
+                }
+                
+                // Extract domain from metadata if available
+                const domain = result.metadata && result.metadata.domain ? result.metadata.domain : "Unknown";
+                
+                resultContent.className = `alert ${scoreClass}`;
+                resultContent.innerHTML = `
+                    <h6>Score: ${result.label} (${result.score})</h6>
+                    <p><strong>Confidence:</strong> ${(result.confidence * 100).toFixed(1)}%</p>
+                    <p><strong>Domain:</strong> ${domain}</p>
+                    ${result.reasoning ? `<p><strong>Reasoning:</strong> ${result.reasoning}</p>` : ''}
+                `;
+                
+                assessmentResult.style.display = 'block';
+            } catch (error) {
+                console.error('Error submitting assessment:', error);
+                alert(`Error submitting assessment: ${error.message}`);
+            } finally {
+                // Reset button state
+                document.getElementById('submit-assessment').disabled = false;
+                document.getElementById('submit-assessment').textContent = 'Submit Assessment';
+            }
+        }
+        
+        // Submit direct test
+        async function submitDirectTest() {
+            const question = document.getElementById('direct-question').value;
+            const milestone = document.getElementById('direct-milestone').value;
+            const response = document.getElementById('direct-response').value;
+            
+            if (!question || !milestone || !response) {
+                alert('Please fill in all fields');
+                return;
+            }
+            
+            try {
+                // Show loading state
+                document.getElementById('submit-direct-test').disabled = true;
+                document.getElementById('submit-direct-test').textContent = 'Submitting...';
+                
+                // Prepare request data
+                const requestData = {
+                    question: question,
+                    milestone: milestone,
+                    response: response
+                };
+                
+                // Send request to API
+                const apiResponse = await fetch('/llm-scoring/direct-test', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(requestData)
+                });
+                
+                if (!apiResponse.ok) {
+                    throw new Error(`HTTP error! status: ${apiResponse.status}`);
+                }
+                
+                const result = await apiResponse.json();
+                
+                // Display result
+                const resultContent = document.getElementById('direct-result-content');
+                const testResult = document.getElementById('direct-test-result');
+                
+                let scoreClass = 'alert-info';
+                if (result.score === 4) {
+                    scoreClass = 'alert-success';
+                } else if (result.score === 3) {
+                    scoreClass = 'alert-primary';
+                } else if (result.score === 2) {
+                    scoreClass = 'alert-warning';
+                } else if (result.score === 1) {
+                    scoreClass = 'alert-danger';
+                } else if (result.score === 0) {
+                    scoreClass = 'alert-dark';
+                }
+                
+                resultContent.className = `alert ${scoreClass}`;
+                resultContent.innerHTML = `
+                    <h6>Score: ${result.score_label} (${result.score})</h6>
+                    <p><strong>Confidence:</strong> ${(result.confidence * 100).toFixed(1)}%</p>
+                    <p><strong>Reasoning:</strong> ${result.reasoning}</p>
+                `;
+                
+                testResult.style.display = 'block';
+            } catch (error) {
+                console.error('Error submitting direct test:', error);
+                alert(`Error submitting direct test: ${error.message}`);
+            } finally {
+                // Reset button state
+                document.getElementById('submit-direct-test').disabled = false;
+                document.getElementById('submit-direct-test').textContent = 'Submit Direct Test';
+            }
+        }
+        
+        // Check API health
+        async function checkApiHealth() {
+            try {
+                // Check main API health
+                const healthResponse = await fetch('/health');
+                if (!healthResponse.ok) {
+                    throw new Error(`HTTP error! status: ${healthResponse.status}`);
+                }
+                
+                const healthData = await healthResponse.json();
+                document.getElementById('health-status').className = 'alert alert-success';
+                document.getElementById('health-status').innerHTML = `
+                    <h6>API Status: Healthy</h6>
+                    <p><strong>Version:</strong> ${healthData.version}</p>
+                `;
+                
+                // Check LLM status
+                try {
+                    const llmResponse = await fetch('/llm-scoring/health');
+                    if (!llmResponse.ok) {
+                        throw new Error(`HTTP error! status: ${llmResponse.status}`);
+                    }
+                    
+                    const llmData = await llmResponse.json();
+                    
+                    if (llmData.status === 'available') {
+                        document.getElementById('llm-status').className = 'alert alert-success';
+                        document.getElementById('llm-status').innerHTML = `
+                            <h6>LLM Status: Available</h6>
+                            <p><strong>Model:</strong> ${llmData.model || 'Unknown'}</p>
+                            <p><strong>Mode:</strong> ${llmData.mode || 'Unknown'}</p>
+                        `;
+                    } else {
+                        document.getElementById('llm-status').className = 'alert alert-warning';
+                        document.getElementById('llm-status').innerHTML = `
+                            <h6>LLM Status: Limited</h6>
+                            <p><strong>Message:</strong> ${llmData.message || 'Unknown issue'}</p>
+                        `;
+                    }
+                } catch (llmError) {
+                    document.getElementById('llm-status').className = 'alert alert-danger';
+                    document.getElementById('llm-status').innerHTML = `
+                        <h6>LLM Status: Unavailable</h6>
+                        <p><strong>Error:</strong> ${llmError.message}</p>
+                    `;
+                }
+            } catch (error) {
+                console.error('Error checking API health:', error);
+                document.getElementById('health-status').className = 'alert alert-danger';
+                document.getElementById('health-status').innerHTML = `
+                    <h6>API Status: Unavailable</h6>
+                    <p><strong>Error:</strong> ${error.message}</p>
+                `;
+                
+                document.getElementById('llm-status').className = 'alert alert-danger';
+                document.getElementById('llm-status').innerHTML = `
+                    <h6>LLM Status: Unavailable</h6>
+                    <p><strong>Error:</strong> API is not responding</p>
+                `;
+            }
+        }
+        
+        // Helper function to get full domain name
+        function getDomainName(code) {
+            const domainMap = {
+                'GM': 'Gross Motor',
+                'FM': 'Fine Motor',
+                'EL': 'Expressive Language',
+                'RL': 'Receptive Language',
+                'SOC': 'Social',
+                'Emo': 'Emotional',
+                'ADL': 'Activities of Daily Living',
+                'Cog': 'Cognitive'
+            };
+            
+            return domainMap[code] || code;
+        }
+    </script>
+</body>
+</html> 

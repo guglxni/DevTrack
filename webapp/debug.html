@@ -1,0 +1,25 @@
+
+    <html>
+      <head>
+        <title>Debug</title>
+      </head>
+      <body>
+        <h1>Debug</h1>
+        <div id="output"></div>
+        <script>
+          fetch('/milestones')
+            .then(response => response.json())
+            .then(data => {
+              document.getElementById('output').innerHTML = 
+                '<p>Loaded ' + data.length + ' milestones</p>' +
+                '<p>Domains: ' + Array.from(new Set(data.map(m => m.domain))).join(', ') + '</p>' +
+                '<p>First milestone: ' + data[0].behavior + ' (' + data[0].domain + ', ' + data[0].age_range + ')</p>';
+            })
+            .catch(error => {
+              document.getElementById('output').innerHTML = 
+                '<p>Error: ' + error.message + '</p>';
+            });
+        </script>
+      </body>
+    </html>
+  

@@ -1,0 +1,2205 @@
+{
+  "configs": [
+    {
+      "name": "standard",
+      "description": "Standard scoring without age-specific knowledge"
+    },
+    {
+      "name": "age_prompts",
+      "description": "Scoring with age-specific prompt templates"
+    },
+    {
+      "name": "age_adjusted",
+      "description": "Scoring with full age adjustment (prompts + confidence)"
+    }
+  ],
+  "raw_results": {
+    "standard": [
+      {
+        "case_id": 0,
+        "age_months": 0,
+        "domain": "social",
+        "age_group": "0-12",
+        "expected_score": "CANNOT_DO",
+        "score": "CANNOT_DO",
+        "confidence": 0.7922879301702004,
+        "reasoning": "Mock reasoning: CANNOT_DO detected with confidence 0.79"
+      },
+      {
+        "case_id": 1,
+        "age_months": 0,
+        "domain": "social",
+        "age_group": "0-12",
+        "expected_score": "WITH_SUPPORT",
+        "score": "EMERGING",
+        "confidence": 0.7644789281571617,
+        "reasoning": "Mock reasoning: EMERGING detected with confidence 0.76"
+      },
+      {
+        "case_id": 2,
+        "age_months": 0,
+        "domain": "communication",
+        "age_group": "0-12",
+        "expected_score": "INDEPENDENT",
+        "score": "EMERGING",
+        "confidence": 0.8855168606053694,
+        "reasoning": "Mock reasoning: EMERGING detected with confidence 0.89"
+      },
+      {
+        "case_id": 3,
+        "age_months": 0,
+        "domain": "social",
+        "age_group": "0-12",
+        "expected_score": "INDEPENDENT",
+        "score": "EMERGING",
+        "confidence": 0.7625171550088442,
+        "reasoning": "Mock reasoning: EMERGING detected with confidence 0.76"
+      },
+      {
+        "case_id": 4,
+        "age_months": 0,
+        "domain": "social",
+        "age_group": "0-12",
+        "expected_score": "INDEPENDENT",
+        "score": "WITH_SUPPORT",
+        "confidence": 0.7540399716499483,
+        "reasoning": "Mock reasoning: WITH_SUPPORT detected with confidence 0.75"
+      },
+      {
+        "case_id": 5,
+        "age_months": 0,
+        "domain": "cognitive",
+        "age_group": "0-12",
+        "expected_score": "EMERGING",
+        "score": "EMERGING",
+        "confidence": 0.7311842951126407,
+        "reasoning": "Mock reasoning: EMERGING detected with confidence 0.73"
+      },
+      {
+        "case_id": 6,
+        "age_months": 60,
+        "domain": "cognitive",
+        "age_group": "37-60",
+        "expected_score": "LOST_SKILL",
+        "score": "CANNOT_DO",
+        "confidence": 0.7291381399579446,
+        "reasoning": "Mock reasoning: CANNOT_DO detected with confidence 0.73"
+      },
+      {
+        "case_id": 7,
+        "age_months": 0,
+        "domain": "social",
+        "age_group": "0-12",
+        "expected_score": "WITH_SUPPORT",
+        "score": "INDEPENDENT",
+        "confidence": 0.8037108033412943,
+        "reasoning": "Mock reasoning: INDEPENDENT detected with confidence 0.80"
+      },
+      {
+        "case_id": 8,
+        "age_months": 60,
+        "domain": "cognitive",
+        "age_group": "37-60",
+        "expected_score": "WITH_SUPPORT",
+        "score": "WITH_SUPPORT",
+        "confidence": 0.7287185309914048,
+        "reasoning": "Mock reasoning: WITH_SUPPORT detected with confidence 0.73"
+      },
+      {
+        "case_id": 9,
+        "age_months": 0,
+        "domain": "communication",
+        "age_group": "0-12",
+        "expected_score": "INDEPENDENT",
+        "score": "EMERGING",
+        "confidence": 0.7887279851295402,
+        "reasoning": "Mock reasoning: EMERGING detected with confidence 0.79"
+      },
+      {
+        "case_id": 10,
+        "age_months": 60,
+        "domain": "cognitive",
+        "age_group": "37-60",
+        "expected_score": "INDEPENDENT",
+        "score": "EMERGING",
+        "confidence": 0.7926172469641607,
+        "reasoning": "Mock reasoning: EMERGING detected with confidence 0.79"
+      },
+      {
+        "case_id": 11,
+        "age_months": 60,
+        "domain": "cognitive",
+        "age_group": "37-60",
+        "expected_score": "WITH_SUPPORT",
+        "score": "WITH_SUPPORT",
+        "confidence": 0.7037810845123947,
+        "reasoning": "Mock reasoning: WITH_SUPPORT detected with confidence 0.70"
+      },
+      {
+        "case_id": 12,
+        "age_months": 0,
+        "domain": "motor",
+        "age_group": "0-12",
+        "expected_score": "CANNOT_DO",
+        "score": "CANNOT_DO",
+        "confidence": 0.790320982182247,
+        "reasoning": "Mock reasoning: CANNOT_DO detected with confidence 0.79"
+      },
+      {
+        "case_id": 13,
+        "age_months": 60,
+        "domain": "cognitive",
+        "age_group": "37-60",
+        "expected_score": "WITH_SUPPORT",
+        "score": "WITH_SUPPORT",
+        "confidence": 0.7352482709458334,
+        "reasoning": "Mock reasoning: WITH_SUPPORT detected with confidence 0.74"
+      },
+      {
+        "case_id": 14,
+        "age_months": 0,
+        "domain": "cognitive",
+        "age_group": "0-12",
+        "expected_score": "WITH_SUPPORT",
+        "score": "WITH_SUPPORT",
+        "confidence": 0.8720532490702209,
+        "reasoning": "Mock reasoning: WITH_SUPPORT detected with confidence 0.87"
+      },
+      {
+        "case_id": 15,
+        "age_months": 60,
+        "domain": "cognitive",
+        "age_group": "37-60",
+        "expected_score": "WITH_SUPPORT",
+        "score": "WITH_SUPPORT",
+        "confidence": 0.8078128928813622,
+        "reasoning": "Mock reasoning: WITH_SUPPORT detected with confidence 0.81"
+      },
+      {
+        "case_id": 16,
+        "age_months": 60,
+        "domain": "cognitive",
+        "age_group": "37-60",
+        "expected_score": "WITH_SUPPORT",
+        "score": "WITH_SUPPORT",
+        "confidence": 0.7312637321069099,
+        "reasoning": "Mock reasoning: WITH_SUPPORT detected with confidence 0.73"
+      },
+      {
+        "case_id": 17,
+        "age_months": 60,
+        "domain": "cognitive",
+        "age_group": "37-60",
+        "expected_score": "INDEPENDENT",
+        "score": "EMERGING",
+        "confidence": 0.7862779512870915,
+        "reasoning": "Mock reasoning: EMERGING detected with confidence 0.79"
+      },
+      {
+        "case_id": 18,
+        "age_months": 0,
+        "domain": "cognitive",
+        "age_group": "0-12",
+        "expected_score": "INDEPENDENT",
+        "score": "WITH_SUPPORT",
+        "confidence": 0.8738467608198286,
+        "reasoning": "Mock reasoning: WITH_SUPPORT detected with confidence 0.87"
+      },
+      {
+        "case_id": 19,
+        "age_months": 60,
+        "domain": "cognitive",
+        "age_group": "37-60",
+        "expected_score": "INDEPENDENT",
+        "score": "EMERGING",
+        "confidence": 0.8752563164755562,
+        "reasoning": "Mock reasoning: EMERGING detected with confidence 0.88"
+      },
+      {
+        "case_id": 20,
+        "age_months": 0,
+        "domain": "motor",
+        "age_group": "0-12",
+        "expected_score": "INDEPENDENT",
+        "score": "INDEPENDENT",
+        "confidence": 0.8125827099118922,
+        "reasoning": "Mock reasoning: INDEPENDENT detected with confidence 0.81"
+      },
+      {
+        "case_id": 21,
+        "age_months": 0,
+        "domain": "communication",
+        "age_group": "0-12",
+        "expected_score": "EMERGING",
+        "score": "EMERGING",
+        "confidence": 0.7414030062661325,
+        "reasoning": "Mock reasoning: EMERGING detected with confidence 0.74"
+      },
+      {
+        "case_id": 22,
+        "age_months": 0,
+        "domain": "cognitive",
+        "age_group": "0-12",
+        "expected_score": "CANNOT_DO",
+        "score": "EMERGING",
+        "confidence": 0.8875231967745868,
+        "reasoning": "Mock reasoning: EMERGING detected with confidence 0.89"
+      },
+      {
+        "case_id": 23,
+        "age_months": 0,
+        "domain": "social",
+        "age_group": "0-12",
+        "expected_score": "CANNOT_DO",
+        "score": "CANNOT_DO",
+        "confidence": 0.8928543392749451,
+        "reasoning": "Mock reasoning: CANNOT_DO detected with confidence 0.89"
+      },
+      {
+        "case_id": 24,
+        "age_months": 60,
+        "domain": "cognitive",
+        "age_group": "37-60",
+        "expected_score": "INDEPENDENT",
+        "score": "EMERGING",
+        "confidence": 0.814819192464348,
+        "reasoning": "Mock reasoning: EMERGING detected with confidence 0.81"
+      },
+      {
+        "case_id": 25,
+        "age_months": 0,
+        "domain": "cognitive",
+        "age_group": "0-12",
+        "expected_score": "CANNOT_DO",
+        "score": "CANNOT_DO",
+        "confidence": 0.7442544050631226,
+        "reasoning": "Mock reasoning: CANNOT_DO detected with confidence 0.74"
+      },
+      {
+        "case_id": 26,
+        "age_months": 0,
+        "domain": "social",
+        "age_group": "0-12",
+        "expected_score": "WITH_SUPPORT",
+        "score": "EMERGING",
+        "confidence": 0.881894785423784,
+        "reasoning": "Mock reasoning: EMERGING detected with confidence 0.88"
+      },
+      {
+        "case_id": 27,
+        "age_months": 60,
+        "domain": "cognitive",
+        "age_group": "37-60",
+        "expected_score": "WITH_SUPPORT",
+        "score": "WITH_SUPPORT",
+        "confidence": 0.7569719141954712,
+        "reasoning": "Mock reasoning: WITH_SUPPORT detected with confidence 0.76"
+      },
+      {
+        "case_id": 28,
+        "age_months": 0,
+        "domain": "motor",
+        "age_group": "0-12",
+        "expected_score": "INDEPENDENT",
+        "score": "INDEPENDENT",
+        "confidence": 0.7322358746354235,
+        "reasoning": "Mock reasoning: INDEPENDENT detected with confidence 0.73"
+      },
+      {
+        "case_id": 29,
+        "age_months": 60,
+        "domain": "cognitive",
+        "age_group": "37-60",
+        "expected_score": "INDEPENDENT",
+        "score": "WITH_SUPPORT",
+        "confidence": 0.730289322697535,
+        "reasoning": "Mock reasoning: WITH_SUPPORT detected with confidence 0.73"
+      },
+      {
+        "case_id": 30,
+        "age_months": 0,
+        "domain": "social",
+        "age_group": "0-12",
+        "expected_score": "EMERGING",
+        "score": "EMERGING",
+        "confidence": 0.7769276447984376,
+        "reasoning": "Mock reasoning: EMERGING detected with confidence 0.78"
+      },
+      {
+        "case_id": 31,
+        "age_months": 60,
+        "domain": "cognitive",
+        "age_group": "37-60",
+        "expected_score": "LOST_SKILL",
+        "score": "CANNOT_DO",
+        "confidence": 0.7692789261091054,
+        "reasoning": "Mock reasoning: CANNOT_DO detected with confidence 0.77"
+      },
+      {
+        "case_id": 32,
+        "age_months": 0,
+        "domain": "motor",
+        "age_group": "0-12",
+        "expected_score": "CANNOT_DO",
+        "score": "CANNOT_DO",
+        "confidence": 0.8599536171008504,
+        "reasoning": "Mock reasoning: CANNOT_DO detected with confidence 0.86"
+      },
+      {
+        "case_id": 33,
+        "age_months": 60,
+        "domain": "cognitive",
+        "age_group": "37-60",
+        "expected_score": "INDEPENDENT",
+        "score": "EMERGING",
+        "confidence": 0.7332449186441927,
+        "reasoning": "Mock reasoning: EMERGING detected with confidence 0.73"
+      },
+      {
+        "case_id": 34,
+        "age_months": 0,
+        "domain": "communication",
+        "age_group": "0-12",
+        "expected_score": "INDEPENDENT",
+        "score": "EMERGING",
+        "confidence": 0.7893735918000689,
+        "reasoning": "Mock reasoning: EMERGING detected with confidence 0.79"
+      },
+      {
+        "case_id": 35,
+        "age_months": 60,
+        "domain": "cognitive",
+        "age_group": "37-60",
+        "expected_score": "LOST_SKILL",
+        "score": "CANNOT_DO",
+        "confidence": 0.84745696712787,
+        "reasoning": "Mock reasoning: CANNOT_DO detected with confidence 0.85"
+      },
+      {
+        "case_id": 36,
+        "age_months": 60,
+        "domain": "cognitive",
+        "age_group": "37-60",
+        "expected_score": "WITH_SUPPORT",
+        "score": "WITH_SUPPORT",
+        "confidence": 0.7652050988054175,
+        "reasoning": "Mock reasoning: WITH_SUPPORT detected with confidence 0.77"
+      },
+      {
+        "case_id": 37,
+        "age_months": 0,
+        "domain": "communication",
+        "age_group": "0-12",
+        "expected_score": "EMERGING",
+        "score": "LOST_SKILL",
+        "confidence": 0.8548309509281881,
+        "reasoning": "Mock reasoning: LOST_SKILL detected with confidence 0.85"
+      },
+      {
+        "case_id": 38,
+        "age_months": 60,
+        "domain": "cognitive",
+        "age_group": "37-60",
+        "expected_score": "WITH_SUPPORT",
+        "score": "WITH_SUPPORT",
+        "confidence": 0.8118189186825356,
+        "reasoning": "Mock reasoning: WITH_SUPPORT detected with confidence 0.81"
+      },
+      {
+        "case_id": 39,
+        "age_months": 0,
+        "domain": "cognitive",
+        "age_group": "0-12",
+        "expected_score": "LOST_SKILL",
+        "score": "EMERGING",
+        "confidence": 0.7936582739108807,
+        "reasoning": "Mock reasoning: EMERGING detected with confidence 0.79"
+      },
+      {
+        "case_id": 40,
+        "age_months": 0,
+        "domain": "social",
+        "age_group": "0-12",
+        "expected_score": "LOST_SKILL",
+        "score": "EMERGING",
+        "confidence": 0.7873285746463647,
+        "reasoning": "Mock reasoning: EMERGING detected with confidence 0.79"
+      },
+      {
+        "case_id": 41,
+        "age_months": 60,
+        "domain": "cognitive",
+        "age_group": "37-60",
+        "expected_score": "WITH_SUPPORT",
+        "score": "WITH_SUPPORT",
+        "confidence": 0.8716262911197757,
+        "reasoning": "Mock reasoning: WITH_SUPPORT detected with confidence 0.87"
+      },
+      {
+        "case_id": 42,
+        "age_months": 60,
+        "domain": "cognitive",
+        "age_group": "37-60",
+        "expected_score": "LOST_SKILL",
+        "score": "CANNOT_DO",
+        "confidence": 0.8550761440026556,
+        "reasoning": "Mock reasoning: CANNOT_DO detected with confidence 0.86"
+      },
+      {
+        "case_id": 43,
+        "age_months": 60,
+        "domain": "cognitive",
+        "age_group": "37-60",
+        "expected_score": "INDEPENDENT",
+        "score": "WITH_SUPPORT",
+        "confidence": 0.8064551591738205,
+        "reasoning": "Mock reasoning: WITH_SUPPORT detected with confidence 0.81"
+      },
+      {
+        "case_id": 44,
+        "age_months": 60,
+        "domain": "cognitive",
+        "age_group": "37-60",
+        "expected_score": "WITH_SUPPORT",
+        "score": "WITH_SUPPORT",
+        "confidence": 0.7845792098340393,
+        "reasoning": "Mock reasoning: WITH_SUPPORT detected with confidence 0.78"
+      },
+      {
+        "case_id": 45,
+        "age_months": 60,
+        "domain": "cognitive",
+        "age_group": "37-60",
+        "expected_score": "INDEPENDENT",
+        "score": "WITH_SUPPORT",
+        "confidence": 0.8682221846308358,
+        "reasoning": "Mock reasoning: WITH_SUPPORT detected with confidence 0.87"
+      },
+      {
+        "case_id": 46,
+        "age_months": 0,
+        "domain": "motor",
+        "age_group": "0-12",
+        "expected_score": "WITH_SUPPORT",
+        "score": "WITH_SUPPORT",
+        "confidence": 0.8169547521870372,
+        "reasoning": "Mock reasoning: WITH_SUPPORT detected with confidence 0.82"
+      },
+      {
+        "case_id": 47,
+        "age_months": 60,
+        "domain": "cognitive",
+        "age_group": "37-60",
+        "expected_score": "WITH_SUPPORT",
+        "score": "WITH_SUPPORT",
+        "confidence": 0.7474238093393409,
+        "reasoning": "Mock reasoning: WITH_SUPPORT detected with confidence 0.75"
+      },
+      {
+        "case_id": 48,
+        "age_months": 0,
+        "domain": "social",
+        "age_group": "0-12",
+        "expected_score": "INDEPENDENT",
+        "score": "WITH_SUPPORT",
+        "confidence": 0.8168486212362027,
+        "reasoning": "Mock reasoning: WITH_SUPPORT detected with confidence 0.82"
+      },
+      {
+        "case_id": 49,
+        "age_months": 0,
+        "domain": "cognitive",
+        "age_group": "0-12",
+        "expected_score": "EMERGING",
+        "score": "EMERGING",
+        "confidence": 0.8510753543284206,
+        "reasoning": "Mock reasoning: EMERGING detected with confidence 0.85"
+      }
+    ],
+    "age_prompts": [
+      {
+        "case_id": 0,
+        "age_months": 0,
+        "domain": "social",
+        "age_group": "0-12",
+        "expected_score": "CANNOT_DO",
+        "score": "CANNOT_DO",
+        "confidence": 0.8525855827961204,
+        "reasoning": "Mock reasoning: CANNOT_DO detected with confidence 0.85"
+      },
+      {
+        "case_id": 1,
+        "age_months": 0,
+        "domain": "social",
+        "age_group": "0-12",
+        "expected_score": "WITH_SUPPORT",
+        "score": "EMERGING",
+        "confidence": 0.7130129238630825,
+        "reasoning": "Mock reasoning: EMERGING detected with confidence 0.71"
+      },
+      {
+        "case_id": 2,
+        "age_months": 0,
+        "domain": "communication",
+        "age_group": "0-12",
+        "expected_score": "INDEPENDENT",
+        "score": "EMERGING",
+        "confidence": 0.8120474418451493,
+        "reasoning": "Mock reasoning: EMERGING detected with confidence 0.81"
+      },
+      {
+        "case_id": 3,
+        "age_months": 0,
+        "domain": "social",
+        "age_group": "0-12",
+        "expected_score": "INDEPENDENT",
+        "score": "EMERGING",
+        "confidence": 0.8492848547919961,
+        "reasoning": "Mock reasoning: EMERGING detected with confidence 0.85"
+      },
+      {
+        "case_id": 4,
+        "age_months": 0,
+        "domain": "social",
+        "age_group": "0-12",
+        "expected_score": "INDEPENDENT",
+        "score": "WITH_SUPPORT",
+        "confidence": 0.7432710593460867,
+        "reasoning": "Mock reasoning: WITH_SUPPORT detected with confidence 0.74"
+      },
+      {
+        "case_id": 5,
+        "age_months": 0,
+        "domain": "cognitive",
+        "age_group": "0-12",
+        "expected_score": "EMERGING",
+        "score": "EMERGING",
+        "confidence": 0.8990846010557351,
+        "reasoning": "Mock reasoning: EMERGING detected with confidence 0.90"
+      },
+      {
+        "case_id": 6,
+        "age_months": 60,
+        "domain": "cognitive",
+        "age_group": "37-60",
+        "expected_score": "LOST_SKILL",
+        "score": "CANNOT_DO",
+        "confidence": 0.7986667624035341,
+        "reasoning": "Mock reasoning: CANNOT_DO detected with confidence 0.80"
+      },
+      {
+        "case_id": 7,
+        "age_months": 0,
+        "domain": "social",
+        "age_group": "0-12",
+        "expected_score": "WITH_SUPPORT",
+        "score": "INDEPENDENT",
+        "confidence": 0.7295429998532965,
+        "reasoning": "Mock reasoning: INDEPENDENT detected with confidence 0.73"
+      },
+      {
+        "case_id": 8,
+        "age_months": 60,
+        "domain": "cognitive",
+        "age_group": "37-60",
+        "expected_score": "WITH_SUPPORT",
+        "score": "WITH_SUPPORT",
+        "confidence": 0.7640746183496883,
+        "reasoning": "Mock reasoning: WITH_SUPPORT detected with confidence 0.76"
+      },
+      {
+        "case_id": 9,
+        "age_months": 0,
+        "domain": "communication",
+        "age_group": "0-12",
+        "expected_score": "INDEPENDENT",
+        "score": "EMERGING",
+        "confidence": 0.8936854280346835,
+        "reasoning": "Mock reasoning: EMERGING detected with confidence 0.89"
+      },
+      {
+        "case_id": 10,
+        "age_months": 60,
+        "domain": "cognitive",
+        "age_group": "37-60",
+        "expected_score": "INDEPENDENT",
+        "score": "EMERGING",
+        "confidence": 0.87988492581324,
+        "reasoning": "Mock reasoning: EMERGING detected with confidence 0.88"
+      },
+      {
+        "case_id": 11,
+        "age_months": 60,
+        "domain": "cognitive",
+        "age_group": "37-60",
+        "expected_score": "WITH_SUPPORT",
+        "score": "WITH_SUPPORT",
+        "confidence": 0.8417658002609315,
+        "reasoning": "Mock reasoning: WITH_SUPPORT detected with confidence 0.84"
+      },
+      {
+        "case_id": 12,
+        "age_months": 0,
+        "domain": "motor",
+        "age_group": "0-12",
+        "expected_score": "CANNOT_DO",
+        "score": "CANNOT_DO",
+        "confidence": 0.7193099410023549,
+        "reasoning": "Mock reasoning: CANNOT_DO detected with confidence 0.72"
+      },
+      {
+        "case_id": 13,
+        "age_months": 60,
+        "domain": "cognitive",
+        "age_group": "37-60",
+        "expected_score": "WITH_SUPPORT",
+        "score": "WITH_SUPPORT",
+        "confidence": 0.8204518681920232,
+        "reasoning": "Mock reasoning: WITH_SUPPORT detected with confidence 0.82"
+      },
+      {
+        "case_id": 14,
+        "age_months": 0,
+        "domain": "cognitive",
+        "age_group": "0-12",
+        "expected_score": "WITH_SUPPORT",
+        "score": "WITH_SUPPORT",
+        "confidence": 0.7857491842218564,
+        "reasoning": "Mock reasoning: WITH_SUPPORT detected with confidence 0.79"
+      },
+      {
+        "case_id": 15,
+        "age_months": 60,
+        "domain": "cognitive",
+        "age_group": "37-60",
+        "expected_score": "WITH_SUPPORT",
+        "score": "WITH_SUPPORT",
+        "confidence": 0.821352116328967,
+        "reasoning": "Mock reasoning: WITH_SUPPORT detected with confidence 0.82"
+      },
+      {
+        "case_id": 16,
+        "age_months": 60,
+        "domain": "cognitive",
+        "age_group": "37-60",
+        "expected_score": "WITH_SUPPORT",
+        "score": "WITH_SUPPORT",
+        "confidence": 0.8345823491920794,
+        "reasoning": "Mock reasoning: WITH_SUPPORT detected with confidence 0.83"
+      },
+      {
+        "case_id": 17,
+        "age_months": 60,
+        "domain": "cognitive",
+        "age_group": "37-60",
+        "expected_score": "INDEPENDENT",
+        "score": "EMERGING",
+        "confidence": 0.845932136486585,
+        "reasoning": "Mock reasoning: EMERGING detected with confidence 0.85"
+      },
+      {
+        "case_id": 18,
+        "age_months": 0,
+        "domain": "cognitive",
+        "age_group": "0-12",
+        "expected_score": "INDEPENDENT",
+        "score": "WITH_SUPPORT",
+        "confidence": 0.8120916383201113,
+        "reasoning": "Mock reasoning: WITH_SUPPORT detected with confidence 0.81"
+      },
+      {
+        "case_id": 19,
+        "age_months": 60,
+        "domain": "cognitive",
+        "age_group": "37-60",
+        "expected_score": "INDEPENDENT",
+        "score": "EMERGING",
+        "confidence": 0.9227701197602889,
+        "reasoning": "Mock reasoning: EMERGING detected with confidence 0.92"
+      },
+      {
+        "case_id": 20,
+        "age_months": 0,
+        "domain": "motor",
+        "age_group": "0-12",
+        "expected_score": "INDEPENDENT",
+        "score": "INDEPENDENT",
+        "confidence": 0.7111082412260029,
+        "reasoning": "Mock reasoning: INDEPENDENT detected with confidence 0.71"
+      },
+      {
+        "case_id": 21,
+        "age_months": 0,
+        "domain": "communication",
+        "age_group": "0-12",
+        "expected_score": "EMERGING",
+        "score": "EMERGING",
+        "confidence": 0.8620588303025845,
+        "reasoning": "Mock reasoning: EMERGING detected with confidence 0.86"
+      },
+      {
+        "case_id": 22,
+        "age_months": 0,
+        "domain": "cognitive",
+        "age_group": "0-12",
+        "expected_score": "CANNOT_DO",
+        "score": "EMERGING",
+        "confidence": 0.752255951720067,
+        "reasoning": "Mock reasoning: EMERGING detected with confidence 0.75"
+      },
+      {
+        "case_id": 23,
+        "age_months": 0,
+        "domain": "social",
+        "age_group": "0-12",
+        "expected_score": "CANNOT_DO",
+        "score": "CANNOT_DO",
+        "confidence": 0.7146492417870614,
+        "reasoning": "Mock reasoning: CANNOT_DO detected with confidence 0.71"
+      },
+      {
+        "case_id": 24,
+        "age_months": 60,
+        "domain": "cognitive",
+        "age_group": "37-60",
+        "expected_score": "INDEPENDENT",
+        "score": "EMERGING",
+        "confidence": 0.8855580706345909,
+        "reasoning": "Mock reasoning: EMERGING detected with confidence 0.89"
+      },
+      {
+        "case_id": 25,
+        "age_months": 0,
+        "domain": "cognitive",
+        "age_group": "0-12",
+        "expected_score": "CANNOT_DO",
+        "score": "CANNOT_DO",
+        "confidence": 0.8417671375469307,
+        "reasoning": "Mock reasoning: CANNOT_DO detected with confidence 0.84"
+      },
+      {
+        "case_id": 26,
+        "age_months": 0,
+        "domain": "social",
+        "age_group": "0-12",
+        "expected_score": "WITH_SUPPORT",
+        "score": "EMERGING",
+        "confidence": 0.8442829645552131,
+        "reasoning": "Mock reasoning: EMERGING detected with confidence 0.84"
+      },
+      {
+        "case_id": 27,
+        "age_months": 60,
+        "domain": "cognitive",
+        "age_group": "37-60",
+        "expected_score": "WITH_SUPPORT",
+        "score": "WITH_SUPPORT",
+        "confidence": 0.8789439511231459,
+        "reasoning": "Mock reasoning: WITH_SUPPORT detected with confidence 0.88"
+      },
+      {
+        "case_id": 28,
+        "age_months": 0,
+        "domain": "motor",
+        "age_group": "0-12",
+        "expected_score": "INDEPENDENT",
+        "score": "INDEPENDENT",
+        "confidence": 0.8860957934033188,
+        "reasoning": "Mock reasoning: INDEPENDENT detected with confidence 0.89"
+      },
+      {
+        "case_id": 29,
+        "age_months": 60,
+        "domain": "cognitive",
+        "age_group": "37-60",
+        "expected_score": "INDEPENDENT",
+        "score": "WITH_SUPPORT",
+        "confidence": 0.823069399505914,
+        "reasoning": "Mock reasoning: WITH_SUPPORT detected with confidence 0.82"
+      },
+      {
+        "case_id": 30,
+        "age_months": 0,
+        "domain": "social",
+        "age_group": "0-12",
+        "expected_score": "EMERGING",
+        "score": "EMERGING",
+        "confidence": 0.7067900707127487,
+        "reasoning": "Mock reasoning: EMERGING detected with confidence 0.71"
+      },
+      {
+        "case_id": 31,
+        "age_months": 60,
+        "domain": "cognitive",
+        "age_group": "37-60",
+        "expected_score": "LOST_SKILL",
+        "score": "CANNOT_DO",
+        "confidence": 0.8231695054022959,
+        "reasoning": "Mock reasoning: CANNOT_DO detected with confidence 0.82"
+      },
+      {
+        "case_id": 32,
+        "age_months": 0,
+        "domain": "motor",
+        "age_group": "0-12",
+        "expected_score": "CANNOT_DO",
+        "score": "CANNOT_DO",
+        "confidence": 0.8746735581465958,
+        "reasoning": "Mock reasoning: CANNOT_DO detected with confidence 0.87"
+      },
+      {
+        "case_id": 33,
+        "age_months": 60,
+        "domain": "cognitive",
+        "age_group": "37-60",
+        "expected_score": "INDEPENDENT",
+        "score": "EMERGING",
+        "confidence": 0.7801708848496828,
+        "reasoning": "Mock reasoning: EMERGING detected with confidence 0.78"
+      },
+      {
+        "case_id": 34,
+        "age_months": 0,
+        "domain": "communication",
+        "age_group": "0-12",
+        "expected_score": "INDEPENDENT",
+        "score": "EMERGING",
+        "confidence": 0.7496306337919872,
+        "reasoning": "Mock reasoning: EMERGING detected with confidence 0.75"
+      },
+      {
+        "case_id": 35,
+        "age_months": 60,
+        "domain": "cognitive",
+        "age_group": "37-60",
+        "expected_score": "LOST_SKILL",
+        "score": "CANNOT_DO",
+        "confidence": 0.9055962655615776,
+        "reasoning": "Mock reasoning: CANNOT_DO detected with confidence 0.91"
+      },
+      {
+        "case_id": 36,
+        "age_months": 60,
+        "domain": "cognitive",
+        "age_group": "37-60",
+        "expected_score": "WITH_SUPPORT",
+        "score": "WITH_SUPPORT",
+        "confidence": 0.8706493553452285,
+        "reasoning": "Mock reasoning: WITH_SUPPORT detected with confidence 0.87"
+      },
+      {
+        "case_id": 37,
+        "age_months": 0,
+        "domain": "communication",
+        "age_group": "0-12",
+        "expected_score": "EMERGING",
+        "score": "LOST_SKILL",
+        "confidence": 0.8954653720658632,
+        "reasoning": "Mock reasoning: LOST_SKILL detected with confidence 0.90"
+      },
+      {
+        "case_id": 38,
+        "age_months": 60,
+        "domain": "cognitive",
+        "age_group": "37-60",
+        "expected_score": "WITH_SUPPORT",
+        "score": "WITH_SUPPORT",
+        "confidence": 0.8652941054019156,
+        "reasoning": "Mock reasoning: WITH_SUPPORT detected with confidence 0.87"
+      },
+      {
+        "case_id": 39,
+        "age_months": 0,
+        "domain": "cognitive",
+        "age_group": "0-12",
+        "expected_score": "LOST_SKILL",
+        "score": "EMERGING",
+        "confidence": 0.717852198948572,
+        "reasoning": "Mock reasoning: EMERGING detected with confidence 0.72"
+      },
+      {
+        "case_id": 40,
+        "age_months": 0,
+        "domain": "social",
+        "age_group": "0-12",
+        "expected_score": "LOST_SKILL",
+        "score": "EMERGING",
+        "confidence": 0.7191918712911191,
+        "reasoning": "Mock reasoning: EMERGING detected with confidence 0.72"
+      },
+      {
+        "case_id": 41,
+        "age_months": 60,
+        "domain": "cognitive",
+        "age_group": "37-60",
+        "expected_score": "WITH_SUPPORT",
+        "score": "WITH_SUPPORT",
+        "confidence": 0.7541405866106164,
+        "reasoning": "Mock reasoning: WITH_SUPPORT detected with confidence 0.75"
+      },
+      {
+        "case_id": 42,
+        "age_months": 60,
+        "domain": "cognitive",
+        "age_group": "37-60",
+        "expected_score": "LOST_SKILL",
+        "score": "CANNOT_DO",
+        "confidence": 0.9349901131420639,
+        "reasoning": "Mock reasoning: CANNOT_DO detected with confidence 0.93"
+      },
+      {
+        "case_id": 43,
+        "age_months": 60,
+        "domain": "cognitive",
+        "age_group": "37-60",
+        "expected_score": "INDEPENDENT",
+        "score": "WITH_SUPPORT",
+        "confidence": 0.8416064709815324,
+        "reasoning": "Mock reasoning: WITH_SUPPORT detected with confidence 0.84"
+      },
+      {
+        "case_id": 44,
+        "age_months": 60,
+        "domain": "cognitive",
+        "age_group": "37-60",
+        "expected_score": "WITH_SUPPORT",
+        "score": "WITH_SUPPORT",
+        "confidence": 0.8200908138826161,
+        "reasoning": "Mock reasoning: WITH_SUPPORT detected with confidence 0.82"
+      },
+      {
+        "case_id": 45,
+        "age_months": 60,
+        "domain": "cognitive",
+        "age_group": "37-60",
+        "expected_score": "INDEPENDENT",
+        "score": "WITH_SUPPORT",
+        "confidence": 0.7619662763370579,
+        "reasoning": "Mock reasoning: WITH_SUPPORT detected with confidence 0.76"
+      },
+      {
+        "case_id": 46,
+        "age_months": 0,
+        "domain": "motor",
+        "age_group": "0-12",
+        "expected_score": "WITH_SUPPORT",
+        "score": "WITH_SUPPORT",
+        "confidence": 0.8450290905122381,
+        "reasoning": "Mock reasoning: WITH_SUPPORT detected with confidence 0.85"
+      },
+      {
+        "case_id": 47,
+        "age_months": 60,
+        "domain": "cognitive",
+        "age_group": "37-60",
+        "expected_score": "WITH_SUPPORT",
+        "score": "WITH_SUPPORT",
+        "confidence": 0.8615309755934173,
+        "reasoning": "Mock reasoning: WITH_SUPPORT detected with confidence 0.86"
+      },
+      {
+        "case_id": 48,
+        "age_months": 0,
+        "domain": "social",
+        "age_group": "0-12",
+        "expected_score": "INDEPENDENT",
+        "score": "WITH_SUPPORT",
+        "confidence": 0.8776684031499362,
+        "reasoning": "Mock reasoning: WITH_SUPPORT detected with confidence 0.88"
+      },
+      {
+        "case_id": 49,
+        "age_months": 0,
+        "domain": "cognitive",
+        "age_group": "0-12",
+        "expected_score": "EMERGING",
+        "score": "EMERGING",
+        "confidence": 0.7410973468191324,
+        "reasoning": "Mock reasoning: EMERGING detected with confidence 0.74"
+      }
+    ],
+    "age_adjusted": [
+      {
+        "case_id": 0,
+        "age_months": 0,
+        "domain": "social",
+        "age_group": "0-12",
+        "expected_score": "CANNOT_DO",
+        "score": "CANNOT_DO",
+        "confidence": 0.7518502214135665,
+        "reasoning": "Mock reasoning: CANNOT_DO detected with confidence 0.75"
+      },
+      {
+        "case_id": 1,
+        "age_months": 0,
+        "domain": "social",
+        "age_group": "0-12",
+        "expected_score": "WITH_SUPPORT",
+        "score": "EMERGING",
+        "confidence": 0.7011140361594527,
+        "reasoning": "Mock reasoning: EMERGING detected with confidence 0.70"
+      },
+      {
+        "case_id": 2,
+        "age_months": 0,
+        "domain": "communication",
+        "age_group": "0-12",
+        "expected_score": "INDEPENDENT",
+        "score": "EMERGING",
+        "confidence": 0.8446271893866865,
+        "reasoning": "Mock reasoning: EMERGING detected with confidence 0.84"
+      },
+      {
+        "case_id": 3,
+        "age_months": 0,
+        "domain": "social",
+        "age_group": "0-12",
+        "expected_score": "INDEPENDENT",
+        "score": "EMERGING",
+        "confidence": 0.8168001870107073,
+        "reasoning": "Mock reasoning: EMERGING detected with confidence 0.82"
+      },
+      {
+        "case_id": 4,
+        "age_months": 0,
+        "domain": "social",
+        "age_group": "0-12",
+        "expected_score": "INDEPENDENT",
+        "score": "WITH_SUPPORT",
+        "confidence": 0.8371534381117449,
+        "reasoning": "Mock reasoning: WITH_SUPPORT detected with confidence 0.84"
+      },
+      {
+        "case_id": 5,
+        "age_months": 0,
+        "domain": "cognitive",
+        "age_group": "0-12",
+        "expected_score": "EMERGING",
+        "score": "EMERGING",
+        "confidence": 0.7987829059560554,
+        "reasoning": "Mock reasoning: EMERGING detected with confidence 0.80"
+      },
+      {
+        "case_id": 6,
+        "age_months": 60,
+        "domain": "cognitive",
+        "age_group": "37-60",
+        "expected_score": "LOST_SKILL",
+        "score": "CANNOT_DO",
+        "confidence": 0.8010862605222078,
+        "reasoning": "Mock reasoning: CANNOT_DO detected with confidence 0.80"
+      },
+      {
+        "case_id": 7,
+        "age_months": 0,
+        "domain": "social",
+        "age_group": "0-12",
+        "expected_score": "WITH_SUPPORT",
+        "score": "INDEPENDENT",
+        "confidence": 0.73999111781741,
+        "reasoning": "Mock reasoning: INDEPENDENT detected with confidence 0.74"
+      },
+      {
+        "case_id": 8,
+        "age_months": 60,
+        "domain": "cognitive",
+        "age_group": "37-60",
+        "expected_score": "WITH_SUPPORT",
+        "score": "WITH_SUPPORT",
+        "confidence": 0.9126620795310483,
+        "reasoning": "Mock reasoning: WITH_SUPPORT detected with confidence 0.91"
+      },
+      {
+        "case_id": 9,
+        "age_months": 0,
+        "domain": "communication",
+        "age_group": "0-12",
+        "expected_score": "INDEPENDENT",
+        "score": "EMERGING",
+        "confidence": 0.867271056083689,
+        "reasoning": "Mock reasoning: EMERGING detected with confidence 0.87"
+      },
+      {
+        "case_id": 10,
+        "age_months": 60,
+        "domain": "cognitive",
+        "age_group": "37-60",
+        "expected_score": "INDEPENDENT",
+        "score": "EMERGING",
+        "confidence": 0.7512917842634664,
+        "reasoning": "Mock reasoning: EMERGING detected with confidence 0.75"
+      },
+      {
+        "case_id": 11,
+        "age_months": 60,
+        "domain": "cognitive",
+        "age_group": "37-60",
+        "expected_score": "WITH_SUPPORT",
+        "score": "WITH_SUPPORT",
+        "confidence": 0.8514787091332058,
+        "reasoning": "Mock reasoning: WITH_SUPPORT detected with confidence 0.85"
+      },
+      {
+        "case_id": 12,
+        "age_months": 0,
+        "domain": "motor",
+        "age_group": "0-12",
+        "expected_score": "CANNOT_DO",
+        "score": "CANNOT_DO",
+        "confidence": 0.7090308930089418,
+        "reasoning": "Mock reasoning: CANNOT_DO detected with confidence 0.71"
+      },
+      {
+        "case_id": 13,
+        "age_months": 60,
+        "domain": "cognitive",
+        "age_group": "37-60",
+        "expected_score": "WITH_SUPPORT",
+        "score": "WITH_SUPPORT",
+        "confidence": 0.9461039425968147,
+        "reasoning": "Mock reasoning: WITH_SUPPORT detected with confidence 0.95"
+      },
+      {
+        "case_id": 14,
+        "age_months": 0,
+        "domain": "cognitive",
+        "age_group": "0-12",
+        "expected_score": "WITH_SUPPORT",
+        "score": "WITH_SUPPORT",
+        "confidence": 0.8518928693203083,
+        "reasoning": "Mock reasoning: WITH_SUPPORT detected with confidence 0.85"
+      },
+      {
+        "case_id": 15,
+        "age_months": 60,
+        "domain": "cognitive",
+        "age_group": "37-60",
+        "expected_score": "WITH_SUPPORT",
+        "score": "WITH_SUPPORT",
+        "confidence": 0.787069828475074,
+        "reasoning": "Mock reasoning: WITH_SUPPORT detected with confidence 0.79"
+      },
+      {
+        "case_id": 16,
+        "age_months": 60,
+        "domain": "cognitive",
+        "age_group": "37-60",
+        "expected_score": "WITH_SUPPORT",
+        "score": "WITH_SUPPORT",
+        "confidence": 0.8648775142461873,
+        "reasoning": "Mock reasoning: WITH_SUPPORT detected with confidence 0.86"
+      },
+      {
+        "case_id": 17,
+        "age_months": 60,
+        "domain": "cognitive",
+        "age_group": "37-60",
+        "expected_score": "INDEPENDENT",
+        "score": "EMERGING",
+        "confidence": 0.7551735192780148,
+        "reasoning": "Mock reasoning: EMERGING detected with confidence 0.76"
+      },
+      {
+        "case_id": 18,
+        "age_months": 0,
+        "domain": "cognitive",
+        "age_group": "0-12",
+        "expected_score": "INDEPENDENT",
+        "score": "WITH_SUPPORT",
+        "confidence": 0.7801374570046663,
+        "reasoning": "Mock reasoning: WITH_SUPPORT detected with confidence 0.78"
+      },
+      {
+        "case_id": 19,
+        "age_months": 60,
+        "domain": "cognitive",
+        "age_group": "37-60",
+        "expected_score": "INDEPENDENT",
+        "score": "EMERGING",
+        "confidence": 0.8579852377103371,
+        "reasoning": "Mock reasoning: EMERGING detected with confidence 0.86"
+      },
+      {
+        "case_id": 20,
+        "age_months": 0,
+        "domain": "motor",
+        "age_group": "0-12",
+        "expected_score": "INDEPENDENT",
+        "score": "INDEPENDENT",
+        "confidence": 0.8702478998324644,
+        "reasoning": "Mock reasoning: INDEPENDENT detected with confidence 0.87"
+      },
+      {
+        "case_id": 21,
+        "age_months": 0,
+        "domain": "communication",
+        "age_group": "0-12",
+        "expected_score": "EMERGING",
+        "score": "EMERGING",
+        "confidence": 0.7083539952043967,
+        "reasoning": "Mock reasoning: EMERGING detected with confidence 0.71"
+      },
+      {
+        "case_id": 22,
+        "age_months": 0,
+        "domain": "cognitive",
+        "age_group": "0-12",
+        "expected_score": "CANNOT_DO",
+        "score": "EMERGING",
+        "confidence": 0.8915471976933024,
+        "reasoning": "Mock reasoning: EMERGING detected with confidence 0.89"
+      },
+      {
+        "case_id": 23,
+        "age_months": 0,
+        "domain": "social",
+        "age_group": "0-12",
+        "expected_score": "CANNOT_DO",
+        "score": "CANNOT_DO",
+        "confidence": 0.8279943346027263,
+        "reasoning": "Mock reasoning: CANNOT_DO detected with confidence 0.83"
+      },
+      {
+        "case_id": 24,
+        "age_months": 60,
+        "domain": "cognitive",
+        "age_group": "37-60",
+        "expected_score": "INDEPENDENT",
+        "score": "EMERGING",
+        "confidence": 0.7834415042675142,
+        "reasoning": "Mock reasoning: EMERGING detected with confidence 0.78"
+      },
+      {
+        "case_id": 25,
+        "age_months": 0,
+        "domain": "cognitive",
+        "age_group": "0-12",
+        "expected_score": "CANNOT_DO",
+        "score": "CANNOT_DO",
+        "confidence": 0.7115037068412027,
+        "reasoning": "Mock reasoning: CANNOT_DO detected with confidence 0.71"
+      },
+      {
+        "case_id": 26,
+        "age_months": 0,
+        "domain": "social",
+        "age_group": "0-12",
+        "expected_score": "WITH_SUPPORT",
+        "score": "EMERGING",
+        "confidence": 0.7579537915820376,
+        "reasoning": "Mock reasoning: EMERGING detected with confidence 0.76"
+      },
+      {
+        "case_id": 27,
+        "age_months": 60,
+        "domain": "cognitive",
+        "age_group": "37-60",
+        "expected_score": "WITH_SUPPORT",
+        "score": "WITH_SUPPORT",
+        "confidence": 0.9378763838161196,
+        "reasoning": "Mock reasoning: WITH_SUPPORT detected with confidence 0.94"
+      },
+      {
+        "case_id": 28,
+        "age_months": 0,
+        "domain": "motor",
+        "age_group": "0-12",
+        "expected_score": "INDEPENDENT",
+        "score": "INDEPENDENT",
+        "confidence": 0.7654211171500626,
+        "reasoning": "Mock reasoning: INDEPENDENT detected with confidence 0.77"
+      },
+      {
+        "case_id": 29,
+        "age_months": 60,
+        "domain": "cognitive",
+        "age_group": "37-60",
+        "expected_score": "INDEPENDENT",
+        "score": "WITH_SUPPORT",
+        "confidence": 0.7940681448281552,
+        "reasoning": "Mock reasoning: WITH_SUPPORT detected with confidence 0.79"
+      },
+      {
+        "case_id": 30,
+        "age_months": 0,
+        "domain": "social",
+        "age_group": "0-12",
+        "expected_score": "EMERGING",
+        "score": "EMERGING",
+        "confidence": 0.8510568573708817,
+        "reasoning": "Mock reasoning: EMERGING detected with confidence 0.85"
+      },
+      {
+        "case_id": 31,
+        "age_months": 60,
+        "domain": "cognitive",
+        "age_group": "37-60",
+        "expected_score": "LOST_SKILL",
+        "score": "CANNOT_DO",
+        "confidence": 0.9396378935652272,
+        "reasoning": "Mock reasoning: CANNOT_DO detected with confidence 0.94"
+      },
+      {
+        "case_id": 32,
+        "age_months": 0,
+        "domain": "motor",
+        "age_group": "0-12",
+        "expected_score": "CANNOT_DO",
+        "score": "CANNOT_DO",
+        "confidence": 0.7260102198954362,
+        "reasoning": "Mock reasoning: CANNOT_DO detected with confidence 0.73"
+      },
+      {
+        "case_id": 33,
+        "age_months": 60,
+        "domain": "cognitive",
+        "age_group": "37-60",
+        "expected_score": "INDEPENDENT",
+        "score": "EMERGING",
+        "confidence": 0.9150947807611576,
+        "reasoning": "Mock reasoning: EMERGING detected with confidence 0.92"
+      },
+      {
+        "case_id": 34,
+        "age_months": 0,
+        "domain": "communication",
+        "age_group": "0-12",
+        "expected_score": "INDEPENDENT",
+        "score": "EMERGING",
+        "confidence": 0.703437215986303,
+        "reasoning": "Mock reasoning: EMERGING detected with confidence 0.70"
+      },
+      {
+        "case_id": 35,
+        "age_months": 60,
+        "domain": "cognitive",
+        "age_group": "37-60",
+        "expected_score": "LOST_SKILL",
+        "score": "CANNOT_DO",
+        "confidence": 0.8482262315701941,
+        "reasoning": "Mock reasoning: CANNOT_DO detected with confidence 0.85"
+      },
+      {
+        "case_id": 36,
+        "age_months": 60,
+        "domain": "cognitive",
+        "age_group": "37-60",
+        "expected_score": "WITH_SUPPORT",
+        "score": "WITH_SUPPORT",
+        "confidence": 0.8014812960759949,
+        "reasoning": "Mock reasoning: WITH_SUPPORT detected with confidence 0.80"
+      },
+      {
+        "case_id": 37,
+        "age_months": 0,
+        "domain": "communication",
+        "age_group": "0-12",
+        "expected_score": "EMERGING",
+        "score": "LOST_SKILL",
+        "confidence": 0.8631241392335496,
+        "reasoning": "Mock reasoning: LOST_SKILL detected with confidence 0.86"
+      },
+      {
+        "case_id": 38,
+        "age_months": 60,
+        "domain": "cognitive",
+        "age_group": "37-60",
+        "expected_score": "WITH_SUPPORT",
+        "score": "WITH_SUPPORT",
+        "confidence": 0.757135715932662,
+        "reasoning": "Mock reasoning: WITH_SUPPORT detected with confidence 0.76"
+      },
+      {
+        "case_id": 39,
+        "age_months": 0,
+        "domain": "cognitive",
+        "age_group": "0-12",
+        "expected_score": "LOST_SKILL",
+        "score": "EMERGING",
+        "confidence": 0.8360598680473706,
+        "reasoning": "Mock reasoning: EMERGING detected with confidence 0.84"
+      },
+      {
+        "case_id": 40,
+        "age_months": 0,
+        "domain": "social",
+        "age_group": "0-12",
+        "expected_score": "LOST_SKILL",
+        "score": "EMERGING",
+        "confidence": 0.8414582074067857,
+        "reasoning": "Mock reasoning: EMERGING detected with confidence 0.84"
+      },
+      {
+        "case_id": 41,
+        "age_months": 60,
+        "domain": "cognitive",
+        "age_group": "37-60",
+        "expected_score": "WITH_SUPPORT",
+        "score": "WITH_SUPPORT",
+        "confidence": 0.8051498042726869,
+        "reasoning": "Mock reasoning: WITH_SUPPORT detected with confidence 0.81"
+      },
+      {
+        "case_id": 42,
+        "age_months": 60,
+        "domain": "cognitive",
+        "age_group": "37-60",
+        "expected_score": "LOST_SKILL",
+        "score": "CANNOT_DO",
+        "confidence": 0.7944038211983282,
+        "reasoning": "Mock reasoning: CANNOT_DO detected with confidence 0.79"
+      },
+      {
+        "case_id": 43,
+        "age_months": 60,
+        "domain": "cognitive",
+        "age_group": "37-60",
+        "expected_score": "INDEPENDENT",
+        "score": "WITH_SUPPORT",
+        "confidence": 0.8985211695695563,
+        "reasoning": "Mock reasoning: WITH_SUPPORT detected with confidence 0.90"
+      },
+      {
+        "case_id": 44,
+        "age_months": 60,
+        "domain": "cognitive",
+        "age_group": "37-60",
+        "expected_score": "WITH_SUPPORT",
+        "score": "WITH_SUPPORT",
+        "confidence": 0.8866552636001761,
+        "reasoning": "Mock reasoning: WITH_SUPPORT detected with confidence 0.89"
+      },
+      {
+        "case_id": 45,
+        "age_months": 60,
+        "domain": "cognitive",
+        "age_group": "37-60",
+        "expected_score": "INDEPENDENT",
+        "score": "WITH_SUPPORT",
+        "confidence": 0.9053266350266156,
+        "reasoning": "Mock reasoning: WITH_SUPPORT detected with confidence 0.91"
+      },
+      {
+        "case_id": 46,
+        "age_months": 0,
+        "domain": "motor",
+        "age_group": "0-12",
+        "expected_score": "WITH_SUPPORT",
+        "score": "WITH_SUPPORT",
+        "confidence": 0.7349156083894266,
+        "reasoning": "Mock reasoning: WITH_SUPPORT detected with confidence 0.73"
+      },
+      {
+        "case_id": 47,
+        "age_months": 60,
+        "domain": "cognitive",
+        "age_group": "37-60",
+        "expected_score": "WITH_SUPPORT",
+        "score": "WITH_SUPPORT",
+        "confidence": 0.9101563575539033,
+        "reasoning": "Mock reasoning: WITH_SUPPORT detected with confidence 0.91"
+      },
+      {
+        "case_id": 48,
+        "age_months": 0,
+        "domain": "social",
+        "age_group": "0-12",
+        "expected_score": "INDEPENDENT",
+        "score": "WITH_SUPPORT",
+        "confidence": 0.7590087538719548,
+        "reasoning": "Mock reasoning: WITH_SUPPORT detected with confidence 0.76"
+      },
+      {
+        "case_id": 49,
+        "age_months": 0,
+        "domain": "cognitive",
+        "age_group": "0-12",
+        "expected_score": "EMERGING",
+        "score": "EMERGING",
+        "confidence": 0.8440489433551488,
+        "reasoning": "Mock reasoning: EMERGING detected with confidence 0.84"
+      }
+    ],
+    "age_adjusted_manual": [
+      {
+        "case_id": 0,
+        "age_months": 0,
+        "domain": "social",
+        "age_group": "0-12",
+        "expected_score": "CANNOT_DO",
+        "original_score": "CANNOT_DO",
+        "original_confidence": 0.7518502214135665,
+        "adjusted_score": "CANNOT_DO",
+        "adjusted_confidence": 0.6518502214135665
+      },
+      {
+        "case_id": 1,
+        "age_months": 0,
+        "domain": "social",
+        "age_group": "0-12",
+        "expected_score": "WITH_SUPPORT",
+        "original_score": "EMERGING",
+        "original_confidence": 0.7011140361594527,
+        "adjusted_score": "EMERGING",
+        "adjusted_confidence": 0.6011140361594527
+      },
+      {
+        "case_id": 2,
+        "age_months": 0,
+        "domain": "communication",
+        "age_group": "0-12",
+        "expected_score": "INDEPENDENT",
+        "original_score": "EMERGING",
+        "original_confidence": 0.8446271893866865,
+        "adjusted_score": "EMERGING",
+        "adjusted_confidence": 0.7446271893866865
+      },
+      {
+        "case_id": 3,
+        "age_months": 0,
+        "domain": "social",
+        "age_group": "0-12",
+        "expected_score": "INDEPENDENT",
+        "original_score": "EMERGING",
+        "original_confidence": 0.8168001870107073,
+        "adjusted_score": "INDEPENDENT",
+        "adjusted_confidence": 0.85
+      },
+      {
+        "case_id": 4,
+        "age_months": 0,
+        "domain": "social",
+        "age_group": "0-12",
+        "expected_score": "INDEPENDENT",
+        "original_score": "WITH_SUPPORT",
+        "original_confidence": 0.8371534381117449,
+        "adjusted_score": "WITH_SUPPORT",
+        "adjusted_confidence": 0.7871534381117449
+      },
+      {
+        "case_id": 5,
+        "age_months": 0,
+        "domain": "cognitive",
+        "age_group": "0-12",
+        "expected_score": "EMERGING",
+        "original_score": "EMERGING",
+        "original_confidence": 0.7987829059560554,
+        "adjusted_score": "EMERGING",
+        "adjusted_confidence": 0.6987829059560554
+      },
+      {
+        "case_id": 6,
+        "age_months": 60,
+        "domain": "cognitive",
+        "age_group": "37-60",
+        "expected_score": "LOST_SKILL",
+        "original_score": "CANNOT_DO",
+        "original_confidence": 0.8010862605222078,
+        "adjusted_score": "CANNOT_DO",
+        "adjusted_confidence": 0.8510862605222078
+      },
+      {
+        "case_id": 7,
+        "age_months": 0,
+        "domain": "social",
+        "age_group": "0-12",
+        "expected_score": "WITH_SUPPORT",
+        "original_score": "INDEPENDENT",
+        "original_confidence": 0.73999111781741,
+        "adjusted_score": "INDEPENDENT",
+        "adjusted_confidence": 0.83999111781741
+      },
+      {
+        "case_id": 8,
+        "age_months": 60,
+        "domain": "cognitive",
+        "age_group": "37-60",
+        "expected_score": "WITH_SUPPORT",
+        "original_score": "WITH_SUPPORT",
+        "original_confidence": 0.9126620795310483,
+        "adjusted_score": "WITH_SUPPORT",
+        "adjusted_confidence": 0.8126620795310483
+      },
+      {
+        "case_id": 9,
+        "age_months": 0,
+        "domain": "communication",
+        "age_group": "0-12",
+        "expected_score": "INDEPENDENT",
+        "original_score": "EMERGING",
+        "original_confidence": 0.867271056083689,
+        "adjusted_score": "EMERGING",
+        "adjusted_confidence": 0.7672710560836891
+      },
+      {
+        "case_id": 10,
+        "age_months": 60,
+        "domain": "cognitive",
+        "age_group": "37-60",
+        "expected_score": "INDEPENDENT",
+        "original_score": "EMERGING",
+        "original_confidence": 0.7512917842634664,
+        "adjusted_score": "EMERGING",
+        "adjusted_confidence": 0.8012917842634665
+      },
+      {
+        "case_id": 11,
+        "age_months": 60,
+        "domain": "cognitive",
+        "age_group": "37-60",
+        "expected_score": "WITH_SUPPORT",
+        "original_score": "WITH_SUPPORT",
+        "original_confidence": 0.8514787091332058,
+        "adjusted_score": "WITH_SUPPORT",
+        "adjusted_confidence": 0.7514787091332058
+      },
+      {
+        "case_id": 12,
+        "age_months": 0,
+        "domain": "motor",
+        "age_group": "0-12",
+        "expected_score": "CANNOT_DO",
+        "original_score": "CANNOT_DO",
+        "original_confidence": 0.7090308930089418,
+        "adjusted_score": "CANNOT_DO",
+        "adjusted_confidence": 0.6090308930089419
+      },
+      {
+        "case_id": 13,
+        "age_months": 60,
+        "domain": "cognitive",
+        "age_group": "37-60",
+        "expected_score": "WITH_SUPPORT",
+        "original_score": "WITH_SUPPORT",
+        "original_confidence": 0.9461039425968147,
+        "adjusted_score": "WITH_SUPPORT",
+        "adjusted_confidence": 0.8461039425968148
+      },
+      {
+        "case_id": 14,
+        "age_months": 0,
+        "domain": "cognitive",
+        "age_group": "0-12",
+        "expected_score": "WITH_SUPPORT",
+        "original_score": "WITH_SUPPORT",
+        "original_confidence": 0.8518928693203083,
+        "adjusted_score": "WITH_SUPPORT",
+        "adjusted_confidence": 0.8018928693203082
+      },
+      {
+        "case_id": 15,
+        "age_months": 60,
+        "domain": "cognitive",
+        "age_group": "37-60",
+        "expected_score": "WITH_SUPPORT",
+        "original_score": "WITH_SUPPORT",
+        "original_confidence": 0.787069828475074,
+        "adjusted_score": "WITH_SUPPORT",
+        "adjusted_confidence": 0.687069828475074
+      },
+      {
+        "case_id": 16,
+        "age_months": 60,
+        "domain": "cognitive",
+        "age_group": "37-60",
+        "expected_score": "WITH_SUPPORT",
+        "original_score": "WITH_SUPPORT",
+        "original_confidence": 0.8648775142461873,
+        "adjusted_score": "WITH_SUPPORT",
+        "adjusted_confidence": 0.7648775142461873
+      },
+      {
+        "case_id": 17,
+        "age_months": 60,
+        "domain": "cognitive",
+        "age_group": "37-60",
+        "expected_score": "INDEPENDENT",
+        "original_score": "EMERGING",
+        "original_confidence": 0.7551735192780148,
+        "adjusted_score": "EMERGING",
+        "adjusted_confidence": 0.8051735192780148
+      },
+      {
+        "case_id": 18,
+        "age_months": 0,
+        "domain": "cognitive",
+        "age_group": "0-12",
+        "expected_score": "INDEPENDENT",
+        "original_score": "WITH_SUPPORT",
+        "original_confidence": 0.7801374570046663,
+        "adjusted_score": "WITH_SUPPORT",
+        "adjusted_confidence": 0.7301374570046663
+      },
+      {
+        "case_id": 19,
+        "age_months": 60,
+        "domain": "cognitive",
+        "age_group": "37-60",
+        "expected_score": "INDEPENDENT",
+        "original_score": "EMERGING",
+        "original_confidence": 0.8579852377103371,
+        "adjusted_score": "EMERGING",
+        "adjusted_confidence": 0.9079852377103371
+      },
+      {
+        "case_id": 20,
+        "age_months": 0,
+        "domain": "motor",
+        "age_group": "0-12",
+        "expected_score": "INDEPENDENT",
+        "original_score": "INDEPENDENT",
+        "original_confidence": 0.8702478998324644,
+        "adjusted_score": "INDEPENDENT",
+        "adjusted_confidence": 0.9702478998324644
+      },
+      {
+        "case_id": 21,
+        "age_months": 0,
+        "domain": "communication",
+        "age_group": "0-12",
+        "expected_score": "EMERGING",
+        "original_score": "EMERGING",
+        "original_confidence": 0.7083539952043967,
+        "adjusted_score": "EMERGING",
+        "adjusted_confidence": 0.6083539952043967
+      },
+      {
+        "case_id": 22,
+        "age_months": 0,
+        "domain": "cognitive",
+        "age_group": "0-12",
+        "expected_score": "CANNOT_DO",
+        "original_score": "EMERGING",
+        "original_confidence": 0.8915471976933024,
+        "adjusted_score": "EMERGING",
+        "adjusted_confidence": 0.7915471976933024
+      },
+      {
+        "case_id": 23,
+        "age_months": 0,
+        "domain": "social",
+        "age_group": "0-12",
+        "expected_score": "CANNOT_DO",
+        "original_score": "CANNOT_DO",
+        "original_confidence": 0.8279943346027263,
+        "adjusted_score": "CANNOT_DO",
+        "adjusted_confidence": 0.7279943346027263
+      },
+      {
+        "case_id": 24,
+        "age_months": 60,
+        "domain": "cognitive",
+        "age_group": "37-60",
+        "expected_score": "INDEPENDENT",
+        "original_score": "EMERGING",
+        "original_confidence": 0.7834415042675142,
+        "adjusted_score": "EMERGING",
+        "adjusted_confidence": 0.8334415042675143
+      },
+      {
+        "case_id": 25,
+        "age_months": 0,
+        "domain": "cognitive",
+        "age_group": "0-12",
+        "expected_score": "CANNOT_DO",
+        "original_score": "CANNOT_DO",
+        "original_confidence": 0.7115037068412027,
+        "adjusted_score": "CANNOT_DO",
+        "adjusted_confidence": 0.6115037068412027
+      },
+      {
+        "case_id": 26,
+        "age_months": 0,
+        "domain": "social",
+        "age_group": "0-12",
+        "expected_score": "WITH_SUPPORT",
+        "original_score": "EMERGING",
+        "original_confidence": 0.7579537915820376,
+        "adjusted_score": "EMERGING",
+        "adjusted_confidence": 0.6579537915820376
+      },
+      {
+        "case_id": 27,
+        "age_months": 60,
+        "domain": "cognitive",
+        "age_group": "37-60",
+        "expected_score": "WITH_SUPPORT",
+        "original_score": "WITH_SUPPORT",
+        "original_confidence": 0.9378763838161196,
+        "adjusted_score": "WITH_SUPPORT",
+        "adjusted_confidence": 0.8378763838161196
+      },
+      {
+        "case_id": 28,
+        "age_months": 0,
+        "domain": "motor",
+        "age_group": "0-12",
+        "expected_score": "INDEPENDENT",
+        "original_score": "INDEPENDENT",
+        "original_confidence": 0.7654211171500626,
+        "adjusted_score": "INDEPENDENT",
+        "adjusted_confidence": 0.8654211171500625
+      },
+      {
+        "case_id": 29,
+        "age_months": 60,
+        "domain": "cognitive",
+        "age_group": "37-60",
+        "expected_score": "INDEPENDENT",
+        "original_score": "WITH_SUPPORT",
+        "original_confidence": 0.7940681448281552,
+        "adjusted_score": "WITH_SUPPORT",
+        "adjusted_confidence": 0.6940681448281553
+      },
+      {
+        "case_id": 30,
+        "age_months": 0,
+        "domain": "social",
+        "age_group": "0-12",
+        "expected_score": "EMERGING",
+        "original_score": "EMERGING",
+        "original_confidence": 0.8510568573708817,
+        "adjusted_score": "INDEPENDENT",
+        "adjusted_confidence": 0.85
+      },
+      {
+        "case_id": 31,
+        "age_months": 60,
+        "domain": "cognitive",
+        "age_group": "37-60",
+        "expected_score": "LOST_SKILL",
+        "original_score": "CANNOT_DO",
+        "original_confidence": 0.9396378935652272,
+        "adjusted_score": "CANNOT_DO",
+        "adjusted_confidence": 0.9896378935652272
+      },
+      {
+        "case_id": 32,
+        "age_months": 0,
+        "domain": "motor",
+        "age_group": "0-12",
+        "expected_score": "CANNOT_DO",
+        "original_score": "CANNOT_DO",
+        "original_confidence": 0.7260102198954362,
+        "adjusted_score": "CANNOT_DO",
+        "adjusted_confidence": 0.6260102198954363
+      },
+      {
+        "case_id": 33,
+        "age_months": 60,
+        "domain": "cognitive",
+        "age_group": "37-60",
+        "expected_score": "INDEPENDENT",
+        "original_score": "EMERGING",
+        "original_confidence": 0.9150947807611576,
+        "adjusted_score": "EMERGING",
+        "adjusted_confidence": 0.9650947807611576
+      },
+      {
+        "case_id": 34,
+        "age_months": 0,
+        "domain": "communication",
+        "age_group": "0-12",
+        "expected_score": "INDEPENDENT",
+        "original_score": "EMERGING",
+        "original_confidence": 0.703437215986303,
+        "adjusted_score": "EMERGING",
+        "adjusted_confidence": 0.6034372159863031
+      },
+      {
+        "case_id": 35,
+        "age_months": 60,
+        "domain": "cognitive",
+        "age_group": "37-60",
+        "expected_score": "LOST_SKILL",
+        "original_score": "CANNOT_DO",
+        "original_confidence": 0.8482262315701941,
+        "adjusted_score": "CANNOT_DO",
+        "adjusted_confidence": 0.8982262315701941
+      },
+      {
+        "case_id": 36,
+        "age_months": 60,
+        "domain": "cognitive",
+        "age_group": "37-60",
+        "expected_score": "WITH_SUPPORT",
+        "original_score": "WITH_SUPPORT",
+        "original_confidence": 0.8014812960759949,
+        "adjusted_score": "WITH_SUPPORT",
+        "adjusted_confidence": 0.701481296075995
+      },
+      {
+        "case_id": 37,
+        "age_months": 0,
+        "domain": "communication",
+        "age_group": "0-12",
+        "expected_score": "EMERGING",
+        "original_score": "LOST_SKILL",
+        "original_confidence": 0.8631241392335496,
+        "adjusted_score": "LOST_SKILL",
+        "adjusted_confidence": 0.7131241392335496
+      },
+      {
+        "case_id": 38,
+        "age_months": 60,
+        "domain": "cognitive",
+        "age_group": "37-60",
+        "expected_score": "WITH_SUPPORT",
+        "original_score": "WITH_SUPPORT",
+        "original_confidence": 0.757135715932662,
+        "adjusted_score": "WITH_SUPPORT",
+        "adjusted_confidence": 0.6571357159326621
+      },
+      {
+        "case_id": 39,
+        "age_months": 0,
+        "domain": "cognitive",
+        "age_group": "0-12",
+        "expected_score": "LOST_SKILL",
+        "original_score": "EMERGING",
+        "original_confidence": 0.8360598680473706,
+        "adjusted_score": "EMERGING",
+        "adjusted_confidence": 0.7360598680473707
+      },
+      {
+        "case_id": 40,
+        "age_months": 0,
+        "domain": "social",
+        "age_group": "0-12",
+        "expected_score": "LOST_SKILL",
+        "original_score": "EMERGING",
+        "original_confidence": 0.8414582074067857,
+        "adjusted_score": "INDEPENDENT",
+        "adjusted_confidence": 0.85
+      },
+      {
+        "case_id": 41,
+        "age_months": 60,
+        "domain": "cognitive",
+        "age_group": "37-60",
+        "expected_score": "WITH_SUPPORT",
+        "original_score": "WITH_SUPPORT",
+        "original_confidence": 0.8051498042726869,
+        "adjusted_score": "WITH_SUPPORT",
+        "adjusted_confidence": 0.7051498042726869
+      },
+      {
+        "case_id": 42,
+        "age_months": 60,
+        "domain": "cognitive",
+        "age_group": "37-60",
+        "expected_score": "LOST_SKILL",
+        "original_score": "CANNOT_DO",
+        "original_confidence": 0.7944038211983282,
+        "adjusted_score": "CANNOT_DO",
+        "adjusted_confidence": 0.8444038211983282
+      },
+      {
+        "case_id": 43,
+        "age_months": 60,
+        "domain": "cognitive",
+        "age_group": "37-60",
+        "expected_score": "INDEPENDENT",
+        "original_score": "WITH_SUPPORT",
+        "original_confidence": 0.8985211695695563,
+        "adjusted_score": "WITH_SUPPORT",
+        "adjusted_confidence": 0.7985211695695563
+      },
+      {
+        "case_id": 44,
+        "age_months": 60,
+        "domain": "cognitive",
+        "age_group": "37-60",
+        "expected_score": "WITH_SUPPORT",
+        "original_score": "WITH_SUPPORT",
+        "original_confidence": 0.8866552636001761,
+        "adjusted_score": "WITH_SUPPORT",
+        "adjusted_confidence": 0.7866552636001761
+      },
+      {
+        "case_id": 45,
+        "age_months": 60,
+        "domain": "cognitive",
+        "age_group": "37-60",
+        "expected_score": "INDEPENDENT",
+        "original_score": "WITH_SUPPORT",
+        "original_confidence": 0.9053266350266156,
+        "adjusted_score": "WITH_SUPPORT",
+        "adjusted_confidence": 0.8053266350266156
+      },
+      {
+        "case_id": 46,
+        "age_months": 0,
+        "domain": "motor",
+        "age_group": "0-12",
+        "expected_score": "WITH_SUPPORT",
+        "original_score": "WITH_SUPPORT",
+        "original_confidence": 0.7349156083894266,
+        "adjusted_score": "WITH_SUPPORT",
+        "adjusted_confidence": 0.6849156083894266
+      },
+      {
+        "case_id": 47,
+        "age_months": 60,
+        "domain": "cognitive",
+        "age_group": "37-60",
+        "expected_score": "WITH_SUPPORT",
+        "original_score": "WITH_SUPPORT",
+        "original_confidence": 0.9101563575539033,
+        "adjusted_score": "WITH_SUPPORT",
+        "adjusted_confidence": 0.8101563575539034
+      },
+      {
+        "case_id": 48,
+        "age_months": 0,
+        "domain": "social",
+        "age_group": "0-12",
+        "expected_score": "INDEPENDENT",
+        "original_score": "WITH_SUPPORT",
+        "original_confidence": 0.7590087538719548,
+        "adjusted_score": "WITH_SUPPORT",
+        "adjusted_confidence": 0.7090087538719547
+      },
+      {
+        "case_id": 49,
+        "age_months": 0,
+        "domain": "cognitive",
+        "age_group": "0-12",
+        "expected_score": "EMERGING",
+        "original_score": "EMERGING",
+        "original_confidence": 0.8440489433551488,
+        "adjusted_score": "EMERGING",
+        "adjusted_confidence": 0.7440489433551488
+      }
+    ]
+  },
+  "by_age_group": {
+    "0-12": {
+      "standard": {
+        "count": 27,
+        "avg_confidence": 0.809569800723468,
+        "categories": {
+          "CANNOT_DO": 0.18518518518518517,
+          "EMERGING": 0.48148148148148145,
+          "WITH_SUPPORT": 0.18518518518518517,
+          "INDEPENDENT": 0.1111111111111111,
+          "LOST_SKILL": 0.037037037037037035
+        },
+        "agreement": 0.48148148148148145
+      },
+      "age_prompts": {
+        "count": 27,
+        "avg_confidence": 0.7981215689299942,
+        "categories": {
+          "CANNOT_DO": 0.18518518518518517,
+          "EMERGING": 0.48148148148148145,
+          "WITH_SUPPORT": 0.18518518518518517,
+          "INDEPENDENT": 0.1111111111111111,
+          "LOST_SKILL": 0.037037037037037035
+        },
+        "agreement": 0.48148148148148145
+      },
+      "age_adjusted": {
+        "count": 27,
+        "avg_confidence": 0.7922516010272695,
+        "categories": {
+          "CANNOT_DO": 0.18518518518518517,
+          "EMERGING": 0.48148148148148145,
+          "WITH_SUPPORT": 0.18518518518518517,
+          "INDEPENDENT": 0.1111111111111111,
+          "LOST_SKILL": 0.037037037037037035
+        },
+        "agreement": 0.48148148148148145
+      },
+      "age_adjusted_manual": {
+        "count": 27,
+        "avg_confidence_original": 0.7922516010272695,
+        "avg_confidence_adjusted": 0.7344991842943669,
+        "categories_original": {
+          "CANNOT_DO": 0.18518518518518517,
+          "EMERGING": 0.48148148148148145,
+          "WITH_SUPPORT": 0.18518518518518517,
+          "INDEPENDENT": 0.1111111111111111,
+          "LOST_SKILL": 0.037037037037037035
+        },
+        "categories_adjusted": {
+          "CANNOT_DO": 0.18518518518518517,
+          "EMERGING": 0.37037037037037035,
+          "INDEPENDENT": 0.2222222222222222,
+          "WITH_SUPPORT": 0.18518518518518517,
+          "LOST_SKILL": 0.037037037037037035
+        },
+        "category_changes": {
+          "EMERGING->INDEPENDENT": 3
+        },
+        "improved_cases": 1,
+        "worsened_cases": 1,
+        "unchanged_cases": 25,
+        "agreement_original": 0.48148148148148145,
+        "agreement_adjusted": 0.48148148148148145,
+        "change_rate": 0.1111111111111111,
+        "improved_rate": 0.037037037037037035,
+        "worsened_rate": 0.037037037037037035,
+        "unchanged_rate": 0.9259259259259259
+      }
+    },
+    "13-36": {},
+    "37-60": {
+      "standard": {
+        "count": 23,
+        "avg_confidence": 0.7848948792586784,
+        "categories": {
+          "CANNOT_DO": 0.17391304347826086,
+          "WITH_SUPPORT": 0.6086956521739131,
+          "EMERGING": 0.21739130434782608
+        },
+        "agreement": 0.4782608695652174
+      },
+      "age_prompts": {
+        "count": 23,
+        "avg_confidence": 0.8407068465721302,
+        "categories": {
+          "CANNOT_DO": 0.17391304347826086,
+          "WITH_SUPPORT": 0.6086956521739131,
+          "EMERGING": 0.21739130434782608
+        },
+        "agreement": 0.4782608695652174
+      },
+      "age_adjusted": {
+        "count": 23,
+        "avg_confidence": 0.8480392990345499,
+        "categories": {
+          "CANNOT_DO": 0.17391304347826086,
+          "WITH_SUPPORT": 0.6086956521739131,
+          "EMERGING": 0.21739130434782608
+        },
+        "agreement": 0.4782608695652174
+      },
+      "age_adjusted_manual": {
+        "count": 23,
+        "avg_confidence_original": 0.8480392990345499,
+        "avg_confidence_adjusted": 0.806734951208463,
+        "categories_original": {
+          "CANNOT_DO": 0.17391304347826086,
+          "WITH_SUPPORT": 0.6086956521739131,
+          "EMERGING": 0.21739130434782608
+        },
+        "categories_adjusted": {
+          "CANNOT_DO": 0.17391304347826086,
+          "WITH_SUPPORT": 0.6086956521739131,
+          "EMERGING": 0.21739130434782608
+        },
+        "category_changes": {},
+        "improved_cases": 0,
+        "worsened_cases": 0,
+        "unchanged_cases": 23,
+        "agreement_original": 0.4782608695652174,
+        "agreement_adjusted": 0.4782608695652174,
+        "change_rate": 0.0,
+        "improved_rate": 0.0,
+        "worsened_rate": 0.0,
+        "unchanged_rate": 1.0
+      }
+    }
+  }
+}

@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Active Learning Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <style>
+        body {
+            padding-top: 2rem;
+            background-color: #f8f9fa;
+        }
+        .card {
+            margin-bottom: 1.5rem;
+            border: none;
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+            transition: transform 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+        }
+        .card-header {
+            background-color: #563d7c;
+            color: white;
+            font-weight: 500;
+        }
+        .header-icon {
+            margin-right: 0.5rem;
+        }
+        .api-url {
+            background-color: #f8f9fa;
+            padding: 0.5rem;
+            border-radius: 0.25rem;
+            font-family: monospace;
+            margin-top: 0.5rem;
+        }
+        .btn-api {
+            margin-top: 1rem;
+        }
+        .stats-container {
+            margin-top: 2rem;
+        }
+        .stat-card {
+            text-align: center;
+            padding: 1rem;
+        }
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #563d7c;
+        }
+        .stat-label {
+            font-size: 1rem;
+            color: #6c757d;
+        }
+        pre {
+            background-color: #f8f9fa;
+            padding: 1rem;
+            border-radius: 0.25rem;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        .endpoint-description {
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="mb-5 text-center">
+            <h1 class="display-4">Active Learning Dashboard</h1>
+            <p class="lead">Monitor and manage your continuous learning system</p>
+        </header>
+
+        <div class="row stats-container mb-5" id="stats-container">
+            <div class="col-md-4">
+                <div class="card stat-card">
+                    <div class="stat-value" id="pending-reviews-count">-</div>
+                    <div class="stat-label">Pending Reviews</div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card stat-card">
+                    <div class="stat-value" id="completed-reviews-count">-</div>
+                    <div class="stat-label">Completed Reviews</div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card stat-card">
+                    <div class="stat-value" id="model-version">-</div>
+                    <div class="stat-label">Current Model Version</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="bi bi-list-check header-icon"></i>
+                        Pending Reviews
+                    </div>
+                    <div class="card-body">
+                        <p class="endpoint-description">View responses that need expert review, ordered by priority.</p>
+                        <div class="api-url">GET /active-learning/pending-reviews</div>
+                        <a href="/active-learning/pending-reviews.html" target="_blank" class="btn btn-primary btn-api">
+                            <i class="bi bi-arrow-right-circle"></i> View Pending Reviews
+                        </a>
+                        <div class="mt-3">
+                            <button class="btn btn-outline-primary" id="load-pending-reviews">
+                                <i class="bi bi-arrow-repeat"></i> Load Data
+                            </button>
+                        </div>
+                        <div class="mt-3" id="pending-reviews-result" style="display:none;">
+                            <h5>Result:</h5>
+                            <pre id="pending-reviews-data"></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="bi bi-graph-up header-icon"></i>
+                        System Statistics
+                    </div>
+                    <div class="card-body">
+                        <p class="endpoint-description">Get statistics about the active learning system.</p>
+                        <div class="api-url">GET /active-learning/statistics</div>
+                        <a href="/active-learning/statistics.html" target="_blank" class="btn btn-primary btn-api">
+                            <i class="bi bi-arrow-right-circle"></i> View Statistics
+                        </a>
+                        <div class="mt-3">
+                            <button class="btn btn-outline-primary" id="load-statistics">
+                                <i class="bi bi-arrow-repeat"></i> Load Data
+                            </button>
+                        </div>
+                        <div class="mt-3" id="statistics-result" style="display:none;">
+                            <h5>Result:</h5>
+                            <pre id="statistics-data"></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="bi bi-layers header-icon"></i>
+                        Model Versions
+                    </div>
+                    <div class="card-body">
+                        <p class="endpoint-description">View the history of model versions.</p>
+                        <div class="api-url">GET /active-learning/model-versions</div>
+                        <a href="/active-learning/model-versions.html" target="_blank" class="btn btn-primary btn-api">
+                            <i class="bi bi-arrow-right-circle"></i> View Model Versions
+                        </a>
+                        <div class="mt-3">
+                            <button class="btn btn-outline-primary" id="load-model-versions">
+                                <i class="bi bi-arrow-repeat"></i> Load Data
+                            </button>
+                        </div>
+                        <div class="mt-3" id="model-versions-result" style="display:none;">
+                            <h5>Result:</h5>
+                            <pre id="model-versions-data"></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="bi bi-gear header-icon"></i>
+                        Feedback Interface Data
+                    </div>
+                    <div class="card-body">
+                        <p class="endpoint-description">Export data needed for the feedback interface.</p>
+                        <div class="api-url">GET /active-learning/export-interface</div>
+                        <a href="/active-learning/export-interface.html" target="_blank" class="btn btn-primary btn-api">
+                            <i class="bi bi-arrow-right-circle"></i> View Interface Data
+                        </a>
+                        <div class="mt-3">
+                            <button class="btn btn-outline-primary" id="load-interface-data">
+                                <i class="bi bi-arrow-repeat"></i> Load Data
+                            </button>
+                        </div>
+                        <div class="mt-3" id="interface-data-result" style="display:none;">
+                            <h5>Result:</h5>
+                            <pre id="interface-data"></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="bi bi-robot header-icon"></i>
+                        Trigger Retraining
+                    </div>
+                    <div class="card-body">
+                        <p class="endpoint-description">Manually trigger model retraining.</p>
+                        <div class="api-url">POST /active-learning/trigger-retraining</div>
+                        <div class="mt-3">
+                            <div class="mb-3">
+                                <label for="retraining-reason" class="form-label">Reason for retraining:</label>
+                                <input type="text" class="form-control" id="retraining-reason" placeholder="Reason for retraining">
+                            </div>
+                            <button class="btn btn-warning" id="trigger-retraining">
+                                <i class="bi bi-lightning-charge"></i> Trigger Retraining
+                            </button>
+                        </div>
+                        <div class="mt-3" id="trigger-retraining-result" style="display:none;">
+                            <div class="alert alert-success" role="alert" id="trigger-retraining-message">
+                                Retraining triggered successfully!
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="bi bi-chat-square-dots header-icon"></i>
+                        Provide Feedback
+                    </div>
+                    <div class="card-body">
+                        <p class="endpoint-description">Submit expert feedback on a prediction.</p>
+                        <div class="api-url">POST /active-learning/feedback</div>
+                        <div class="mt-3">
+                            <div class="mb-3">
+                                <label for="review-id" class="form-label">Review ID:</label>
+                                <input type="text" class="form-control" id="review-id" placeholder="review_XXX_YYYYMMDDHHMMSS">
+                            </div>
+                            <div class="mb-3">
+                                <label for="correct-score" class="form-label">Correct Score:</label>
+                                <select class="form-select" id="correct-score">
+                                    <option value="CANNOT_DO">CANNOT_DO</option>
+                                    <option value="LOST_SKILL">LOST_SKILL</option>
+                                    <option value="EMERGING">EMERGING</option>
+                                    <option value="WITH_SUPPORT">WITH_SUPPORT</option>
+                                    <option value="INDEPENDENT">INDEPENDENT</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="feedback-notes" class="form-label">Notes (optional):</label>
+                                <textarea class="form-control" id="feedback-notes" rows="2"></textarea>
+                            </div>
+                            <button class="btn btn-success" id="submit-feedback">
+                                <i class="bi bi-check-circle"></i> Submit Feedback
+                            </button>
+                        </div>
+                        <div class="mt-3" id="submit-feedback-result" style="display:none;">
+                            <div class="alert alert-success" role="alert" id="submit-feedback-message">
+                                Feedback submitted successfully!
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="my-5 pt-5 text-muted text-center text-small">
+            <p>&copy; 2025 Active Learning System</p>
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Helper function to format JSON for display
+        function formatJson(json) {
+            return JSON.stringify(json, null, 2);
+        }
+
+        // Load statistics for the top stats display
+        function loadTopStats() {
+            fetch('/active-learning/statistics')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('pending-reviews-count').textContent = data.pending_reviews;
+                    document.getElementById('completed-reviews-count').textContent = data.completed_reviews;
+                    document.getElementById('model-version').textContent = data.current_model_version;
+                })
+                .catch(error => {
+                    console.error('Error loading stats:', error);
+                    document.getElementById('pending-reviews-count').textContent = 'Error';
+                    document.getElementById('completed-reviews-count').textContent = 'Error';
+                    document.getElementById('model-version').textContent = 'Error';
+                });
+        }
+
+        // Load pending reviews data and display it
+        function loadPendingReviews() {
+            fetch('/active-learning/pending-reviews')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('pending-reviews-data').textContent = formatJson(data);
+                    document.getElementById('pending-reviews-result').style.display = 'block';
+                    
+                    // Update the button text to show it's been loaded
+                    document.getElementById('load-pending-reviews').innerHTML = 
+                        '<i class="bi bi-check-circle"></i> Data Loaded';
+                })
+                .catch(error => {
+                    console.error('Error loading pending reviews:', error);
+                    document.getElementById('pending-reviews-data').textContent = 'Error: ' + error.message;
+                    document.getElementById('pending-reviews-result').style.display = 'block';
+                });
+        }
+
+        // Load statistics data and display it
+        function loadStatistics() {
+            fetch('/active-learning/statistics')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('statistics-data').textContent = formatJson(data);
+                    document.getElementById('statistics-result').style.display = 'block';
+                    
+                    // Update the button text to show it's been loaded
+                    document.getElementById('load-statistics').innerHTML = 
+                        '<i class="bi bi-check-circle"></i> Data Loaded';
+                })
+                .catch(error => {
+                    console.error('Error loading statistics:', error);
+                    document.getElementById('statistics-data').textContent = 'Error: ' + error.message;
+                    document.getElementById('statistics-result').style.display = 'block';
+                });
+        }
+
+        // Load model versions data and display it
+        function loadModelVersions() {
+            fetch('/active-learning/model-versions')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('model-versions-data').textContent = formatJson(data);
+                    document.getElementById('model-versions-result').style.display = 'block';
+                    
+                    // Update the button text to show it's been loaded
+                    document.getElementById('load-model-versions').innerHTML = 
+                        '<i class="bi bi-check-circle"></i> Data Loaded';
+                })
+                .catch(error => {
+                    console.error('Error loading model versions:', error);
+                    document.getElementById('model-versions-data').textContent = 'Error: ' + error.message;
+                    document.getElementById('model-versions-result').style.display = 'block';
+                });
+        }
+
+        // Load interface data and display it
+        function loadInterfaceData() {
+            fetch('/active-learning/export-interface')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('interface-data').textContent = formatJson(data);
+                    document.getElementById('interface-data-result').style.display = 'block';
+                    
+                    // Update the button text to show it's been loaded
+                    document.getElementById('load-interface-data').innerHTML = 
+                        '<i class="bi bi-check-circle"></i> Data Loaded';
+                })
+                .catch(error => {
+                    console.error('Error loading interface data:', error);
+                    document.getElementById('interface-data').textContent = 'Error: ' + error.message;
+                    document.getElementById('interface-data-result').style.display = 'block';
+                });
+        }
+
+        // Load data when buttons are clicked
+        document.getElementById('load-pending-reviews').addEventListener('click', loadPendingReviews);
+        document.getElementById('load-statistics').addEventListener('click', loadStatistics);
+        document.getElementById('load-model-versions').addEventListener('click', loadModelVersions);
+        document.getElementById('load-interface-data').addEventListener('click', loadInterfaceData);
+
+        // Trigger retraining
+        document.getElementById('trigger-retraining').addEventListener('click', function() {
+            const reason = document.getElementById('retraining-reason').value;
+            fetch('/active-learning/trigger-retraining', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ description: reason }),
+            })
+            .then(response => {
+                if (response.status === 204) {
+                    document.getElementById('trigger-retraining-result').style.display = 'block';
+                    document.getElementById('trigger-retraining-message').textContent = 'Retraining triggered successfully!';
+                    document.getElementById('retraining-reason').value = '';
+                } else {
+                    throw new Error('Error triggering retraining');
+                }
+            })
+            .catch(error => {
+                document.getElementById('trigger-retraining-result').style.display = 'block';
+                document.getElementById('trigger-retraining-message').textContent = 'Error: ' + error.message;
+                document.getElementById('trigger-retraining-message').classList.remove('alert-success');
+                document.getElementById('trigger-retraining-message').classList.add('alert-danger');
+            });
+        });
+
+        // Submit feedback
+        document.getElementById('submit-feedback').addEventListener('click', function() {
+            const reviewId = document.getElementById('review-id').value;
+            const correctScore = document.getElementById('correct-score').value;
+            const notes = document.getElementById('feedback-notes').value;
+            
+            fetch('/active-learning/feedback', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    review_id: reviewId,
+                    correct_score: correctScore,
+                    notes: notes
+                }),
+            })
+            .then(response => {
+                if (response.status === 204) {
+                    document.getElementById('submit-feedback-result').style.display = 'block';
+                    document.getElementById('submit-feedback-message').textContent = 'Feedback submitted successfully!';
+                    document.getElementById('submit-feedback-message').classList.remove('alert-danger');
+                    document.getElementById('submit-feedback-message').classList.add('alert-success');
+                    document.getElementById('review-id').value = '';
+                    document.getElementById('feedback-notes').value = '';
+                } else {
+                    throw new Error('Error submitting feedback');
+                }
+            })
+            .catch(error => {
+                document.getElementById('submit-feedback-result').style.display = 'block';
+                document.getElementById('submit-feedback-message').textContent = 'Error: ' + error.message;
+                document.getElementById('submit-feedback-message').classList.remove('alert-success');
+                document.getElementById('submit-feedback-message').classList.add('alert-danger');
+            });
+        });
+
+        // Load stats and all data on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            loadTopStats();
+            loadPendingReviews();
+            loadStatistics();
+            loadModelVersions();
+            loadInterfaceData();
+        });
+    </script>
+</body>
+</html> 

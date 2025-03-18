@@ -1,0 +1,191 @@
+[
+  {
+    "response": "they does this with support from babysitter. The specific help needed is physical guidance, but they can handle the preparation independently.",
+    "expected_score": "WITH_SUPPORT",
+    "domain": "MOTOR",
+    "age_months": 24,
+    "milestone": "Can pick threads, pins"
+  },
+  {
+    "response": "My child can runs without any help. they mastered this skill about several weeks and does it consistently in different settings like at grandma's house and at the park.",
+    "expected_score": "INDEPENDENT",
+    "domain": "MOTOR",
+    "age_months": 24,
+    "milestone": "Runs"
+  },
+  {
+    "response": "Yes, Jessie demonstrates this ability independently. I've noticed they does this regularly, especially when we are in the car. they seems to enjoy it and will often try to do it again.",
+    "expected_score": "INDEPENDENT",
+    "domain": "SOCIAL",
+    "age_months": 24,
+    "milestone": "increases understanding about language used related to emotions"
+  },
+  {
+    "response": "Jessie has completely mastered this skill. they does it on their own not only at home but also when we're at the park. It's been consistent for a couple of months.",
+    "expected_score": "INDEPENDENT",
+    "domain": "SOCIAL",
+    "age_months": 24,
+    "milestone": "Engages in cooperative play"
+  },
+  {
+    "response": "they occasionally attempts this, especially when interested in the outcome. The skill isn't reliable yet, but I can see they is making progress compared to a month ago.",
+    "expected_score": "EMERGING",
+    "domain": "SOCIAL",
+    "age_months": 24,
+    "milestone": "Engages in pretend play"
+  },
+  {
+    "response": "Jessie has completely mastered this skill. they does it on their own not only at home but also when we're at the store. It's been consistent for 2 weeks.",
+    "expected_score": "INDEPENDENT",
+    "domain": "COMMUNICATION",
+    "age_months": 24,
+    "milestone": "listens to short rhymes"
+  },
+  {
+    "response": "Yes, Jessie demonstrates this ability independently. I've noticed they does this regularly, especially when we are at home. they seems to enjoy it and will often try to do it again.",
+    "expected_score": "INDEPENDENT",
+    "domain": "MOTOR",
+    "age_months": 24,
+    "milestone": "Makes own designs or spontaneous forms in drawing"
+  },
+  {
+    "response": "Definitely yes. Jessie is very independent with this skill and even helps friends with it. they demonstrates this ability almost every time and in various contexts.",
+    "expected_score": "INDEPENDENT",
+    "domain": "MOTOR",
+    "age_months": 24,
+    "milestone": "Scribbles spontaneously"
+  },
+  {
+    "response": "Yes, Jessie demonstrates this ability independently. I've noticed they does this regularly, especially when we are at home. they seems to enjoy it and will often try to practice more.",
+    "expected_score": "INDEPENDENT",
+    "domain": "COMMUNICATION",
+    "age_months": 24,
+    "milestone": "Uses 50+ words"
+  },
+  {
+    "response": "My child can jumps with both feet without any help. they mastered this skill about 3 months and does it consistently in different settings like at bedtime and at the store.",
+    "expected_score": "INDEPENDENT",
+    "domain": "MOTOR",
+    "age_months": 24,
+    "milestone": "Jumps with both feet"
+  },
+  {
+    "response": "My child can talks about past events without any help. they mastered this skill about 3 months and does it consistently in different settings like at the park and at bedtime.",
+    "expected_score": "INDEPENDENT",
+    "domain": "COMMUNICATION",
+    "age_months": 24,
+    "milestone": "Talks about past events"
+  },
+  {
+    "response": "This is something Jessie does very well without any assistance. they first showed this ability when we were at the store and has been doing it confidently ever since.",
+    "expected_score": "INDEPENDENT",
+    "domain": "SOCIAL",
+    "age_months": 24,
+    "milestone": "Follows simple rules"
+  },
+  {
+    "response": "Yes, Jessie demonstrates this ability independently. I've noticed they does this regularly, especially when we are at grandma's house. they seems to enjoy it and will often try to practice more.",
+    "expected_score": "INDEPENDENT",
+    "domain": "COGNITIVE",
+    "age_months": 24,
+    "milestone": "knows where things usually belong"
+  },
+  {
+    "response": "My child can curious about everything without any help. they mastered this skill about a couple of months and does it consistently in different settings like at bedtime and at daycare.",
+    "expected_score": "INDEPENDENT",
+    "domain": "COGNITIVE",
+    "age_months": 24,
+    "milestone": "curious about everything"
+  },
+  {
+    "response": "Jessie has completely mastered this skill. they does it on their own not only at home but also when we're during bath time. It's been consistent for 3 months.",
+    "expected_score": "INDEPENDENT",
+    "domain": "SOCIAL",
+    "age_months": 24,
+    "milestone": "preference for likes and dislikes"
+  },
+  {
+    "response": "My child can gives empty dish to adults without any help. they mastered this skill about 3 months and does it consistently in different settings like at bedtime and during bath time.",
+    "expected_score": "INDEPENDENT",
+    "domain": "MOTOR",
+    "age_months": 24,
+    "milestone": "gives empty dish to adults"
+  },
+  {
+    "response": "Jessie shows early signs of this skill. they has tried 9 times in the past week, succeeding about 1 out of 10 times. It seems to depend on level of interest.",
+    "expected_score": "EMERGING",
+    "domain": "MOTOR",
+    "age_months": 24,
+    "milestone": "Stands on one foot briefly"
+  },
+  {
+    "response": "My child can shows empathy without any help. they mastered this skill about a couple of months and does it consistently in different settings like in the car and at bedtime.",
+    "expected_score": "INDEPENDENT",
+    "domain": "SOCIAL",
+    "age_months": 24,
+    "milestone": "Shows empathy"
+  },
+  {
+    "response": "Definitely yes. Jessie is very independent with this skill and even helps friends with it. they demonstrates this ability whenever the opportunity arises and in various contexts.",
+    "expected_score": "INDEPENDENT",
+    "domain": "COGNITIVE",
+    "age_months": 24,
+    "milestone": "enjoys picture books and recognises smaller details"
+  },
+  {
+    "response": "Yes, Jessie demonstrates this ability independently. I've noticed they does this regularly, especially when we are in the car. they seems to enjoy it and will often try to practice more.",
+    "expected_score": "INDEPENDENT",
+    "domain": "COGNITIVE",
+    "age_months": 24,
+    "milestone": "very curious about surrounding but has little understnasing of common dangers"
+  },
+  {
+    "response": "No, he hasn't started doing this at all. We've tried to encourage it, but there's no sign of the skill yet.",
+    "expected_score": "CANNOT_DO",
+    "domain": "MOTOR",
+    "age_months": 36,
+    "milestone": "Catches a ball with two hands"
+  },
+  {
+    "response": "He used to do this regularly, but after his illness a few months ago, he stopped completely. Now he doesn't even try.",
+    "expected_score": "LOST_SKILL",
+    "domain": "COMMUNICATION",
+    "age_months": 30,
+    "milestone": "Speaks in short sentences"
+  },
+  {
+    "response": "It depends on the day. At home with familiar toys he can do this, but in new environments he gets overwhelmed and can't focus at all.",
+    "expected_score": "EMERGING",
+    "domain": "COGNITIVE",
+    "age_months": 28,
+    "milestone": "Completes simple puzzles"
+  },
+  {
+    "response": "She can do this but needs verbal prompts and sometimes hand-over-hand guidance, especially when starting the activity.",
+    "expected_score": "WITH_SUPPORT",
+    "domain": "MOTOR",
+    "age_months": 42,
+    "milestone": "Uses scissors to cut along a line"
+  },
+  {
+    "response": "No, but also yes. It's complicated because sometimes he seems to understand and follow directions perfectly, while other times he completely ignores the same instructions.",
+    "expected_score": "EMERGING",
+    "domain": "COMMUNICATION",
+    "age_months": 36,
+    "milestone": "Follows two-step instructions"
+  },
+  {
+    "response": "My child can do this with his therapist, but not with me or at school. The therapist uses specific visual supports.",
+    "expected_score": "WITH_SUPPORT",
+    "domain": "SOCIAL",
+    "age_months": 48,
+    "milestone": "Takes turns in games"
+  },
+  {
+    "response": "She was doing this consistently a year ago, but after we moved, she regressed and now refuses to try.",
+    "expected_score": "LOST_SKILL",
+    "domain": "SOCIAL",
+    "age_months": 54,
+    "milestone": "Plays cooperatively with peers"
+  }
+] 

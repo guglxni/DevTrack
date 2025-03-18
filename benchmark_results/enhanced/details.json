@@ -1,0 +1,1614 @@
+{
+  "configs": [
+    {
+      "name": "standard",
+      "description": "Standard scoring without age-specific knowledge"
+    },
+    {
+      "name": "age_prompts",
+      "description": "Scoring with age-specific prompt templates"
+    },
+    {
+      "name": "age_adjusted",
+      "description": "Scoring with full age adjustment (prompts + confidence)"
+    }
+  ],
+  "raw_results": {
+    "standard": [
+      {
+        "case_id": 0,
+        "age_months": 24,
+        "domain": "MOTOR",
+        "age_group": "13-36",
+        "expected_score": "EMERGING",
+        "score": "EMERGING",
+        "confidence": 0.7825580413760338,
+        "prompt_length": 134,
+        "has_age_specific": false,
+        "has_domain_specific": true
+      },
+      {
+        "case_id": 1,
+        "age_months": 36,
+        "domain": "COGNITIVE",
+        "age_group": "13-36",
+        "expected_score": "EMERGING",
+        "score": "CANNOT_DO",
+        "confidence": 0.8834500710548627,
+        "prompt_length": 197,
+        "has_age_specific": false,
+        "has_domain_specific": true
+      },
+      {
+        "case_id": 2,
+        "age_months": 11,
+        "domain": "MOTOR",
+        "age_group": "0-12",
+        "expected_score": "CANNOT_DO",
+        "score": "CANNOT_DO",
+        "confidence": 0.8751436784655944,
+        "prompt_length": 176,
+        "has_age_specific": false,
+        "has_domain_specific": true
+      },
+      {
+        "case_id": 3,
+        "age_months": 16,
+        "domain": "COGNITIVE",
+        "age_group": "13-36",
+        "expected_score": "WITH_SUPPORT",
+        "score": "EMERGING",
+        "confidence": 0.737664490311442,
+        "prompt_length": 171,
+        "has_age_specific": false,
+        "has_domain_specific": true
+      },
+      {
+        "case_id": 4,
+        "age_months": 36,
+        "domain": "COMMUNICATION",
+        "age_group": "13-36",
+        "expected_score": "INDEPENDENT",
+        "score": "EMERGING",
+        "confidence": 0.7794251819769618,
+        "prompt_length": 176,
+        "has_age_specific": false,
+        "has_domain_specific": true
+      },
+      {
+        "case_id": 5,
+        "age_months": 24,
+        "domain": "COMMUNICATION",
+        "age_group": "13-36",
+        "expected_score": "INDEPENDENT",
+        "score": "EMERGING",
+        "confidence": 0.714902496486526,
+        "prompt_length": 149,
+        "has_age_specific": false,
+        "has_domain_specific": true
+      },
+      {
+        "case_id": 6,
+        "age_months": 7,
+        "domain": "SOCIAL",
+        "age_group": "0-12",
+        "expected_score": "EMERGING",
+        "score": "EMERGING",
+        "confidence": 0.8262480757526021,
+        "prompt_length": 175,
+        "has_age_specific": false,
+        "has_domain_specific": true
+      },
+      {
+        "case_id": 7,
+        "age_months": 26,
+        "domain": "COMMUNICATION",
+        "age_group": "13-36",
+        "expected_score": "LOST_SKILL",
+        "score": "CANNOT_DO",
+        "confidence": 0.7480980177958051,
+        "prompt_length": 190,
+        "has_age_specific": false,
+        "has_domain_specific": true
+      },
+      {
+        "case_id": 8,
+        "age_months": 8,
+        "domain": "SOCIAL",
+        "age_group": "0-12",
+        "expected_score": "EMERGING",
+        "score": "EMERGING",
+        "confidence": 0.7288767275528872,
+        "prompt_length": 160,
+        "has_age_specific": false,
+        "has_domain_specific": true
+      },
+      {
+        "case_id": 9,
+        "age_months": 15,
+        "domain": "MOTOR",
+        "age_group": "13-36",
+        "expected_score": "LOST_SKILL",
+        "score": "EMERGING",
+        "confidence": 0.8255023530868248,
+        "prompt_length": 176,
+        "has_age_specific": false,
+        "has_domain_specific": true
+      },
+      {
+        "case_id": 10,
+        "age_months": 15,
+        "domain": "MOTOR",
+        "age_group": "13-36",
+        "expected_score": "INDEPENDENT",
+        "score": "EMERGING",
+        "confidence": 0.7567961301289008,
+        "prompt_length": 174,
+        "has_age_specific": false,
+        "has_domain_specific": true
+      },
+      {
+        "case_id": 11,
+        "age_months": 14,
+        "domain": "COMMUNICATION",
+        "age_group": "13-36",
+        "expected_score": "CANNOT_DO",
+        "score": "CANNOT_DO",
+        "confidence": 0.8987088880518468,
+        "prompt_length": 150,
+        "has_age_specific": false,
+        "has_domain_specific": true
+      },
+      {
+        "case_id": 12,
+        "age_months": 36,
+        "domain": "MOTOR",
+        "age_group": "13-36",
+        "expected_score": "INDEPENDENT",
+        "score": "EMERGING",
+        "confidence": 0.743038661817574,
+        "prompt_length": 146,
+        "has_age_specific": false,
+        "has_domain_specific": true
+      },
+      {
+        "case_id": 13,
+        "age_months": 3,
+        "domain": "MOTOR",
+        "age_group": "0-12",
+        "expected_score": "EMERGING",
+        "score": "LOST_SKILL",
+        "confidence": 0.8641949832571174,
+        "prompt_length": 182,
+        "has_age_specific": false,
+        "has_domain_specific": true
+      },
+      {
+        "case_id": 14,
+        "age_months": 36,
+        "domain": "MOTOR",
+        "age_group": "13-36",
+        "expected_score": "CANNOT_DO",
+        "score": "EMERGING",
+        "confidence": 0.789002175618037,
+        "prompt_length": 157,
+        "has_age_specific": false,
+        "has_domain_specific": true
+      },
+      {
+        "case_id": 15,
+        "age_months": 24,
+        "domain": "COGNITIVE",
+        "age_group": "13-36",
+        "expected_score": "EMERGING",
+        "score": "EMERGING",
+        "confidence": 0.7470419236394598,
+        "prompt_length": 198,
+        "has_age_specific": false,
+        "has_domain_specific": true
+      },
+      {
+        "case_id": 16,
+        "age_months": 12,
+        "domain": "COMMUNICATION",
+        "age_group": "0-12",
+        "expected_score": "INDEPENDENT",
+        "score": "EMERGING",
+        "confidence": 0.884165156838525,
+        "prompt_length": 188,
+        "has_age_specific": false,
+        "has_domain_specific": true
+      },
+      {
+        "case_id": 17,
+        "age_months": 10,
+        "domain": "MOTOR",
+        "age_group": "0-12",
+        "expected_score": "INDEPENDENT",
+        "score": "WITH_SUPPORT",
+        "confidence": 0.7985492886050904,
+        "prompt_length": 168,
+        "has_age_specific": false,
+        "has_domain_specific": true
+      },
+      {
+        "case_id": 18,
+        "age_months": 30,
+        "domain": "SOCIAL",
+        "age_group": "13-36",
+        "expected_score": "INDEPENDENT",
+        "score": "CANNOT_DO",
+        "confidence": 0.7283934755059571,
+        "prompt_length": 166,
+        "has_age_specific": false,
+        "has_domain_specific": true
+      },
+      {
+        "case_id": 19,
+        "age_months": 42,
+        "domain": "SOCIAL",
+        "age_group": "37-60",
+        "expected_score": "WITH_SUPPORT",
+        "score": "WITH_SUPPORT",
+        "confidence": 0.7998970620647691,
+        "prompt_length": 161,
+        "has_age_specific": false,
+        "has_domain_specific": true
+      },
+      {
+        "case_id": 20,
+        "age_months": 48,
+        "domain": "MOTOR",
+        "age_group": "37-60",
+        "expected_score": "LOST_SKILL",
+        "score": "CANNOT_DO",
+        "confidence": 0.864686024619985,
+        "prompt_length": 166,
+        "has_age_specific": false,
+        "has_domain_specific": true
+      },
+      {
+        "case_id": 21,
+        "age_months": 8,
+        "domain": "COGNITIVE",
+        "age_group": "0-12",
+        "expected_score": "INDEPENDENT",
+        "score": "EMERGING",
+        "confidence": 0.8016401470376676,
+        "prompt_length": 148,
+        "has_age_specific": false,
+        "has_domain_specific": true
+      },
+      {
+        "case_id": 22,
+        "age_months": 15,
+        "domain": "COMMUNICATION",
+        "age_group": "13-36",
+        "expected_score": "INDEPENDENT",
+        "score": "INDEPENDENT",
+        "confidence": 0.8980113817383415,
+        "prompt_length": 158,
+        "has_age_specific": false,
+        "has_domain_specific": true
+      },
+      {
+        "case_id": 23,
+        "age_months": 2,
+        "domain": "SOCIAL",
+        "age_group": "0-12",
+        "expected_score": "INDEPENDENT",
+        "score": "EMERGING",
+        "confidence": 0.7235870514867165,
+        "prompt_length": 157,
+        "has_age_specific": false,
+        "has_domain_specific": true
+      },
+      {
+        "case_id": 24,
+        "age_months": 9,
+        "domain": "COMMUNICATION",
+        "age_group": "0-12",
+        "expected_score": "EMERGING",
+        "score": "EMERGING",
+        "confidence": 0.7175979060182004,
+        "prompt_length": 181,
+        "has_age_specific": false,
+        "has_domain_specific": true
+      },
+      {
+        "case_id": 25,
+        "age_months": 8,
+        "domain": "COMMUNICATION",
+        "age_group": "0-12",
+        "expected_score": "EMERGING",
+        "score": "EMERGING",
+        "confidence": 0.762723453951269,
+        "prompt_length": 175,
+        "has_age_specific": false,
+        "has_domain_specific": true
+      },
+      {
+        "case_id": 26,
+        "age_months": 6,
+        "domain": "MOTOR",
+        "age_group": "0-12",
+        "expected_score": "EMERGING",
+        "score": "EMERGING",
+        "confidence": 0.7020274085032919,
+        "prompt_length": 179,
+        "has_age_specific": false,
+        "has_domain_specific": true
+      },
+      {
+        "case_id": 27,
+        "age_months": 30,
+        "domain": "COMMUNICATION",
+        "age_group": "13-36",
+        "expected_score": "INDEPENDENT",
+        "score": "EMERGING",
+        "confidence": 0.8556704400077062,
+        "prompt_length": 156,
+        "has_age_specific": false,
+        "has_domain_specific": true
+      },
+      {
+        "case_id": 28,
+        "age_months": 21,
+        "domain": "COMMUNICATION",
+        "age_group": "13-36",
+        "expected_score": "WITH_SUPPORT",
+        "score": "EMERGING",
+        "confidence": 0.7907997038153324,
+        "prompt_length": 174,
+        "has_age_specific": false,
+        "has_domain_specific": true
+      },
+      {
+        "case_id": 29,
+        "age_months": 36,
+        "domain": "COGNITIVE",
+        "age_group": "13-36",
+        "expected_score": "CANNOT_DO",
+        "score": "CANNOT_DO",
+        "confidence": 0.8181256801765154,
+        "prompt_length": 144,
+        "has_age_specific": false,
+        "has_domain_specific": true
+      }
+    ],
+    "age_prompts": [
+      {
+        "case_id": 0,
+        "age_months": 24,
+        "domain": "MOTOR",
+        "age_group": "13-36",
+        "expected_score": "EMERGING",
+        "score": "EMERGING",
+        "confidence": 0.891292999455382,
+        "prompt_length": 159,
+        "has_age_specific": false,
+        "has_domain_specific": true
+      },
+      {
+        "case_id": 1,
+        "age_months": 36,
+        "domain": "COGNITIVE",
+        "age_group": "13-36",
+        "expected_score": "EMERGING",
+        "score": "CANNOT_DO",
+        "confidence": 0.8798692752936964,
+        "prompt_length": 226,
+        "has_age_specific": false,
+        "has_domain_specific": true
+      },
+      {
+        "case_id": 2,
+        "age_months": 11,
+        "domain": "MOTOR",
+        "age_group": "0-12",
+        "expected_score": "CANNOT_DO",
+        "score": "CANNOT_DO",
+        "confidence": 0.8047493060081481,
+        "prompt_length": 200,
+        "has_age_specific": false,
+        "has_domain_specific": true
+      },
+      {
+        "case_id": 3,
+        "age_months": 16,
+        "domain": "COGNITIVE",
+        "age_group": "13-36",
+        "expected_score": "WITH_SUPPORT",
+        "score": "EMERGING",
+        "confidence": 0.9438339816627347,
+        "prompt_length": 196,
+        "has_age_specific": false,
+        "has_domain_specific": true
+      },
+      {
+        "case_id": 4,
+        "age_months": 36,
+        "domain": "COMMUNICATION",
+        "age_group": "13-36",
+        "expected_score": "INDEPENDENT",
+        "score": "EMERGING",
+        "confidence": 0.9364335831161632,
+        "prompt_length": 205,
+        "has_age_specific": false,
+        "has_domain_specific": true
+      },
+      {
+        "case_id": 5,
+        "age_months": 24,
+        "domain": "COMMUNICATION",
+        "age_group": "13-36",
+        "expected_score": "INDEPENDENT",
+        "score": "EMERGING",
+        "confidence": 0.7580600818840257,
+        "prompt_length": 174,
+        "has_age_specific": false,
+        "has_domain_specific": true
+      },
+      {
+        "case_id": 6,
+        "age_months": 7,
+        "domain": "SOCIAL",
+        "age_group": "0-12",
+        "expected_score": "EMERGING",
+        "score": "EMERGING",
+        "confidence": 0.8217534902834487,
+        "prompt_length": 198,
+        "has_age_specific": false,
+        "has_domain_specific": true
+      },
+      {
+        "case_id": 7,
+        "age_months": 26,
+        "domain": "COMMUNICATION",
+        "age_group": "13-36",
+        "expected_score": "LOST_SKILL",
+        "score": "CANNOT_DO",
+        "confidence": 0.8147936556016446,
+        "prompt_length": 219,
+        "has_age_specific": false,
+        "has_domain_specific": true
+      },
+      {
+        "case_id": 8,
+        "age_months": 8,
+        "domain": "SOCIAL",
+        "age_group": "0-12",
+        "expected_score": "EMERGING",
+        "score": "EMERGING",
+        "confidence": 0.9158662537496398,
+        "prompt_length": 183,
+        "has_age_specific": false,
+        "has_domain_specific": true
+      },
+      {
+        "case_id": 9,
+        "age_months": 15,
+        "domain": "MOTOR",
+        "age_group": "13-36",
+        "expected_score": "LOST_SKILL",
+        "score": "EMERGING",
+        "confidence": 0.8174951981038708,
+        "prompt_length": 201,
+        "has_age_specific": false,
+        "has_domain_specific": true
+      },
+      {
+        "case_id": 10,
+        "age_months": 15,
+        "domain": "MOTOR",
+        "age_group": "13-36",
+        "expected_score": "INDEPENDENT",
+        "score": "EMERGING",
+        "confidence": 0.8130331144888383,
+        "prompt_length": 199,
+        "has_age_specific": false,
+        "has_domain_specific": true
+      },
+      {
+        "case_id": 11,
+        "age_months": 14,
+        "domain": "COMMUNICATION",
+        "age_group": "13-36",
+        "expected_score": "CANNOT_DO",
+        "score": "CANNOT_DO",
+        "confidence": 0.8120792017575501,
+        "prompt_length": 175,
+        "has_age_specific": false,
+        "has_domain_specific": true
+      },
+      {
+        "case_id": 12,
+        "age_months": 36,
+        "domain": "MOTOR",
+        "age_group": "13-36",
+        "expected_score": "INDEPENDENT",
+        "score": "EMERGING",
+        "confidence": 0.7946685183523218,
+        "prompt_length": 175,
+        "has_age_specific": false,
+        "has_domain_specific": true
+      },
+      {
+        "case_id": 13,
+        "age_months": 3,
+        "domain": "MOTOR",
+        "age_group": "0-12",
+        "expected_score": "EMERGING",
+        "score": "LOST_SKILL",
+        "confidence": 0.8078765029992597,
+        "prompt_length": 205,
+        "has_age_specific": false,
+        "has_domain_specific": true
+      },
+      {
+        "case_id": 14,
+        "age_months": 36,
+        "domain": "MOTOR",
+        "age_group": "13-36",
+        "expected_score": "CANNOT_DO",
+        "score": "EMERGING",
+        "confidence": 0.8521523778137177,
+        "prompt_length": 186,
+        "has_age_specific": false,
+        "has_domain_specific": true
+      },
+      {
+        "case_id": 15,
+        "age_months": 24,
+        "domain": "COGNITIVE",
+        "age_group": "13-36",
+        "expected_score": "EMERGING",
+        "score": "EMERGING",
+        "confidence": 0.8107316547661099,
+        "prompt_length": 223,
+        "has_age_specific": false,
+        "has_domain_specific": true
+      },
+      {
+        "case_id": 16,
+        "age_months": 12,
+        "domain": "COMMUNICATION",
+        "age_group": "0-12",
+        "expected_score": "INDEPENDENT",
+        "score": "EMERGING",
+        "confidence": 0.8520017011412873,
+        "prompt_length": 212,
+        "has_age_specific": false,
+        "has_domain_specific": true
+      },
+      {
+        "case_id": 17,
+        "age_months": 10,
+        "domain": "MOTOR",
+        "age_group": "0-12",
+        "expected_score": "INDEPENDENT",
+        "score": "WITH_SUPPORT",
+        "confidence": 0.8077126630612816,
+        "prompt_length": 192,
+        "has_age_specific": false,
+        "has_domain_specific": true
+      },
+      {
+        "case_id": 18,
+        "age_months": 30,
+        "domain": "SOCIAL",
+        "age_group": "13-36",
+        "expected_score": "INDEPENDENT",
+        "score": "CANNOT_DO",
+        "confidence": 0.8617207153560815,
+        "prompt_length": 195,
+        "has_age_specific": false,
+        "has_domain_specific": true
+      },
+      {
+        "case_id": 19,
+        "age_months": 42,
+        "domain": "SOCIAL",
+        "age_group": "37-60",
+        "expected_score": "WITH_SUPPORT",
+        "score": "WITH_SUPPORT",
+        "confidence": 0.8297897757044999,
+        "prompt_length": 190,
+        "has_age_specific": false,
+        "has_domain_specific": true
+      },
+      {
+        "case_id": 20,
+        "age_months": 48,
+        "domain": "MOTOR",
+        "age_group": "37-60",
+        "expected_score": "LOST_SKILL",
+        "score": "CANNOT_DO",
+        "confidence": 0.7999483925787005,
+        "prompt_length": 195,
+        "has_age_specific": false,
+        "has_domain_specific": true
+      },
+      {
+        "case_id": 21,
+        "age_months": 8,
+        "domain": "COGNITIVE",
+        "age_group": "0-12",
+        "expected_score": "INDEPENDENT",
+        "score": "EMERGING",
+        "confidence": 0.8796049712543482,
+        "prompt_length": 171,
+        "has_age_specific": false,
+        "has_domain_specific": true
+      },
+      {
+        "case_id": 22,
+        "age_months": 15,
+        "domain": "COMMUNICATION",
+        "age_group": "13-36",
+        "expected_score": "INDEPENDENT",
+        "score": "INDEPENDENT",
+        "confidence": 0.8958117036410453,
+        "prompt_length": 183,
+        "has_age_specific": false,
+        "has_domain_specific": true
+      },
+      {
+        "case_id": 23,
+        "age_months": 2,
+        "domain": "SOCIAL",
+        "age_group": "0-12",
+        "expected_score": "INDEPENDENT",
+        "score": "EMERGING",
+        "confidence": 0.7953056895475781,
+        "prompt_length": 180,
+        "has_age_specific": false,
+        "has_domain_specific": true
+      },
+      {
+        "case_id": 24,
+        "age_months": 9,
+        "domain": "COMMUNICATION",
+        "age_group": "0-12",
+        "expected_score": "EMERGING",
+        "score": "EMERGING",
+        "confidence": 0.8343170973608578,
+        "prompt_length": 204,
+        "has_age_specific": false,
+        "has_domain_specific": true
+      },
+      {
+        "case_id": 25,
+        "age_months": 8,
+        "domain": "COMMUNICATION",
+        "age_group": "0-12",
+        "expected_score": "EMERGING",
+        "score": "EMERGING",
+        "confidence": 0.842271414574532,
+        "prompt_length": 198,
+        "has_age_specific": false,
+        "has_domain_specific": true
+      },
+      {
+        "case_id": 26,
+        "age_months": 6,
+        "domain": "MOTOR",
+        "age_group": "0-12",
+        "expected_score": "EMERGING",
+        "score": "EMERGING",
+        "confidence": 0.7956346366237224,
+        "prompt_length": 202,
+        "has_age_specific": false,
+        "has_domain_specific": true
+      },
+      {
+        "case_id": 27,
+        "age_months": 30,
+        "domain": "COMMUNICATION",
+        "age_group": "13-36",
+        "expected_score": "INDEPENDENT",
+        "score": "EMERGING",
+        "confidence": 0.8521634231391345,
+        "prompt_length": 185,
+        "has_age_specific": false,
+        "has_domain_specific": true
+      },
+      {
+        "case_id": 28,
+        "age_months": 21,
+        "domain": "COMMUNICATION",
+        "age_group": "13-36",
+        "expected_score": "WITH_SUPPORT",
+        "score": "EMERGING",
+        "confidence": 0.8180300392522633,
+        "prompt_length": 199,
+        "has_age_specific": false,
+        "has_domain_specific": true
+      },
+      {
+        "case_id": 29,
+        "age_months": 36,
+        "domain": "COGNITIVE",
+        "age_group": "13-36",
+        "expected_score": "CANNOT_DO",
+        "score": "CANNOT_DO",
+        "confidence": 0.8382394707677265,
+        "prompt_length": 173,
+        "has_age_specific": false,
+        "has_domain_specific": true
+      }
+    ],
+    "age_adjusted": [
+      {
+        "case_id": 0,
+        "age_months": 24,
+        "domain": "MOTOR",
+        "age_group": "13-36",
+        "expected_score": "EMERGING",
+        "score": "EMERGING",
+        "confidence": 0.8162181244703811,
+        "prompt_length": 159,
+        "has_age_specific": false,
+        "has_domain_specific": true
+      },
+      {
+        "case_id": 1,
+        "age_months": 36,
+        "domain": "COGNITIVE",
+        "age_group": "13-36",
+        "expected_score": "EMERGING",
+        "score": "CANNOT_DO",
+        "confidence": 0.9063998449497839,
+        "prompt_length": 226,
+        "has_age_specific": false,
+        "has_domain_specific": true
+      },
+      {
+        "case_id": 2,
+        "age_months": 11,
+        "domain": "MOTOR",
+        "age_group": "0-12",
+        "expected_score": "CANNOT_DO",
+        "score": "CANNOT_DO",
+        "confidence": 0.8073052563292552,
+        "prompt_length": 200,
+        "has_age_specific": false,
+        "has_domain_specific": true
+      },
+      {
+        "case_id": 3,
+        "age_months": 16,
+        "domain": "COGNITIVE",
+        "age_group": "13-36",
+        "expected_score": "WITH_SUPPORT",
+        "score": "EMERGING",
+        "confidence": 0.7798633749287184,
+        "prompt_length": 196,
+        "has_age_specific": false,
+        "has_domain_specific": true
+      },
+      {
+        "case_id": 4,
+        "age_months": 36,
+        "domain": "COMMUNICATION",
+        "age_group": "13-36",
+        "expected_score": "INDEPENDENT",
+        "score": "EMERGING",
+        "confidence": 0.9396979527705625,
+        "prompt_length": 205,
+        "has_age_specific": false,
+        "has_domain_specific": true
+      },
+      {
+        "case_id": 5,
+        "age_months": 24,
+        "domain": "COMMUNICATION",
+        "age_group": "13-36",
+        "expected_score": "INDEPENDENT",
+        "score": "EMERGING",
+        "confidence": 0.8635159206612717,
+        "prompt_length": 174,
+        "has_age_specific": false,
+        "has_domain_specific": true
+      },
+      {
+        "case_id": 6,
+        "age_months": 7,
+        "domain": "SOCIAL",
+        "age_group": "0-12",
+        "expected_score": "EMERGING",
+        "score": "EMERGING",
+        "confidence": 0.8883095474522723,
+        "prompt_length": 198,
+        "has_age_specific": false,
+        "has_domain_specific": true
+      },
+      {
+        "case_id": 7,
+        "age_months": 26,
+        "domain": "COMMUNICATION",
+        "age_group": "13-36",
+        "expected_score": "LOST_SKILL",
+        "score": "CANNOT_DO",
+        "confidence": 0.8316130744857535,
+        "prompt_length": 219,
+        "has_age_specific": false,
+        "has_domain_specific": true
+      },
+      {
+        "case_id": 8,
+        "age_months": 8,
+        "domain": "SOCIAL",
+        "age_group": "0-12",
+        "expected_score": "EMERGING",
+        "score": "EMERGING",
+        "confidence": 0.765493483672654,
+        "prompt_length": 183,
+        "has_age_specific": false,
+        "has_domain_specific": true
+      },
+      {
+        "case_id": 9,
+        "age_months": 15,
+        "domain": "MOTOR",
+        "age_group": "13-36",
+        "expected_score": "LOST_SKILL",
+        "score": "EMERGING",
+        "confidence": 0.7663443724701443,
+        "prompt_length": 201,
+        "has_age_specific": false,
+        "has_domain_specific": true
+      },
+      {
+        "case_id": 10,
+        "age_months": 15,
+        "domain": "MOTOR",
+        "age_group": "13-36",
+        "expected_score": "INDEPENDENT",
+        "score": "EMERGING",
+        "confidence": 0.8800976521201953,
+        "prompt_length": 199,
+        "has_age_specific": false,
+        "has_domain_specific": true
+      },
+      {
+        "case_id": 11,
+        "age_months": 14,
+        "domain": "COMMUNICATION",
+        "age_group": "13-36",
+        "expected_score": "CANNOT_DO",
+        "score": "CANNOT_DO",
+        "confidence": 0.7614206011586903,
+        "prompt_length": 175,
+        "has_age_specific": false,
+        "has_domain_specific": true
+      },
+      {
+        "case_id": 12,
+        "age_months": 36,
+        "domain": "MOTOR",
+        "age_group": "13-36",
+        "expected_score": "INDEPENDENT",
+        "score": "EMERGING",
+        "confidence": 0.7672500950693697,
+        "prompt_length": 175,
+        "has_age_specific": false,
+        "has_domain_specific": true
+      },
+      {
+        "case_id": 13,
+        "age_months": 3,
+        "domain": "MOTOR",
+        "age_group": "0-12",
+        "expected_score": "EMERGING",
+        "score": "LOST_SKILL",
+        "confidence": 0.9499122419050248,
+        "prompt_length": 205,
+        "has_age_specific": false,
+        "has_domain_specific": true
+      },
+      {
+        "case_id": 14,
+        "age_months": 36,
+        "domain": "MOTOR",
+        "age_group": "13-36",
+        "expected_score": "CANNOT_DO",
+        "score": "EMERGING",
+        "confidence": 0.8834346764733293,
+        "prompt_length": 186,
+        "has_age_specific": false,
+        "has_domain_specific": true
+      },
+      {
+        "case_id": 15,
+        "age_months": 24,
+        "domain": "COGNITIVE",
+        "age_group": "13-36",
+        "expected_score": "EMERGING",
+        "score": "EMERGING",
+        "confidence": 0.8778975934901584,
+        "prompt_length": 223,
+        "has_age_specific": false,
+        "has_domain_specific": true
+      },
+      {
+        "case_id": 16,
+        "age_months": 12,
+        "domain": "COMMUNICATION",
+        "age_group": "0-12",
+        "expected_score": "INDEPENDENT",
+        "score": "EMERGING",
+        "confidence": 0.9224666274979642,
+        "prompt_length": 212,
+        "has_age_specific": false,
+        "has_domain_specific": true
+      },
+      {
+        "case_id": 17,
+        "age_months": 10,
+        "domain": "MOTOR",
+        "age_group": "0-12",
+        "expected_score": "INDEPENDENT",
+        "score": "WITH_SUPPORT",
+        "confidence": 0.9022820868040564,
+        "prompt_length": 192,
+        "has_age_specific": false,
+        "has_domain_specific": true
+      },
+      {
+        "case_id": 18,
+        "age_months": 30,
+        "domain": "SOCIAL",
+        "age_group": "13-36",
+        "expected_score": "INDEPENDENT",
+        "score": "CANNOT_DO",
+        "confidence": 0.8916300440187995,
+        "prompt_length": 195,
+        "has_age_specific": false,
+        "has_domain_specific": true
+      },
+      {
+        "case_id": 19,
+        "age_months": 42,
+        "domain": "SOCIAL",
+        "age_group": "37-60",
+        "expected_score": "WITH_SUPPORT",
+        "score": "WITH_SUPPORT",
+        "confidence": 0.7831043453640645,
+        "prompt_length": 190,
+        "has_age_specific": false,
+        "has_domain_specific": true
+      },
+      {
+        "case_id": 20,
+        "age_months": 48,
+        "domain": "MOTOR",
+        "age_group": "37-60",
+        "expected_score": "LOST_SKILL",
+        "score": "CANNOT_DO",
+        "confidence": 0.7996287341800907,
+        "prompt_length": 195,
+        "has_age_specific": false,
+        "has_domain_specific": true
+      },
+      {
+        "case_id": 21,
+        "age_months": 8,
+        "domain": "COGNITIVE",
+        "age_group": "0-12",
+        "expected_score": "INDEPENDENT",
+        "score": "EMERGING",
+        "confidence": 0.8868118764205042,
+        "prompt_length": 171,
+        "has_age_specific": false,
+        "has_domain_specific": true
+      },
+      {
+        "case_id": 22,
+        "age_months": 15,
+        "domain": "COMMUNICATION",
+        "age_group": "13-36",
+        "expected_score": "INDEPENDENT",
+        "score": "INDEPENDENT",
+        "confidence": 0.7719760012422182,
+        "prompt_length": 183,
+        "has_age_specific": false,
+        "has_domain_specific": true
+      },
+      {
+        "case_id": 23,
+        "age_months": 2,
+        "domain": "SOCIAL",
+        "age_group": "0-12",
+        "expected_score": "INDEPENDENT",
+        "score": "EMERGING",
+        "confidence": 0.9357566174435489,
+        "prompt_length": 180,
+        "has_age_specific": false,
+        "has_domain_specific": true
+      },
+      {
+        "case_id": 24,
+        "age_months": 9,
+        "domain": "COMMUNICATION",
+        "age_group": "0-12",
+        "expected_score": "EMERGING",
+        "score": "EMERGING",
+        "confidence": 0.9471000676702142,
+        "prompt_length": 204,
+        "has_age_specific": false,
+        "has_domain_specific": true
+      },
+      {
+        "case_id": 25,
+        "age_months": 8,
+        "domain": "COMMUNICATION",
+        "age_group": "0-12",
+        "expected_score": "EMERGING",
+        "score": "EMERGING",
+        "confidence": 0.846304265550105,
+        "prompt_length": 198,
+        "has_age_specific": false,
+        "has_domain_specific": true
+      },
+      {
+        "case_id": 26,
+        "age_months": 6,
+        "domain": "MOTOR",
+        "age_group": "0-12",
+        "expected_score": "EMERGING",
+        "score": "EMERGING",
+        "confidence": 0.9103213961185044,
+        "prompt_length": 202,
+        "has_age_specific": false,
+        "has_domain_specific": true
+      },
+      {
+        "case_id": 27,
+        "age_months": 30,
+        "domain": "COMMUNICATION",
+        "age_group": "13-36",
+        "expected_score": "INDEPENDENT",
+        "score": "EMERGING",
+        "confidence": 0.9049612228458743,
+        "prompt_length": 185,
+        "has_age_specific": false,
+        "has_domain_specific": true
+      },
+      {
+        "case_id": 28,
+        "age_months": 21,
+        "domain": "COMMUNICATION",
+        "age_group": "13-36",
+        "expected_score": "WITH_SUPPORT",
+        "score": "EMERGING",
+        "confidence": 0.8133733253102565,
+        "prompt_length": 199,
+        "has_age_specific": false,
+        "has_domain_specific": true
+      },
+      {
+        "case_id": 29,
+        "age_months": 36,
+        "domain": "COGNITIVE",
+        "age_group": "13-36",
+        "expected_score": "CANNOT_DO",
+        "score": "CANNOT_DO",
+        "confidence": 0.8460130749411056,
+        "prompt_length": 173,
+        "has_age_specific": false,
+        "has_domain_specific": true
+      }
+    ],
+    "age_adjusted_manual": [
+      {
+        "case_id": 0,
+        "age_months": 24,
+        "domain": "MOTOR",
+        "age_group": "13-36",
+        "expected_score": "EMERGING",
+        "original_score": "EMERGING",
+        "original_confidence": 0.8162181244703811,
+        "adjusted_score": "INDEPENDENT",
+        "adjusted_confidence": 0.85
+      },
+      {
+        "case_id": 1,
+        "age_months": 36,
+        "domain": "COGNITIVE",
+        "age_group": "13-36",
+        "expected_score": "EMERGING",
+        "original_score": "CANNOT_DO",
+        "original_confidence": 0.9063998449497839,
+        "adjusted_score": "CANNOT_DO",
+        "adjusted_confidence": 0.9563998449497839
+      },
+      {
+        "case_id": 2,
+        "age_months": 11,
+        "domain": "MOTOR",
+        "age_group": "0-12",
+        "expected_score": "CANNOT_DO",
+        "original_score": "CANNOT_DO",
+        "original_confidence": 0.8073052563292552,
+        "adjusted_score": "CANNOT_DO",
+        "adjusted_confidence": 0.7073052563292552
+      },
+      {
+        "case_id": 3,
+        "age_months": 16,
+        "domain": "COGNITIVE",
+        "age_group": "13-36",
+        "expected_score": "WITH_SUPPORT",
+        "original_score": "EMERGING",
+        "original_confidence": 0.7798633749287184,
+        "adjusted_score": "EMERGING",
+        "adjusted_confidence": 0.7298633749287183
+      },
+      {
+        "case_id": 4,
+        "age_months": 36,
+        "domain": "COMMUNICATION",
+        "age_group": "13-36",
+        "expected_score": "INDEPENDENT",
+        "original_score": "EMERGING",
+        "original_confidence": 0.9396979527705625,
+        "adjusted_score": "EMERGING",
+        "adjusted_confidence": 0.9896979527705625
+      },
+      {
+        "case_id": 5,
+        "age_months": 24,
+        "domain": "COMMUNICATION",
+        "age_group": "13-36",
+        "expected_score": "INDEPENDENT",
+        "original_score": "EMERGING",
+        "original_confidence": 0.8635159206612717,
+        "adjusted_score": "INDEPENDENT",
+        "adjusted_confidence": 0.85
+      },
+      {
+        "case_id": 6,
+        "age_months": 7,
+        "domain": "SOCIAL",
+        "age_group": "0-12",
+        "expected_score": "EMERGING",
+        "original_score": "EMERGING",
+        "original_confidence": 0.8883095474522723,
+        "adjusted_score": "INDEPENDENT",
+        "adjusted_confidence": 0.85
+      },
+      {
+        "case_id": 7,
+        "age_months": 26,
+        "domain": "COMMUNICATION",
+        "age_group": "13-36",
+        "expected_score": "LOST_SKILL",
+        "original_score": "CANNOT_DO",
+        "original_confidence": 0.8316130744857535,
+        "adjusted_score": "CANNOT_DO",
+        "adjusted_confidence": 0.8816130744857535
+      },
+      {
+        "case_id": 8,
+        "age_months": 8,
+        "domain": "SOCIAL",
+        "age_group": "0-12",
+        "expected_score": "EMERGING",
+        "original_score": "EMERGING",
+        "original_confidence": 0.765493483672654,
+        "adjusted_score": "EMERGING",
+        "adjusted_confidence": 0.665493483672654
+      },
+      {
+        "case_id": 9,
+        "age_months": 15,
+        "domain": "MOTOR",
+        "age_group": "13-36",
+        "expected_score": "LOST_SKILL",
+        "original_score": "EMERGING",
+        "original_confidence": 0.7663443724701443,
+        "adjusted_score": "EMERGING",
+        "adjusted_confidence": 0.7163443724701443
+      },
+      {
+        "case_id": 10,
+        "age_months": 15,
+        "domain": "MOTOR",
+        "age_group": "13-36",
+        "expected_score": "INDEPENDENT",
+        "original_score": "EMERGING",
+        "original_confidence": 0.8800976521201953,
+        "adjusted_score": "INDEPENDENT",
+        "adjusted_confidence": 0.85
+      },
+      {
+        "case_id": 11,
+        "age_months": 14,
+        "domain": "COMMUNICATION",
+        "age_group": "13-36",
+        "expected_score": "CANNOT_DO",
+        "original_score": "CANNOT_DO",
+        "original_confidence": 0.7614206011586903,
+        "adjusted_score": "CANNOT_DO",
+        "adjusted_confidence": 0.7614206011586903
+      },
+      {
+        "case_id": 12,
+        "age_months": 36,
+        "domain": "MOTOR",
+        "age_group": "13-36",
+        "expected_score": "INDEPENDENT",
+        "original_score": "EMERGING",
+        "original_confidence": 0.7672500950693697,
+        "adjusted_score": "EMERGING",
+        "adjusted_confidence": 0.8172500950693697
+      },
+      {
+        "case_id": 13,
+        "age_months": 3,
+        "domain": "MOTOR",
+        "age_group": "0-12",
+        "expected_score": "EMERGING",
+        "original_score": "LOST_SKILL",
+        "original_confidence": 0.9499122419050248,
+        "adjusted_score": "LOST_SKILL",
+        "adjusted_confidence": 0.7999122419050247
+      },
+      {
+        "case_id": 14,
+        "age_months": 36,
+        "domain": "MOTOR",
+        "age_group": "13-36",
+        "expected_score": "CANNOT_DO",
+        "original_score": "EMERGING",
+        "original_confidence": 0.8834346764733293,
+        "adjusted_score": "INDEPENDENT",
+        "adjusted_confidence": 0.9334346764733293
+      },
+      {
+        "case_id": 15,
+        "age_months": 24,
+        "domain": "COGNITIVE",
+        "age_group": "13-36",
+        "expected_score": "EMERGING",
+        "original_score": "EMERGING",
+        "original_confidence": 0.8778975934901584,
+        "adjusted_score": "EMERGING",
+        "adjusted_confidence": 0.8278975934901583
+      },
+      {
+        "case_id": 16,
+        "age_months": 12,
+        "domain": "COMMUNICATION",
+        "age_group": "0-12",
+        "expected_score": "INDEPENDENT",
+        "original_score": "EMERGING",
+        "original_confidence": 0.9224666274979642,
+        "adjusted_score": "EMERGING",
+        "adjusted_confidence": 0.8224666274979642
+      },
+      {
+        "case_id": 17,
+        "age_months": 10,
+        "domain": "MOTOR",
+        "age_group": "0-12",
+        "expected_score": "INDEPENDENT",
+        "original_score": "WITH_SUPPORT",
+        "original_confidence": 0.9022820868040564,
+        "adjusted_score": "WITH_SUPPORT",
+        "adjusted_confidence": 0.8522820868040564
+      },
+      {
+        "case_id": 18,
+        "age_months": 30,
+        "domain": "SOCIAL",
+        "age_group": "13-36",
+        "expected_score": "INDEPENDENT",
+        "original_score": "CANNOT_DO",
+        "original_confidence": 0.8916300440187995,
+        "adjusted_score": "CANNOT_DO",
+        "adjusted_confidence": 0.9416300440187996
+      },
+      {
+        "case_id": 19,
+        "age_months": 42,
+        "domain": "SOCIAL",
+        "age_group": "37-60",
+        "expected_score": "WITH_SUPPORT",
+        "original_score": "WITH_SUPPORT",
+        "original_confidence": 0.7831043453640645,
+        "adjusted_score": "WITH_SUPPORT",
+        "adjusted_confidence": 0.6831043453640645
+      },
+      {
+        "case_id": 20,
+        "age_months": 48,
+        "domain": "MOTOR",
+        "age_group": "37-60",
+        "expected_score": "LOST_SKILL",
+        "original_score": "CANNOT_DO",
+        "original_confidence": 0.7996287341800907,
+        "adjusted_score": "CANNOT_DO",
+        "adjusted_confidence": 0.8496287341800908
+      },
+      {
+        "case_id": 21,
+        "age_months": 8,
+        "domain": "COGNITIVE",
+        "age_group": "0-12",
+        "expected_score": "INDEPENDENT",
+        "original_score": "EMERGING",
+        "original_confidence": 0.8868118764205042,
+        "adjusted_score": "EMERGING",
+        "adjusted_confidence": 0.7868118764205042
+      },
+      {
+        "case_id": 22,
+        "age_months": 15,
+        "domain": "COMMUNICATION",
+        "age_group": "13-36",
+        "expected_score": "INDEPENDENT",
+        "original_score": "INDEPENDENT",
+        "original_confidence": 0.7719760012422182,
+        "adjusted_score": "INDEPENDENT",
+        "adjusted_confidence": 0.8719760012422182
+      },
+      {
+        "case_id": 23,
+        "age_months": 2,
+        "domain": "SOCIAL",
+        "age_group": "0-12",
+        "expected_score": "INDEPENDENT",
+        "original_score": "EMERGING",
+        "original_confidence": 0.9357566174435489,
+        "adjusted_score": "INDEPENDENT",
+        "adjusted_confidence": 0.85
+      },
+      {
+        "case_id": 24,
+        "age_months": 9,
+        "domain": "COMMUNICATION",
+        "age_group": "0-12",
+        "expected_score": "EMERGING",
+        "original_score": "EMERGING",
+        "original_confidence": 0.9471000676702142,
+        "adjusted_score": "EMERGING",
+        "adjusted_confidence": 0.8471000676702142
+      },
+      {
+        "case_id": 25,
+        "age_months": 8,
+        "domain": "COMMUNICATION",
+        "age_group": "0-12",
+        "expected_score": "EMERGING",
+        "original_score": "EMERGING",
+        "original_confidence": 0.846304265550105,
+        "adjusted_score": "EMERGING",
+        "adjusted_confidence": 0.746304265550105
+      },
+      {
+        "case_id": 26,
+        "age_months": 6,
+        "domain": "MOTOR",
+        "age_group": "0-12",
+        "expected_score": "EMERGING",
+        "original_score": "EMERGING",
+        "original_confidence": 0.9103213961185044,
+        "adjusted_score": "INDEPENDENT",
+        "adjusted_confidence": 0.85
+      },
+      {
+        "case_id": 27,
+        "age_months": 30,
+        "domain": "COMMUNICATION",
+        "age_group": "13-36",
+        "expected_score": "INDEPENDENT",
+        "original_score": "EMERGING",
+        "original_confidence": 0.9049612228458743,
+        "adjusted_score": "EMERGING",
+        "adjusted_confidence": 0.9549612228458744
+      },
+      {
+        "case_id": 28,
+        "age_months": 21,
+        "domain": "COMMUNICATION",
+        "age_group": "13-36",
+        "expected_score": "WITH_SUPPORT",
+        "original_score": "EMERGING",
+        "original_confidence": 0.8133733253102565,
+        "adjusted_score": "INDEPENDENT",
+        "adjusted_confidence": 0.85
+      },
+      {
+        "case_id": 29,
+        "age_months": 36,
+        "domain": "COGNITIVE",
+        "age_group": "13-36",
+        "expected_score": "CANNOT_DO",
+        "original_score": "CANNOT_DO",
+        "original_confidence": 0.8460130749411056,
+        "adjusted_score": "CANNOT_DO",
+        "adjusted_confidence": 0.8960130749411056
+      }
+    ]
+  },
+  "by_age_group": {
+    "0-12": {
+      "standard": {
+        "count": 11,
+        "avg_confidence": 0.7895230797699057,
+        "categories": {
+          "CANNOT_DO": 0.09090909090909091,
+          "EMERGING": 0.7272727272727273,
+          "LOST_SKILL": 0.09090909090909091,
+          "WITH_SUPPORT": 0.09090909090909091
+        },
+        "agreement": 0.5454545454545454
+      },
+      "age_prompts": {
+        "count": 11,
+        "avg_confidence": 0.8324630660549185,
+        "categories": {
+          "CANNOT_DO": 0.09090909090909091,
+          "EMERGING": 0.7272727272727273,
+          "LOST_SKILL": 0.09090909090909091,
+          "WITH_SUPPORT": 0.09090909090909091
+        },
+        "agreement": 0.5454545454545454
+      },
+      "age_adjusted": {
+        "count": 11,
+        "avg_confidence": 0.887460315169464,
+        "categories": {
+          "CANNOT_DO": 0.09090909090909091,
+          "EMERGING": 0.7272727272727273,
+          "LOST_SKILL": 0.09090909090909091,
+          "WITH_SUPPORT": 0.09090909090909091
+        },
+        "agreement": 0.5454545454545454
+      },
+      "age_adjusted_manual": {
+        "count": 11,
+        "avg_confidence_original": 0.887460315169464,
+        "avg_confidence_adjusted": 0.7979705368954343,
+        "categories_original": {
+          "CANNOT_DO": 0.09090909090909091,
+          "EMERGING": 0.7272727272727273,
+          "LOST_SKILL": 0.09090909090909091,
+          "WITH_SUPPORT": 0.09090909090909091
+        },
+        "categories_adjusted": {
+          "CANNOT_DO": 0.09090909090909091,
+          "INDEPENDENT": 0.2727272727272727,
+          "EMERGING": 0.45454545454545453,
+          "LOST_SKILL": 0.09090909090909091,
+          "WITH_SUPPORT": 0.09090909090909091
+        },
+        "category_changes": {
+          "EMERGING->INDEPENDENT": 3
+        },
+        "improved_cases": 1,
+        "worsened_cases": 2,
+        "unchanged_cases": 8,
+        "agreement_original": 0.5454545454545454,
+        "agreement_adjusted": 0.45454545454545453,
+        "change_rate": 0.2727272727272727,
+        "improved_rate": 0.09090909090909091,
+        "worsened_rate": 0.18181818181818182,
+        "unchanged_rate": 0.7272727272727273
+      }
+    },
+    "13-36": {
+      "standard": {
+        "count": 17,
+        "avg_confidence": 0.7939523007404781,
+        "categories": {
+          "EMERGING": 0.6470588235294118,
+          "CANNOT_DO": 0.29411764705882354,
+          "INDEPENDENT": 0.058823529411764705
+        },
+        "agreement": 0.29411764705882354
+      },
+      "age_prompts": {
+        "count": 17,
+        "avg_confidence": 0.8464946467324886,
+        "categories": {
+          "EMERGING": 0.6470588235294118,
+          "CANNOT_DO": 0.29411764705882354,
+          "INDEPENDENT": 0.058823529411764705
+        },
+        "agreement": 0.29411764705882354
+      },
+      "age_adjusted": {
+        "count": 17,
+        "avg_confidence": 0.8412768794945066,
+        "categories": {
+          "EMERGING": 0.6470588235294118,
+          "CANNOT_DO": 0.29411764705882354,
+          "INDEPENDENT": 0.058823529411764705
+        },
+        "agreement": 0.29411764705882354
+      },
+      "age_adjusted_manual": {
+        "count": 17,
+        "avg_confidence_original": 0.8412768794945066,
+        "avg_confidence_adjusted": 0.8634412899320298,
+        "categories_original": {
+          "EMERGING": 0.6470588235294118,
+          "CANNOT_DO": 0.29411764705882354,
+          "INDEPENDENT": 0.058823529411764705
+        },
+        "categories_adjusted": {
+          "INDEPENDENT": 0.35294117647058826,
+          "CANNOT_DO": 0.29411764705882354,
+          "EMERGING": 0.35294117647058826
+        },
+        "category_changes": {
+          "EMERGING->INDEPENDENT": 5
+        },
+        "improved_cases": 2,
+        "worsened_cases": 1,
+        "unchanged_cases": 14,
+        "agreement_original": 0.29411764705882354,
+        "agreement_adjusted": 0.35294117647058826,
+        "change_rate": 0.29411764705882354,
+        "improved_rate": 0.11764705882352941,
+        "worsened_rate": 0.058823529411764705,
+        "unchanged_rate": 0.8235294117647058
+      }
+    },
+    "37-60": {
+      "standard": {
+        "count": 2,
+        "avg_confidence": 0.832291543342377,
+        "categories": {
+          "WITH_SUPPORT": 0.5,
+          "CANNOT_DO": 0.5
+        },
+        "agreement": 0.5
+      },
+      "age_prompts": {
+        "count": 2,
+        "avg_confidence": 0.8148690841416002,
+        "categories": {
+          "WITH_SUPPORT": 0.5,
+          "CANNOT_DO": 0.5
+        },
+        "agreement": 0.5
+      },
+      "age_adjusted": {
+        "count": 2,
+        "avg_confidence": 0.7913665397720776,
+        "categories": {
+          "WITH_SUPPORT": 0.5,
+          "CANNOT_DO": 0.5
+        },
+        "agreement": 0.5
+      },
+      "age_adjusted_manual": {
+        "count": 2,
+        "avg_confidence_original": 0.7913665397720776,
+        "avg_confidence_adjusted": 0.7663665397720776,
+        "categories_original": {
+          "WITH_SUPPORT": 0.5,
+          "CANNOT_DO": 0.5
+        },
+        "categories_adjusted": {
+          "WITH_SUPPORT": 0.5,
+          "CANNOT_DO": 0.5
+        },
+        "category_changes": {},
+        "improved_cases": 0,
+        "worsened_cases": 0,
+        "unchanged_cases": 2,
+        "agreement_original": 0.5,
+        "agreement_adjusted": 0.5,
+        "change_rate": 0.0,
+        "improved_rate": 0.0,
+        "worsened_rate": 0.0,
+        "unchanged_rate": 1.0
+      }
+    }
+  }
+}

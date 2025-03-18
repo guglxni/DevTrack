@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevTrack Project Overview</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { 
+            padding-top: 50px; 
+            color: #333;
+            line-height: 1.6;
+        }
+        .hero-section {
+            background-color: #f8f9fa;
+            padding: 60px 0;
+            margin-bottom: 40px;
+            border-radius: 10px;
+        }
+        .section {
+            margin-bottom: 40px;
+        }
+        .tech-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            color: #0d6efd;
+        }
+        .card {
+            margin-bottom: 20px;
+            border: none;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .card-header {
+            background-color: #0d6efd;
+            color: white;
+            font-weight: bold;
+        }
+        h1, h2, h3 {
+            font-weight: 700;
+        }
+        .lead {
+            font-size: 1.2rem;
+        }
+        .feature-icon {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 50%;
+            margin-bottom: 15px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Hero Section -->
+        <div class="hero-section text-center">
+            <h1 class="display-4 mb-4">DevTrack: Child Developmental Assessment System</h1>
+            <p class="lead mb-4">An advanced platform for tracking, assessing, and supporting early childhood development with AI-powered analysis and insights</p>
+        </div>
+        
+        <!-- About Section -->
+        <div class="section">
+            <h2 class="mb-4">About DevTrack</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <p>DevTrack is a comprehensive developmental assessment system designed to aid healthcare professionals, educators, and caregivers in monitoring and supporting child development. Using advanced artificial intelligence and machine learning techniques, DevTrack provides accurate assessments, personalized insights, and evidence-based recommendations.</p>
+                    <p>The system focuses on six key developmental domains:</p>
+                    <ul>
+                        <li><strong>Cognitive (Cog)</strong> - Problem-solving, learning, and thinking skills</li>
+                        <li><strong>Gross Motor (GM)</strong> - Large muscle movement and coordination</li>
+                        <li><strong>Fine Motor (FM)</strong> - Small muscle control and precision</li>
+                        <li><strong>Receptive Language (RL)</strong> - Understanding language</li>
+                        <li><strong>Expressive Language (EL)</strong> - Using language to communicate</li>
+                        <li><strong>Emotional (Emo)</strong> - Social and emotional development</li>
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">Key Features</div>
+                        <div class="card-body">
+                            <ul>
+                                <li>Age-specific milestone assessments (0-36 months)</li>
+                                <li>Multi-modal AI scoring system with confidence tracking</li>
+                                <li>Comprehensive assessment API with detailed reporting</li>
+                                <li>Retrieval-to-Reasoning (R2R) for context-aware analysis</li>
+                                <li>Active learning system for continuous improvement</li>
+                                <li>Domain-specific developmental insights</li>
+                                <li>RESTful API for seamless integration</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Technology Stack -->
+        <div class="section">
+            <h2 class="mb-4">Technology Stack</h2>
+            <div class="row">
+                <div class="col-md-4 text-center mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h3 class="mb-3">Backend</h3>
+                            <ul class="list-unstyled">
+                                <li>Python 3.10+</li>
+                                <li>FastAPI</li>
+                                <li>Pydantic</li>
+                                <li>Uvicorn ASGI Server</li>
+                                <li>SQLite/PostgreSQL</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 text-center mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h3 class="mb-3">AI & ML</h3>
+                            <ul class="list-unstyled">
+                                <li>Sentence Transformers</li>
+                                <li>Local LLMs via llama-cpp</li>
+                                <li>Neural Embedding Models</li>
+                                <li>Hybrid Scoring Engines</li>
+                                <li>Dynamic Ensemble Models</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 text-center mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h3 class="mb-3">Frontend</h3>
+                            <ul class="list-unstyled">
+                                <li>HTML5/CSS3/JavaScript</li>
+                                <li>Bootstrap 5</li>
+                                <li>Express.js</li>
+                                <li>EJS Templates</li>
+                                <li>Axios HTTP Client</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- How It Works -->
+        <div class="section">
+            <h2 class="mb-4">How It Works</h2>
+            <div class="row mb-4">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 class="mb-3">Assessment Pipeline</h3>
+                            <ol>
+                                <li><strong>Question Generation</strong> - Age-appropriate questions are generated based on developmental milestones</li>
+                                <li><strong>Response Collection</strong> - Caregivers provide responses about the child's behavior</li>
+                                <li><strong>Multi-Modal Analysis</strong> - Responses are analyzed using:
+                                    <ul>
+                                        <li>Keyword-based scoring</li>
+                                        <li>Semantic embedding analysis</li>
+                                        <li>Transformer-based deep learning</li>
+                                        <li>LLM-based reasoning (when R2R is enabled)</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Score Generation</strong> - Weighted ensemble creates final score with confidence metric</li>
+                                <li><strong>Domain Analysis</strong> - Scores are aggregated by developmental domain</li>
+                                <li><strong>Report Generation</strong> - Comprehensive reports with actionable insights</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card h-100">
+                        <div class="card-header">Improved Scoring Engine</div>
+                        <div class="card-body">
+                            <p>The core of DevTrack is the <strong>ImprovedDevelopmentalScoringEngine</strong>, which combines multiple scoring approaches:</p>
+                            <ul>
+                                <li><strong>Keyword Analysis</strong> - Pattern matching with domain-specific lexicons</li>
+                                <li><strong>Semantic Embedding</strong> - Vectorized response analysis using neural networks</li>
+                                <li><strong>Dynamic Ensemble</strong> - Adaptive weighting based on response characteristics</li>
+                                <li><strong>Confidence Tracking</strong> - Quantification of assessment certainty</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card h-100">
+                        <div class="card-header">R2R Enhanced Assessment</div>
+                        <div class="card-body">
+                            <p>When enabled, the <strong>Retrieval-to-Reasoning (R2R)</strong> system provides advanced capabilities:</p>
+                            <ul>
+                                <li><strong>Context-Aware Analysis</strong> - Leverages domain knowledge for nuanced understanding</li>
+                                <li><strong>Chain-of-Thought Reasoning</strong> - Transparent, step-by-step assessment logic</li>
+                                <li><strong>Knowledge Retrieval</strong> - Accessing relevant developmental information</li>
+                                <li><strong>Continuous Learning</strong> - Improving with expert feedback and new data</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- LLM Integration Section -->
+        <div class="section">
+            <h2 class="mb-4">LLM Integration & Scoring Engine</h2>
+            
+            <div class="row mb-4">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">Advanced Language Model Integration</div>
+                        <div class="card-body">
+                            <p>DevTrack leverages Large Language Models (LLMs) to significantly enhance the accuracy and nuance of developmental assessments. Our system integrates LLMs in multiple ways:</p>
+                            
+                            <h4 class="mt-4">Core LLM Integration Components</h4>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <ul>
+                                        <li><strong>Local Inference</strong> - Optimized Mistral-7B models run locally for privacy and low latency</li>
+                                        <li><strong>Neural Embeddings</strong> - Sentence transformers map responses to high-dimensional semantic spaces</li>
+                                        <li><strong>Fine-tuned Models</strong> - Domain-specific tuning for developmental assessment tasks</li>
+                                        <li><strong>Reasoning Enhancement</strong> - Chain-of-thought processes for transparent scoring decisions</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <ul>
+                                        <li><strong>Knowledge Retrieval</strong> - Contextual information retrieval from developmental literature</li>
+                                        <li><strong>Active Learning Integration</strong> - Continuous model improvement through expert feedback</li>
+                                        <li><strong>Multi-modal Processing</strong> - Combined text, vector, and symbolic reasoning</li>
+                                        <li><strong>Confidence Calibration</strong> - Uncertainty quantification for reliability assessment</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row mb-4">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">Scoring Engine Architecture</div>
+                        <div class="card-body">
+                            <h4>Multi-Component Scoring System</h4>
+                            <p>The DevTrack scoring engine uses a sophisticated layered architecture:</p>
+                            
+                            <div class="row mt-3">
+                                <div class="col-md-4">
+                                    <div class="card mb-3">
+                                        <div class="card-header bg-light text-dark">Layer 1: Base Scorers</div>
+                                        <div class="card-body">
+                                            <ul class="list-unstyled">
+                                                <li><strong>KeywordBasedScorer</strong> - Identifies key phrases and linguistic patterns in responses</li>
+                                                <li><strong>SemanticEmbeddingScorer</strong> - Uses neural embeddings to capture semantic meaning</li>
+                                                <li><strong>TransformerBasedScorer</strong> - Applies transformer models for contextual understanding</li>
+                                                <li><strong>LLMBasedScorer</strong> - Leverages LLM for advanced language understanding</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="card mb-3">
+                                        <div class="card-header bg-light text-dark">Layer 2: Integration</div>
+                                        <div class="card-body">
+                                            <ul class="list-unstyled">
+                                                <li><strong>DynamicEnsembleScorer</strong> - Weighted combination of base scorers</li>
+                                                <li><strong>ConfidenceTracker</strong> - Uncertainty estimation across methods</li>
+                                                <li><strong>SpecializedScorer</strong> - Domain and age-specific scorer customization</li>
+                                                <li><strong>R2REnhancedScorer</strong> - Augments scoring with knowledge retrieval</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="card mb-3">
+                                        <div class="card-header bg-light text-dark">Layer 3: Enhancement</div>
+                                        <div class="card-body">
+                                            <ul class="list-unstyled">
+                                                <li><strong>ReasoningEnhancer</strong> - Generates step-by-step reasoning chains</li>
+                                                <li><strong>R2RActiveLearningSystems</strong> - Identifies valuable examples for improvement</li>
+                                                <li><strong>AuditLogger</strong> - Transparent recording of scoring decisions</li>
+                                                <li><strong>ContinuousLearningEngine</strong> - Model updating from expert feedback</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <h4 class="mt-4">Scoring Process Detail</h4>
+                            <ol>
+                                <li><strong>Response Preprocessing</strong> - Normalizes text, handles linguistic variations, applies domain-specific processing</li>
+                                <li><strong>Multiple Scoring Approaches</strong> - Each scorer independently evaluates the response from different angles</li>
+                                <li><strong>Dynamic Weighting</strong> - Response characteristics determine the optimal contribution of each scorer:
+                                    <ul>
+                                        <li>Clear keyword matches prioritize the keyword scorer</li>
+                                        <li>Nuanced or complex responses prioritize LLM-based scoring</li>
+                                        <li>Domain-specific content influences component specialization</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Confidence Calculation</strong> - Combines scorer agreement, output confidence, and historical reliability</li>
+                                <li><strong>Score Finalization</strong> - Maps to developmental categories (CANNOT_DO to INDEPENDENT) with normalized values (0-4)</li>
+                                <li><strong>Reasoning Chain Generation</strong> - Produces human-readable explanation for scoring decisions</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card h-100">
+                        <div class="card-header">LLM Benefits</div>
+                        <div class="card-body">
+                            <p>The integration of LLMs provides critical advantages:</p>
+                            <ul>
+                                <li><strong>Natural Language Understanding</strong> - Comprehends complex, nuanced caregiver descriptions that keyword systems would miss</li>
+                                <li><strong>Context Sensitivity</strong> - Considers developmental context, age appropriateness, and domain specifics</li>
+                                <li><strong>Handling Ambiguity</strong> - Manages uncertainty in responses with principled confidence estimation</li>
+                                <li><strong>Cross-lingual Capability</strong> - Supports multilingual assessment with consistent scoring across languages</li>
+                                <li><strong>Explainability</strong> - Generates human-readable explanations of scoring decisions</li>
+                                <li><strong>Adaptability</strong> - Improves over time through active learning feedback loops</li>
+                                <li><strong>Superior Accuracy</strong> - Achieves significantly higher accuracy compared to conventional methods, especially for complex or ambiguous responses</li>
+                                <li><strong>Consistent Reasoning</strong> - Provides detailed, consistent reasoning for each assessment, enhancing clinical decision-making</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card h-100">
+                        <div class="card-header">Technical Implementation</div>
+                        <div class="card-body">
+                            <p>DevTrack employs several advanced LLM techniques:</p>
+                            <ul>
+                                <li><strong>Quantized Models</strong> - Optimized 3-bit and 4-bit quantization for efficient local inference</li>
+                                <li><strong>Parameter-Efficient Fine-Tuning</strong> - LoRA adapters for domain-specific optimization</li>
+                                <li><strong>Retrieval Augmentation</strong> - RAG techniques to incorporate developmental knowledge</li>
+                                <li><strong>Few-Shot Learning</strong> - In-context examples for improved scoring accuracy</li>
+                                <li><strong>Chain-of-Thought Prompting</strong> - Structured reasoning for complex assessments</li>
+                                <li><strong>Model Distillation</strong> - Knowledge transfer from larger to smaller models</li>
+                                <li><strong>Hybrid Systems</strong> - Combining rule-based, statistical, and neural approaches</li>
+                                <li><strong>Prompt Engineering</strong> - Carefully crafted prompts with domain-specific knowledge to guide the LLM's reasoning process</li>
+                                <li><strong>Continuous Improvement</strong> - System designed to learn from each interaction, building a dataset for future fine-tuning</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row mt-4">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">Recent Developments in LLM Scoring</div>
+                        <div class="card-body">
+                            <p>Our latest enhancements to the LLM-based scoring system include:</p>
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5>Improved Scoring Accuracy</h5>
+                                    <ul>
+                                        <li><strong>Standardized Scoring Scale</strong> - Refined 0-4 scale mapping (CANNOT_DO, LOST_SKILL, EMERGING, WITH_SUPPORT, INDEPENDENT) for more precise developmental assessment</li>
+                                        <li><strong>Enhanced Prompt Templates</strong> - Domain-specific templates that incorporate developmental expertise and clinical guidelines</li>
+                                        <li><strong>Consistent Reasoning</strong> - Improved reasoning text generation with automatic correction of inconsistencies between scores and explanations</li>
+                                        <li><strong>Age-Specific Context</strong> - Tailored prompts based on child's age range for more accurate developmental expectations</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <h5>Technical Improvements</h5>
+                                    <ul>
+                                        <li><strong>Robust Error Handling</strong> - Graceful recovery from model errors with fallback mechanisms</li>
+                                        <li><strong>Optimized Inference</strong> - Reduced latency through model quantization and efficient prompt processing</li>
+                                        <li><strong>Comprehensive Logging</strong> - Detailed tracking of model inputs, outputs, and decision processes for auditability</li>
+                                        <li><strong>Confidence Calibration</strong> - More accurate confidence scores based on response clarity and model certainty</li>
+                                        <li><strong>Direct Testing Endpoint</strong> - New API endpoint for direct testing and validation of the LLM scoring system</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Applications -->
+        <div class="section">
+            <h2 class="mb-4">Applications</h2>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-header">Healthcare</div>
+                        <div class="card-body">
+                            <p>DevTrack assists pediatricians and healthcare providers in:</p>
+                            <ul>
+                                <li>Early detection of developmental delays</li>
+                                <li>Tracking developmental progress over time</li>
+                                <li>Evidence-based intervention planning</li>
+                                <li>Parent education and resource provision</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-header">Education</div>
+                        <div class="card-body">
+                            <p>Early childhood educators benefit from:</p>
+                            <ul>
+                                <li>Individualized learning plans</li>
+                                <li>Developmental progress monitoring</li>
+                                <li>Curriculum alignment to developmental needs</li>
+                                <li>Improved communication with families</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-header">Research</div>
+                        <div class="card-body">
+                            <p>DevTrack supports developmental research through:</p>
+                            <ul>
+                                <li>Standardized assessment data collection</li>
+                                <li>Population-level developmental insights</li>
+                                <li>Validation of intervention effectiveness</li>
+                                <li>Longitudinal developmental tracking</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Future Work Section -->
+        <div class="section">
+            <h2 class="mb-4">Future Work</h2>
+            <div class="row">
+                <div class="col-md-12 mb-4">
+                    <div class="card">
+                        <div class="card-header">Roadmap for Future Development</div>
+                        <div class="card-body">
+                            <p>DevTrack is continuously evolving to enhance its capabilities and reach. Our future development plans include:</p>
+                            
+                            <div class="row mt-3">
+                                <div class="col-md-6">
+                                    <h5>Expanded Coverage</h5>
+                                    <ul>
+                                        <li><strong>Extended Age Range</strong> - Expanding questionnaires and assessment capabilities to cover children aged 3-6 years</li>
+                                        <li><strong>Additional Developmental Domains</strong> - Incorporating more specialized domains such as sensory processing and executive function</li>
+                                        <li><strong>Cultural Adaptations</strong> - Developing culturally-specific milestone assessments for diverse populations</li>
+                                        <li><strong>Multilingual Support</strong> - Expanding language capabilities beyond English to support global usage</li>
+                                    </ul>
+                                    
+                                    <h5>Enhanced LLM Capabilities</h5>
+                                    <ul>
+                                        <li><strong>Advanced Model Integration</strong> - Incorporating newer, more capable LLMs as they become available</li>
+                                        <li><strong>Specialized Fine-tuning</strong> - Domain-specific fine-tuning using accumulated assessment data</li>
+                                        <li><strong>GPU Acceleration</strong> - Optimizing for better hardware utilization to improve inference speed and capacity</li>
+                                        <li><strong>Multi-modal Assessment</strong> - Extending beyond text to incorporate image and video analysis for behavioral assessment</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <h5>Privacy-Preserving Learning</h5>
+                                    <ul>
+                                        <li><strong>Federated Learning Module</strong> - Implementing federated learning to improve models while preserving privacy of sensitive medical data</li>
+                                        <li><strong>Differential Privacy</strong> - Adding differential privacy guarantees to protect individual patient information</li>
+                                        <li><strong>Secure Enclaves</strong> - Utilizing secure computing environments for processing sensitive information</li>
+                                        <li><strong>Anonymization Techniques</strong> - Advanced methods to remove personally identifiable information while preserving clinical utility</li>
+                                    </ul>
+                                    
+                                    <h5>Deployment Flexibility</h5>
+                                    <ul>
+                                        <li><strong>Cloud Computing Integration</strong> - Expanding to cloud platforms for scalable deployment options</li>
+                                        <li><strong>Distributed Computing</strong> - Enabling hospitals and clinics to run the engine locally on their own hardware</li>
+                                        <li><strong>Custom GPU Servers</strong> - Tailored hardware solutions based on institutional needs and demographics</li>
+                                        <li><strong>Edge Deployment</strong> - Optimized versions for deployment in resource-constrained environments</li>
+                                        <li><strong>Hybrid Models</strong> - Combining local processing with cloud capabilities for optimal performance and privacy</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <div class="row mt-4">
+                                <div class="col-md-12">
+                                    <h5>Research and Clinical Integration</h5>
+                                    <ul>
+                                        <li><strong>Longitudinal Studies</strong> - Tools for tracking developmental trajectories over extended periods</li>
+                                        <li><strong>Clinical Decision Support</strong> - Integration with electronic health records and clinical workflows</li>
+                                        <li><strong>Intervention Effectiveness</strong> - Measuring the impact of early interventions on developmental outcomes</li>
+                                        <li><strong>Population Health</strong> - Aggregated insights for public health planning and resource allocation</li>
+                                        <li><strong>Research Collaborations</strong> - Partnerships with academic institutions to advance developmental science</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- System Architecture -->
+        <div class="section">
+            <h2 class="mb-4">System Architecture</h2>
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h4>API Endpoints</h4>
+                            <ul>
+                                <li><strong>/comprehensive-assessment</strong> - Complete milestone assessment with detailed analysis</li>
+                                <li><strong>/r2r/</strong> - R2R dashboard and retrieval-enhanced reasoning</li>
+                                <li><strong>/active-learning/</strong> - Active learning system for model improvement</li>
+                                <li><strong>/improved-scoring/</strong> - Advanced scoring dashboard</li>
+                                <li><strong>/batch-processing/</strong> - Batch processing interface</li>
+                                <li><strong>/metrics-dashboard/</strong> - System performance metrics</li>
+                                <li><strong>/llm-scoring/</strong> - Direct access to LLM-based scoring capabilities</li>
+                                <li><strong>/direct-test</strong> - Endpoint for testing and validating the scoring system</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Footer Section -->
+        <div class="mt-5 pt-5 border-top">
+            <p class="text-center text-muted">DevTrack Developmental Assessment System © 2025</p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html> 

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASD Assessment API Demo</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="/static/webapp/css/style.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="mb-4">ASD Assessment API Demo</h1>
+                <div class="card">
+                    <div class="card-header">
+                        <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="comprehensive-tab" data-bs-toggle="tab" data-bs-target="#comprehensive" type="button" role="tab" aria-controls="comprehensive" aria-selected="true">Comprehensive Assessment</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="dashboards-tab" data-bs-toggle="tab" data-bs-target="#dashboards" type="button" role="tab" aria-controls="dashboards" aria-selected="false">API Dashboards</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="health-tab" data-bs-toggle="tab" data-bs-target="#health" type="button" role="tab" aria-controls="health" aria-selected="false">API Health</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="direct-test-tab" data-bs-toggle="tab" data-bs-target="#direct-test" type="button" role="tab" aria-controls="direct-test" aria-selected="false">Direct Test</button>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card-body">
+                        <div class="tab-content" id="myTabContent">
+                            <!-- Comprehensive Assessment Tab -->
+                            <div class="tab-pane fade show active" id="comprehensive" role="tabpanel" aria-labelledby="comprehensive-tab">
+                                <h5 class="card-title">Comprehensive Assessment</h5>
+                                <form id="comprehensive-form">
+                                    <div class="mb-3">
+                                        <label for="question" class="form-label">Question</label>
+                                        <input type="text" class="form-control" id="question" placeholder="e.g., Does your child walk independently?">
+                                    </div>
+                                    
+                                    <div id="milestone-select-container">
+                                        <div class="mb-3">
+                                            <label for="domain-select" class="form-label">Developmental Domain</label>
+                                            <select class="form-select" id="domain-select">
+                                                <option value="">Select Domain</option>
+                                            </select>
+                                        </div>
+                                        
+                                        <div class="mb-3">
+                                            <label for="age-range-select" class="form-label">Age Range</label>
+                                            <select class="form-select" id="age-range-select" disabled>
+                                                <option value="">Select Age Range</option>
+                                            </select>
+                                        </div>
+                                        
+                                        <div class="mb-3">
+                                            <label for="milestone-select" class="form-label">Milestone</label>
+                                            <select class="form-select" id="milestone-select" disabled>
+                                                <option value="">Select Milestone</option>
+                                            </select>
+                                        </div>
+                                        
+                                        <div id="milestone-criteria" class="mb-3 d-none">
+                                            <div class="alert alert-info">
+                                                <strong>Criteria:</strong> <span id="milestone-criteria-text"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <label for="parent-response" class="form-label">Parent's Response</label>
+                                        <textarea class="form-control" id="parent-response" rows="3" placeholder="e.g., Yes, she can walk without holding on to anything."></textarea>
+                                    </div>
+                                    
+                                    <button type="submit" id="submit-btn" class="btn btn-primary">
+                                        Submit Assessment
+                                    </button>
+                                </form>
+                                
+                                <div id="result-container" class="mt-4 d-none">
+                                    <h5>Assessment Result</h5>
+                                    <div class="card bg-light">
+                                        <div class="card-body">
+                                            <pre id="result-json" class="mb-0"></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- API Dashboards Tab -->
+                            <div class="tab-pane fade" id="dashboards" role="tabpanel" aria-labelledby="dashboards-tab">
+                                <h5 class="card-title">Available Dashboards</h5>
+                                <div class="list-group">
+                                    <a href="/project-overview/" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                                        Project Overview <span class="badge bg-primary rounded-pill">Core</span>
+                                    </a>
+                                    <a href="/improved-scoring/" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                                        Improved Scoring Dashboard <span class="badge bg-success rounded-pill">V2</span>
+                                    </a>
+                                    <a href="/metrics-dashboard/" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                                        Performance Metrics <span class="badge bg-info rounded-pill">Stats</span>
+                                    </a>
+                                    <a href="/batch-processing/" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                                        Batch Processing <span class="badge bg-warning rounded-pill">Bulk</span>
+                                    </a>
+                                    <a href="/r2r/" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                                        R2R Dashboard <span class="badge bg-danger rounded-pill">LLM</span>
+                                    </a>
+                                    <a href="/active-learning/" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                                        Active Learning <span class="badge bg-secondary rounded-pill">ML</span>
+                                    </a>
+                                </div>
+                            </div>
+                            
+                            <!-- API Health Tab -->
+                            <div class="tab-pane fade" id="health" role="tabpanel" aria-labelledby="health-tab">
+                                <h5 class="card-title">API Health Status</h5>
+                                <div id="health-container">
+                                    <p>Checking API health...</p>
+                                    <div class="d-flex align-items-center">
+                                        <div class="spinner-border text-primary me-2" role="status">
+                                            <span class="visually-hidden">Loading...</span>
+                                        </div>
+                                        <span>Connecting to API...</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Direct Test Tab -->
+                            <div class="tab-pane fade" id="direct-test" role="tabpanel" aria-labelledby="direct-test-tab">
+                                <h5 class="card-title">Direct API Testing</h5>
+                                <form id="direct-test-form">
+                                    <div class="mb-3">
+                                        <label for="direct-milestone" class="form-label">Milestone Behavior</label>
+                                        <input type="text" class="form-control" id="direct-milestone" placeholder="e.g., Walks independently">
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <label for="direct-response" class="form-label">Parent Response</label>
+                                        <textarea class="form-control" id="direct-response" rows="3" placeholder="e.g., Yes, she can walk on her own now."></textarea>
+                                    </div>
+                                    
+                                    <button type="submit" id="direct-submit-btn" class="btn btn-primary">
+                                        Test Direct API
+                                    </button>
+                                </form>
+                                
+                                <div id="direct-result-container" class="mt-4 d-none">
+                                    <h5>API Response</h5>
+                                    <div class="card bg-light">
+                                        <div class="card-body">
+                                            <pre id="direct-result-json" class="mb-0"></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/webapp/js/main.js"></script>
+</body>
+</html> 

@@ -1,0 +1,461 @@
+[
+  {
+    "response": "He does this all by himself. We practice this when we can.",
+    "milestone_context": {
+      "id": "motor_48",
+      "domain": "motor",
+      "behavior": "Climbs stairs with support",
+      "criteria": "Child climbs stairs with support regularly and consistently",
+      "age_range": "6-12 months"
+    },
+    "expected_score": "INDEPENDENT",
+    "expected_score_value": 4,
+    "observation_date": "2025-02-24T23:02:38.940008"
+  },
+  {
+    "response": "She has mastered this skill fully. I've noticed this for several weeks.",
+    "milestone_context": {
+      "id": "communication_17",
+      "domain": "communication",
+      "behavior": "Uses gestures to communicate",
+      "criteria": "Child uses gestures to communicate regularly and consistently",
+      "age_range": "30-36 months"
+    },
+    "expected_score": "INDEPENDENT",
+    "expected_score_value": 4,
+    "observation_date": "2025-02-24T23:02:38.940127"
+  },
+  {
+    "response": "In familiar settings, With guidance she manages this well.",
+    "milestone_context": {
+      "id": "communication_26",
+      "domain": "communication",
+      "behavior": "Uses two-word sentences",
+      "criteria": "Child uses two-word sentences regularly and consistently",
+      "age_range": "18-24 months"
+    },
+    "expected_score": "WITH_SUPPORT",
+    "expected_score_value": 3,
+    "observation_date": "2025-01-25T23:02:38.940099"
+  },
+  {
+    "response": "Sometimes It's beginning to develop but still early stages., other times not",
+    "milestone_context": {
+      "id": "social_37",
+      "domain": "social",
+      "behavior": "Takes turns in simple games",
+      "criteria": "Child takes turns in simple games regularly and consistently",
+      "age_range": "12-18 months"
+    },
+    "expected_score": "EMERGING",
+    "expected_score_value": 2,
+    "observation_date": "2024-12-26T23:02:38.940050"
+  },
+  {
+    "response": "He doesn't show any ability to do this.",
+    "milestone_context": {
+      "id": "motor_02",
+      "domain": "motor",
+      "behavior": "Climbs stairs with support",
+      "criteria": "Child climbs stairs with support regularly and consistently",
+      "age_range": "12-18 months"
+    },
+    "expected_score": "CANNOT_DO",
+    "expected_score_value": 0
+  },
+  {
+    "response": "My child is very good at this without help. We practice this when we can. [es: Simulated translation]",
+    "milestone_context": {
+      "id": "social_17",
+      "domain": "social",
+      "behavior": "Shows empathy when others are upset",
+      "criteria": "Child shows empathy when others are upset regularly and consistently",
+      "age_range": "24-30 months"
+    },
+    "expected_score": "INDEPENDENT",
+    "expected_score_value": 4
+  },
+  {
+    "response": "I'm not entirely sure, but Sometimes, but not consistently.",
+    "milestone_context": {
+      "id": "motor_48",
+      "domain": "motor",
+      "behavior": "Climbs stairs with support",
+      "criteria": "Child climbs stairs with support regularly and consistently",
+      "age_range": "6-12 months"
+    },
+    "expected_score": "EMERGING",
+    "expected_score_value": 2,
+    "observation_date": "2024-12-26T23:02:38.940008"
+  },
+  {
+    "response": "It's beginning to develop but still early stages. [es: Simulated translation]",
+    "milestone_context": {
+      "id": "motor_50",
+      "domain": "motor",
+      "behavior": "Climbs stairs with support",
+      "criteria": "Child climbs stairs with support regularly and consistently",
+      "age_range": "18-24 months"
+    },
+    "expected_score": "EMERGING",
+    "expected_score_value": 2
+  },
+  {
+    "response": "Not at all, this is beyond her current abilities. I've noticed this for about a month.",
+    "milestone_context": {
+      "id": "communication_48",
+      "domain": "communication",
+      "behavior": "Responds to their name",
+      "criteria": "Child responds to their name regularly and consistently",
+      "age_range": "30-36 months"
+    },
+    "expected_score": "CANNOT_DO",
+    "expected_score_value": 0,
+    "observation_date": "2024-12-11T23:02:38.940078"
+  },
+  {
+    "response": "She has mastered this skill fully.",
+    "milestone_context": {
+      "id": "social_19",
+      "domain": "social",
+      "behavior": "Takes turns in simple games",
+      "criteria": "Child takes turns in simple games regularly and consistently",
+      "age_range": "30-36 months"
+    },
+    "expected_score": "INDEPENDENT",
+    "expected_score_value": 4,
+    "observation_date": "2025-02-24T23:02:38.940092"
+  },
+  {
+    "response": "He's just starting to show signs of this. We practice this daily.",
+    "milestone_context": {
+      "id": "motor_12",
+      "domain": "motor",
+      "behavior": "Climbs stairs with support",
+      "criteria": "Child climbs stairs with support regularly and consistently",
+      "age_range": "24-36 months"
+    },
+    "expected_score": "EMERGING",
+    "expected_score_value": 2
+  },
+  {
+    "response": "He needs prompting but then can do it. This is exciting to see.",
+    "milestone_context": {
+      "id": "motor_37",
+      "domain": "motor",
+      "behavior": "Stacks blocks",
+      "criteria": "Child stacks blocks regularly and consistently",
+      "age_range": "24-36 months"
+    },
+    "expected_score": "WITH_SUPPORT",
+    "expected_score_value": 3
+  },
+  {
+    "response": "Sometimes Sometimes, but not consistently., other times not",
+    "milestone_context": {
+      "id": "social_33",
+      "domain": "social",
+      "behavior": "Shows empathy when others are upset",
+      "criteria": "Child shows empathy when others are upset regularly and consistently",
+      "age_range": "30-36 months"
+    },
+    "expected_score": "EMERGING",
+    "expected_score_value": 2
+  },
+  {
+    "response": "Showed promise initially, now Not at all, this is beyond her current abilities.",
+    "milestone_context": {
+      "id": "social_30",
+      "domain": "social",
+      "behavior": "Takes turns in simple games",
+      "criteria": "Child takes turns in simple games regularly and consistently",
+      "age_range": "12-18 months"
+    },
+    "expected_score": "LOST_SKILL",
+    "expected_score_value": 1
+  },
+  {
+    "response": "Not at all, this is beyond her current abilities. We practice this daily.",
+    "milestone_context": {
+      "id": "motor_15",
+      "domain": "motor",
+      "behavior": "Walks independently",
+      "criteria": "Child walks independently regularly and consistently",
+      "age_range": "18-24 months"
+    },
+    "expected_score": "CANNOT_DO",
+    "expected_score_value": 0
+  },
+  {
+    "response": "Occasionally I see her attempt this.",
+    "milestone_context": {
+      "id": "motor_30",
+      "domain": "motor",
+      "behavior": "Stacks blocks",
+      "criteria": "Child stacks blocks regularly and consistently",
+      "age_range": "24-36 months"
+    },
+    "expected_score": "EMERGING",
+    "expected_score_value": 2
+  },
+  {
+    "response": "When his friend fell down at playgroup, he went over and patted him on the back. He even brought him his favorite toy.",
+    "milestone_context": {
+      "id": "social_03",
+      "domain": "social",
+      "behavior": "Shows empathy when others are upset",
+      "criteria": "Child responds to others' emotions with caring behavior",
+      "age_range": "24-36 months"
+    },
+    "expected_score": "INDEPENDENT",
+    "expected_score_value": 4
+  },
+  {
+    "response": "When well-rested, Yes, but only when I help him. I've noticed this recently.",
+    "milestone_context": {
+      "id": "cognitive_22",
+      "domain": "cognitive",
+      "behavior": "Sorts objects by color or shape",
+      "criteria": "Child sorts objects by color or shape regularly and consistently",
+      "age_range": "36-48 months"
+    },
+    "expected_score": "WITH_SUPPORT",
+    "expected_score_value": 3
+  },
+  {
+    "response": "He doesn't show any ability to do this.",
+    "milestone_context": {
+      "id": "communication_26",
+      "domain": "communication",
+      "behavior": "Uses two-word sentences",
+      "criteria": "Child uses two-word sentences regularly and consistently",
+      "age_range": "18-24 months"
+    },
+    "expected_score": "CANNOT_DO",
+    "expected_score_value": 0,
+    "observation_date": "2024-12-11T23:02:38.940099"
+  },
+  {
+    "response": "Showed promise initially, now My child has never demonstrated this behavior.",
+    "milestone_context": {
+      "id": "social_33",
+      "domain": "social",
+      "behavior": "Recognizes familiar people",
+      "criteria": "Child recognizes familiar people regularly and consistently",
+      "age_range": "24-30 months"
+    },
+    "expected_score": "LOST_SKILL",
+    "expected_score_value": 1
+  },
+  {
+    "response": "When well-rested, Yes, but only when I help him. The teacher has also noticed this.",
+    "milestone_context": {
+      "id": "motor_16",
+      "domain": "motor",
+      "behavior": "Stacks blocks",
+      "criteria": "Child stacks blocks regularly and consistently",
+      "age_range": "12-18 months"
+    },
+    "expected_score": "WITH_SUPPORT",
+    "expected_score_value": 3,
+    "observation_date": "2025-01-25T23:02:38.940033"
+  },
+  {
+    "response": "Depending on the situation, Yes, but only when I help him.",
+    "milestone_context": {
+      "id": "social_17",
+      "domain": "social",
+      "behavior": "Shows empathy when others are upset",
+      "criteria": "Child shows empathy when others are upset regularly and consistently",
+      "age_range": "24-30 months"
+    },
+    "expected_score": "WITH_SUPPORT",
+    "expected_score_value": 3,
+    "observation_date": "2025-01-25T23:02:38.940085"
+  },
+  {
+    "response": "He can climb up the stairs if I hold his hand, but needs to be carried down.",
+    "milestone_context": {
+      "id": "motor_03",
+      "domain": "motor",
+      "behavior": "Climbs stairs with support",
+      "criteria": "Child can climb stairs with hand support",
+      "age_range": "18-24 months"
+    },
+    "expected_score": "WITH_SUPPORT",
+    "expected_score_value": 3
+  },
+  {
+    "response": "My child is very good at this without help.",
+    "milestone_context": {
+      "id": "social_15",
+      "domain": "social",
+      "behavior": "Shows empathy when others are upset",
+      "criteria": "Child shows empathy when others are upset regularly and consistently",
+      "age_range": "18-24 months"
+    },
+    "expected_score": "INDEPENDENT",
+    "expected_score_value": 4
+  },
+  {
+    "response": "My child has never demonstrated this behavior. The teacher has also noticed this.",
+    "milestone_context": {
+      "id": "motor_48",
+      "domain": "motor",
+      "behavior": "Climbs stairs with support",
+      "criteria": "Child climbs stairs with support regularly and consistently",
+      "age_range": "6-12 months"
+    },
+    "expected_score": "CANNOT_DO",
+    "expected_score_value": 0,
+    "observation_date": "2024-12-11T23:02:38.940008"
+  },
+  {
+    "response": "I'm not entirely sure, but It's beginning to develop but still early stages.",
+    "milestone_context": {
+      "id": "communication_17",
+      "domain": "communication",
+      "behavior": "Uses gestures to communicate",
+      "criteria": "Child uses gestures to communicate regularly and consistently",
+      "age_range": "30-36 months"
+    },
+    "expected_score": "EMERGING",
+    "expected_score_value": 2,
+    "observation_date": "2024-12-26T23:02:38.940127"
+  },
+  {
+    "response": "No, she cannot do this yet.",
+    "milestone_context": {
+      "id": "motor_16",
+      "domain": "motor",
+      "behavior": "Stacks blocks",
+      "criteria": "Child stacks blocks regularly and consistently",
+      "age_range": "12-18 months"
+    },
+    "expected_score": "CANNOT_DO",
+    "expected_score_value": 0,
+    "observation_date": "2024-12-11T23:02:38.940033"
+  },
+  {
+    "response": "No, she cannot do this yet. This is exciting to see.",
+    "milestone_context": {
+      "id": "motor_38",
+      "domain": "motor",
+      "behavior": "Kicks a ball",
+      "criteria": "Child kicks a ball regularly and consistently",
+      "age_range": "6-12 months"
+    },
+    "expected_score": "CANNOT_DO",
+    "expected_score_value": 0
+  },
+  {
+    "response": "He does this all by himself.",
+    "milestone_context": {
+      "id": "motor_37",
+      "domain": "motor",
+      "behavior": "Walks independently",
+      "criteria": "Child walks independently regularly and consistently",
+      "age_range": "12-18 months"
+    },
+    "expected_score": "INDEPENDENT",
+    "expected_score_value": 4
+  },
+  {
+    "response": "Sometimes Occasionally I see her attempt this., other times not",
+    "milestone_context": {
+      "id": "communication_13",
+      "domain": "communication",
+      "behavior": "Responds to their name",
+      "criteria": "Child responds to their name regularly and consistently",
+      "age_range": "24-30 months"
+    },
+    "expected_score": "EMERGING",
+    "expected_score_value": 2
+  },
+  {
+    "response": "She used to do this but has stopped. The teacher has also noticed this. [es: Simulated translation]",
+    "milestone_context": {
+      "id": "motor_43",
+      "domain": "motor",
+      "behavior": "Draws simple shapes",
+      "criteria": "Child draws simple shapes regularly and consistently",
+      "age_range": "18-24 months"
+    },
+    "expected_score": "LOST_SKILL",
+    "expected_score_value": 1
+  },
+  {
+    "response": "With guidance she manages this well.",
+    "milestone_context": {
+      "id": "cognitive_27",
+      "domain": "cognitive",
+      "behavior": "Sorts objects by color or shape",
+      "criteria": "Child sorts objects by color or shape regularly and consistently",
+      "age_range": "24-30 months"
+    },
+    "expected_score": "WITH_SUPPORT",
+    "expected_score_value": 3
+  },
+  {
+    "response": "She did this before but now refuses or is unable.",
+    "milestone_context": {
+      "id": "motor_44",
+      "domain": "motor",
+      "behavior": "Walks independently",
+      "criteria": "Child walks independently regularly and consistently",
+      "age_range": "6-12 months"
+    },
+    "expected_score": "LOST_SKILL",
+    "expected_score_value": 1
+  },
+  {
+    "response": "My child is very good at this without help. I've noticed this for about a month.",
+    "milestone_context": {
+      "id": "motor_27",
+      "domain": "motor",
+      "behavior": "Kicks a ball",
+      "criteria": "Child kicks a ball regularly and consistently",
+      "age_range": "24-36 months"
+    },
+    "expected_score": "INDEPENDENT",
+    "expected_score_value": 4
+  },
+  {
+    "response": "It depends on who's asking. With me, she always responds. With strangers or even her dad, she often ignores them completely.",
+    "milestone_context": {
+      "id": "social_04",
+      "domain": "social",
+      "behavior": "Recognizes familiar people",
+      "criteria": "Child shows recognition of familiar caregivers",
+      "age_range": "6-12 months"
+    },
+    "expected_score": "WITH_SUPPORT",
+    "expected_score_value": 3,
+    "notes": "This describes conditional performance based on the person involved."
+  },
+  {
+    "response": "No, she cannot do this yet.",
+    "milestone_context": {
+      "id": "motor_10",
+      "domain": "motor",
+      "behavior": "Stacks blocks",
+      "criteria": "Child stacks blocks regularly and consistently",
+      "age_range": "24-36 months"
+    },
+    "expected_score": "CANNOT_DO",
+    "expected_score_value": 0
+  },
+  {
+    "response": "She has mastered this skill fully. We practice this daily.",
+    "milestone_context": {
+      "id": "motor_16",
+      "domain": "motor",
+      "behavior": "Stacks blocks",
+      "criteria": "Child stacks blocks regularly and consistently",
+      "age_range": "12-18 months"
+    },
+    "expected_score": "INDEPENDENT",
+    "expected_score_value": 4,
+    "observation_date": "2025-02-24T23:02:38.940033"
+  }
+]

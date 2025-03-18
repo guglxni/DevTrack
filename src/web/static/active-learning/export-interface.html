@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Active Learning Export Interface</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <style>
+        body {
+            padding-top: 56px;
+        }
+        .sidebar {
+            position: fixed;
+            top: 56px;
+            bottom: 0;
+            left: 0;
+            z-index: 100;
+            padding: 48px 0 0;
+            box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+        }
+        .sidebar-sticky {
+            position: relative;
+            top: 0;
+            height: calc(100vh - 48px);
+            padding-top: .5rem;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+        .nav-link {
+            font-weight: 500;
+            color: #333;
+        }
+        .nav-link.active {
+            color: #2470dc;
+        }
+        .card {
+            margin-bottom: 1.5rem;
+        }
+        .json-display {
+            background-color: #f8f9fa;
+            border-radius: 0.25rem;
+            padding: 1rem;
+            font-family: monospace;
+            white-space: pre-wrap;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .stats-card {
+            transition: transform 0.3s;
+        }
+        .stats-card:hover {
+            transform: translateY(-5px);
+        }
+        .download-btn {
+            margin-bottom: 1rem;
+        }
+        #loading {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.8);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="loading">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">DevTrack Assessment</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/active-learning/">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/active-learning/pending-reviews.html">Pending Reviews</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/active-learning/statistics.html">Statistics</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/active-learning/model-versions.html">Model Versions</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/active-learning/export-interface.html">Export Interface</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+                <div class="sidebar-sticky pt-3">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#overview">
+                                <i class="bi bi-house-door"></i> Overview
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#statistics">
+                                <i class="bi bi-graph-up"></i> Statistics
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#categories">
+                                <i class="bi bi-tags"></i> Categories
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#pending-reviews">
+                                <i class="bi bi-list-check"></i> Pending Reviews
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#export-data">
+                                <i class="bi bi-download"></i> Export Data
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1 class="h2">Active Learning Export Interface</h1>
+                    <div class="btn-toolbar mb-2 mb-md-0">
+                        <button type="button" class="btn btn-sm btn-outline-primary me-2" id="refreshBtn">
+                            <i class="bi bi-arrow-clockwise"></i> Refresh Data
+                        </button>
+                    </div>
+                </div>
+
+                <section id="overview" class="mb-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">Overview</h5>
+                        </div>
+                        <div class="card-body">
+                            <p>This interface provides access to the active learning system's data for export and analysis. You can view statistics, categories, pending reviews, and export the data in various formats.</p>
+                            <div class="alert alert-info">
+                                <i class="bi bi-info-circle"></i> Current Model Version: <span id="modelVersion">Loading...</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="statistics" class="mb-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">Statistics</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row" id="statsCards">
+                                <div class="col-md-4">
+                                    <div class="card stats-card bg-light">
+                                        <div class="card-body text-center">
+                                            <h5 class="card-title">Total Examples</h5>
+                                            <p class="card-text display-4" id="totalExamples">0</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="card stats-card bg-light">
+                                        <div class="card-body text-center">
+                                            <h5 class="card-title">Pending Reviews</h5>
+                                            <p class="card-text display-4" id="pendingReviews">0</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="card stats-card bg-light">
+                                        <div class="card-body text-center">
+                                            <h5 class="card-title">Completed Reviews</h5>
+                                            <p class="card-text display-4" id="completedReviews">0</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-4">
+                                <h6>Examples by Category</h6>
+                                <div id="categoryStats" class="mt-3">
+                                    <p class="text-muted">No category data available</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="categories" class="mb-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">Categories</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row" id="categoriesList">
+                                <p class="text-muted">Loading categories...</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="pending-reviews" class="mb-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">Pending Reviews</h5>
+                        </div>
+                        <div class="card-body">
+                            <div id="pendingReviewsList">
+                                <p class="text-muted">No pending reviews available</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="export-data" class="mb-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">Export Data</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <button class="btn btn-primary download-btn w-100" id="downloadJsonBtn">
+                                        <i class="bi bi-file-earmark-code"></i> Download as JSON
+                                    </button>
+                                </div>
+                                <div class="col-md-6">
+                                    <button class="btn btn-success download-btn w-100" id="downloadCsvBtn">
+                                        <i class="bi bi-file-earmark-spreadsheet"></i> Download as CSV
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="form-check form-switch mb-3">
+                                <input class="form-check-input" type="checkbox" id="includeReviewsSwitch" checked>
+                                <label class="form-check-label" for="includeReviewsSwitch">Include pending reviews in export</label>
+                            </div>
+                            <h6>Raw JSON Data</h6>
+                            <div class="json-display" id="jsonDisplay">
+                                Loading data...
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Global variable to store the data
+        let exportData = null;
+
+        // Function to fetch data from the API
+        async function fetchExportData() {
+            try {
+                document.getElementById('loading').style.display = 'flex';
+                const response = await fetch('/active-learning/export-interface');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                exportData = await response.json();
+                updateUI(exportData);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+                document.getElementById('jsonDisplay').textContent = `Error fetching data: ${error.message}`;
+            } finally {
+                document.getElementById('loading').style.display = 'none';
+            }
+        }
+
+        // Function to update the UI with the fetched data
+        function updateUI(data) {
+            // Update model version
+            document.getElementById('modelVersion').textContent = data.model_version || 'Unknown';
+
+            // Update statistics
+            const stats = data.statistics || {};
+            document.getElementById('totalExamples').textContent = stats.total_examples || 0;
+            document.getElementById('pendingReviews').textContent = stats.pending_reviews || 0;
+            document.getElementById('completedReviews').textContent = stats.completed_reviews || 0;
+
+            // Update category statistics
+            const categoryStatsElement = document.getElementById('categoryStats');
+            const examplesByCategory = stats.examples_by_category || {};
+            
+            if (Object.keys(examplesByCategory).length > 0) {
+                let categoryHtml = '<div class="row">';
+                for (const [category, count] of Object.entries(examplesByCategory)) {
+                    categoryHtml += `
+                        <div class="col-md-4 mb-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h6 class="card-title">${category}</h6>
+                                    <p class="card-text">${count} examples</p>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }
+                categoryHtml += '</div>';
+                categoryStatsElement.innerHTML = categoryHtml;
+            } else {
+                categoryStatsElement.innerHTML = '<p class="text-muted">No category data available</p>';
+            }
+
+            // Update categories list
+            const categoriesElement = document.getElementById('categoriesList');
+            const categories = data.categories || [];
+            
+            if (categories.length > 0) {
+                let categoriesHtml = '';
+                categories.forEach(category => {
+                    let badgeClass = 'bg-secondary';
+                    switch(category) {
+                        case 'INDEPENDENT': badgeClass = 'bg-success'; break;
+                        case 'WITH_SUPPORT': badgeClass = 'bg-info'; break;
+                        case 'EMERGING': badgeClass = 'bg-primary'; break;
+                        case 'LOST_SKILL': badgeClass = 'bg-warning'; break;
+                        case 'CANNOT_DO': badgeClass = 'bg-danger'; break;
+                    }
+                    
+                    categoriesHtml += `
+                        <div class="col-md-4 mb-3">
+                            <div class="d-flex align-items-center">
+                                <span class="badge ${badgeClass} me-2">${category}</span>
+                                <span>${getCategoryDescription(category)}</span>
+                            </div>
+                        </div>
+                    `;
+                });
+                categoriesElement.innerHTML = categoriesHtml;
+            } else {
+                categoriesElement.innerHTML = '<p class="text-muted">No categories available</p>';
+            }
+
+            // Update pending reviews list
+            const pendingReviewsElement = document.getElementById('pendingReviewsList');
+            const pendingReviews = data.pending_reviews || [];
+            
+            if (pendingReviews.length > 0) {
+                let reviewsHtml = '<div class="table-responsive"><table class="table table-striped table-hover">';
+                reviewsHtml += `
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Milestone</th>
+                            <th>Response</th>
+                            <th>Predicted Score</th>
+                            <th>Confidence</th>
+                            <th>Priority</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                `;
+                
+                pendingReviews.forEach(review => {
+                    const milestone = review.milestone_context?.behavior || 'Unknown';
+                    const truncatedResponse = (review.response || '').length > 50 
+                        ? (review.response || '').substring(0, 50) + '...' 
+                        : (review.response || '');
+                    
+                    reviewsHtml += `
+                        <tr>
+                            <td>${review.id || 'Unknown'}</td>
+                            <td>${milestone}</td>
+                            <td>${truncatedResponse}</td>
+                            <td>${review.predicted_score || 'NOT_RATED'}</td>
+                            <td>${(review.confidence || 0).toFixed(2)}</td>
+                            <td>${(review.priority || 0).toFixed(2)}</td>
+                        </tr>
+                    `;
+                });
+                
+                reviewsHtml += '</tbody></table></div>';
+                pendingReviewsElement.innerHTML = reviewsHtml;
+            } else {
+                pendingReviewsElement.innerHTML = '<p class="text-muted">No pending reviews available</p>';
+            }
+
+            // Update JSON display
+            document.getElementById('jsonDisplay').textContent = JSON.stringify(data, null, 2);
+        }
+
+        // Helper function to get category descriptions
+        function getCategoryDescription(category) {
+            switch(category) {
+                case 'INDEPENDENT': return 'Child performs skill consistently without help';
+                case 'WITH_SUPPORT': return 'Child performs skill with assistance';
+                case 'EMERGING': return 'Child is beginning to develop skill';
+                case 'LOST_SKILL': return 'Child previously had skill but lost it';
+                case 'CANNOT_DO': return 'Child cannot perform skill';
+                case 'NOT_RATED': return 'Skill has not been rated';
+                default: return 'Unknown category';
+            }
+        }
+
+        // Function to download data as JSON
+        function downloadJson() {
+            if (!exportData) return;
+            
+            const includeReviews = document.getElementById('includeReviewsSwitch').checked;
+            let dataToExport = { ...exportData };
+            
+            if (!includeReviews) {
+                dataToExport.pending_reviews = [];
+            }
+            
+            const dataStr = JSON.stringify(dataToExport, null, 2);
+            const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+            
+            const exportFileDefaultName = `active_learning_export_${new Date().toISOString().slice(0,10)}.json`;
+            
+            const linkElement = document.createElement('a');
+            linkElement.setAttribute('href', dataUri);
+            linkElement.setAttribute('download', exportFileDefaultName);
+            linkElement.click();
+        }
+
+        // Function to download data as CSV
+        function downloadCsv() {
+            if (!exportData) return;
+            
+            const includeReviews = document.getElementById('includeReviewsSwitch').checked;
+            let pendingReviews = includeReviews ? (exportData.pending_reviews || []) : [];
+            
+            if (pendingReviews.length === 0) {
+                alert('No review data available to export as CSV');
+                return;
+            }
+            
+            // Create CSV header
+            let csvContent = 'ID,Milestone,Response,Predicted Score,Confidence,Priority\n';
+            
+            // Add rows
+            pendingReviews.forEach(review => {
+                const milestone = review.milestone_context?.behavior || 'Unknown';
+                const response = (review.response || '').replace(/,/g, ' ').replace(/\n/g, ' ');
+                const predictedScore = review.predicted_score || 'NOT_RATED';
+                const confidence = (review.confidence || 0).toFixed(2);
+                const priority = (review.priority || 0).toFixed(2);
+                
+                csvContent += `"${review.id}","${milestone}","${response}","${predictedScore}",${confidence},${priority}\n`;
+            });
+            
+            const dataUri = 'data:text/csv;charset=utf-8,'+ encodeURIComponent(csvContent);
+            const exportFileDefaultName = `active_learning_reviews_${new Date().toISOString().slice(0,10)}.csv`;
+            
+            const linkElement = document.createElement('a');
+            linkElement.setAttribute('href', dataUri);
+            linkElement.setAttribute('download', exportFileDefaultName);
+            linkElement.click();
+        }
+
+        // Event listeners
+        document.addEventListener('DOMContentLoaded', () => {
+            fetchExportData();
+            
+            document.getElementById('refreshBtn').addEventListener('click', fetchExportData);
+            document.getElementById('downloadJsonBtn').addEventListener('click', downloadJson);
+            document.getElementById('downloadCsvBtn').addEventListener('click', downloadCsv);
+        });
+    </script>
+</body>
+</html> 

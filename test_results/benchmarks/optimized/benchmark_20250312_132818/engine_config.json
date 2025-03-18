@@ -1,0 +1,37 @@
+{
+  "enable_keyword_scorer": true,
+  "enable_embedding_scorer": true,
+  "enable_transformer_scorer": true,
+  "enable_llm_scorer": true,
+  "enable_continuous_learning": true,
+  "enable_audit_logging": true,
+  "use_tiered_approach": true,
+  "confidence_threshold": 0.8,
+  "llm_threshold": 0.65,
+  "score_weights": {
+    "keyword": 0.2,
+    "embedding": 0.4,
+    "transformer": 0.3,
+    "llm": 0.8
+  },
+  "keyword_scorer": {
+    "confidence_threshold": 0.6
+  },
+  "embedding_scorer": {
+    "model_name": "all-MiniLM-L6-v2",
+    "cache_embeddings": true
+  },
+  "transformer_scorer": {
+    "model_name": "distilbert-base-uncased-finetuned-sst-2-english",
+    "method": "zero_shot",
+    "use_cached_model": true
+  },
+  "llm_scorer": {
+    "model_path": "models/mistral-7b-instruct-v0.2.Q3_K_S.gguf",
+    "n_ctx": 2048,
+    "n_batch": 512,
+    "n_gpu_layers": 16,
+    "n_threads": 4,
+    "f16_kv": true
+  }
+}

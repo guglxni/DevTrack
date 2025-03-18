@@ -1,0 +1,21 @@
+{
+  "count": 182,
+  "score_distribution": {
+    "INDEPENDENT": 42,
+    "LOST_SKILL": 22,
+    "WITH_SUPPORT": 41,
+    "EMERGING": 39,
+    "CANNOT_DO": 38
+  },
+  "domain_distribution": {
+    "social": 51,
+    "motor": 45,
+    "cognitive": 31,
+    "communication": 55
+  },
+  "response_length": {
+    "min": 3,
+    "max": 329,
+    "avg": 62.14835164835165
+  }
+}

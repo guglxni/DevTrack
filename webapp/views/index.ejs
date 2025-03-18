@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="mb-4">ASD Assessment API Demo</h1>
+                
+                <!-- Direct milestone count display -->
+                <div id="direct-milestone-count" class="alert alert-info mb-3">
+                    Loading milestone data directly...
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="comprehensive-tab" data-bs-toggle="tab" data-bs-target="#comprehensive" type="button" role="tab" aria-controls="comprehensive" aria-selected="true">Comprehensive Assessment</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="dashboards-tab" data-bs-toggle="tab" data-bs-target="#dashboards" type="button" role="tab" aria-controls="dashboards" aria-selected="false">API Dashboards</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="health-tab" data-bs-toggle="tab" data-bs-target="#health" type="button" role="tab" aria-controls="health" aria-selected="false">API Health</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="direct-test-tab" data-bs-toggle="tab" data-bs-target="#direct-test" type="button" role="tab" aria-controls="direct-test" aria-selected="false">Direct Test</button>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card-body">
+                        <div class="tab-content" id="myTabContent">
+                            <!-- Comprehensive Assessment Tab -->
+                            <div class="tab-pane fade show active" id="comprehensive" role="tabpanel" aria-labelledby="comprehensive-tab">
+                                <h5 class="card-title">Comprehensive Assessment</h5>
+                                <form id="comprehensive-form">
+                                    <div class="mb-3">
+                                        <label for="question" class="form-label">Question</label>
+                                        <input type="text" class="form-control" id="question" placeholder="Does your child recognize familiar people?">
+                                    </div>
+                                    
+                                    <!-- Milestone count display -->
+                                    <div id="milestone-count" class="alert alert-info mb-3">
+                                        Loading milestone data...
+                                    </div>
+                                    
+                                    <div class="mb-3" id="milestone-select-container">
+                                        <label class="form-label">Milestone Selection</label>
+                                        <div class="row">
+                                            <div class="col-md-4 mb-2">
+                                                <select id="domain-select" class="form-select">
+                                                    <option value="">Select Domain</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-4 mb-2">
+                                                <select id="age-range-select" class="form-select" disabled>
+                                                    <option value="">Select Age Range</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-4 mb-2">
+                                                <select id="milestone-select" class="form-select" disabled>
+                                                    <option value="">Select Milestone</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div id="milestone-criteria" class="mb-3">
+                                        <!-- Milestone criteria will be displayed here -->
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <label for="parent-response" class="form-label">Parent/Caregiver Response</label>
+                                        <textarea class="form-control" id="parent-response" rows="3" placeholder="My child can recognize familiar people and smiles when they see them."></textarea>
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <button type="button" id="submit-assessment" class="btn btn-primary">Submit Assessment</button>
+                                    </div>
+                                </form>
+                                
+                                <div id="assessment-result" class="mt-4" style="display: none;">
+                                    <h5>Assessment Result</h5>
+                                    <div id="result-content" class="alert alert-info">
+                                        <!-- Results will be displayed here -->
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- API Dashboards Tab -->
+                            <div class="tab-pane fade" id="dashboards" role="tabpanel" aria-labelledby="dashboards-tab">
+                                <h5 class="card-title">API Dashboards</h5>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <h5 class="card-title">DevTrack API Dashboard</h5>
+                                                <p class="card-text">Access the main DevTrack API dashboard with all features.</p>
+                                                <a href="http://localhost:8003" target="_blank" class="btn btn-primary">Open Dashboard</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <h5 class="card-title">Improved Scoring</h5>
+                                                <p class="card-text">View the improved scoring dashboard with enhanced features.</p>
+                                                <a href="http://localhost:8003/improved-scoring/" target="_blank" class="btn btn-primary">Open Dashboard</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- API Health Tab -->
+                            <div class="tab-pane fade" id="health" role="tabpanel" aria-labelledby="health-tab">
+                                <h5 class="card-title">API Health</h5>
+                                <div id="api-health-status" class="alert alert-info">
+                                    Checking API health...
+                                </div>
+                                <div id="api-endpoints-status">
+                                    <h6>Endpoint Status</h6>
+                                    <ul class="list-group" id="endpoint-list">
+                                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                            Health Endpoint
+                                            <span class="badge bg-secondary" id="health-endpoint-status">Checking...</span>
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                            Milestones Endpoint
+                                            <span class="badge bg-secondary" id="milestones-endpoint-status">Checking...</span>
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                            Comprehensive Assessment Endpoint
+                                            <span class="badge bg-secondary" id="comprehensive-endpoint-status">Checking...</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <!-- Direct Test Tab -->
+                            <div class="tab-pane fade" id="direct-test" role="tabpanel" aria-labelledby="direct-test-tab">
+                                <h5 class="card-title">Direct API Test</h5>
+                                <div class="mb-3">
+                                    <button id="testComprehensive" class="btn btn-primary">Test Comprehensive Assessment</button>
+                                </div>
+                                <pre id="response" class="mt-3">Response will appear here...</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/main.js"></script>
+    
+    <!-- Direct milestone count script -->
+    <script>
+        // Direct milestone count script
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Direct milestone count script loaded');
+            
+            // Function to directly fetch and display milestone count
+            function fetchDirectMilestoneCount() {
+                console.log('Directly fetching milestones from /milestones');
+                
+                fetch('/milestones')
+                    .then(response => {
+                        console.log('Direct fetch response status:', response.status);
+                        return response.json();
+                    })
+                    .then(data => {
+                        console.log(`Directly loaded ${data.length} milestones`);
+                        
+                        // Get unique domains
+                        const domains = [...new Set(data.map(m => m.domain))];
+                        console.log('Domains:', domains);
+                        
+                        // Update the direct milestone count display
+                        const directMilestoneCountElement = document.getElementById('direct-milestone-count');
+                        if (directMilestoneCountElement) {
+                            directMilestoneCountElement.textContent = `${data.length} milestones available across ${domains.length} domains: ${domains.join(', ')}`;
+                            directMilestoneCountElement.className = 'alert alert-success mb-3';
+                        }
+                        
+                        // Also update the regular milestone count display as a backup
+                        const milestoneCountElement = document.getElementById('milestone-count');
+                        if (milestoneCountElement) {
+                            milestoneCountElement.textContent = `${data.length} milestones available across ${domains.length} domains: ${domains.join(', ')}`;
+                            milestoneCountElement.className = 'alert alert-success mb-3';
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error directly fetching milestones:', error);
+                        
+                        // Update the direct milestone count display with the error
+                        const directMilestoneCountElement = document.getElementById('direct-milestone-count');
+                        if (directMilestoneCountElement) {
+                            directMilestoneCountElement.className = 'alert alert-danger mb-3';
+                            directMilestoneCountElement.textContent = `Failed to load milestones. Error: ${error.message}`;
+                        }
+                    });
+            }
+            
+            // Fetch milestone count directly
+            fetchDirectMilestoneCount();
+            
+            // Set up the comprehensive assessment form
+            const submitButton = document.getElementById('submit-assessment');
+            if (submitButton) {
+                submitButton.addEventListener('click', function() {
+                    const question = document.getElementById('question').value;
+                    const milestoneBehavior = document.getElementById('milestone-select').value;
+                    const parentResponse = document.getElementById('parent-response').value;
+                    
+                    if (!question || !milestoneBehavior || !parentResponse) {
+                        alert('Please fill out all fields');
+                        return;
+                    }
+                    
+                    // Show loading state
+                    const resultContent = document.getElementById('result-content');
+                    resultContent.textContent = 'Processing assessment...';
+                    resultContent.className = 'alert alert-info';
+                    document.getElementById('assessment-result').style.display = 'block';
+                    
+                    // Send the assessment request
+                    fetch('/smart-scoring/smart-comprehensive-assessment', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            parent_responses: [{
+                                id: "form-submission",
+                                question: question,
+                                milestone_behavior: milestoneBehavior,
+                                response: parentResponse
+                            }]
+                        })
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            return response.json().then(errorData => {
+                                throw new Error(`API error: ${errorData.error || response.status}`);
+                            });
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        console.log('Assessment result:', data);
+                        
+                        // Extract the first result from the array
+                        let result = data;
+                        if (Array.isArray(data) && data.length > 0) {
+                            result = data[0];
+                        }
+                        
+                        // Format the result
+                        let resultHtml = `
+                            <h6>Assessment Result</h6>
+                            <p><strong>Score:</strong> ${result.score} (${result.label || result.score_label})</p>
+                            <p><strong>Confidence:</strong> ${(result.confidence * 100).toFixed(0)}%</p>
+                        `;
+                        
+                        if (result.reasoning) {
+                            resultHtml += `<p><strong>Reasoning:</strong> ${result.reasoning}</p>`;
+                        }
+                        
+                        if (result.milestone_details) {
+                            resultHtml += `
+                                <h6>Milestone Details</h6>
+                                <p><strong>Behavior:</strong> ${result.milestone_details.behavior}</p>
+                                <p><strong>Domain:</strong> ${result.milestone_details.domain}</p>
+                                <p><strong>Age Range:</strong> ${result.milestone_details.age_range}</p>
+                                <p><strong>Criteria:</strong> ${result.milestone_details.criteria || 'Not specified'}</p>
+                            `;
+                        }
+                        
+                        // Update the result content
+                        resultContent.innerHTML = resultHtml;
+                        resultContent.className = 'alert alert-success';
+                    })
+                    .catch(error => {
+                        console.error('Error submitting assessment:', error);
+                        resultContent.textContent = `Error: ${error.message}`;
+                        resultContent.className = 'alert alert-danger';
+                    });
+                });
+            }
+            
+            // Set up the test comprehensive button
+            const testComprehensiveButton = document.getElementById('testComprehensive');
+            if (testComprehensiveButton) {
+                testComprehensiveButton.addEventListener('click', function() {
+                    const responseElement = document.getElementById('response');
+                    responseElement.textContent = 'Loading...';
+                    
+                    // Send a test request
+                    fetch('/smart-scoring/smart-comprehensive-assessment', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            parent_responses: [{
+                                id: "test1",
+                                question: 'Does your child walk independently?',
+                                milestone_behavior: 'Walks independently',
+                                response: 'Yes, she can walk without holding on to anything.'
+                            }]
+                        })
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            return response.json().then(errorData => {
+                                throw new Error(`API error: ${errorData.error || response.status}`);
+                            });
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        responseElement.textContent = JSON.stringify(data, null, 2);
+                    })
+                    .catch(error => {
+                        console.error('Test request error:', error);
+                        responseElement.textContent = `Error: ${error.message}`;
+                    });
+                });
+            }
+        });
+    </script>
+</body>
+</html> 
+ 

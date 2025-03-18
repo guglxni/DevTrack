@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple API Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        pre {
+            background-color: #f5f5f5;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 10px 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Simple API Test</h1>
+    
+    <div>
+        <button id="checkHealth">Check Health (API Direct)</button>
+        <button id="checkHealthProxy">Check Health (Proxy)</button>
+        <button id="testComprehensive">Test Comprehensive (Proxy)</button>
+    </div>
+    
+    <h3>Response:</h3>
+    <pre id="response">Response will appear here...</pre>
+    
+    <script>
+        document.getElementById('checkHealth').addEventListener('click', function() {
+            const responseElement = document.getElementById('response');
+            responseElement.textContent = 'Loading...';
+            
+            fetch('http://localhost:8003/health')
+                .then(response => response.json())
+                .then(data => {
+                    responseElement.textContent = 'Direct Health Response:\n' + JSON.stringify(data, null, 2);
+                })
+                .catch(error => {
+                    responseElement.textContent = 'Error: ' + error.message;
+                });
+        });
+        
+        document.getElementById('checkHealthProxy').addEventListener('click', function() {
+            const responseElement = document.getElementById('response');
+            responseElement.textContent = 'Loading...';
+            
+            fetch('/api/health')
+                .then(response => response.json())
+                .then(data => {
+                    responseElement.textContent = 'Proxy Health Response:\n' + JSON.stringify(data, null, 2);
+                })
+                .catch(error => {
+                    responseElement.textContent = 'Error: ' + error.message;
+                });
+        });
+        
+        document.getElementById('testComprehensive').addEventListener('click', function() {
+            const responseElement = document.getElementById('response');
+            responseElement.textContent = 'Loading...';
+            
+            const testData = {
+                question: "Test question",
+                milestone_behavior: "Walks independently",
+                parent_response: "Test response",
+                keywords: {
+                    "INDEPENDENT": ["test keyword"]
+                }
+            };
+            
+            fetch('/api/comprehensive-assessment', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(testData)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    return response.text().then(text => {
+                        throw new Error(`API Error (${response.status}): ${text}`);
+                    });
+                }
+                return response.json();
+            })
+            .then(data => {
+                responseElement.textContent = 'Comprehensive Response:\n' + JSON.stringify(data, null, 2);
+            })
+            .catch(error => {
+                responseElement.textContent = 'Error: ' + error.message;
+                console.error('Error details:', error);
+            });
+        });
+    </script>
+</body>
+</html> 

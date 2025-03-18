@@ -1,0 +1,117 @@
+Starting edge case benchmark...
+Successfully imported all modules
+Defined 10 edge cases for testing
+Script starting...
+Starting main function...
+Creating standard ensemble...
+Creating enhanced ensemble...
+Successfully created scorers
+Processing case 1/10: ambiguous_with_qualifier
+  Scoring with standard system...
+  Scoring with enhanced system...
+  Standard: EMERGING (0.70) - Enhanced: EMERGING (0.56)
+Processing case 2/10: contradictory
+  Scoring with standard system...
+  Scoring with enhanced system...
+  Standard: CANNOT_DO (0.70) - Enhanced: EMERGING (0.72)
+Processing case 3/10: context_dependent
+  Scoring with standard system...
+  Scoring with enhanced system...
+  Standard: CANNOT_DO (0.74) - Enhanced: EMERGING (0.67)
+Processing case 4/10: attempting_not_achieving
+  Scoring with standard system...
+  Scoring with enhanced system...
+  Standard: EMERGING (0.74) - Enhanced: EMERGING (0.74)
+Processing case 5/10: regression
+  Scoring with standard system...
+  Scoring with enhanced system...
+  Standard: LOST_SKILL (0.85) - Enhanced: LOST_SKILL (0.79)
+Processing case 6/10: person_dependent
+  Scoring with standard system...
+  Scoring with enhanced system...
+  Standard: CANNOT_DO (0.80) - Enhanced: WITH_SUPPORT (0.78)
+Processing case 7/10: requires_initiation
+  Scoring with standard system...
+  Scoring with enhanced system...
+  Standard: CANNOT_DO (0.74) - Enhanced: WITH_SUPPORT (0.75)
+Processing case 8/10: double_negative
+  Scoring with standard system...
+  Scoring with enhanced system...
+  Standard: INDEPENDENT (0.70) - Enhanced: INDEPENDENT (0.70)
+Processing case 9/10: inconsistent
+  Scoring with standard system...
+  Scoring with enhanced system...
+  Standard: CANNOT_DO (0.80) - Enhanced: CANNOT_DO (0.74)
+Processing case 10/10: qualified_negative
+  Scoring with standard system...
+  Scoring with enhanced system...
+  Standard: INDEPENDENT (0.70) - Enhanced: INDEPENDENT (0.70)
+Calculating metrics...
+Calculating metrics...
+Printing results...
+
+===== EDGE CASE BENCHMARK RESULTS =====
+
+Overall Performance:
+  Standard:  Accuracy: 0.30 (3/10), Confidence: 0.75
+  Enhanced:  Accuracy: 0.70 (7/10), Confidence: 0.72
+  Difference: 40.00% accuracy, -3.20% confidence
+
+Category Performance:
+  ambiguous_with_qualifier:
+    Standard: 1.00 (1/1), Confidence: 0.70
+    Enhanced: 1.00 (1/1), Confidence: 0.56
+    Difference: 0.00% accuracy, -13.50% confidence
+
+  attempting_not_achieving:
+    Standard: 1.00 (1/1), Confidence: 0.74
+    Enhanced: 1.00 (1/1), Confidence: 0.74
+    Difference: 0.00% accuracy, 0.00% confidence
+
+  context_dependent:
+    Standard: 0.00 (0/1), Confidence: 0.74
+    Enhanced: 1.00 (1/1), Confidence: 0.67
+    Difference: 100.00% accuracy, -7.08% confidence
+
+  contradictory:
+    Standard: 0.00 (0/1), Confidence: 0.70
+    Enhanced: 1.00 (1/1), Confidence: 0.72
+    Difference: 100.00% accuracy, 2.00% confidence
+
+  double_negative:
+    Standard: 0.00 (0/1), Confidence: 0.70
+    Enhanced: 0.00 (0/1), Confidence: 0.70
+    Difference: 0.00% accuracy, 0.00% confidence
+
+  inconsistent:
+    Standard: 0.00 (0/1), Confidence: 0.80
+    Enhanced: 0.00 (0/1), Confidence: 0.74
+    Difference: 0.00% accuracy, -6.00% confidence
+
+  person_dependent:
+    Standard: 0.00 (0/1), Confidence: 0.80
+    Enhanced: 1.00 (1/1), Confidence: 0.78
+    Difference: 100.00% accuracy, -2.00% confidence
+
+  qualified_negative:
+    Standard: 0.00 (0/1), Confidence: 0.70
+    Enhanced: 0.00 (0/1), Confidence: 0.70
+    Difference: 0.00% accuracy, 0.00% confidence
+
+  regression:
+    Standard: 1.00 (1/1), Confidence: 0.85
+    Enhanced: 1.00 (1/1), Confidence: 0.79
+    Difference: 0.00% accuracy, -6.00% confidence
+
+  requires_initiation:
+    Standard: 0.00 (0/1), Confidence: 0.74
+    Enhanced: 1.00 (1/1), Confidence: 0.75
+    Difference: 100.00% accuracy, 0.60% confidence
+
+Key Improvements:
+  - contradictory: +100.00% accuracy
+  - person_dependent: +100.00% accuracy
+  - context_dependent: +100.00% accuracy
+  - requires_initiation: +100.00% accuracy
+
+Benchmark completed in 28.86 seconds.

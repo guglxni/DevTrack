@@ -1,0 +1,261 @@
+/* 
+   Additional CSS for the Feedback Interface
+   This complements the Bootstrap styling applied in the main template
+*/
+
+/* Custom theme colors */
+:root {
+    --primary-color: #3498db;
+    --secondary-color: #2ecc71;
+    --tertiary-color: #9b59b6;
+    --warning-color: #f39c12;
+    --danger-color: #e74c3c;
+    --light-gray: #f5f5f5;
+    --dark-gray: #333333;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* Global styles */
+body {
+    font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    transition: background-color 0.3s ease;
+}
+
+.card {
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Review card styles */
+.review-card-container {
+    animation: slideUp 0.4s ease-in-out;
+}
+
+.review-response {
+    background-color: var(--light-gray);
+    padding: 15px;
+    border-radius: 6px;
+    border-left: 4px solid var(--primary-color);
+}
+
+.milestone-info {
+    background-color: rgba(52, 152, 219, 0.05);
+    padding: 10px 15px;
+    border-radius: 6px;
+}
+
+.priority-indicator {
+    height: 8px;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.priority-marker {
+    width: 12px;
+    height: 12px;
+    background-color: #000;
+    border: 2px solid white;
+    box-shadow: 0 0 5px rgba(0,0,0,0.3);
+}
+
+/* Score button enhancements */
+.score-button {
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.score-button::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.5);
+    opacity: 0;
+    border-radius: 100%;
+    transform: scale(1, 1) translate(-50%);
+    transform-origin: 50% 50%;
+}
+
+.score-button:focus:not(:active)::after {
+    animation: ripple 1s ease-out;
+}
+
+@keyframes ripple {
+    0% {
+        transform: scale(0, 0);
+        opacity: 0.5;
+    }
+    20% {
+        transform: scale(25, 25);
+        opacity: 0.3;
+    }
+    100% {
+        opacity: 0;
+        transform: scale(40, 40);
+    }
+}
+
+/* Statistics page */
+.stat-card {
+    position: relative;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.stat-value {
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.stat-label {
+    font-size: 1rem;
+    color: var(--dark-gray);
+    margin-bottom: 15px;
+}
+
+/* Model versions section */
+.version-history-timeline {
+    position: relative;
+    padding-left: 30px;
+}
+
+.version-history-timeline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 15px;
+    height: 100%;
+    width: 2px;
+    background-color: #ddd;
+}
+
+.version-item {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.version-item::before {
+    content: '';
+    position: absolute;
+    left: -30px;
+    top: 15px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    z-index: 1;
+}
+
+.version-item:nth-child(odd)::before {
+    background-color: var(--secondary-color);
+}
+
+.version-item:nth-child(3n)::before {
+    background-color: var(--tertiary-color);
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #121212;
+        color: #e0e0e0;
+    }
+    
+    .card {
+        background-color: #1e1e1e;
+        border-color: #333;
+    }
+    
+    .review-response {
+        background-color: #2a2a2a;
+        border-left-color: var(--primary-color);
+    }
+    
+    .milestone-info {
+        background-color: rgba(52, 152, 219, 0.1);
+    }
+    
+    .jumbotron {
+        background-color: #2a2a2a;
+    }
+    
+    .form-control {
+        background-color: #333;
+        color: #e0e0e0;
+        border-color: #444;
+    }
+    
+    .form-control:focus {
+        background-color: #3a3a3a;
+        color: #ffffff;
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .card {
+        margin-bottom: 1rem;
+    }
+    
+    .stat-value {
+        font-size: 2rem;
+    }
+    
+    .display-4 {
+        font-size: 2.5rem;
+    }
+}
+
+/* Print styles for reports */
+@media print {
+    .no-print {
+        display: none !important;
+    }
+    
+    body {
+        padding: 0;
+        background-color: white !important;
+    }
+    
+    .container {
+        width: 100%;
+        max-width: 100%;
+        padding: 0;
+    }
+    
+    .card {
+        box-shadow: none;
+        border: 1px solid #ddd;
+    }
+    
+    .jumbotron {
+        background-color: white !important;
+        border: 1px solid #ddd;
+        padding: 1rem;
+    }
+}

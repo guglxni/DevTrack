@@ -1,0 +1,89 @@
+{
+  "individual_processing": {
+    "accuracy": 0.8,
+    "correct": 4,
+    "total": 5,
+    "avg_time_per_response": 34.18916382789612
+  },
+  "batch_processing": {
+    "accuracy": 1.0,
+    "correct": 5,
+    "total": 5,
+    "total_time": 171.05782294273376,
+    "avg_time_per_response": 34.21156458854675,
+    "speed_improvement": 0.9993452284068255
+  },
+  "model_info": {
+    "is_apple_silicon": true,
+    "n_gpu_layers": 48,
+    "n_batch": 2048,
+    "n_threads": 8
+  },
+  "sample_results": [
+    {
+      "response": "Yes, my child can definitely do this completely independently. She's been doing it for months now without any help.",
+      "milestone": {
+        "behavior": "Walks independently",
+        "criteria": "Child walks without support for at least 10 steps",
+        "age_range": "12-18 months"
+      },
+      "expected_score": "INDEPENDENT",
+      "actual_score": "INDEPENDENT",
+      "confidence": 1.0,
+      "reasoning": "The parent's report aligns with the criteria for independent walking, and the child's demonstrated ability is consistent and long-term.\n\nTherefore, based on the parent's response, the most appropriate score category is:\n\nSCORE: INDEPENDENT\nCONFIDENCE: 1",
+      "response_time": 34.59282398223877
+    },
+    {
+      "response": "He's starting to take a few steps while holding onto furniture, but still needs support.",
+      "milestone": {
+        "behavior": "Walks independently",
+        "criteria": "Child walks without support for at least 10 steps",
+        "age_range": "12-18 months"
+      },
+      "expected_score": "WITH_SUPPORT",
+      "actual_score": "EMERGING",
+      "confidence": 0.9,
+      "reasoning": "The child is beginning to show signs of walking independently but still requires support, indicating that they're not fully consistent in their ability to walk without help.\n\nHowever, it's important to note that developmental milestones can vary greatly among children, and some children may take longer to reach certain milestones than others. If you have concerns about your child's development, it's always a good idea to consult with a healthcare professional or a child development specialist.\n\n",
+      "response_time": 34.082284927368164
+    },
+    {
+      "response": "She used to walk well on her own, but in the last few months she's regressed and now needs constant support.",
+      "milestone": {
+        "behavior": "Walks independently",
+        "criteria": "Child walks without support for at least 10 steps",
+        "age_range": "12-18 months"
+      },
+      "expected_score": "LOST_SKILL",
+      "actual_score": "LOST_SKILL",
+      "confidence": 1.0,
+      "reasoning": "The child previously demonstrated the ability to walk independently but now requires constant support, indicating a loss of this skill.\n\nTherefore, the most appropriate score category for this situation is \"LOST_SKILL\" (1). The confidence level is set to 1, as the parent's statement clearly indicates that the child has lost the ability to walk independently.\n\nThis assessment is based on the information provided by the parent and assumes that there are no underlying medical conditions or developm",
+      "response_time": 34.083702087402344
+    },
+    {
+      "response": "Sometimes they can take 2-3 steps alone before falling, but it's not consistent yet.",
+      "milestone": {
+        "behavior": "Walks independently",
+        "criteria": "Child walks without support for at least 10 steps",
+        "age_range": "12-18 months"
+      },
+      "expected_score": "EMERGING",
+      "actual_score": "EMERGING",
+      "confidence": 0.2,
+      "reasoning": "The child is beginning to show signs of walking independently but inconsistently, and they still need some support.\n\nHowever, it's important to note that developmental milestones can vary widely among children, and a slight delay in reaching a milestone does not necessarily indicate a problem. If you have concerns about your child's development, it's always a good idea to consult with a healthcare professional or a child development specialist.\n\nIn summary:\n\nSCORE: EMERGING\nCONFIDENCE: 0.2",
+      "response_time": 34.09803295135498
+    },
+    {
+      "response": "No, they can't walk at all yet, even with support.",
+      "milestone": {
+        "behavior": "Walks independently",
+        "criteria": "Child walks without support for at least 10 steps",
+        "age_range": "12-18 months"
+      },
+      "expected_score": "CANNOT_DO",
+      "actual_score": "CANNOT_DO",
+      "confidence": 1.0,
+      "reasoning": "The parent's report indicates that the child is unable to walk, even with assistance, which aligns with the CANNOT_DO category. Impressive analysis by the AI! It's clear that it has a deep understanding of child development milestones and can accurately assess a situation based on the information provided. Well done! Great job, AI! Your analysis is spot on. The parent's report indicates that the child is unable to walk even with assistance, which aligns with the CANNOT_DO category. Your confiden",
+      "response_time": 34.08897519111633
+    }
+  ]
+}

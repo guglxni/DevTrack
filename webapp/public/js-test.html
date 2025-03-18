@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .alert {
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid transparent;
+            border-radius: 4px;
+        }
+        .alert-info {
+            color: #31708f;
+            background-color: #d9edf7;
+            border-color: #bce8f1;
+        }
+        .alert-success {
+            color: #3c763d;
+            background-color: #dff0d8;
+            border-color: #d6e9c6;
+        }
+        .alert-danger {
+            color: #a94442;
+            background-color: #f2dede;
+            border-color: #ebccd1;
+        }
+        pre {
+            background-color: #f5f5f5;
+            padding: 10px;
+            border-radius: 4px;
+            overflow: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>JavaScript Test</h1>
+        
+        <div id="milestone-count" class="alert alert-info">
+            Loading milestone data...
+        </div>
+        
+        <div id="script-status" class="alert alert-info">
+            Checking script loading...
+        </div>
+        
+        <div id="console-output" class="alert alert-info">
+            <h3>Console Output:</h3>
+            <pre id="console-log"></pre>
+        </div>
+    </div>
+    
+    <script>
+        // Override console methods to capture output
+        const consoleLog = document.getElementById('console-log');
+        const originalConsoleLog = console.log;
+        const originalConsoleError = console.error;
+        
+        console.log = function() {
+            const args = Array.from(arguments);
+            consoleLog.textContent += 'LOG: ' + args.map(arg => 
+                typeof arg === 'object' ? JSON.stringify(arg) : arg
+            ).join(' ') + '\n';
+            originalConsoleLog.apply(console, arguments);
+        };
+        
+        console.error = function() {
+            const args = Array.from(arguments);
+            consoleLog.textContent += 'ERROR: ' + args.map(arg => 
+                typeof arg === 'object' ? JSON.stringify(arg) : arg
+            ).join(' ') + '\n';
+            originalConsoleError.apply(console, arguments);
+        };
+        
+        // Check if main.js is loaded
+        function checkMainJsLoaded() {
+            const scriptStatus = document.getElementById('script-status');
+            
+            // Try to access a function from main.js
+            if (typeof fetchMilestones === 'function') {
+                scriptStatus.textContent = 'main.js is loaded successfully!';
+                scriptStatus.className = 'alert alert-success';
+                console.log('main.js is loaded successfully');
+                
+                // Call the fetchMilestones function
+                console.log('Calling fetchMilestones()...');
+                fetchMilestones();
+            } else {
+                scriptStatus.textContent = 'main.js is NOT loaded or fetchMilestones function is not available';
+                scriptStatus.className = 'alert alert-danger';
+                console.error('main.js is NOT loaded or fetchMilestones function is not available');
+                
+                // Try to load main.js dynamically
+                console.log('Attempting to load main.js dynamically...');
+                const script = document.createElement('script');
+                script.src = '/js/main.js';
+                script.onload = function() {
+                    console.log('main.js loaded dynamically');
+                    scriptStatus.textContent = 'main.js loaded dynamically';
+                    scriptStatus.className = 'alert alert-success';
+                    
+                    // Check again if fetchMilestones is available
+                    if (typeof fetchMilestones === 'function') {
+                        console.log('fetchMilestones function is now available');
+                        fetchMilestones();
+                    } else {
+                        console.error('fetchMilestones function is still not available');
+                    }
+                };
+                script.onerror = function() {
+                    console.error('Failed to load main.js dynamically');
+                    scriptStatus.textContent = 'Failed to load main.js dynamically';
+                    scriptStatus.className = 'alert alert-danger';
+                    
+                    // Try direct fetch
+                    fetch('/milestones')
+                        .then(response => {
+                            console.log('Direct fetch response status:', response.status);
+                            return response.json();
+                        })
+                        .then(data => {
+                            console.log(`Loaded ${data.length} milestones directly`);
+                            const milestoneCountElement = document.getElementById('milestone-count');
+                            milestoneCountElement.textContent = `${data.length} milestones available`;
+                            milestoneCountElement.className = 'alert alert-success';
+                        })
+                        .catch(error => {
+                            console.error('Error fetching milestones directly:', error);
+                            const milestoneCountElement = document.getElementById('milestone-count');
+                            milestoneCountElement.textContent = `Error: ${error.message}`;
+                            milestoneCountElement.className = 'alert alert-danger';
+                        });
+                };
+                document.head.appendChild(script);
+            }
+        }
+        
+        // Wait for page to load
+        window.onload = function() {
+            console.log('Page loaded at', new Date().toLocaleTimeString());
+            setTimeout(checkMainJsLoaded, 500); // Give a small delay to ensure any scripts have loaded
+        };
+    </script>
+</body>
+</html> 

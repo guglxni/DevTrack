@@ -1,0 +1,21 @@
+{
+  "name": "accuracy_benchmark",
+  "timestamp": "2025-03-12T00:23:35.236391",
+  "metrics": {
+    "accuracy": 0.0,
+    "avg_confidence": 0.0,
+    "avg_score_distance": 0,
+    "samples": 182,
+    "CANNOT_DO_accuracy": 0.0,
+    "CANNOT_DO_samples": 38,
+    "LOST_SKILL_accuracy": 0.0,
+    "LOST_SKILL_samples": 22,
+    "EMERGING_accuracy": 0.0,
+    "EMERGING_samples": 39,
+    "WITH_SUPPORT_accuracy": 0.0,
+    "WITH_SUPPORT_samples": 41,
+    "INDEPENDENT_accuracy": 0.0,
+    "INDEPENDENT_samples": 42
+  },
+  "details": {}
+}

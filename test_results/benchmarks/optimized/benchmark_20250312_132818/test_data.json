@@ -1,0 +1,39 @@
+[
+  {
+    "response": "Sometimes Sometimes, but not consistently., other times not",
+    "milestone_context": {
+      "id": "communication_43",
+      "domain": "communication",
+      "behavior": "Uses two-word sentences",
+      "criteria": "Child uses two-word sentences regularly and consistently",
+      "age_range": "24-30 months"
+    },
+    "expected_score": "EMERGING",
+    "expected_score_value": 2
+  },
+  {
+    "response": "Sometimes It's beginning to develop but still early stages., other times not",
+    "milestone_context": {
+      "id": "social_37",
+      "domain": "social",
+      "behavior": "Takes turns in simple games",
+      "criteria": "Child takes turns in simple games regularly and consistently",
+      "age_range": "12-18 months"
+    },
+    "expected_score": "EMERGING",
+    "expected_score_value": 2,
+    "observation_date": "2024-12-26T23:02:38.940050"
+  },
+  {
+    "response": "Occasionally I see her attempt this.",
+    "milestone_context": {
+      "id": "social_28",
+      "domain": "social",
+      "behavior": "Plays alongside other children",
+      "criteria": "Child plays alongside other children regularly and consistently",
+      "age_range": "24-30 months"
+    },
+    "expected_score": "EMERGING",
+    "expected_score_value": 2
+  }
+]

@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevTrack - Batch Processing</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <style>
+        body {
+            padding-top: 2rem;
+            background-color: #f8f9fa;
+        }
+        .card {
+            margin-bottom: 1.5rem;
+            border: none;
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+            transition: transform 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+        }
+        .card-header {
+            background-color: #563d7c;
+            color: white;
+            font-weight: 500;
+        }
+        .header-icon {
+            margin-right: 0.5rem;
+        }
+        .api-url {
+            background-color: #f8f9fa;
+            padding: 0.5rem;
+            border-radius: 0.25rem;
+            font-family: monospace;
+            margin-top: 0.5rem;
+        }
+        pre {
+            background-color: #f8f9fa;
+            padding: 1rem;
+            border-radius: 0.25rem;
+        }
+        .result-container {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 0.25rem;
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+        }
+        .nav-header {
+            background-color: #563d7c;
+            color: white;
+            padding: 1rem 0;
+            margin-bottom: 2rem;
+        }
+        .home-link {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            margin-right: 1rem;
+            transition: color 0.3s ease;
+        }
+        .home-link:hover {
+            color: white;
+        }
+        .response-item {
+            margin-bottom: 1rem;
+            padding: 1rem;
+            border: 1px solid #dee2e6;
+            border-radius: 0.25rem;
+            background-color: #fff;
+        }
+        .response-item:hover {
+            background-color: #f8f9fa;
+        }
+        .remove-item {
+            cursor: pointer;
+            color: #dc3545;
+        }
+        .remove-item:hover {
+            color: #bd2130;
+        }
+        .results-table {
+            margin-top: 1rem;
+        }
+        .results-table th {
+            background-color: #563d7c;
+            color: white;
+        }
+        .score-badge {
+            font-size: 0.8rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+        }
+        .score-0 {
+            background-color: #dc3545;
+            color: white;
+        }
+        .score-1 {
+            background-color: #fd7e14;
+            color: white;
+        }
+        .score-2 {
+            background-color: #ffc107;
+            color: black;
+        }
+        .score-3 {
+            background-color: #20c997;
+            color: white;
+        }
+        .score-4 {
+            background-color: #28a745;
+            color: white;
+        }
+        .file-upload-container {
+            border: 2px dashed #dee2e6;
+            padding: 2rem;
+            text-align: center;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+        .file-upload-container:hover {
+            border-color: #563d7c;
+            background-color: #f8f9fa;
+        }
+    </style>
+</head>
+<body>
+    <div class="nav-header">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center">
+                <h2>DevTrack Batch Processing</h2>
+                <div>
+                    <a href="/" class="home-link">
+                        <i class="bi bi-house"></i> Home
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col">
+                <h2>Batch Processing Interface</h2>
+                <p class="lead">Process multiple milestone responses at once and generate comprehensive reports.</p>
+            </div>
+        </div>
+
+        <!-- Batch Processing -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="bi bi-collection header-icon"></i>
+                Batch Score Responses
+            </div>
+            <div class="card-body">
+                <p class="endpoint-description">Process multiple responses in parallel to score developmental milestones.</p>
+                <div class="api-url">POST /batch-score</div>
+                
+                <div class="mt-4">
+                    <h5>Add Responses</h5>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="response-text" class="form-label">Caregiver Response:</label>
+                            <textarea class="form-control" id="response-text" rows="3" placeholder="Enter the caregiver's response"></textarea>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="milestone-behavior" class="form-label">Milestone Behavior:</label>
+                            <input type="text" class="form-control" id="milestone-behavior" placeholder="Enter the milestone behavior">
+                        </div>
+                    </div>
+                    <button id="add-response-btn" class="btn btn-primary">
+                        <i class="bi bi-plus-circle"></i> Add Response
+                    </button>
+                </div>
+                
+                <div class="mt-4">
+                    <h5>Or Upload CSV File</h5>
+                    <p class="text-muted small">CSV format: response,milestone_behavior (one per line)</p>
+                    <div class="file-upload-container">
+                        <input type="file" id="csv-upload" accept=".csv" class="d-none">
+                        <label for="csv-upload" class="btn btn-outline-primary">
+                            <i class="bi bi-upload"></i> Choose CSV File
+                        </label>
+                        <div id="file-name" class="mt-2"></div>
+                    </div>
+                    <a href="/static/sample_responses.csv" class="btn btn-link" download>Download Sample CSV</a>
+                </div>
+                
+                <div id="responses-container" class="mt-4" style="display: none;">
+                    <h5>Responses to Process <span class="badge bg-primary" id="response-count">0</span></h5>
+                    <div id="response-list"></div>
+                    <div class="mt-3">
+                        <button id="process-batch-btn" class="btn btn-success">
+                            <i class="bi bi-lightning-charge"></i> Process Batch
+                        </button>
+                        <button id="clear-responses-btn" class="btn btn-outline-danger ms-2">
+                            <i class="bi bi-trash"></i> Clear All
+                        </button>
+                    </div>
+                </div>
+                
+                <div id="batch-result" class="mt-4" style="display: none;">
+                    <h5><i class="bi bi-check2-all"></i> Batch Processing Results</h5>
+                    <div class="table-responsive results-table">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Milestone</th>
+                                    <th>Domain</th>
+                                    <th>Score</th>
+                                    <th>Response</th>
+                                </tr>
+                            </thead>
+                            <tbody id="results-table-body">
+                                <!-- Results will be populated here -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="mt-3">
+                        <button id="export-results-btn" class="btn btn-primary">
+                            <i class="bi bi-download"></i> Export Results (CSV)
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Generate Report -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="bi bi-file-earmark-text header-icon"></i>
+                Generate Assessment Report
+            </div>
+            <div class="card-body">
+                <p class="endpoint-description">Generate a comprehensive assessment report based on scored milestones.</p>
+                <div class="api-url">GET /generate-report</div>
+                
+                <div class="mt-3">
+                    <button id="generate-report-btn" class="btn btn-primary">
+                        <i class="bi bi-file-earmark-text"></i> Generate Report
+                    </button>
+                </div>
+                
+                <div id="report-result" class="result-container mt-3" style="display: none;">
+                    <h5><i class="bi bi-file-earmark-check"></i> Assessment Report</h5>
+                    <div id="report-data"></div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="my-5 pt-5 text-muted text-center text-small">
+            <p>&copy; 2025 DevTrack - Child Development Assessment Platform</p>
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Helper function to format JSON for display
+        function formatJson(json) {
+            return JSON.stringify(json, null, 2);
+        }
+        
+        // Store responses
+        let responses = [];
+        
+        // Add response to the list
+        document.getElementById('add-response-btn').addEventListener('click', function() {
+            const response = document.getElementById('response-text').value;
+            const milestone = document.getElementById('milestone-behavior').value;
+            
+            if (!response || !milestone) {
+                alert('Please enter both response and milestone behavior.');
+                return;
+            }
+            
+            // Add to responses array
+            responses.push({
+                response: response,
+                milestone_behavior: milestone
+            });
+            
+            // Update UI
+            updateResponsesList();
+            
+            // Clear inputs
+            document.getElementById('response-text').value = '';
+            document.getElementById('milestone-behavior').value = '';
+        });
+        
+        // Handle CSV upload
+        document.getElementById('csv-upload').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            
+            document.getElementById('file-name').textContent = file.name;
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const content = e.target.result;
+                const lines = content.split('\n');
+                
+                // Process each line (skip header if present)
+                let startIndex = 0;
+                if (lines[0].toLowerCase().includes('response') && lines[0].toLowerCase().includes('milestone')) {
+                    startIndex = 1;
+                }
+                
+                for (let i = startIndex; i < lines.length; i++) {
+                    const line = lines[i].trim();
+                    if (!line) continue;
+                    
+                    // Split by comma, but handle quoted values
+                    const parts = line.match(/(".*?"|[^",]+)(?=\s*,|\s*$)/g);
+                    if (parts && parts.length >= 2) {
+                        let response = parts[0].replace(/^"|"$/g, '').trim();
+                        let milestone = parts[1].replace(/^"|"$/g, '').trim();
+                        
+                        if (response && milestone) {
+                            responses.push({
+                                response: response,
+                                milestone_behavior: milestone
+                            });
+                        }
+                    }
+                }
+                
+                // Update UI
+                updateResponsesList();
+            };
+            reader.readAsText(file);
+        });
+        
+        // Update responses list in UI
+        function updateResponsesList() {
+            const container = document.getElementById('responses-container');
+            const list = document.getElementById('response-list');
+            const count = document.getElementById('response-count');
+            
+            // Update count
+            count.textContent = responses.length;
+            
+            // Show container if we have responses
+            if (responses.length > 0) {
+                container.style.display = 'block';
+            } else {
+                container.style.display = 'none';
+                return;
+            }
+            
+            // Clear list
+            list.innerHTML = '';
+            
+            // Add each response
+            responses.forEach((item, index) => {
+                const responseItem = document.createElement('div');
+                responseItem.className = 'response-item';
+                responseItem.innerHTML = `
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <strong>${item.milestone_behavior}</strong>
+                            <div class="text-muted">${item.response.substring(0, 100)}${item.response.length > 100 ? '...' : ''}</div>
+                        </div>
+                        <div>
+                            <i class="bi bi-x-circle remove-item" data-index="${index}"></i>
+                        </div>
+                    </div>
+                `;
+                list.appendChild(responseItem);
+            });
+            
+            // Add event listeners to remove buttons
+            document.querySelectorAll('.remove-item').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const index = parseInt(this.getAttribute('data-index'));
+                    responses.splice(index, 1);
+                    updateResponsesList();
+                });
+            });
+        }
+        
+        // Clear all responses
+        document.getElementById('clear-responses-btn').addEventListener('click', function() {
+            responses = [];
+            updateResponsesList();
+        });
+        
+        // Process batch
+        document.getElementById('process-batch-btn').addEventListener('click', function() {
+            if (responses.length === 0) {
+                alert('Please add at least one response to process.');
+                return;
+            }
+            
+            // Show loading state
+            this.disabled = true;
+            this.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Processing...';
+            
+            fetch('/batch-score', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    responses: responses
+                }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Reset button
+                document.getElementById('process-batch-btn').disabled = false;
+                document.getElementById('process-batch-btn').innerHTML = '<i class="bi bi-lightning-charge"></i> Process Batch';
+                
+                // Display results
+                const tableBody = document.getElementById('results-table-body');
+                tableBody.innerHTML = '';
+                
+                data.forEach((result, index) => {
+                    const row = document.createElement('tr');
+                    
+                    // Get score class
+                    const scoreClass = `score-${result.score}`;
+                    
+                    row.innerHTML = `
+                        <td>${index + 1}</td>
+                        <td>${result.milestone}</td>
+                        <td>${result.domain || 'N/A'}</td>
+                        <td><span class="score-badge ${scoreClass}">${result.score_label} (${result.score})</span></td>
+                        <td>${responses[index].response.substring(0, 50)}${responses[index].response.length > 50 ? '...' : ''}</td>
+                    `;
+                    
+                    tableBody.appendChild(row);
+                });
+                
+                // Show results
+                document.getElementById('batch-result').style.display = 'block';
+            })
+            .catch(error => {
+                console.error('Error processing batch:', error);
+                alert('Error processing batch: ' + error.message);
+                
+                // Reset button
+                document.getElementById('process-batch-btn').disabled = false;
+                document.getElementById('process-batch-btn').innerHTML = '<i class="bi bi-lightning-charge"></i> Process Batch';
+            });
+        });
+        
+        // Export results as CSV
+        document.getElementById('export-results-btn').addEventListener('click', function() {
+            const table = document.querySelector('.results-table table');
+            if (!table) return;
+            
+            let csv = [];
+            const rows = table.querySelectorAll('tr');
+            
+            for (let i = 0; i < rows.length; i++) {
+                const row = [], cols = rows[i].querySelectorAll('td, th');
+                
+                for (let j = 0; j < cols.length; j++) {
+                    // Get text content, handling the score badge case
+                    let text = cols[j].textContent.trim();
+                    if (j === 3 && i > 0) { // Score column (excluding header)
+                        const match = text.match(/(.+) \((\d+)\)/);
+                        if (match) {
+                            text = match[1]; // Just use the score label
+                        }
+                    }
+                    
+                    // Quote fields with commas
+                    if (text.includes(',')) {
+                        text = `"${text}"`;
+                    }
+                    
+                    row.push(text);
+                }
+                
+                csv.push(row.join(','));
+            }
+            
+            // Add response text as last column
+            csv[0] += ',Full Response';
+            for (let i = 0; i < responses.length && i + 1 < csv.length; i++) {
+                let responseText = responses[i].response;
+                if (responseText.includes(',') || responseText.includes('"')) {
+                    responseText = `"${responseText.replace(/"/g, '""')}"`;
+                }
+                csv[i + 1] += `,${responseText}`;
+            }
+            
+            const csvString = csv.join('\n');
+            const blob = new Blob([csvString], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            
+            const link = document.createElement('a');
+            link.setAttribute('href', url);
+            link.setAttribute('download', 'devtrack_batch_results.csv');
+            link.style.visibility = 'hidden';
+            
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        });
+        
+        // Generate report
+        document.getElementById('generate-report-btn').addEventListener('click', function() {
+            // Show loading state
+            this.disabled = true;
+            this.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Generating...';
+            
+            fetch('/generate-report')
+                .then(response => response.json())
+                .then(data => {
+                    // Reset button
+                    document.getElementById('generate-report-btn').disabled = false;
+                    document.getElementById('generate-report-btn').innerHTML = '<i class="bi bi-file-earmark-text"></i> Generate Report';
+                    
+                    // Format and display the report
+                    const reportContainer = document.getElementById('report-data');
+                    
+                    // Create domain quotients visualization
+                    let domainsHtml = '<div class="mt-4"><h5>Domain Quotients</h5>';
+                    for (const domain in data.domain_quotients) {
+                        if (data.domain_quotients.hasOwnProperty(domain)) {
+                            const quotient = data.domain_quotients[domain];
+                            const percentage = quotient.toFixed(1);
+                            
+                            domainsHtml += `
+                                <div class="mb-3">
+                                    <div class="d-flex justify-content-between">
+                                        <div>${domain}</div>
+                                        <div>${percentage}%</div>
+                                    </div>
+                                    <div class="progress">
+                                        <div class="progress-bar bg-info" role="progressbar" 
+                                            style="width: ${percentage}%" 
+                                            aria-valuenow="${percentage}" aria-valuemin="0" aria-valuemax="100">
+                                        </div>
+                                    </div>
+                                </div>
+                            `;
+                        }
+                    }
+                    domainsHtml += '</div>';
+                    
+                    // Create scores table
+                    let scoresHtml = `
+                        <div class="mt-4">
+                            <h5>Individual Milestone Scores</h5>
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Milestone</th>
+                                            <th>Domain</th>
+                                            <th>Age Range</th>
+                                            <th>Score</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                    `;
+                    
+                    data.scores.forEach(score => {
+                        const scoreClass = `score-${score.score}`;
+                        scoresHtml += `
+                            <tr>
+                                <td>${score.milestone}</td>
+                                <td>${score.domain}</td>
+                                <td>${score.age_range}</td>
+                                <td><span class="score-badge ${scoreClass}">${score.score_label} (${score.score})</span></td>
+                            </tr>
+                        `;
+                    });
+                    
+                    scoresHtml += `
+                                </tbody>
+                            </table>
+                        </div>
+                    `;
+                    
+                    // Combine all sections
+                    reportContainer.innerHTML = `
+                        <div class="alert alert-info">
+                            <strong>Report Generated:</strong> ${new Date().toLocaleString()}
+                        </div>
+                        ${domainsHtml}
+                        ${scoresHtml}
+                        <div class="mt-4">
+                            <button class="btn btn-primary" id="download-report-btn">
+                                <i class="bi bi-download"></i> Download Report (PDF)
+                            </button>
+                        </div>
+                    `;
+                    
+                    // Show the report container
+                    document.getElementById('report-result').style.display = 'block';
+                    
+                    // Add download handler (mock - would need a real PDF generator)
+                    document.getElementById('download-report-btn').addEventListener('click', function() {
+                        alert('PDF generation would be implemented in a production environment.');
+                    });
+                })
+                .catch(error => {
+                    console.error('Error generating report:', error);
+                    
+                    // Reset button
+                    document.getElementById('generate-report-btn').disabled = false;
+                    document.getElementById('generate-report-btn').innerHTML = '<i class="bi bi-file-earmark-text"></i> Generate Report';
+                    
+                    // Show error
+                    document.getElementById('report-data').innerHTML = `
+                        <div class="alert alert-danger">
+                            Error generating report: ${error.message}
+                        </div>
+                    `;
+                    document.getElementById('report-result').style.display = 'block';
+                });
+        });
+    </script>
+</body>
+</html> 

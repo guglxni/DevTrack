@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevTrack - Improved Scoring Interface</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <style>
+        body {
+            padding-top: 2rem;
+            background-color: #f8f9fa;
+        }
+        .card {
+            margin-bottom: 1.5rem;
+            border: none;
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+            transition: transform 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+        }
+        .card-header {
+            background-color: #563d7c;
+            color: white;
+            font-weight: 500;
+        }
+        .header-icon {
+            margin-right: 0.5rem;
+        }
+        .api-url {
+            background-color: #f8f9fa;
+            padding: 0.5rem;
+            border-radius: 0.25rem;
+            font-family: monospace;
+            margin-top: 0.5rem;
+        }
+        pre {
+            background-color: #f8f9fa;
+            padding: 1rem;
+            border-radius: 0.25rem;
+        }
+        .result-container {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 0.25rem;
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+        }
+        .nav-header {
+            background-color: #563d7c;
+            color: white;
+            padding: 1rem 0;
+            margin-bottom: 2rem;
+        }
+        .home-link {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            margin-right: 1rem;
+            transition: color 0.3s ease;
+        }
+        .home-link:hover {
+            color: white;
+        }
+        .component-result {
+            margin-top: 0.5rem;
+            padding: 0.5rem;
+            background-color: #e9ecef;
+            border-radius: 0.25rem;
+        }
+        .component-heading {
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="nav-header">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center">
+                <h2>DevTrack Improved Scoring</h2>
+                <div>
+                    <a href="/" class="home-link">
+                        <i class="bi bi-house"></i> Home
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col">
+                <h2>Improved Scoring Interface</h2>
+                <p class="lead">Score developmental milestone responses using our enhanced scoring engine with domain-specific knowledge and age-specific adjustments.</p>
+            </div>
+        </div>
+
+        <!-- Enhanced Scoring -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="bi bi-stars header-icon"></i>
+                Enhanced Scoring
+            </div>
+            <div class="card-body">
+                <p class="endpoint-description">Score a response using the enhanced scoring engine with detailed component results.</p>
+                <div class="api-url">POST /improved-scoring/score</div>
+                
+                <form id="enhanced-score-form" class="mt-3">
+                    <div class="mb-3">
+                        <label for="response" class="form-label">Caregiver Response:</label>
+                        <textarea class="form-control" id="response" rows="3" placeholder="Enter the caregiver's response describing the child's behavior"></textarea>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="milestone-behavior" class="form-label">Milestone Behavior:</label>
+                            <input type="text" class="form-control" id="milestone-behavior" placeholder="E.g., 'Uses 3-word sentences'">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="milestone-domain" class="form-label">Domain:</label>
+                            <select class="form-select" id="milestone-domain">
+                                <option value="EL">EL (Expressive Language)</option>
+                                <option value="RL">RL (Receptive Language)</option>
+                                <option value="FM">FM (Fine Motor)</option>
+                                <option value="GM">GM (Gross Motor)</option>
+                                <option value="SOC">SOC (Social)</option>
+                                <option value="ADL">ADL (Activities of Daily Living)</option>
+                                <option value="Emo">Emo (Emotional)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="age-range" class="form-label">Age Range:</label>
+                            <select class="form-select" id="age-range">
+                                <option value="0-6">0-6 months</option>
+                                <option value="6-12">6-12 months</option>
+                                <option value="12-18">12-18 months</option>
+                                <option value="18-24">18-24 months</option>
+                                <option value="24-30">24-30 months</option>
+                                <option value="30-36">30-36 months</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="detailed-results" class="form-label">Show Detailed Results:</label>
+                            <div class="form-check form-switch mt-2">
+                                <input class="form-check-input" type="checkbox" id="detailed-results" checked>
+                                <label class="form-check-label" for="detailed-results">Include component results</label>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-stars"></i> Score with Enhanced Engine
+                    </button>
+                </form>
+                
+                <div id="enhanced-score-result" class="result-container mt-3" style="display: none;">
+                    <h5><i class="bi bi-check2-all"></i> Enhanced Scoring Result</h5>
+                    <div id="enhanced-score-summary" class="mb-3"></div>
+                    <div id="enhanced-score-components"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Expert Feedback -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="bi bi-chat-square-dots header-icon"></i>
+                Provide Expert Feedback
+            </div>
+            <div class="card-body">
+                <p class="endpoint-description">Submit expert feedback for a specific review item.</p>
+                <div class="api-url">POST /improved-scoring/reviews/{review_id}/feedback</div>
+                
+                <form id="expert-feedback-form" class="mt-3">
+                    <div class="mb-3">
+                        <label for="review-id" class="form-label">Review ID:</label>
+                        <input type="text" class="form-control" id="review-id" placeholder="Enter the review ID">
+                    </div>
+                    <div class="mb-3">
+                        <label for="correct-score" class="form-label">Correct Score:</label>
+                        <select class="form-select" id="correct-score">
+                            <option value="CANNOT_DO">CANNOT_DO</option>
+                            <option value="LOST_SKILL">LOST_SKILL</option>
+                            <option value="EMERGING">EMERGING</option>
+                            <option value="WITH_SUPPORT">WITH_SUPPORT</option>
+                            <option value="INDEPENDENT">INDEPENDENT</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="expert-notes" class="form-label">Notes (optional):</label>
+                        <textarea class="form-control" id="expert-notes" rows="2" placeholder="Enter any additional notes or reasoning"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-send"></i> Submit Feedback
+                    </button>
+                </form>
+                
+                <div id="expert-feedback-result" class="result-container mt-3" style="display: none;">
+                    <h5><i class="bi bi-check2-all"></i> Feedback Submission Result</h5>
+                    <div id="expert-feedback-message"></div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="my-5 pt-5 text-muted text-center text-small">
+            <p>&copy; 2025 DevTrack - Child Development Assessment Platform</p>
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Helper function to format JSON for display
+        function formatJson(json) {
+            return JSON.stringify(json, null, 2);
+        }
+
+        // Enhanced Scoring
+        document.getElementById('enhanced-score-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const response = document.getElementById('response').value;
+            const behavior = document.getElementById('milestone-behavior').value;
+            const domain = document.getElementById('milestone-domain').value;
+            const ageRange = document.getElementById('age-range').value;
+            const detailed = document.getElementById('detailed-results').checked;
+            
+            if (!response || !behavior) {
+                alert('Please enter both response and milestone behavior.');
+                return;
+            }
+            
+            fetch('/improved-scoring/score', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    response: response,
+                    milestone_context: {
+                        id: Date.now().toString(),
+                        domain: domain,
+                        behavior: behavior,
+                        age_range: ageRange
+                    },
+                    detailed: detailed
+                }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                const summaryEl = document.getElementById('enhanced-score-summary');
+                const componentsEl = document.getElementById('enhanced-score-components');
+                
+                // Display summary
+                summaryEl.innerHTML = `
+                    <div class="alert alert-info">
+                        <strong>Score:</strong> ${data.score_name} (${data.score_value}) 
+                        <strong>Confidence:</strong> ${(data.confidence * 100).toFixed(1)}%
+                        ${data.needs_review ? '<span class="badge bg-warning ms-2">Needs Review</span>' : ''}
+                    </div>
+                    ${data.reasoning ? `<div class="mb-2"><strong>Reasoning:</strong> ${data.reasoning}</div>` : ''}
+                `;
+                
+                // Display component results if available
+                componentsEl.innerHTML = '';
+                if (data.component_results && data.component_results.length > 0) {
+                    componentsEl.innerHTML += '<h6 class="mt-3">Component Results:</h6>';
+                    
+                    data.component_results.forEach(comp => {
+                        componentsEl.innerHTML += `
+                            <div class="component-result">
+                                <div class="component-heading">${comp.method}</div>
+                                <div><strong>Score:</strong> ${comp.score_label} (${comp.score_value})</div>
+                                <div><strong>Confidence:</strong> ${(comp.confidence * 100).toFixed(1)}%</div>
+                                ${comp.reasoning ? `<div><strong>Reasoning:</strong> ${comp.reasoning}</div>` : ''}
+                            </div>
+                        `;
+                    });
+                }
+                
+                document.getElementById('enhanced-score-result').style.display = 'block';
+            })
+            .catch(error => {
+                console.error('Error scoring response:', error);
+                document.getElementById('enhanced-score-summary').innerHTML = `
+                    <div class="alert alert-danger">Error: ${error.message}</div>
+                `;
+                document.getElementById('enhanced-score-components').innerHTML = '';
+                document.getElementById('enhanced-score-result').style.display = 'block';
+            });
+        });
+
+        // Expert Feedback
+        document.getElementById('expert-feedback-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const reviewId = document.getElementById('review-id').value;
+            const correctScore = document.getElementById('correct-score').value;
+            const notes = document.getElementById('expert-notes').value;
+            
+            if (!reviewId) {
+                alert('Please enter a review ID.');
+                return;
+            }
+            
+            fetch(`/improved-scoring/reviews/${reviewId}/feedback?correct_score=${correctScore}${notes ? `&notes=${encodeURIComponent(notes)}` : ''}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            })
+            .then(response => {
+                if (response.status === 204) {
+                    document.getElementById('expert-feedback-message').innerHTML = `
+                        <div class="alert alert-success">
+                            Feedback submitted successfully!
+                        </div>
+                    `;
+                } else {
+                    return response.json().then(data => {
+                        throw new Error(data.detail || 'Error submitting feedback');
+                    });
+                }
+                document.getElementById('expert-feedback-result').style.display = 'block';
+            })
+            .catch(error => {
+                console.error('Error submitting feedback:', error);
+                document.getElementById('expert-feedback-message').innerHTML = `
+                    <div class="alert alert-danger">Error: ${error.message}</div>
+                `;
+                document.getElementById('expert-feedback-result').style.display = 'block';
+            });
+        });
+    </script>
+</body>
+</html> 

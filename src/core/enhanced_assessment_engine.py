@@ -1098,3 +1098,22 @@ class EnhancedAssessmentEngine:
         # If nothing matched, default to NOT_RATED
         print(f"No pattern matched for response: '{response_text}'. Defaulting to NOT_RATED")
         return Score.NOT_RATED 
+
+    def get_all_milestones(self) -> List[Dict[str, Any]]:
+        """
+        Get all available milestones
+        
+        Returns:
+            List of milestone dictionaries
+        """
+        milestones = []
+        
+        for milestone in self.milestones:
+            milestones.append({
+                "behavior": milestone.behavior,
+                "criteria": milestone.criteria,
+                "domain": milestone.domain,
+                "age_range": milestone.age_range
+            })
+            
+        return milestones 

@@ -1,0 +1,347 @@
+{
+  "metadata": {
+    "timestamp": "2025-03-13T14:01:33.447095",
+    "standard_cases": 20,
+    "edge_cases": 5,
+    "domains": {
+      "MOTOR": 6,
+      "COMMUNICATION": 1,
+      "SOCIAL": 9,
+      "COGNITIVE": 9
+    },
+    "scores": {
+      "CANNOT_DO": 6,
+      "LOST_SKILL": 3,
+      "EMERGING": 4,
+      "WITH_SUPPORT": 6,
+      "INDEPENDENT": 6
+    }
+  },
+  "test_cases": [
+    {
+      "milestone_context": {
+        "id": "social-1",
+        "behavior": "Takes turns in games",
+        "criteria": "Child waits for their turn and follows simple game rules",
+        "age_range": "30-36 months"
+      },
+      "response": "This is concerning because she had mastered takesing, but now she refuses to even attempt it.",
+      "expected_score": "LOST_SKILL",
+      "expected_score_value": 1,
+      "test_type": "standard",
+      "domain": "SOCIAL"
+    },
+    {
+      "milestone_context": {
+        "id": "social-1",
+        "behavior": "Takes turns in games",
+        "criteria": "Child waits for their turn and follows simple game rules",
+        "age_range": "30-36 months"
+      },
+      "response": "He's fully capable of takesing on his own and does it many times throughout the day.",
+      "expected_score": "INDEPENDENT",
+      "expected_score_value": 4,
+      "test_type": "standard",
+      "domain": "SOCIAL"
+    },
+    {
+      "milestone_context": {
+        "id": "social-3",
+        "behavior": "Engages in pretend play",
+        "criteria": "Child uses objects to represent other items during play",
+        "age_range": "24-36 months"
+      },
+      "response": "My child can't engages currently. I haven't seen any attempts at this behavior.",
+      "expected_score": "CANNOT_DO",
+      "expected_score_value": 0,
+      "test_type": "standard",
+      "domain": "SOCIAL"
+    },
+    {
+      "milestone_context": {
+        "id": "motor-1",
+        "behavior": "Crawls on hands and knees",
+        "criteria": "Child moves forward on hands and knees for at least 3 feet",
+        "age_range": "9-12 months"
+      },
+      "response": "We see early signs of this skill. She has attempted to crawls a few times in the last week. The therapist has also noticed this.",
+      "expected_score": "EMERGING",
+      "expected_score_value": 2,
+      "test_type": "standard",
+      "domain": "MOTOR"
+    },
+    {
+      "milestone_context": {
+        "id": "cognitive-1",
+        "behavior": "Sorts objects by shape",
+        "criteria": "Child sorts at least 3 different shapes correctly",
+        "age_range": "24-30 months"
+      },
+      "response": "My child can't sorts currently. I haven't seen any attempts at this behavior.",
+      "expected_score": "CANNOT_DO",
+      "expected_score_value": 0,
+      "test_type": "standard",
+      "domain": "COGNITIVE"
+    },
+    {
+      "milestone_context": {
+        "id": "social-3",
+        "behavior": "Engages in pretend play",
+        "criteria": "Child uses objects to represent other items during play",
+        "age_range": "24-36 months"
+      },
+      "response": "She used to engages a few months ago, but she doesn't anymore. I'm not sure why she stopped. This is exciting to see.",
+      "expected_score": "LOST_SKILL",
+      "expected_score_value": 1,
+      "test_type": "standard",
+      "domain": "SOCIAL"
+    },
+    {
+      "milestone_context": {
+        "id": "social-1",
+        "behavior": "Takes turns in games",
+        "criteria": "Child waits for their turn and follows simple game rules",
+        "age_range": "30-36 months"
+      },
+      "response": "My child is very good at takesing. This is something she mastered and does regularly.",
+      "expected_score": "INDEPENDENT",
+      "expected_score_value": 4,
+      "test_type": "standard",
+      "domain": "SOCIAL"
+    },
+    {
+      "milestone_context": {
+        "id": "cognitive-2",
+        "behavior": "Completes simple puzzles",
+        "criteria": "Child completes 3-5 piece puzzles independently",
+        "age_range": "24-36 months"
+      },
+      "response": "No, he doesn't completes at all. He hasn't shown any progress in this area.",
+      "expected_score": "CANNOT_DO",
+      "expected_score_value": 0,
+      "test_type": "standard",
+      "domain": "COGNITIVE"
+    },
+    {
+      "milestone_context": {
+        "id": "cognitive-1",
+        "behavior": "Sorts objects by shape",
+        "criteria": "Child sorts at least 3 different shapes correctly",
+        "age_range": "24-30 months"
+      },
+      "response": "He sometimes tries to sorts, but he needs a lot of encouragement and doesn't always succeed.",
+      "expected_score": "EMERGING",
+      "expected_score_value": 2,
+      "test_type": "standard",
+      "domain": "COGNITIVE"
+    },
+    {
+      "milestone_context": {
+        "id": "cognitive-2",
+        "behavior": "Completes simple puzzles",
+        "criteria": "Child completes 3-5 piece puzzles independently",
+        "age_range": "24-36 months"
+      },
+      "response": "She hasn't started completesing yet. We've tried to encourage her but she's not showing any signs of this skill.",
+      "expected_score": "CANNOT_DO",
+      "expected_score_value": 0,
+      "test_type": "standard",
+      "domain": "COGNITIVE"
+    },
+    {
+      "milestone_context": {
+        "id": "cognitive-3",
+        "behavior": "Understands concept of counting",
+        "criteria": "Child counts at least 3 objects with one-to-one correspondence",
+        "age_range": "30-36 months"
+      },
+      "response": "He does understands but only when I'm guiding him through it step by step.",
+      "expected_score": "WITH_SUPPORT",
+      "expected_score_value": 3,
+      "test_type": "standard",
+      "domain": "COGNITIVE"
+    },
+    {
+      "milestone_context": {
+        "id": "cognitive-3",
+        "behavior": "Understands concept of counting",
+        "criteria": "Child counts at least 3 objects with one-to-one correspondence",
+        "age_range": "30-36 months"
+      },
+      "response": "She hasn't started understandsing yet. We've tried to encourage her but she's not showing any signs of this skill.",
+      "expected_score": "CANNOT_DO",
+      "expected_score_value": 0,
+      "test_type": "standard",
+      "domain": "COGNITIVE"
+    },
+    {
+      "milestone_context": {
+        "id": "cognitive-2",
+        "behavior": "Completes simple puzzles",
+        "criteria": "Child completes 3-5 piece puzzles independently",
+        "age_range": "24-36 months"
+      },
+      "response": "We see early signs of this skill. She has attempted to completes a few times in the last week.",
+      "expected_score": "EMERGING",
+      "expected_score_value": 2,
+      "test_type": "standard",
+      "domain": "COGNITIVE"
+    },
+    {
+      "milestone_context": {
+        "id": "motor-3",
+        "behavior": "Runs with coordination",
+        "criteria": "Child runs without frequent falling",
+        "age_range": "24-30 months"
+      },
+      "response": "My child needs assistance with runsing, but participates actively when supported.",
+      "expected_score": "WITH_SUPPORT",
+      "expected_score_value": 3,
+      "test_type": "standard",
+      "domain": "MOTOR"
+    },
+    {
+      "milestone_context": {
+        "id": "motor-1",
+        "behavior": "Crawls on hands and knees",
+        "criteria": "Child moves forward on hands and knees for at least 3 feet",
+        "age_range": "9-12 months"
+      },
+      "response": "This is something we've been working on, but she still can't crawls.",
+      "expected_score": "CANNOT_DO",
+      "expected_score_value": 0,
+      "test_type": "standard",
+      "domain": "MOTOR"
+    },
+    {
+      "milestone_context": {
+        "id": "social-3",
+        "behavior": "Engages in pretend play",
+        "criteria": "Child uses objects to represent other items during play",
+        "age_range": "24-36 months"
+      },
+      "response": "He's fully capable of engagesing on his own and does it many times throughout the day. This is new.",
+      "expected_score": "INDEPENDENT",
+      "expected_score_value": 4,
+      "test_type": "standard",
+      "domain": "SOCIAL"
+    },
+    {
+      "milestone_context": {
+        "id": "social-2",
+        "behavior": "Shows interest in peers",
+        "criteria": "Child engages with other children in parallel or interactive play",
+        "age_range": "24-30 months"
+      },
+      "response": "My child was showsing consistently, but in the last month has stopped doing it completely.",
+      "expected_score": "LOST_SKILL",
+      "expected_score_value": 1,
+      "test_type": "standard",
+      "domain": "SOCIAL"
+    },
+    {
+      "milestone_context": {
+        "id": "motor-1",
+        "behavior": "Crawls on hands and knees",
+        "criteria": "Child moves forward on hands and knees for at least 3 feet",
+        "age_range": "9-12 months"
+      },
+      "response": "My child is very good at crawlsing. This is something she mastered and does regularly.",
+      "expected_score": "INDEPENDENT",
+      "expected_score_value": 4,
+      "test_type": "standard",
+      "domain": "MOTOR"
+    },
+    {
+      "milestone_context": {
+        "id": "cognitive-1",
+        "behavior": "Sorts objects by shape",
+        "criteria": "Child sorts at least 3 different shapes correctly",
+        "age_range": "24-30 months"
+      },
+      "response": "She's just beginning to sorts. We've seen a few attempts, but she's not consistent yet. We practice this when we can.",
+      "expected_score": "EMERGING",
+      "expected_score_value": 2,
+      "test_type": "standard",
+      "domain": "COGNITIVE"
+    },
+    {
+      "milestone_context": {
+        "id": "cognitive-2",
+        "behavior": "Completes simple puzzles",
+        "criteria": "Child completes 3-5 piece puzzles independently",
+        "age_range": "24-36 months"
+      },
+      "response": "She's getting better at completesing, but still needs me to help her with certain parts.",
+      "expected_score": "WITH_SUPPORT",
+      "expected_score_value": 3,
+      "test_type": "standard",
+      "domain": "COGNITIVE"
+    },
+    {
+      "milestone_context": {
+        "id": "comm-2",
+        "behavior": "Forms short sentences",
+        "criteria": "Child combines 2-3 words to form simple sentences",
+        "age_range": "24-30 months"
+      },
+      "response": "My child combines formsing with other skills in unexpected ways, demonstrating creativity beyond what I'd expect.",
+      "expected_score": "WITH_SUPPORT",
+      "expected_score_value": 3,
+      "test_type": "edge_complex",
+      "domain": "COMMUNICATION"
+    },
+    {
+      "milestone_context": {
+        "id": "social-2",
+        "behavior": "Shows interest in peers",
+        "criteria": "Child engages with other children in parallel or interactive play",
+        "age_range": "24-30 months"
+      },
+      "response": "He goes back and forth with showsing. Some days he's very good at it, other days it's like he's never done it before.",
+      "expected_score": "WITH_SUPPORT",
+      "expected_score_value": 3,
+      "test_type": "edge_ambiguous",
+      "domain": "SOCIAL"
+    },
+    {
+      "milestone_context": {
+        "id": "motor-3",
+        "behavior": "Runs with coordination",
+        "criteria": "Child runs without frequent falling",
+        "age_range": "24-30 months"
+      },
+      "response": "He has a unique approach to runsing. Instead of following the usual steps for runs with coordination, he does using a creative method that still accomplishes runs with coordination, which achieves the same result.",
+      "expected_score": "WITH_SUPPORT",
+      "expected_score_value": 3,
+      "test_type": "edge_complex",
+      "domain": "MOTOR"
+    },
+    {
+      "milestone_context": {
+        "id": "motor-1",
+        "behavior": "Crawls on hands and knees",
+        "criteria": "Child moves forward on hands and knees for at least 3 feet",
+        "age_range": "9-12 months"
+      },
+      "response": "My child combines crawlsing with other skills in unexpected ways, demonstrating creativity beyond what I'd expect.",
+      "expected_score": "INDEPENDENT",
+      "expected_score_value": 4,
+      "test_type": "edge_complex",
+      "domain": "MOTOR"
+    },
+    {
+      "milestone_context": {
+        "id": "social-2",
+        "behavior": "Shows interest in peers",
+        "criteria": "Child engages with other children in parallel or interactive play",
+        "age_range": "24-30 months"
+      },
+      "response": "Sometimes \u308f\u305f\u3057\u306e\u5b50 (my child) will shows, but only when he feels like it.",
+      "expected_score": "INDEPENDENT",
+      "expected_score_value": 4,
+      "test_type": "edge_multilingual",
+      "domain": "SOCIAL"
+    }
+  ]
+}

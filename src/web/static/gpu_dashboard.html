@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metal GPU Acceleration Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            padding-top: 2rem;
+            background-color: #f8f9fa;
+        }
+        .card {
+            margin-bottom: 1.5rem;
+            border: none;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .card-header {
+            background-color: #4b70e2;
+            color: white;
+            font-weight: bold;
+        }
+        .status-badge {
+            font-size: 0.8rem;
+            padding: 0.3rem 0.6rem;
+        }
+        .btn-action {
+            margin-top: 0.5rem;
+        }
+        .system-info {
+            font-family: monospace;
+            font-size: 0.9rem;
+            max-height: 300px;
+            overflow-y: auto;
+            background-color: #f0f0f0;
+            padding: 1rem;
+            border-radius: 0.25rem;
+        }
+        .chart-container {
+            height: 300px;
+            width: 100%;
+        }
+        .nav-pills .nav-link.active {
+            background-color: #4b70e2;
+        }
+        .tab-content {
+            padding-top: 1.5rem;
+        }
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #4b70e2;
+        }
+        .status-container {
+            border-left: 4px solid #4b70e2;
+            padding-left: 1rem;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="pb-3 mb-4 border-bottom">
+            <div class="d-flex align-items-center justify-content-between">
+                <h1 class="fw-bold">Metal GPU Acceleration Dashboard</h1>
+                <span class="badge bg-success status-badge" id="status-badge">System Ready</span>
+            </div>
+            <p class="text-muted">Monitor and control GPU acceleration for Apple Silicon</p>
+        </header>
+
+        <!-- System Information Card -->
+        <div class="card mb-4">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <span>System Information</span>
+                <button class="btn btn-sm btn-light" id="refresh-system-info">Refresh</button>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="status-container">
+                            <h5>Hardware</h5>
+                            <div id="hardware-info">
+                                <p><strong>Chip:</strong> <span id="chip-model">Loading...</span></p>
+                                <p><strong>OS:</strong> <span id="os-version">Loading...</span></p>
+                                <p><strong>Memory:</strong> <span id="memory-info">Loading...</span></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="status-container">
+                            <h5>GPU Acceleration</h5>
+                            <div id="gpu-info">
+                                <p><strong>Status:</strong> <span id="gpu-status">Checking...</span></p>
+                                <p><strong>Mode:</strong> <span id="gpu-mode">Unknown</span></p>
+                                <p><strong>Layers:</strong> <span id="gpu-layers">Unknown</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-12">
+                        <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#detailedSystemInfo">
+                            Show Detailed System Information
+                        </button>
+                        <div class="collapse mt-3" id="detailedSystemInfo">
+                            <div class="system-info" id="detailed-system-info">
+                                Loading detailed system information...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Action Cards Row -->
+        <div class="row">
+            <!-- Server Control Card -->
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <div class="card-header">Server Control</div>
+                    <div class="card-body d-flex flex-column">
+                        <div class="text-center feature-icon">
+                            <i class="bi bi-server"></i>
+                        </div>
+                        <h5 class="card-title">API Server</h5>
+                        <p class="card-text">Control the API server with different GPU acceleration settings.</p>
+                        <div class="mt-auto">
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-success btn-action" id="start-optimized">Start Optimized</button>
+                                <button class="btn btn-primary btn-action" id="start-basic">Start Basic GPU</button>
+                                <button class="btn btn-secondary btn-action" id="start-cpu">Start CPU-only</button>
+                                <button class="btn btn-danger btn-action" id="stop-server">Stop Server</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Benchmarking Card -->
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <div class="card-header">Benchmarking</div>
+                    <div class="card-body d-flex flex-column">
+                        <div class="text-center feature-icon">
+                            <i class="bi bi-speedometer"></i>
+                        </div>
+                        <h5 class="card-title">Performance Testing</h5>
+                        <p class="card-text">Run benchmarks to measure GPU acceleration benefits.</p>
+                        <div class="mt-auto">
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-primary btn-action" id="run-benchmarks">Run All Benchmarks</button>
+                                <button class="btn btn-outline-primary btn-action" id="run-matrix-benchmark">Matrix Operations</button>
+                                <button class="btn btn-outline-primary btn-action" id="run-llm-benchmark">LLM Inference</button>
+                                <button class="btn btn-outline-secondary btn-action" id="view-results">View Results</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Monitoring Card -->
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <div class="card-header">Monitoring</div>
+                    <div class="card-body d-flex flex-column">
+                        <div class="text-center feature-icon">
+                            <i class="bi bi-graph-up"></i>
+                        </div>
+                        <h5 class="card-title">GPU Performance</h5>
+                        <p class="card-text">Monitor GPU memory usage and performance metrics.</p>
+                        <div class="mt-auto">
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-primary btn-action" id="analyze-performance">Analyze Performance</button>
+                                <button class="btn btn-outline-primary btn-action" id="monitor-live">Live Monitoring</button>
+                                <button class="btn btn-outline-primary btn-action" id="test-gpu">Test GPU Setup</button>
+                                <button class="btn btn-outline-secondary btn-action" id="view-logs">View Logs</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Performance Visualization -->
+        <div class="card mt-4">
+            <div class="card-header">Performance Visualization</div>
+            <div class="card-body">
+                <ul class="nav nav-pills mb-3" id="performance-tabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="memory-tab" data-bs-toggle="pill" data-bs-target="#memory-chart" type="button" role="tab">GPU Memory</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="benchmark-tab" data-bs-toggle="pill" data-bs-target="#benchmark-chart" type="button" role="tab">Benchmark Results</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="cpu-tab" data-bs-toggle="pill" data-bs-target="#cpu-chart" type="button" role="tab">CPU Usage</button>
+                    </li>
+                </ul>
+                <div class="tab-content" id="performance-tabs-content">
+                    <div class="tab-pane fade show active" id="memory-chart" role="tabpanel">
+                        <div class="chart-container">
+                            <canvas id="memory-canvas"></canvas>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="benchmark-chart" role="tabpanel">
+                        <div class="chart-container">
+                            <canvas id="benchmark-canvas"></canvas>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="cpu-chart" role="tabpanel">
+                        <div class="chart-container">
+                            <canvas id="cpu-canvas"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Status Log -->
+        <div class="card mt-4">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <span>Status Log</span>
+                <button class="btn btn-sm btn-light" id="clear-log">Clear</button>
+            </div>
+            <div class="card-body">
+                <div class="system-info" id="status-log">
+                    <div class="log-entry">[INFO] Dashboard initialized</div>
+                    <div class="log-entry">[INFO] Checking system compatibility...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Results -->
+    <div class="modal fade" id="resultsModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Benchmark Results</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="results-container">
+                        <p>Loading benchmark results...</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Initialize charts
+        const memoryCtx = document.getElementById('memory-canvas').getContext('2d');
+        const memoryChart = new Chart(memoryCtx, {
+            type: 'line',
+            data: {
+                labels: Array.from({length: 10}, (_, i) => i),
+                datasets: [{
+                    label: 'GPU Memory Usage (MB)',
+                    data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    borderColor: '#4b70e2',
+                    backgroundColor: 'rgba(75, 112, 226, 0.1)',
+                    tension: 0.4,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Memory (MB)'
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Time'
+                        }
+                    }
+                }
+            }
+        });
+
+        const benchmarkCtx = document.getElementById('benchmark-canvas').getContext('2d');
+        const benchmarkChart = new Chart(benchmarkCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Matrix Mult.', 'Convolution', 'NN Forward', 'NN Backward', 'LLM Inference'],
+                datasets: [{
+                    label: 'CPU Time (s)',
+                    data: [1.2, 0.8, 0.6, 1.5, 13.6],
+                    backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }, {
+                    label: 'GPU Time (s)',
+                    data: [0.3, 0.2, 0.15, 0.4, 5.9],
+                    backgroundColor: 'rgba(75, 192, 192, 0.5)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Execution Time (s)'
+                        }
+                    }
+                }
+            }
+        });
+
+        const cpuCtx = document.getElementById('cpu-canvas').getContext('2d');
+        const cpuChart = new Chart(cpuCtx, {
+            type: 'line',
+            data: {
+                labels: Array.from({length: 10}, (_, i) => i),
+                datasets: [{
+                    label: 'CPU Usage (%)',
+                    data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    borderColor: '#ffa500',
+                    backgroundColor: 'rgba(255, 165, 0, 0.1)',
+                    tension: 0.4,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 100,
+                        title: {
+                            display: true,
+                            text: 'CPU Usage (%)'
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Time'
+                        }
+                    }
+                }
+            }
+        });
+
+        // Add log entry
+        function addLogEntry(message, type = 'INFO') {
+            const logContainer = document.getElementById('status-log');
+            const logEntry = document.createElement('div');
+            logEntry.className = 'log-entry';
+            logEntry.innerText = `[${type}] ${message}`;
+            logContainer.prepend(logEntry);
+        }
+
+        // API functions
+        async function fetchSystemInfo() {
+            addLogEntry('Fetching system information...');
+            try {
+                const response = await fetch('/gpu-acceleration/system-info');
+                if (!response.ok) {
+                    throw new Error(`HTTP error ${response.status}`);
+                }
+                const data = await response.json();
+                
+                // Update the UI with real data
+                document.getElementById('chip-model').innerText = data.chip_model;
+                document.getElementById('os-version').innerText = data.os_version;
+                document.getElementById('memory-info').innerText = data.memory_info;
+                
+                let statusBadge = '';
+                if (data.metal_enabled) {
+                    statusBadge = '<span class="badge bg-success">Available</span>';
+                } else {
+                    statusBadge = '<span class="badge bg-danger">Not Available</span>';
+                }
+                
+                document.getElementById('gpu-status').innerHTML = statusBadge;
+                document.getElementById('gpu-mode').innerText = data.gpu_mode;
+                document.getElementById('gpu-layers').innerText = data.gpu_layers;
+                
+                // Update page status
+                if (data.metal_enabled) {
+                    document.getElementById('status-badge').className = 'badge bg-success status-badge';
+                    document.getElementById('status-badge').innerText = 'GPU Accelerated';
+                } else {
+                    document.getElementById('status-badge').className = 'badge bg-warning status-badge';
+                    document.getElementById('status-badge').innerText = 'CPU Only';
+                }
+                
+                addLogEntry('System information updated successfully');
+                return data;
+            } catch (error) {
+                addLogEntry(`Error fetching system info: ${error.message}`, 'ERROR');
+                return null;
+            }
+        }
+
+        async function getDetailedSystemInfo() {
+            addLogEntry('Fetching detailed system information...');
+            try {
+                const response = await fetch('/gpu-acceleration/detailed-system-info');
+                if (!response.ok) {
+                    throw new Error(`HTTP error ${response.status}`);
+                }
+                const data = await response.json();
+                
+                if (data.status === 'success') {
+                    document.getElementById('detailed-system-info').innerText = data.data;
+                    addLogEntry('Detailed system information loaded');
+                } else {
+                    document.getElementById('detailed-system-info').innerText = `Error: ${data.message}`;
+                    addLogEntry(`Error loading detailed info: ${data.message}`, 'ERROR');
+                }
+            } catch (error) {
+                document.getElementById('detailed-system-info').innerText = `Error: ${error.message}`;
+                addLogEntry(`Error fetching detailed system info: ${error.message}`, 'ERROR');
+            }
+        }
+
+        async function getServerStatus() {
+            try {
+                const response = await fetch('/gpu-acceleration/server-status');
+                if (!response.ok) {
+                    throw new Error(`HTTP error ${response.status}`);
+                }
+                const data = await response.json();
+                
+                // Update UI elements based on server status
+                if (data.running) {
+                    addLogEntry(`Server is running in ${data.mode} mode with PID ${data.pid}`);
+                    document.getElementById('stop-server').disabled = false;
+                    document.getElementById('start-optimized').disabled = true;
+                    document.getElementById('start-basic').disabled = true;
+                    document.getElementById('start-cpu').disabled = true;
+                } else {
+                    addLogEntry('Server is not running');
+                    document.getElementById('stop-server').disabled = true;
+                    document.getElementById('start-optimized').disabled = false;
+                    document.getElementById('start-basic').disabled = false;
+                    document.getElementById('start-cpu').disabled = false;
+                }
+                
+                return data;
+            } catch (error) {
+                addLogEntry(`Error fetching server status: ${error.message}`, 'ERROR');
+                return null;
+            }
+        }
+
+        async function fetchMonitoringData() {
+            try {
+                const response = await fetch('/gpu-acceleration/monitoring-data');
+                if (!response.ok) {
+                    throw new Error(`HTTP error ${response.status}`);
+                }
+                const data = await response.json();
+                
+                if (data.memory_usage.length > 0) {
+                    // Update memory chart
+                    memoryChart.data.labels = data.timestamps.map(ts => {
+                        // Format timestamp to show only time
+                        const date = new Date(ts);
+                        return date.toLocaleTimeString();
+                    });
+                    memoryChart.data.datasets[0].data = data.memory_usage;
+                    memoryChart.update();
+                    
+                    // Update CPU usage chart
+                    cpuChart.data.labels = memoryChart.data.labels;
+                    cpuChart.data.datasets[0].data = data.cpu_usage;
+                    cpuChart.update();
+                    
+                    addLogEntry(`Updated charts with ${data.memory_usage.length} data points`);
+                } else {
+                    addLogEntry('No monitoring data available', 'WARNING');
+                }
+                
+                return data;
+            } catch (error) {
+                addLogEntry(`Error fetching monitoring data: ${error.message}`, 'ERROR');
+                return null;
+            }
+        }
+
+        async function fetchBenchmarkResults() {
+            try {
+                const response = await fetch('/gpu-acceleration/benchmark-results');
+                if (!response.ok) {
+                    throw new Error(`HTTP error ${response.status}`);
+                }
+                const data = await response.json();
+                
+                if (data.length > 0) {
+                    // Update benchmark chart
+                    const operations = data.map(result => result.operation.replace(/^(Matrix Multiplication|2D Convolution) /, ''));
+                    const cpuTimes = data.map(result => result.cpu_time);
+                    const gpuTimes = data.map(result => result.gpu_time || 0);
+                    
+                    benchmarkChart.data.labels = operations;
+                    benchmarkChart.data.datasets[0].data = cpuTimes;
+                    benchmarkChart.data.datasets[1].data = gpuTimes;
+                    benchmarkChart.update();
+                    
+                    // Display in results container
+                    const resultsContainer = document.getElementById('results-container');
+                    resultsContainer.innerHTML = '<h5>Latest Benchmark Results</h5>';
+                    
+                    const table = document.createElement('table');
+                    table.className = 'table table-striped table-sm';
+                    table.innerHTML = `
+                        <thead>
+                            <tr>
+                                <th>Operation</th>
+                                <th>CPU Time (s)</th>
+                                <th>GPU Time (s)</th>
+                                <th>Speedup</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${data.map(result => `
+                                <tr>
+                                    <td>${result.operation}</td>
+                                    <td>${result.cpu_time.toFixed(4)}</td>
+                                    <td>${result.gpu_time ? result.gpu_time.toFixed(4) : 'N/A'}</td>
+                                    <td>${result.speedup ? result.speedup.toFixed(2) + 'x' : 'N/A'}</td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    `;
+                    
+                    resultsContainer.appendChild(table);
+                    
+                    addLogEntry(`Loaded benchmark results for ${data.length} operations`);
+                } else {
+                    addLogEntry('No benchmark results available', 'WARNING');
+                    document.getElementById('results-container').innerHTML = '<p>No benchmark results found. Run benchmarks to generate data.</p>';
+                }
+                
+                return data;
+            } catch (error) {
+                addLogEntry(`Error fetching benchmark results: ${error.message}`, 'ERROR');
+                document.getElementById('results-container').innerHTML = `<p>Error: ${error.message}</p>`;
+                return null;
+            }
+        }
+
+        async function runBenchmarks() {
+            addLogEntry('Starting benchmark suite...', 'INFO');
+            try {
+                const response = await fetch('/gpu-acceleration/run-benchmarks', {
+                    method: 'POST'
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error ${response.status}`);
+                }
+                
+                const data = await response.json();
+                addLogEntry(`Benchmarks started: ${data.message}`);
+                
+                // Disable the button while benchmarks are running
+                document.getElementById('run-benchmarks').disabled = true;
+                document.getElementById('run-matrix-benchmark').disabled = true;
+                document.getElementById('run-llm-benchmark').disabled = true;
+                
+                // Set a timer to periodically check for new results
+                const checkInterval = setInterval(async () => {
+                    // Check if new results are available
+                    await fetchBenchmarkResults();
+                    
+                    // Re-enable buttons after a reasonable time (30 seconds)
+                    setTimeout(() => {
+                        document.getElementById('run-benchmarks').disabled = false;
+                        document.getElementById('run-matrix-benchmark').disabled = false;
+                        document.getElementById('run-llm-benchmark').disabled = false;
+                        clearInterval(checkInterval);
+                    }, 30000);
+                }, 5000);
+            } catch (error) {
+                addLogEntry(`Error starting benchmarks: ${error.message}`, 'ERROR');
+                
+                // Re-enable buttons
+                document.getElementById('run-benchmarks').disabled = false;
+                document.getElementById('run-matrix-benchmark').disabled = false;
+                document.getElementById('run-llm-benchmark').disabled = false;
+            }
+        }
+
+        async function testGPU() {
+            addLogEntry('Running GPU acceleration test...', 'INFO');
+            try {
+                const response = await fetch('/gpu-acceleration/test-gpu', {
+                    method: 'POST'
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error ${response.status}`);
+                }
+                
+                const data = await response.json();
+                addLogEntry(`GPU test started: ${data.message}`);
+                
+                // Disable the button while the test is running
+                document.getElementById('test-gpu').disabled = true;
+                
+                // Re-enable after a reasonable time (10 seconds)
+                setTimeout(() => {
+                    document.getElementById('test-gpu').disabled = false;
+                    // Refresh system info to see if the test changed anything
+                    fetchSystemInfo();
+                }, 10000);
+            } catch (error) {
+                addLogEntry(`Error running GPU test: ${error.message}`, 'ERROR');
+                document.getElementById('test-gpu').disabled = false;
+            }
+        }
+
+        async function restartServer(mode) {
+            let modeName = '';
+            let buttonId = '';
+            
+            switch (mode) {
+                case 'cpu':
+                    modeName = 'CPU-only mode';
+                    buttonId = 'start-cpu';
+                    break;
+                case 'basic_gpu':
+                    modeName = 'basic GPU acceleration';
+                    buttonId = 'start-basic';
+                    break;
+                case 'advanced_gpu':
+                    modeName = 'optimized GPU acceleration';
+                    buttonId = 'start-optimized';
+                    break;
+            }
+            
+            addLogEntry(`Restarting server with ${modeName}...`, 'INFO');
+            
+            // Disable all server control buttons
+            document.getElementById('start-optimized').disabled = true;
+            document.getElementById('start-basic').disabled = true;
+            document.getElementById('start-cpu').disabled = true;
+            document.getElementById('stop-server').disabled = true;
+            
+            try {
+                const response = await fetch(`/gpu-acceleration/restart-server?mode=${mode}`, {
+                    method: 'POST'
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error ${response.status}`);
+                }
+                
+                const data = await response.json();
+                addLogEntry(`Server restart initiated in ${modeName}`);
+                
+                // Set a timer to periodically check server status
+                const checkInterval = setInterval(async () => {
+                    const status = await getServerStatus();
+                    if (status && status.running) {
+                        addLogEntry(`Server is now running in ${status.mode} mode`);
+                        clearInterval(checkInterval);
+                        
+                        // Refresh system info
+                        await fetchSystemInfo();
+                    }
+                }, 5000);
+                
+                // Safety timeout to re-enable buttons after 60 seconds
+                setTimeout(() => {
+                    getServerStatus();
+                    clearInterval(checkInterval);
+                }, 60000);
+            } catch (error) {
+                addLogEntry(`Error restarting server: ${error.message}`, 'ERROR');
+                
+                // Re-enable buttons
+                document.getElementById('start-optimized').disabled = false;
+                document.getElementById('start-basic').disabled = false;
+                document.getElementById('start-cpu').disabled = false;
+                document.getElementById('stop-server').disabled = false;
+            }
+        }
+
+        async function stopServer() {
+            addLogEntry('Stopping server...', 'INFO');
+            
+            // Disable all server control buttons
+            document.getElementById('start-optimized').disabled = true;
+            document.getElementById('start-basic').disabled = true;
+            document.getElementById('start-cpu').disabled = true;
+            document.getElementById('stop-server').disabled = true;
+            
+            try {
+                const response = await fetch('/gpu-acceleration/stop-server', {
+                    method: 'POST'
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error ${response.status}`);
+                }
+                
+                const data = await response.json();
+                
+                if (data.status === 'stopped') {
+                    addLogEntry('Server stopped successfully');
+                } else {
+                    addLogEntry('Server was not running');
+                }
+                
+                // Re-enable appropriate buttons
+                document.getElementById('start-optimized').disabled = false;
+                document.getElementById('start-basic').disabled = false;
+                document.getElementById('start-cpu').disabled = false;
+                document.getElementById('stop-server').disabled = true;
+                
+                // Update page status
+                document.getElementById('status-badge').className = 'badge bg-danger status-badge';
+                document.getElementById('status-badge').innerText = 'Server Stopped';
+            } catch (error) {
+                addLogEntry(`Error stopping server: ${error.message}`, 'ERROR');
+                
+                // Re-enable all buttons
+                document.getElementById('start-optimized').disabled = false;
+                document.getElementById('start-basic').disabled = false;
+                document.getElementById('start-cpu').disabled = false;
+                document.getElementById('stop-server').disabled = false;
+            }
+        }
+
+        // Setup event handlers for buttons
+        document.getElementById('refresh-system-info').addEventListener('click', fetchSystemInfo);
+        document.getElementById('start-optimized').addEventListener('click', () => restartServer('advanced_gpu'));
+        document.getElementById('start-basic').addEventListener('click', () => restartServer('basic_gpu'));
+        document.getElementById('start-cpu').addEventListener('click', () => restartServer('cpu'));
+        document.getElementById('stop-server').addEventListener('click', stopServer);
+        document.getElementById('run-benchmarks').addEventListener('click', runBenchmarks);
+        document.getElementById('view-results').addEventListener('click', () => {
+            new bootstrap.Modal(document.getElementById('resultsModal')).show();
+            fetchBenchmarkResults();
+        });
+        document.getElementById('test-gpu').addEventListener('click', testGPU);
+        document.getElementById('analyze-performance').addEventListener('click', fetchMonitoringData);
+        document.getElementById('clear-log').addEventListener('click', () => {
+            document.getElementById('status-log').innerHTML = '';
+            addLogEntry('Log cleared');
+        });
+
+        // Initialize data on page load
+        document.addEventListener('DOMContentLoaded', async () => {
+            addLogEntry('Initializing dashboard...');
+            
+            // Get initial system info
+            await fetchSystemInfo();
+            
+            // Get server status
+            await getServerStatus();
+            
+            // Try to load benchmark results
+            await fetchBenchmarkResults();
+            
+            // Try to load monitoring data
+            await fetchMonitoringData();
+            
+            addLogEntry('Dashboard initialization complete');
+            
+            // Set up periodic refresh
+            setInterval(async () => {
+                await getServerStatus();
+                await fetchMonitoringData();
+            }, 10000); // Refresh every 10 seconds
+        });
+    </script>
+</body>
+</html> 

@@ -1,0 +1,82 @@
+[
+  {
+    "response": "Yes, he walks without any support now.",
+    "milestone_context": {
+      "behavior": "Walks independently",
+      "question": "Does your child walk independently?",
+      "domain": "GM",
+      "criteria": "Child walks independently regularly and consistently",
+      "age_range": "12-24 months"
+    },
+    "predicted_score": "NOT_RATED",
+    "predicted_score_value": -1,
+    "confidence": 0.9,
+    "reasoning": "This is a sample review for testing the GM domain.",
+    "priority": 0.95,
+    "id": "sample_0_20250317025708"
+  },
+  {
+    "response": "She says about 10 words clearly and tries to say more.",
+    "milestone_context": {
+      "behavior": "Uses words to communicate",
+      "question": "Does your child use words to communicate?",
+      "domain": "EL",
+      "criteria": "Child uses words to communicate regularly and consistently",
+      "age_range": "12-24 months"
+    },
+    "predicted_score": "NOT_RATED",
+    "predicted_score_value": -1,
+    "confidence": 0.9,
+    "reasoning": "This is a sample review for testing the EL domain.",
+    "priority": 0.95,
+    "id": "sample_1_20250317025708"
+  },
+  {
+    "response": "He points to things he wants but doesn't use words yet.",
+    "milestone_context": {
+      "behavior": "Points to ask for things",
+      "question": "Does your child point to ask for things?",
+      "domain": "SOC",
+      "criteria": "Child points to ask for things regularly and consistently",
+      "age_range": "12-24 months"
+    },
+    "predicted_score": "NOT_RATED",
+    "predicted_score_value": -1,
+    "confidence": 0.9,
+    "reasoning": "This is a sample review for testing the SOC domain.",
+    "priority": 0.95,
+    "id": "sample_2_20250317025708"
+  },
+  {
+    "response": "Yes, she smiles when she sees family members.",
+    "milestone_context": {
+      "behavior": "Recognizes familiar people",
+      "question": "Does your child recognize familiar people?",
+      "domain": "SOC",
+      "criteria": "Child recognizes familiar people regularly and consistently",
+      "age_range": "12-24 months"
+    },
+    "predicted_score": "NOT_RATED",
+    "predicted_score_value": -1,
+    "confidence": 0.9,
+    "reasoning": "This is a sample review for testing the SOC domain.",
+    "priority": 0.95,
+    "id": "sample_3_20250317025708"
+  },
+  {
+    "response": "Sometimes, but often just throws them.",
+    "milestone_context": {
+      "behavior": "Plays with toys appropriately",
+      "question": "Does your child play with toys appropriately?",
+      "domain": "Cog",
+      "criteria": "Child plays with toys appropriately regularly and consistently",
+      "age_range": "12-24 months"
+    },
+    "predicted_score": "NOT_RATED",
+    "predicted_score_value": -1,
+    "confidence": 0.9,
+    "reasoning": "This is a sample review for testing the Cog domain.",
+    "priority": 0.95,
+    "id": "sample_4_20250317025708"
+  }
+]

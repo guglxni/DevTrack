@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Milestone Display</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        pre {
+            background-color: #f5f5f5;
+            padding: 10px;
+            border-radius: 4px;
+            overflow: auto;
+        }
+        .domain-badge {
+            display: inline-block;
+            margin: 2px;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.9em;
+        }
+        .domain-ADL { background-color: #ffcccc; }
+        .domain-Cog { background-color: #ccffcc; }
+        .domain-EL { background-color: #ccccff; }
+        .domain-Emo { background-color: #ffffcc; }
+        .domain-FM { background-color: #ffccff; }
+        .domain-GM { background-color: #ccffff; }
+        .domain-RL { background-color: #ffddbb; }
+        .domain-SOC { background-color: #ddbbff; }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4">Milestone Display</h1>
+        
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="mb-0">Milestone Count</h5>
+            </div>
+            <div class="card-body">
+                <div id="milestone-count" class="alert alert-info">
+                    Loading milestone data...
+                </div>
+                
+                <div id="domain-list" class="mb-3">
+                    <h5>Domains:</h5>
+                    <div id="domain-badges"></div>
+                </div>
+                
+                <div id="age-ranges" class="mb-3">
+                    <h5>Age Ranges:</h5>
+                    <ul id="age-range-list" class="list-group"></ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="mb-0">Sample Milestones</h5>
+            </div>
+            <div class="card-body">
+                <div id="sample-milestones"></div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">Console Output</h5>
+            </div>
+            <div class="card-body">
+                <pre id="console-log"></pre>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Override console methods to capture output
+        const consoleLog = document.getElementById('console-log');
+        const originalConsoleLog = console.log;
+        const originalConsoleError = console.error;
+        
+        console.log = function() {
+            const args = Array.from(arguments);
+            consoleLog.textContent += 'LOG: ' + args.map(arg => 
+                typeof arg === 'object' ? JSON.stringify(arg) : arg
+            ).join(' ') + '\n';
+            originalConsoleLog.apply(console, arguments);
+        };
+        
+        console.error = function() {
+            const args = Array.from(arguments);
+            consoleLog.textContent += 'ERROR: ' + args.map(arg => 
+                typeof arg === 'object' ? JSON.stringify(arg) : arg
+            ).join(' ') + '\n';
+            originalConsoleError.apply(console, arguments);
+        };
+        
+        // Function to update milestone count
+        function updateMilestoneCount(count, domains) {
+            console.log(`Updating milestone count: ${count} milestones across ${domains.length} domains`);
+            const milestoneCountElement = document.getElementById('milestone-count');
+            if (milestoneCountElement) {
+                milestoneCountElement.textContent = `${count} milestones available across ${domains.length} domains`;
+                milestoneCountElement.className = 'alert alert-success';
+            }
+            
+            // Update domain badges
+            const domainBadgesElement = document.getElementById('domain-badges');
+            domainBadgesElement.innerHTML = '';
+            domains.forEach(domain => {
+                const badge = document.createElement('span');
+                badge.className = `domain-badge domain-${domain}`;
+                badge.textContent = domain;
+                domainBadgesElement.appendChild(badge);
+            });
+        }
+        
+        // Function to update age ranges
+        function updateAgeRanges(milestones) {
+            const ageRanges = [...new Set(milestones.map(m => m.age_range))];
+            console.log(`Found ${ageRanges.length} age ranges`);
+            
+            const ageRangeListElement = document.getElementById('age-range-list');
+            ageRangeListElement.innerHTML = '';
+            
+            ageRanges.forEach(ageRange => {
+                const milestonesInRange = milestones.filter(m => m.age_range === ageRange);
+                const item = document.createElement('li');
+                item.className = 'list-group-item d-flex justify-content-between align-items-center';
+                item.textContent = ageRange;
+                
+                const badge = document.createElement('span');
+                badge.className = 'badge bg-primary rounded-pill';
+                badge.textContent = milestonesInRange.length;
+                
+                item.appendChild(badge);
+                ageRangeListElement.appendChild(item);
+            });
+        }
+        
+        // Function to display sample milestones
+        function displaySampleMilestones(milestones) {
+            const sampleMilestonesElement = document.getElementById('sample-milestones');
+            
+            // Get one milestone from each domain
+            const domains = [...new Set(milestones.map(m => m.domain))];
+            const samples = domains.map(domain => {
+                return milestones.find(m => m.domain === domain);
+            });
+            
+            // Create a table to display the samples
+            const table = document.createElement('table');
+            table.className = 'table table-striped';
+            
+            // Create table header
+            const thead = document.createElement('thead');
+            const headerRow = document.createElement('tr');
+            ['Domain', 'Behavior', 'Age Range', 'Criteria'].forEach(header => {
+                const th = document.createElement('th');
+                th.textContent = header;
+                headerRow.appendChild(th);
+            });
+            thead.appendChild(headerRow);
+            table.appendChild(thead);
+            
+            // Create table body
+            const tbody = document.createElement('tbody');
+            samples.forEach(milestone => {
+                const row = document.createElement('tr');
+                
+                const domainCell = document.createElement('td');
+                domainCell.textContent = milestone.domain;
+                row.appendChild(domainCell);
+                
+                const behaviorCell = document.createElement('td');
+                behaviorCell.textContent = milestone.behavior;
+                row.appendChild(behaviorCell);
+                
+                const ageRangeCell = document.createElement('td');
+                ageRangeCell.textContent = milestone.age_range;
+                row.appendChild(ageRangeCell);
+                
+                const criteriaCell = document.createElement('td');
+                criteriaCell.textContent = milestone.criteria || 'No criteria specified';
+                row.appendChild(criteriaCell);
+                
+                tbody.appendChild(row);
+            });
+            table.appendChild(tbody);
+            
+            sampleMilestonesElement.appendChild(table);
+        }
+        
+        // Function to fetch milestones
+        function fetchMilestones() {
+            console.log('Fetching milestones from /milestones');
+            
+            fetch('/milestones')
+                .then(response => {
+                    console.log('Response status:', response.status);
+                    return response.json();
+                })
+                .then(data => {
+                    console.log(`Loaded ${data.length} milestones from server`);
+                    
+                    // Get unique domains
+                    const domains = [...new Set(data.map(m => m.domain))];
+                    console.log('Domains:', domains);
+                    
+                    // Update the UI
+                    updateMilestoneCount(data.length, domains);
+                    updateAgeRanges(data);
+                    displaySampleMilestones(data);
+                })
+                .catch(error => {
+                    console.error('Error fetching milestones:', error);
+                    
+                    // Update the milestone count display with the error
+                    const milestoneCountElement = document.getElementById('milestone-count');
+                    if (milestoneCountElement) {
+                        milestoneCountElement.className = 'alert alert-danger';
+                        milestoneCountElement.textContent = `Failed to load milestones. Error: ${error.message}`;
+                    }
+                });
+        }
+        
+        // Fetch milestones when the page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM content loaded, fetching milestones...');
+            fetchMilestones();
+        });
+    </script>
+</body>
+</html>
+ 
